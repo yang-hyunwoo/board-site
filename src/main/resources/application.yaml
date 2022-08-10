@@ -1,0 +1,35 @@
+debug: false
+management.endpoints.web.exposure.include: "*"
+
+logging:
+  level:
+    com.board.boardsite: debug
+    org.springframework.web.servlet: debug                      #Request / Response bebug 활성화
+    org.hibernate.type.descriptor.sql.BasicBinder: trace
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3307/boardsite
+    username: gusdn
+    password: thisisTEST!@#
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    defer-datasource-initialization: true         # 2.5 이상 data.sql 실행
+    hibernate.ddl-auto: create                    # table 생성
+    open-in-view: false
+    show-sql: true                                # 쿼리 보여줌
+    properties:
+      hibernate.format_sql: true
+      hibernate.default_batch_fetch_size: 100 # N+1 이슈
+  h2.console.enabled: false
+  sql.init.mode: always
+  data.rest:
+    base-path: /api
+    detection-strategy: annotated
+  thymeleaf3.decoupled-logic: true
+
+
+
+---
+
