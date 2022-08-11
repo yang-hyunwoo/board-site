@@ -23,7 +23,7 @@ import java.util.Set;
         @Index(columnList = "readCount"),
         @Index(columnList = "likeCount"),
 })
-public class TravelAgencyList {
+public class TravelAgencyList extends AuditingFields {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,44 +42,42 @@ public class TravelAgencyList {
     @Column(nullable = false , length = 50)
     private String city;
 
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    @Column(nullable = false)
-    private LocalDateTime travelStartAt; // 수정일시
+    @Column(nullable = false , length = 8)
+    private String travelStartAt; // 출발일시
 
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    @Column(nullable = false)
-    private LocalDateTime travelEndAt   ; // 수정일시
+    @Column(nullable = false, length = 8)
+    private String travelEndAt   ; // 종료일시
 
     @Setter
     @Column(nullable = false , length = 100)
-    private String title;
+    private String title;                           //제목
 
     @Setter
     @Column(nullable = false , columnDefinition = "TEXT")
-    private String content;
+    private String content;                         //내용
 
     @Setter
     @Column(nullable = false)
-    private int realPaid;
+    private int realPaid;                           //실제 비용
 
     @Setter
-    private int salePercent;
+    private int salePercent;                        //세일 퍼센트
 
     @Setter
-    private int salePaid;
+    private int salePaid;                           //세일후 비용
 
     @Setter
-    private int personCount;
+    private int personCount;                       //예약 인원
 
     @Setter
     @Column(nullable = false)
-    private int personMaxCount;
+    private int personMaxCount;                     //예약 총 인원
 
     @Setter
-    private int readCount;
+    private int readCount;                          //조회수
 
     @Setter
-    private int likeCount;
+    private int likeCount;                          //좋아요 수
 
 
     protected  TravelAgencyList() {
@@ -87,8 +85,8 @@ public class TravelAgencyList {
     }
 
     private TravelAgencyList(String city,
-                            LocalDateTime travelStartAt,
-                            LocalDateTime travelEndAt,
+                            String travelStartAt,
+                             String travelEndAt,
                             String title,
                             String content,
                             int realPaid,
@@ -97,7 +95,8 @@ public class TravelAgencyList {
                             int personCount,
                             int personMaxCount,
                             int readCount,
-                            int likeCount)
+                            int likeCount,
+                             TravelAgency travelAgency)
     {
         this.city = city;
         this.travelStartAt = travelStartAt;
@@ -111,20 +110,22 @@ public class TravelAgencyList {
         this.personMaxCount = personMaxCount;
         this.readCount = readCount;
         this.likeCount = likeCount;
+        this.travelAgency = travelAgency;
     }
 
     public static TravelAgencyList of(String city,
-                               LocalDateTime travelStartAt,
-                               LocalDateTime travelEndAt,
-                               String title,
-                               String content,
-                               int realPaid,
-                               int salePercent,
-                               int salePaid,
-                               int personCount,
-                               int personMaxCount,
-                               int readCount,
-                               int likeCount)
+                                      String travelStartAt,
+                                      String travelEndAt,
+                                      String title,
+                                      String content,
+                                      int realPaid,
+                                      int salePercent,
+                                      int salePaid,
+                                      int personCount,
+                                      int personMaxCount,
+                                      int readCount,
+                                      int likeCount ,
+                                      TravelAgency travelAgency)
     {
         return new TravelAgencyList(city,
                     travelStartAt,
@@ -137,7 +138,8 @@ public class TravelAgencyList {
                     personCount,
                     personMaxCount,
                     readCount,
-                    likeCount);
+                    likeCount,
+                    travelAgency);
     }
 
     @Override

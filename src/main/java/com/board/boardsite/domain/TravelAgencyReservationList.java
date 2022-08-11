@@ -10,7 +10,7 @@ import java.util.Objects;
 @Getter
 @ToString(callSuper = true)
 @Entity
-public class TravelAgencyReservationList {
+public class TravelAgencyReservationList extends AuditingFields {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,28 +30,41 @@ public class TravelAgencyReservationList {
 
     @Setter
     @Column(nullable = false)
-    private int paid;
+    private int paid;                           //비용
 
     @Setter
     @Column(nullable = false)
-    private int salePercent;
+    private int salePercent;                    //세일 비용
 
     @Setter
     @Column(nullable = false , length = 1)
-    private String useYn;
+    private String useYn;                       //사용 여부
 
     protected TravelAgencyReservationList() {
 
     }
 
-    private TravelAgencyReservationList( int paid, int salePercent, String useYn) {
+    private TravelAgencyReservationList( int paid,
+                                         int salePercent,
+                                         String useYn,
+                                         TripUser tripUser,
+                                         TravelAgency travelAgency,
+                                         TravelAgencyList travelAgencyList) {
         this.paid = paid;
         this.salePercent = salePercent;
         this.useYn = useYn;
+        this.tripUser = tripUser;
+        this.travelAgency = travelAgency;
+        this.travelAgencyList =travelAgencyList;
     }
 
-    public static TravelAgencyReservationList of(int paid, int salePercent, String useYn) {
-        return new TravelAgencyReservationList(paid,salePercent,useYn);
+    public static TravelAgencyReservationList of(int paid,
+                                                 int salePercent,
+                                                 String useYn,
+                                                 TripUser tripUser,
+                                                 TravelAgency travelAgency ,
+                                                 TravelAgencyList travelAgencyList) {
+        return new TravelAgencyReservationList(paid,salePercent,useYn,tripUser,travelAgency,travelAgencyList);
     }
 
     @Override

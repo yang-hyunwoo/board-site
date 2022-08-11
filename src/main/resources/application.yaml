@@ -25,7 +25,7 @@ spring:
   h2.console.enabled: false
   sql.init.mode: always
   data.rest:
-    base-path: /api
+    base-path: /hal-api
     detection-strategy: annotated
   thymeleaf3.decoupled-logic: true
 

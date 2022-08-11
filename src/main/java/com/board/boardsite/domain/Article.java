@@ -37,6 +37,10 @@ public class Article extends AuditingFields{
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content; // 본문
 
+    @Setter
+    @Column(nullable = false, length = 1)
+    private String useYn;
+
     @ToString.Exclude
     @OrderBy("createdAt DESC")
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
@@ -44,14 +48,19 @@ public class Article extends AuditingFields{
 
     protected Article() {}
 
-    private Article(String title, String content) {
+
+
+    private Article(String title, String content ,String useYn , TripUser tripUser) {
         this.title = title;
         this.content = content;
+        this.useYn = useYn;
+        this.tripUser = tripUser;
     }
 
-    public static Article of(String title, String content) {
-        return new Article(title, content);
+    public static Article of(String title, String content ,String useYn ,TripUser tripUser) {
+        return new Article(title, content,useYn, tripUser);
     }
+
 
     @Override
     public boolean equals(Object o) {

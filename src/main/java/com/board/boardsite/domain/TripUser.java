@@ -19,7 +19,7 @@ import java.util.Objects;
         @Index(columnList = "name"),
         @Index(columnList = "point")
 })
-@EntityListeners(value = {TripUserEntityListener.class})
+//@EntityListeners(value = {TripUserEntityListener.class})
 public class TripUser extends AuditingFields {
 
     @Id
@@ -43,7 +43,11 @@ public class TripUser extends AuditingFields {
     @Column(nullable = false , length = 1000)
     private String password;                                //패스워트
 
-    private int point;                                      //포인트
+    private int point;
+    //포인트
+    @Setter
+    @Column(nullable = false , length = 1)
+    private String useYn;
 
     @Enumerated(value=EnumType.STRING)
     private Gender gender;                                  //성별
@@ -52,17 +56,18 @@ public class TripUser extends AuditingFields {
 
     }
 
-    private TripUser (String name, String nickName, String email, String password, int point, Gender gender) {
+    private TripUser (String name, String nickName, String email, String password, int point, Gender gender,String useYn) {
         this.name = name;
         this.nickName = nickName;
         this.email = email;
         this.password = password;
         this.point = point;
         this.gender = gender;
+        this.useYn = useYn;
     }
 
-    public static TripUser of(String name, String nickName, String email, String password, int point, Gender gender) {
-      return new TripUser(name,nickName,email,password,point,gender);
+    public static TripUser of(String name, String nickName, String email, String password, int point, Gender gender,String useYn) {
+      return new TripUser(name,nickName,email,password,point,gender,useYn);
     }
 
 
