@@ -20,3 +20,8 @@
 11. @ToString.Exclude :@oneToMany 나 ManyToOne을 사용할때 @ToString을 클래스에 걸어 두게 되면 순환참조가 걸려서 시스템이 죽어 버리기 때문에 이 순환 참조를 제거 하기 위해서 사용하는 것으로 알고 있다.
 12. @OrderBy : 정렬을 하기 위해서 사용 하였다.
 13. @DateTimeFormat : datetimeformat 을 하기 위해서 사용 하였다.
+
+# 2022/08/11
+# 도메인 CRUD 각각 테스트 완료
+현재 도메인 CRUD 테스트를 작성하여 정상적으로 된것을 확인 하였고
+DATA REST + HAL EXPLORER 을 그래들로 받아 실행을 시켜 정상적으로 작동  및 간단한 조회 테스트 한개를 만들어 테스트를 해보았다.
