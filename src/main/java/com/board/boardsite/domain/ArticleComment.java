@@ -11,7 +11,6 @@ import java.util.Objects;
 @Getter
 @ToString(callSuper = true)
 @Table(indexes = {
-        @Index(columnList = "content"),
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy")
 })
@@ -35,15 +34,23 @@ public class ArticleComment  extends AuditingFields {
     @Column(nullable = false, length = 4000)
     private String content; // 본문
 
+    @Setter
+    @Column(nullable = false, length = 1)
+    private String useYn;
+
+
+
     protected ArticleComment() {}
 
-    private ArticleComment(Article article, String content) {
+    private ArticleComment(Article article, String content,String useYn , TripUser tripUser) {
         this.article = article;
         this.content = content;
+        this.useYn = useYn;
+        this.tripUser = tripUser;
     }
 
-    public static ArticleComment of(Article article,  String content) {
-        return new ArticleComment(article, content);
+    public static ArticleComment of(Article article,  String content,String useYn , TripUser tripUser) {
+        return new ArticleComment(article, content,useYn,tripUser);
     }
 
     @Override

@@ -1,7 +1,6 @@
 package com.board.boardsite.listener;
 
 
-import com.board.boardsite.domain.TravelAgency;
 import com.board.boardsite.domain.TripUser;
 import com.board.boardsite.domain.TripUserHistory;
 import com.board.boardsite.repository.TripUserHistoryRepository;

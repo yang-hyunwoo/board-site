@@ -16,7 +16,7 @@ import java.util.Set;
         @Index(columnList = "name"),
         @Index(columnList = "useYn")
 })
-public class TravelAgency {
+public class TravelAgency extends AuditingFields {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
