@@ -1,6 +1,5 @@
 debug: false
 management.endpoints.web.exposure.include: "*"
-
 logging:
   level:
     com.board.boardsite: debug
@@ -28,7 +27,8 @@ spring:
     base-path: /hal-api
     detection-strategy: annotated
   thymeleaf3.decoupled-logic: true
-
+server:
+  port: 8081
 
 
 ---
