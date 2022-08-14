@@ -12,6 +12,21 @@ spring:
     username: gusdn
     password: thisisTEST!@#
     driver-class-name: com.mysql.cj.jdbc.Driver
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: username
+    password: 구글보안비밀번호
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
+            required: true
+            auth: true
+            connectiontimeout: 5000
+            timeout: 5000
+            writetimeout: 5000
 
   jpa:
     defer-datasource-initialization: true         # 2.5 이상 data.sql 실행
