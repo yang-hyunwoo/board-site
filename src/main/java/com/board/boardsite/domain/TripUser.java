@@ -34,7 +34,6 @@ public class TripUser extends AuditingFields {
     @Column(nullable = false , length = 50)
     private String nickName;                                    //이름
 
-
     @Setter
     @Column(nullable = false , length = 100)
     private String email;                                   //이메일
@@ -56,7 +55,14 @@ public class TripUser extends AuditingFields {
 
     }
 
-    private TripUser (String name, String nickName, String email, String password, int point, Gender gender,String useYn) {
+    private TripUser (String name,
+                      String nickName,
+                      String email,
+                      String password,
+                      int point,
+                      Gender gender,
+                      String useYn)
+    {
         this.name = name;
         this.nickName = nickName;
         this.email = email;
@@ -66,8 +72,21 @@ public class TripUser extends AuditingFields {
         this.useYn = useYn;
     }
 
-    public static TripUser of(String name, String nickName, String email, String password, int point, Gender gender,String useYn) {
-      return new TripUser(name,nickName,email,password,point,gender,useYn);
+    public static TripUser of(String name,
+                              String nickName,
+                              String email,
+                              String password,
+                              int point,
+                              Gender gender,
+                              String useYn)
+    {
+      return new TripUser(name,
+                          nickName,
+                          email,
+                          password,
+                          point,
+                          gender,
+                          useYn);
     }
 
 

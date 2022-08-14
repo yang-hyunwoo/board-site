@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 @Getter
 public enum ErrorCode {
 
-    DUPLICATED_USER_NAME(HttpStatus.CONFLICT,"user email is duplicated");
+    DUPLICATED_EMAIL(HttpStatus.CONFLICT,"user email is duplicated");
 
     private HttpStatus status;
     private String message;
