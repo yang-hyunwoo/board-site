@@ -12,6 +12,10 @@ public class BoardSiteException extends RuntimeException{
 
     private String message;
 
+    public BoardSiteException(ErrorCode errorCode){
+        this.errorCode =errorCode;
+        this.message =null;
+    }
 
     @Override
     public String getMessage() {

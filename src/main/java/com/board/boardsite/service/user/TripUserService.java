@@ -33,12 +33,13 @@ public class TripUserService {
         });
 
         String passwordEncode = encoder.encode(tripUserDto.password());
-
         TripUser tripUser = tripUserRepository.save(tripUserDto.toEntity(passwordEncode));
+
         EmailAuthDto emailAuthDto = EmailAuthDto.of(tripUserDto.email(), UUID.randomUUID().toString(),false, LocalDateTime.now());
         emailAuthRepository.save(emailAuthDto.toEntity());
-
         emailService.send(emailAuthDto.email(),emailAuthDto.authToken());
+
+
         return TripUserDto.from(tripUser);
     }
 
