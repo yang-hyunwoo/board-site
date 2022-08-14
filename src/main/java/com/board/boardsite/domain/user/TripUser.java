@@ -1,8 +1,9 @@
-package com.board.boardsite.domain;
+package com.board.boardsite.domain.user;
 
 
+import com.board.boardsite.domain.ArticleComment;
+import com.board.boardsite.domain.AuditingFields;
 import com.board.boardsite.domain.constant.Gender;
-import com.board.boardsite.listener.TripUserEntityListener;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -51,17 +52,22 @@ public class TripUser extends AuditingFields {
     @Enumerated(value=EnumType.STRING)
     private Gender gender;                                  //성별
 
+    private Boolean emailAuth;
+
+    private String refreshToken;
+
     protected TripUser() {
 
     }
 
-    private TripUser (String name,
-                      String nickName,
-                      String email,
-                      String password,
-                      int point,
-                      Gender gender,
-                      String useYn)
+    private TripUser(String name,
+                     String nickName,
+                     String email,
+                     String password,
+                     int point,
+                     Gender gender,
+                     String useYn,
+                     Boolean emailAuth)
     {
         this.name = name;
         this.nickName = nickName;
@@ -70,6 +76,7 @@ public class TripUser extends AuditingFields {
         this.point = point;
         this.gender = gender;
         this.useYn = useYn;
+        this.emailAuth = emailAuth;
     }
 
     public static TripUser of(String name,
@@ -78,7 +85,8 @@ public class TripUser extends AuditingFields {
                               String password,
                               int point,
                               Gender gender,
-                              String useYn)
+                              String useYn,
+                              Boolean emailAuth)
     {
       return new TripUser(name,
                           nickName,
@@ -86,9 +94,16 @@ public class TripUser extends AuditingFields {
                           password,
                           point,
                           gender,
-                          useYn);
+                          useYn,
+                          emailAuth);
     }
 
+    public void updateRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
+    }
+    public void emailVerifiedSuccess(){
+        this.emailAuth = true;
+    }
 
     @Override
     public boolean equals(Object o) {
