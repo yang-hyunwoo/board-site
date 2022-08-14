@@ -1,6 +1,7 @@
 package com.board.boardsite.domain;
 
 
+import com.board.boardsite.domain.user.TripUser;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

@@ -1,10 +1,8 @@
-package com.board.boardsite.dto;
+package com.board.boardsite.dto.user;
 
-import com.board.boardsite.domain.TripUser;
 import com.board.boardsite.domain.constant.Gender;
-import lombok.Setter;
+import com.board.boardsite.domain.user.TripUser;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 public record TripUserDto(
         Long id,
@@ -15,6 +13,7 @@ public record TripUserDto(
         String useYn,
         String password,
         Gender gender,
+        Boolean emailAuth,
         LocalDateTime createdAt,
         String createdBy,
         LocalDateTime modifiedAt,
@@ -27,7 +26,7 @@ public record TripUserDto(
                                  String nickName,
                                  String password,
                                  Gender gender) {
-        return new TripUserDto(null,email,name,nickName,0,"Y",password,gender,null,null,null,null);
+        return new TripUserDto(null,email,name,nickName,0,"Y",password,gender,false,null,null,null,null);
     }
 
     public static TripUserDto from(TripUser entity) {
@@ -40,6 +39,7 @@ public record TripUserDto(
                 entity.getUseYn(),
                 entity.getPassword(),
                 entity.getGender(),
+                entity.getEmailAuth(),
                 entity.getCreatedAt(),
                 entity.getCreatedBy(),
                 entity.getModifiedAt(),
@@ -55,7 +55,8 @@ public record TripUserDto(
                 passwordEncode,
                 point,
                 gender,
-                useYn
+                useYn,
+                emailAuth
         );
     }
 

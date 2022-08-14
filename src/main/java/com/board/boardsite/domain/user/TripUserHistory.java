@@ -1,6 +1,8 @@
-package com.board.boardsite.domain;
+package com.board.boardsite.domain.user;
 
 
+import com.board.boardsite.domain.ArticleComment;
+import com.board.boardsite.domain.AuditingFields;
 import com.board.boardsite.domain.constant.Gender;
 import lombok.Getter;
 import lombok.Setter;
@@ -53,7 +55,7 @@ public class TripUserHistory extends AuditingFields {
     protected TripUserHistory() {
 
     }
-    private TripUserHistory (Long id , String name, String nickName, String email, String password, int point, Gender gender) {
+    private TripUserHistory(Long id , String name, String nickName, String email, String password, int point, Gender gender) {
         this.id = id;
         this.name = name;
         this.nickName = nickName;
