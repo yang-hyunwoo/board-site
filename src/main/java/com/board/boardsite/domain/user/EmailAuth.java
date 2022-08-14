@@ -1,6 +1,8 @@
 package com.board.boardsite.domain.user;
 
+import com.board.boardsite.domain.Article;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,8 +21,11 @@ public class EmailAuth {
     private Long id;
 
     private String email;
+
+    @Setter
     private String authToken;
     private Boolean expired;
+    @Setter
     private LocalDateTime expireDate;
 
     protected EmailAuth() {
@@ -49,6 +54,12 @@ public class EmailAuth {
                 expireDate.plusMinutes(MAX_EXPIRE_TIME));
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof EmailAuth that)) return false;
+        return email != null && email.equals(that.getEmail());
+    }
 
     public void useToken() {
         this.expired = true;

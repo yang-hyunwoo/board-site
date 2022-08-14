@@ -3,6 +3,9 @@ package com.board.boardsite.service.user;
 import com.board.boardsite.domain.user.EmailAuth;
 import com.board.boardsite.domain.user.TripUser;
 import com.board.boardsite.dto.request.user.EmailAuthRequest;
+import com.board.boardsite.dto.user.EmailAuthDto;
+import com.board.boardsite.exception.BoardSiteException;
+import com.board.boardsite.exception.ErrorCode;
 import com.board.boardsite.repository.user.TripUserRepository;
 import com.board.boardsite.repository.user.EmailAuthRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Service
 @EnableAsync
@@ -28,6 +32,7 @@ public class EmailService {
 
     private final EmailAuthRepository emailAuthRepository;
 
+    private static final Long MAX_EXPIRE_TIME = 5L;
     @Async
     public void send(String email , String authToken){
         SimpleMailMessage sim = new SimpleMailMessage();
@@ -39,13 +44,33 @@ public class EmailService {
     }
 
     @Transactional
-    public void confirmEmail(EmailAuthRequest request){
-        log.warn("request.email() :{}",request.email());
-        log.warn("request.authToken() :{}",request.authToken());
+    public boolean confirmEmail(EmailAuthRequest request) {
+        if(emailAuthRepository.findValidAuthByEmail(request.email(), request.authToken(), LocalDateTime.now()).isEmpty()){
+            if(tripUserRepository.findByEmail(request.email()).isEmpty()) {
+//                throw new BoardSiteException(ErrorCode.DUPLICATED_EMAIL, String.format("%s is duplicated", request.email()));
+                return  false;
+            }
+//                throw new BoardSiteException(ErrorCode.EMAIL_TIME_INVAILED);
+            return  false;
+        }
+
+
         EmailAuth emailAuth = emailAuthRepository.findValidAuthByEmail(request.email(), request.authToken(), LocalDateTime.now()).get();
         TripUser tripUser = tripUserRepository.findByEmail(request.email()).get();
         emailAuth.useToken();
         tripUser.emailVerifiedSuccess();
+        return true;
+
     }
 
+    @Transactional
+    public void retryConfirmEmail(EmailAuthRequest request) {
+
+        EmailAuth emailAuth = emailAuthRepository.findByEmail(request.email()).get();
+        emailAuth.setAuthToken(UUID.randomUUID().toString());
+        emailAuth.setExpireDate(LocalDateTime.now().plusMinutes(MAX_EXPIRE_TIME));
+
+        emailAuthRepository.saveAndFlush(emailAuth);
+        send(request.email(),emailAuth.getAuthToken());
+    }
 }
