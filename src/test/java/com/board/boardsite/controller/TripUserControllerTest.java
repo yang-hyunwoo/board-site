@@ -1,32 +1,23 @@
 package com.board.boardsite.controller;
 
-import com.board.boardsite.domain.TripUser;
 import com.board.boardsite.domain.constant.Gender;
-import com.board.boardsite.dto.TripUserDto;
-import com.board.boardsite.dto.request.TripUserJoinRequest;
+import com.board.boardsite.dto.user.TripUserDto;
+import com.board.boardsite.dto.request.user.TripUserJoinRequest;
 import com.board.boardsite.exception.BoardSiteException;
 import com.board.boardsite.exception.ErrorCode;
-import com.board.boardsite.repository.TripUserRepository;
-import com.board.boardsite.service.TripUserService;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.board.boardsite.service.user.TripUserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.mockito.BDDMockito.*;
-import java.util.Optional;
 
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -45,8 +36,6 @@ class TripUserControllerTest {
     @MockBean
     private TripUserService tripUserService;
 
-    @MockBean
-    private TripUserRepository tripUserRepository;
 
 
 

@@ -1,11 +1,12 @@
 package com.board.boardsite.service;
 
-import com.board.boardsite.domain.TripUser;
 import com.board.boardsite.domain.constant.Gender;
-import com.board.boardsite.dto.TripUserDto;
+import com.board.boardsite.domain.user.TripUser;
+import com.board.boardsite.dto.user.TripUserDto;
 import com.board.boardsite.exception.BoardSiteException;
 import com.board.boardsite.exception.ErrorCode;
-import com.board.boardsite.repository.TripUserRepository;
+import com.board.boardsite.repository.user.TripUserRepository;
+import com.board.boardsite.service.user.TripUserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,7 +17,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

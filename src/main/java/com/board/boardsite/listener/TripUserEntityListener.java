@@ -1,9 +1,9 @@
 package com.board.boardsite.listener;
 
 
-import com.board.boardsite.domain.TripUser;
-import com.board.boardsite.domain.TripUserHistory;
-import com.board.boardsite.repository.TripUserHistoryRepository;
+import com.board.boardsite.domain.user.TripUser;
+import com.board.boardsite.domain.user.TripUserHistory;
+import com.board.boardsite.repository.user.TripUserHistoryRepository;
 import com.board.boardsite.support.BeanUtils;
 import org.springframework.stereotype.Component;
 

@@ -3,6 +3,8 @@ package com.board.boardsite.repository;
 import com.board.boardsite.config.JpaConfig;
 import com.board.boardsite.domain.*;
 import com.board.boardsite.domain.constant.Gender;
+import com.board.boardsite.domain.user.TripUser;
+import com.board.boardsite.repository.user.TripUserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -284,7 +286,7 @@ class JpaRepositoryTest {
         // Given
         long perviousCount = tripUserRepository.count();
         // When
-        tripUserRepository.save(TripUser.of("gus","123","asdf","1214",0, Gender.M,"Y"));
+        tripUserRepository.save(TripUser.of("gus","123","asdf","1214",0,Gender.M,"Y",false));
         // Then
         assertThat(tripUserRepository.count()).isEqualTo(perviousCount+1);
     }

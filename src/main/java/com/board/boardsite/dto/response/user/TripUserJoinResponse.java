@@ -1,9 +1,7 @@
-package com.board.boardsite.dto.response;
+package com.board.boardsite.dto.response.user;
 
 import com.board.boardsite.domain.constant.Gender;
-import com.board.boardsite.dto.TripUserDto;
-
-import java.io.Serializable;
+import com.board.boardsite.dto.user.TripUserDto;
 
 public record TripUserJoinResponse(
         Long id,

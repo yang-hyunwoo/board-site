@@ -1,7 +1,7 @@
-package com.board.boardsite.dto.request;
+package com.board.boardsite.dto.request.user;
 
 import com.board.boardsite.domain.constant.Gender;
-import com.board.boardsite.dto.TripUserDto;
+import com.board.boardsite.dto.user.TripUserDto;
 
 public record TripUserJoinRequest(
         String name,
