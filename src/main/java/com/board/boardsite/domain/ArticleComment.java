@@ -36,22 +36,22 @@ public class ArticleComment  extends AuditingFields {
     private String content; // 본문
 
     @Setter
-    @Column(nullable = false, length = 1)
-    private String useYn;
+    @Column(nullable = false)
+    private boolean deleted;
 
 
 
     protected ArticleComment() {}
 
-    private ArticleComment(Article article, String content,String useYn , TripUser tripUser) {
+    private ArticleComment(Article article, String content,boolean deleted , TripUser tripUser) {
         this.article = article;
         this.content = content;
-        this.useYn = useYn;
+        this.deleted = deleted;
         this.tripUser = tripUser;
     }
 
-    public static ArticleComment of(Article article,  String content,String useYn , TripUser tripUser) {
-        return new ArticleComment(article, content,useYn,tripUser);
+    public static ArticleComment of(Article article,  String content,boolean deleted , TripUser tripUser) {
+        return new ArticleComment(article, content,deleted,tripUser);
     }
 
     @Override

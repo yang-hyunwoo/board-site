@@ -39,8 +39,8 @@ public class Article extends AuditingFields{
     private String content; // 본문
 
     @Setter
-    @Column(nullable = false, length = 1)
-    private String useYn;
+    @Column(nullable = false)
+    private boolean deleted;
 
     @ToString.Exclude
     @OrderBy("createdAt DESC")
@@ -51,15 +51,15 @@ public class Article extends AuditingFields{
 
 
 
-    private Article(String title, String content ,String useYn , TripUser tripUser) {
+    private Article(String title, String content ,boolean deleted , TripUser tripUser) {
         this.title = title;
         this.content = content;
-        this.useYn = useYn;
+        this.deleted = deleted;
         this.tripUser = tripUser;
     }
 
-    public static Article of(String title, String content ,String useYn ,TripUser tripUser) {
-        return new Article(title, content,useYn, tripUser);
+    public static Article of(String title, String content ,boolean deleted ,TripUser tripUser) {
+        return new Article(title, content,deleted, tripUser);
     }
 
 

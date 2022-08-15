@@ -41,7 +41,7 @@ class TripUserControllerTest {
 
 
 
-    @DisplayName("회원가입 정상 ")
+    @DisplayName("[POST][TRIP_USER] 회원가입 정상")
     @Test
     void givenNewTripUser_whenRequesting_thenSavesNewTripUser() throws Exception {
 
@@ -59,7 +59,7 @@ class TripUserControllerTest {
 
     }
 
-    @DisplayName("회원가입시 이미 가입된 이메일로 회원가입 하는 경우 ")
+    @DisplayName("[POST][TRIP_USER] 회원가입시 이미 가입된 이메일로 회원가입 하는 경우 ")
     @Test
     void givenNewTripUser_whenRequesting_thenSavesNewTripUserError() throws Exception {
 
@@ -77,7 +77,7 @@ class TripUserControllerTest {
 
     }
 
-    @DisplayName("회원 로그인 성공")
+    @DisplayName("[POST][TRIP_USER] 회원 로그인 성공")
     @Test
     void givenTripEmailAndPw_whenRequesting_thenReturnToken() throws Exception {
 
@@ -92,7 +92,7 @@ class TripUserControllerTest {
                 .andExpect(status().isOk());
     }
 
-    @DisplayName("회원 로그인 시 가입 되지 않은 이메일 입력 시")
+    @DisplayName("[POST][TRIP_USER] 회원 로그인 시 가입 되지 않은 이메일 입력 시")
     @Test
     void givenErrorTripEmail_whenRequesting_thenReturnException() throws Exception {
 
@@ -108,7 +108,7 @@ class TripUserControllerTest {
                 .andExpect(status().isNotFound());
     }
 
-    @DisplayName("회원 로그인 시 비밀번호가 다를 시")
+    @DisplayName("[POST][TRIP_USER] 회원 로그인 시 비밀번호가 다를 시")
     @Test
     void givenErrorTripPassword_whenRequesting_thenReturnException() throws Exception {
 

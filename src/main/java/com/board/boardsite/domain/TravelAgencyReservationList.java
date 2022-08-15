@@ -38,8 +38,8 @@ public class TravelAgencyReservationList extends AuditingFields {
     private int salePercent;                    //세일 비용
 
     @Setter
-    @Column(nullable = false , length = 1)
-    private String useYn;                       //사용 여부
+    @Column(nullable = false )
+    private boolean deleted;                       //사용 여부
 
     protected TravelAgencyReservationList() {
 
@@ -47,13 +47,13 @@ public class TravelAgencyReservationList extends AuditingFields {
 
     private TravelAgencyReservationList( int paid,
                                          int salePercent,
-                                         String useYn,
+                                         boolean deleted,
                                          TripUser tripUser,
                                          TravelAgency travelAgency,
                                          TravelAgencyList travelAgencyList) {
         this.paid = paid;
         this.salePercent = salePercent;
-        this.useYn = useYn;
+        this.deleted = deleted;
         this.tripUser = tripUser;
         this.travelAgency = travelAgency;
         this.travelAgencyList =travelAgencyList;
@@ -61,11 +61,11 @@ public class TravelAgencyReservationList extends AuditingFields {
 
     public static TravelAgencyReservationList of(int paid,
                                                  int salePercent,
-                                                 String useYn,
+                                                 boolean deleted,
                                                  TripUser tripUser,
                                                  TravelAgency travelAgency ,
                                                  TravelAgencyList travelAgencyList) {
-        return new TravelAgencyReservationList(paid,salePercent,useYn,tripUser,travelAgency,travelAgencyList);
+        return new TravelAgencyReservationList(paid,salePercent,deleted,tripUser,travelAgency,travelAgencyList);
     }
 
     @Override

@@ -7,6 +7,7 @@ import com.board.boardsite.domain.constant.Gender;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -20,6 +21,7 @@ import java.util.Objects;
         @Index(columnList = "name"),
         @Index(columnList = "point")
 })
+@Where(clause = "deleted = false")
 //@EntityListeners(value = {TripUserEntityListener.class})
 public class TripUser extends AuditingFields {
 
@@ -46,8 +48,8 @@ public class TripUser extends AuditingFields {
     private int point;
     //포인트
     @Setter
-    @Column(nullable = false , length = 1)
-    private String useYn;
+    @Column(nullable = false)
+    private boolean deleted;
 
     @Enumerated(value=EnumType.STRING)
     private Gender gender;                                  //성별
@@ -66,7 +68,7 @@ public class TripUser extends AuditingFields {
                      String password,
                      int point,
                      Gender gender,
-                     String useYn,
+                     boolean deleted,
                      Boolean emailAuth)
     {
         this.name = name;
@@ -75,7 +77,7 @@ public class TripUser extends AuditingFields {
         this.password = password;
         this.point = point;
         this.gender = gender;
-        this.useYn = useYn;
+        this.deleted = deleted;
         this.emailAuth = emailAuth;
     }
 
@@ -85,7 +87,7 @@ public class TripUser extends AuditingFields {
                               String password,
                               int point,
                               Gender gender,
-                              String useYn,
+                              boolean deleted,
                               Boolean emailAuth)
     {
       return new TripUser(name,
@@ -94,7 +96,7 @@ public class TripUser extends AuditingFields {
                           password,
                           point,
                           gender,
-                          useYn,
+                          deleted,
                           emailAuth);
     }
 

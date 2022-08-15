@@ -13,8 +13,7 @@ import java.util.Set;
 @Entity
 @ToString(callSuper = true)
 @Table(indexes = {
-        @Index(columnList = "name"),
-        @Index(columnList = "useYn")
+        @Index(columnList = "name")
 })
 public class TravelAgency extends AuditingFields {
 
@@ -38,8 +37,8 @@ public class TravelAgency extends AuditingFields {
     private String detail;                                  //여행사 상세 정보
 
     @Setter
-    @Column(nullable = false , length = 1)
-    private String useYn;                                   //여행사 사용 여부
+    @Column(nullable = false )
+    private boolean deleted;                                   //여행사 사용 여부
 
     @ToString.Exclude
     @OneToMany(mappedBy = "travelAgency", cascade = CascadeType.ALL)
@@ -54,16 +53,16 @@ public class TravelAgency extends AuditingFields {
 
     }
 
-    private TravelAgency ( String name, String address, String tel, String detail, String useYn) {
+    private TravelAgency ( String name, String address, String tel, String detail, boolean deleted) {
         this.name = name;
         this.address = address;
         this.tel = tel;
         this.detail = detail;
-        this.useYn = useYn;
+        this.deleted = deleted;
     }
 
-    public static TravelAgency of( String name, String address, String tel, String detail, String useYn) {
-        return new TravelAgency(name,address,tel,detail,useYn);
+    public static TravelAgency of( String name, String address, String tel, String detail, boolean deleted) {
+        return new TravelAgency(name,address,tel,detail,deleted);
     }
 
     @Override

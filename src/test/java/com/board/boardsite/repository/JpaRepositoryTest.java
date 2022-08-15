@@ -4,6 +4,8 @@ import com.board.boardsite.config.JpaConfig;
 import com.board.boardsite.domain.*;
 import com.board.boardsite.domain.constant.Gender;
 import com.board.boardsite.domain.user.TripUser;
+import com.board.boardsite.repository.article.ArticleCommentRepository;
+import com.board.boardsite.repository.article.ArticleRepository;
 import com.board.boardsite.repository.user.TripUserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -65,7 +67,7 @@ class JpaRepositoryTest {
         var tripUser = tripUserRepository.findById(1L);      //DB 바로 액세스해서 데이터 가져옴
         var tripUser2 = tripUserRepository.getReferenceById(5L);    //실제 테이블 조회하는 대신 프록시 객체만 가져옴
         // When
-        articleRepository.save(Article.of("asdfsadf","vvvvvvvvvv","Y",tripUser2));
+        articleRepository.save(Article.of("asdfsadf","vvvvvvvvvv",false,tripUser2));
 
 
         // Then
@@ -82,7 +84,7 @@ class JpaRepositoryTest {
         String updTitle = "ccccccc";
         article.setTitle(updTitle);
         Article updArticle = articleRepository.save(article);
-        System.out.println(updArticle.getUseYn());
+        System.out.println(updArticle.isDeleted());
         // Then
         assertThat(updArticle).hasFieldOrPropertyWithValue("title",updTitle);
     }
@@ -109,7 +111,7 @@ class JpaRepositoryTest {
         var tripUser  = tripUserRepository.findById(1L);
         var article = articleRepository.findById(1L);
         // When
-        articleCommentRepository.save(ArticleComment.of(article.get(),"아이밀","Y",tripUser.get()));
+        articleCommentRepository.save(ArticleComment.of(article.get(),"아이밀",false,tripUser.get()));
 
         // Then
         assertThat(articleCommentRepository.count()).isEqualTo(perviousCount+1);
@@ -149,7 +151,7 @@ class JpaRepositoryTest {
         // Given
         long perviousCount = travelAgencyRepository.count();
         // When
-        travelAgencyRepository.save(TravelAgency.of("gus","1234","1234","12354","Y"));
+        travelAgencyRepository.save(TravelAgency.of("gus","1234","1234","12354",false));
 
         // Then
         assertThat(travelAgencyRepository.count()).isEqualTo(perviousCount+1);
@@ -245,7 +247,7 @@ class JpaRepositoryTest {
         // When
         travelAgencyReservationListRepository.save(TravelAgencyReservationList.of(1,
                 2,
-                "Y",
+                false,
                 tripUser,
                 travelAgency,
                 travelAgencyList));
@@ -260,7 +262,7 @@ class JpaRepositoryTest {
         // When
         var travelAgencyReservationList = travelAgencyReservationListRepository.findById(1L).orElseThrow();
         String UpdUseYn = "Y";
-        travelAgencyReservationList.setUseYn(UpdUseYn);
+        travelAgencyReservationList.setDeleted(true);
         TravelAgencyReservationList updTravelAgencyReservationList = travelAgencyReservationListRepository.saveAndFlush(travelAgencyReservationList);
         // Then
 //        assertThat(updTravelAgencyReservationList).hasFieldOrPropertyWithValue("use_yn",UpdUseYn);
@@ -286,7 +288,7 @@ class JpaRepositoryTest {
         // Given
         long perviousCount = tripUserRepository.count();
         // When
-        tripUserRepository.save(TripUser.of("gus","123","asdf","1214",0,Gender.M,"Y",false));
+        tripUserRepository.save(TripUser.of("gus","123","asdf","1214",0,Gender.M,false,false));
         // Then
         assertThat(tripUserRepository.count()).isEqualTo(perviousCount+1);
     }
@@ -298,7 +300,7 @@ class JpaRepositoryTest {
         // When
         var tripUser = tripUserRepository.findById(1L).orElseThrow();
         String UpdUseYn = "Y";
-        tripUser.setUseYn(UpdUseYn);
+        tripUser.setDeleted(true);
         TripUser updTravelAgencyReservationList = tripUserRepository.saveAndFlush(tripUser);
         // Then
 //        assertThat(updTravelAgencyReservationList).hasFieldOrPropertyWithValue("use_yn",UpdUseYn);
