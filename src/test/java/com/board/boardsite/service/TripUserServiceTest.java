@@ -2,6 +2,7 @@ package com.board.boardsite.service;
 
 import com.board.boardsite.domain.constant.Gender;
 import com.board.boardsite.domain.user.TripUser;
+import com.board.boardsite.dto.request.user.TripUserLoginRequest;
 import com.board.boardsite.dto.user.TripUserDto;
 import com.board.boardsite.exception.BoardSiteException;
 import com.board.boardsite.exception.ErrorCode;
@@ -13,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Optional;
@@ -20,6 +22,9 @@ import java.util.Optional;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 class TripUserServiceTest {
@@ -58,6 +63,45 @@ class TripUserServiceTest {
         BoardSiteException e = Assertions.assertThrows(BoardSiteException.class,()->tripUserService.join(dto));
         Assertions.assertEquals(ErrorCode.DUPLICATED_EMAIL,e.getErrorCode());
     }
+
+    @DisplayName("회원 로그인 성공")
+    @Test
+    void givenTripEmailAndPw_whenRequesting_thenReturnToken() throws Exception {
+        TripUserDto dto = createTripUserDto();
+
+        var tripUser = dto.toEntity(dto.password());
+        when(tripUserRepository.findByEmail(dto.email())).thenReturn(Optional.of(tripUser));
+        when(encoder.matches(dto.password(),dto.password())).thenReturn(true);
+        Assertions.assertDoesNotThrow(() -> tripUserService.login(dto.email(),dto.password()));
+
+
+    }
+
+    @DisplayName("회원 로그인 시 가입 되지 않은 이메일 입력 시")
+    @Test
+    void givenErrorTripEmail_whenRequesting_thenReturnException() throws Exception {
+        TripUserDto dto = createTripUserDto();
+        when(tripUserRepository.findByEmail(dto.email())).thenReturn(Optional.empty());
+
+
+        BoardSiteException e= Assertions.assertThrows(BoardSiteException.class,()->tripUserService.login(dto.email(),dto.password()));
+        Assertions.assertEquals(ErrorCode.EMAIL_NOT_FOUND,e.getErrorCode());
+
+    }
+
+    @DisplayName("회원 로그인 시 비밀번호가 다를 시")
+    @Test
+    void givenErrorTripPassword_whenRequesting_thenReturnException() throws Exception {
+        TripUserDto dto = createTripUserDto();
+        String passwordNot = "password";
+        TripUser tripUser = dto.toEntity(encoder.encode(dto.password()));
+        when(tripUserRepository.findByEmail(dto.email())).thenReturn(Optional.of(tripUser));
+
+
+        BoardSiteException e = Assertions.assertThrows(BoardSiteException.class,()->tripUserService.login(dto.email(),passwordNot));
+        Assertions.assertEquals(ErrorCode.INVALID_PASSWORD,e.getErrorCode());
+    }
+
 
     private TripUserDto createTripUserDto() {
         return  TripUserDto.of(

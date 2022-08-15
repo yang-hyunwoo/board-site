@@ -2,6 +2,8 @@ package com.board.boardsite.controller;
 
 
 import com.board.boardsite.dto.request.user.EmailAuthRequest;
+import com.board.boardsite.dto.request.user.TripUserLoginRequest;
+import com.board.boardsite.dto.response.user.TripUserLoginResponse;
 import com.board.boardsite.dto.user.TripUserDto;
 import com.board.boardsite.dto.request.user.TripUserJoinRequest;
 import com.board.boardsite.dto.response.Response;
@@ -35,14 +37,20 @@ public class TripUserController {
            boolean test =  emailService.confirmEmail(request);
 
            if(test){
-               return Response.success("인증이 완료되었습니다.");
+//               return Response.success("인증이 완료되었습니다.");
            } else {
                emailService.retryConfirmEmail(request);
-               return null;
+//               return null;
            }
-
+        return Response.success("인증이 완료되었습니다.");
     }
 
+    @PostMapping("/login")
+    public Response<TripUserLoginResponse> login(@RequestBody TripUserLoginRequest request) {
+        String token = tripUserService.login(request.email(),request.password());
+        return Response.success(new TripUserLoginResponse(token));
+
+    }
 
 
 }

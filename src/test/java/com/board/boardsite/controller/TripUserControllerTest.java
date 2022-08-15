@@ -1,11 +1,13 @@
 package com.board.boardsite.controller;
 
 import com.board.boardsite.domain.constant.Gender;
+import com.board.boardsite.dto.request.user.TripUserLoginRequest;
 import com.board.boardsite.dto.user.TripUserDto;
 import com.board.boardsite.dto.request.user.TripUserJoinRequest;
 import com.board.boardsite.exception.BoardSiteException;
 import com.board.boardsite.exception.ErrorCode;
 import com.board.boardsite.service.user.TripUserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -62,7 +64,7 @@ class TripUserControllerTest {
     void givenNewTripUser_whenRequesting_thenSavesNewTripUserError() throws Exception {
 
         TripUserDto dto = createTripUserDto();
-        when(tripUserService.join(dto)).thenThrow(new BoardSiteException(ErrorCode.DUPLICATED_EMAIL,""));
+        when(tripUserService.join(dto)).thenThrow(new BoardSiteException(ErrorCode.DUPLICATED_EMAIL));
         mockMvc.perform(post("/api/trip/users/join")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsBytes(new TripUserJoinRequest(dto.name(),
@@ -73,6 +75,53 @@ class TripUserControllerTest {
                 .andDo(print())
                 .andExpect(status().isConflict());
 
+    }
+
+    @DisplayName("회원 로그인 성공")
+    @Test
+    void givenTripEmailAndPw_whenRequesting_thenReturnToken() throws Exception {
+
+        String email = "gus@naver.com";
+        String password = "password";
+
+        when(tripUserService.login(email , password)).thenReturn("test_token");
+        mockMvc.perform(post("/api/trip/users/login")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsBytes(new TripUserLoginRequest(email , password))))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    @DisplayName("회원 로그인 시 가입 되지 않은 이메일 입력 시")
+    @Test
+    void givenErrorTripEmail_whenRequesting_thenReturnException() throws Exception {
+
+        String email = "gus@naver.com";
+        String password = "password";
+
+        when(tripUserService.login(email, password)).thenThrow(new BoardSiteException(ErrorCode.EMAIL_NOT_FOUND));
+
+        mockMvc.perform(post("/api/trip/users/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsBytes(new TripUserLoginRequest(email , password))))
+                .andDo(print())
+                .andExpect(status().isNotFound());
+    }
+
+    @DisplayName("회원 로그인 시 비밀번호가 다를 시")
+    @Test
+    void givenErrorTripPassword_whenRequesting_thenReturnException() throws Exception {
+
+        String email = "gus@naver.com";
+        String password = "password";
+
+        when(tripUserService.login(email, password)).thenThrow(new BoardSiteException(ErrorCode.INVALID_PASSWORD));
+
+        mockMvc.perform(post("/api/trip/users/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsBytes(new TripUserLoginRequest(email , password))))
+                .andDo(print())
+                .andExpect(status().isUnauthorized());
     }
 
 
