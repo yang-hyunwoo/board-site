@@ -7,7 +7,9 @@ import com.board.boardsite.exception.BoardSiteException;
 import com.board.boardsite.exception.ErrorCode;
 import com.board.boardsite.repository.user.TripUserRepository;
 import com.board.boardsite.repository.user.EmailAuthRepository;
+import com.board.boardsite.support.JwtTokenUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,11 +22,15 @@ import java.util.UUID;
 public class TripUserService {
 
     private final TripUserRepository tripUserRepository;
-
     private final EmailAuthRepository emailAuthRepository;
     private final BCryptPasswordEncoder encoder;
-
     private final EmailService emailService;
+
+    @Value("${jwt.secret-key}")
+    private String secretKey;
+
+    @Value("${jwt.token.expired-time-ms}")
+    private Long expiredTimeMs;
 
     @Transactional
     public TripUserDto join(TripUserDto tripUserDto) {
@@ -41,6 +47,18 @@ public class TripUserService {
 
 
         return TripUserDto.from(tripUser);
+    }
+
+    public String login(String email , String password) {
+        var tripUser = tripUserRepository.findByEmail(email).orElseThrow(() -> new BoardSiteException(ErrorCode.EMAIL_NOT_FOUND,String.format("%s not founded",email)));
+        System.out.println(password);
+        System.out.println(tripUser.getPassword());
+        if(!encoder.matches(password , tripUser.getPassword())) {
+            throw new BoardSiteException(ErrorCode.INVALID_PASSWORD);
+        }
+        String token = JwtTokenUtils.generateToken(email,secretKey , expiredTimeMs);
+
+        return token;
     }
 
 }

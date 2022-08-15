@@ -15,8 +15,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: username
-    password: 구글보안비밀번호
+    username:  username
+    password: 구글앱 비밀번호
     properties:
       mail:
         smtp:
@@ -45,6 +45,9 @@ spring:
 server:
   port: 8081
 
-
+jwt:
+  secret-key: board_site.trip_web_application.secret_key
+  #30 days
+  token.expired-time-ms: 2592000000
 ---
 
