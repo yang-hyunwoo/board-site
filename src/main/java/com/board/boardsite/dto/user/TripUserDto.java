@@ -10,7 +10,7 @@ public record TripUserDto(
         String name,
         String nickName,
         int point,
-        String useYn,
+        boolean deleted,
         String password,
         Gender gender,
         Boolean emailAuth,
@@ -26,7 +26,7 @@ public record TripUserDto(
                                  String nickName,
                                  String password,
                                  Gender gender) {
-        return new TripUserDto(null,email,name,nickName,0,"Y",password,gender,false,null,null,null,null);
+        return new TripUserDto(null,email,name,nickName,0,false,password,gender,false,null,null,null,null);
     }
 
     public static TripUserDto from(TripUser entity) {
@@ -36,7 +36,7 @@ public record TripUserDto(
                 entity.getName(),
                 entity.getNickName(),
                 entity.getPoint(),
-                entity.getUseYn(),
+                entity.isDeleted(),
                 entity.getPassword(),
                 entity.getGender(),
                 entity.getEmailAuth(),
@@ -55,7 +55,7 @@ public record TripUserDto(
                 passwordEncode,
                 point,
                 gender,
-                useYn,
+                deleted,
                 emailAuth
         );
     }

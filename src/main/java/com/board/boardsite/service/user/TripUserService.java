@@ -1,6 +1,7 @@
 package com.board.boardsite.service.user;
 
 import com.board.boardsite.domain.user.TripUser;
+import com.board.boardsite.dto.security.TripUserPrincipal;
 import com.board.boardsite.dto.user.EmailAuthDto;
 import com.board.boardsite.dto.user.TripUserDto;
 import com.board.boardsite.exception.BoardSiteException;
@@ -32,6 +33,14 @@ public class TripUserService {
     @Value("${jwt.token.expired-time-ms}")
     private Long expiredTimeMs;
 
+    public TripUserPrincipal loadUserByEmail(String email) {
+        return  tripUserRepository.findByEmail(email)
+                .map(TripUserDto::from)
+                .map(TripUserPrincipal::from)
+                .orElseThrow(() -> new BoardSiteException(ErrorCode.USER_NOT_FOUND,String.format("%s not founded",email)));
+
+    }
+
     @Transactional
     public TripUserDto join(TripUserDto tripUserDto) {
         tripUserRepository.findByEmail(tripUserDto.email()).ifPresent(it -> {
@@ -48,11 +57,9 @@ public class TripUserService {
 
         return TripUserDto.from(tripUser);
     }
-
+    //TODO : 인증안되면 로그인 안되게 수정
     public String login(String email , String password) {
         var tripUser = tripUserRepository.findByEmail(email).orElseThrow(() -> new BoardSiteException(ErrorCode.EMAIL_NOT_FOUND,String.format("%s not founded",email)));
-        System.out.println(password);
-        System.out.println(tripUser.getPassword());
         if(!encoder.matches(password , tripUser.getPassword())) {
             throw new BoardSiteException(ErrorCode.INVALID_PASSWORD);
         }
