@@ -45,6 +45,9 @@ class JpaRepositoryTest {
         this.travelAgencyReservationListRepository = travelAgencyReservationListRepository;
     }
 
+
+
+
     @DisplayName("1. select Article 테스트")
     @Test
     void givenTestData_whenArticleSelecting_thenWorksFine() {

@@ -1,9 +1,10 @@
-package com.board.boardsite.controller;
+package com.board.boardsite.controller.userController;
 
 
 import com.board.boardsite.dto.request.user.EmailAuthRequest;
 import com.board.boardsite.dto.request.user.TripUserLoginRequest;
 import com.board.boardsite.dto.response.user.TripUserLoginResponse;
+import com.board.boardsite.dto.security.TripUserPrincipal;
 import com.board.boardsite.dto.user.TripUserDto;
 import com.board.boardsite.dto.request.user.TripUserJoinRequest;
 import com.board.boardsite.dto.response.Response;
@@ -13,6 +14,7 @@ import com.board.boardsite.service.user.EmailService;
 import com.board.boardsite.service.user.TripUserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -30,6 +32,8 @@ public class TripUserController {
         TripUserDto tripUserDto  = tripUserService.join(request.toDto());
         return Response.success(TripUserJoinResponse.from(tripUserDto));
     }
+
+
 
     @GetMapping("/confirm-email")
     public Response<String> confirmEmail(@ModelAttribute EmailAuthRequest request) {
@@ -49,6 +53,14 @@ public class TripUserController {
     public Response<TripUserLoginResponse> login(@RequestBody TripUserLoginRequest request) {
         String token = tripUserService.login(request.email(),request.password());
         return Response.success(new TripUserLoginResponse(token));
+
+    }
+
+    @GetMapping("/aaaa")
+    public String  aaa(@AuthenticationPrincipal TripUserPrincipal tripUserPrincipal){
+//        System.out.println(tripUserPrincipal.email());
+//        System.out.println(tripUserPrincipal.name());
+        return "aa";
 
     }
 

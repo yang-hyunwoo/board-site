@@ -3,6 +3,7 @@ package com.board.boardsite.service;
 import com.board.boardsite.domain.constant.Gender;
 import com.board.boardsite.domain.user.TripUser;
 import com.board.boardsite.dto.request.user.TripUserLoginRequest;
+import com.board.boardsite.dto.security.TripUserPrincipal;
 import com.board.boardsite.dto.user.TripUserDto;
 import com.board.boardsite.exception.BoardSiteException;
 import com.board.boardsite.exception.ErrorCode;
@@ -37,6 +38,7 @@ class TripUserServiceTest {
 
     @MockBean
     private BCryptPasswordEncoder encoder;
+
 
     @DisplayName("회원가입 -Service 정상")
     @Test
