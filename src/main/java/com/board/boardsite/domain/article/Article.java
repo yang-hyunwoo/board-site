@@ -6,6 +6,7 @@ import com.board.boardsite.domain.user.TripUser;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.LinkedHashSet;
@@ -20,6 +21,7 @@ import java.util.Set;
         @Index(columnList = "createdBy")
 })
 @Entity
+@Where(clause = "deleted = false")
 public class Article extends AuditingFields {
 
     @Id

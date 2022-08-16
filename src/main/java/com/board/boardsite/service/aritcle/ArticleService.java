@@ -33,8 +33,9 @@ public class ArticleService {
 
     @Transactional(readOnly = true)
     public ArticleWithCommentsDto getArticleWithComment(Long articleId) {
+
         return articleRepository.findById(articleId)
                 .map(ArticleWithCommentsDto::from)
-                .orElseThrow(() -> new BoardSiteException(ErrorCode.EMAIL_NOT_FOUND));
+                .orElseThrow(() -> new BoardSiteException(ErrorCode.ARTICLE_NOT_FOUND,"게시글이 없습니다."));
     }
 }
