@@ -2,6 +2,8 @@ package com.board.boardsite.repository;
 
 import com.board.boardsite.config.JpaConfig;
 import com.board.boardsite.domain.*;
+import com.board.boardsite.domain.article.Article;
+import com.board.boardsite.domain.article.ArticleComment;
 import com.board.boardsite.domain.constant.Gender;
 import com.board.boardsite.domain.user.TripUser;
 import com.board.boardsite.repository.article.ArticleCommentRepository;

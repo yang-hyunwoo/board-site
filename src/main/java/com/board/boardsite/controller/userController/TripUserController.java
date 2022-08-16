@@ -9,7 +9,6 @@ import com.board.boardsite.dto.user.TripUserDto;
 import com.board.boardsite.dto.request.user.TripUserJoinRequest;
 import com.board.boardsite.dto.response.Response;
 import com.board.boardsite.dto.response.user.TripUserJoinResponse;
-import com.board.boardsite.exception.ErrorCode;
 import com.board.boardsite.service.user.EmailService;
 import com.board.boardsite.service.user.TripUserService;
 import lombok.RequiredArgsConstructor;
@@ -58,8 +57,6 @@ public class TripUserController {
 
     @GetMapping("/aaaa")
     public String  aaa(@AuthenticationPrincipal TripUserPrincipal tripUserPrincipal){
-//        System.out.println(tripUserPrincipal.email());
-//        System.out.println(tripUserPrincipal.name());
         return "aa";
 
     }

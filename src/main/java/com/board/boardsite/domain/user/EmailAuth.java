@@ -1,6 +1,5 @@
 package com.board.boardsite.domain.user;
 
-import com.board.boardsite.domain.Article;
 import lombok.Getter;
 import lombok.Setter;
 

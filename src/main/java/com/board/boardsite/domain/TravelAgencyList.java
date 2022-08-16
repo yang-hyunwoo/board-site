@@ -1,6 +1,7 @@
 package com.board.boardsite.domain;
 
 
+import com.board.boardsite.domain.article.ArticleComment;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -145,7 +146,7 @@ public class TravelAgencyList extends AuditingFields {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof ArticleComment that)) return false;
+        if (!(o instanceof TravelAgencyList that)) return false;
         return id != null && id.equals(that.getId());
     }
 
