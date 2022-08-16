@@ -12,6 +12,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public record TripUserPrincipal(
+        Long id,
         String name,
         String nickName,
         String email,
@@ -22,7 +23,8 @@ public record TripUserPrincipal(
         Collection<? extends GrantedAuthority> authorities
 ) implements UserDetails {
 
-    public static TripUserPrincipal of(String name,
+    public static TripUserPrincipal of(Long id ,
+                              String name,
                              String nickName,
                              String email,
                              String password,
@@ -31,6 +33,7 @@ public record TripUserPrincipal(
                              Gender gender) {
         Set<RoleType> roleTypes = Set.of(RoleType.USER);
         return new TripUserPrincipal(
+                id,
                 name,
                 nickName,
                 email,
@@ -47,6 +50,7 @@ public record TripUserPrincipal(
 
     public static TripUserPrincipal from(TripUserDto dto){
         return TripUserPrincipal.of(
+                dto.id(),
                 dto.name(),
                 dto.nickName(),
                 dto.email(),

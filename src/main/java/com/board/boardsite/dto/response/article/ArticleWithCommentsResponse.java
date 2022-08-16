@@ -2,6 +2,7 @@ package com.board.boardsite.dto.response.article;
 
 import com.board.boardsite.dto.article.ArticleCommentDto;
 import com.board.boardsite.dto.article.ArticleWithCommentsDto;
+import com.board.boardsite.dto.security.TripUserPrincipal;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -12,23 +13,26 @@ public record ArticleWithCommentsResponse (
         String content,
         String email,
         String nickName,
-        Set<ArticleCommentResponse> articleCommentResponses
+        Set<ArticleCommentResponse> articleCommentResponses,
+        boolean authChk
 ){
     public static ArticleWithCommentsResponse of(Long id,
                                        String content,
                                        String email,
                                        String nickName,
-                                       Set<ArticleCommentResponse> articleCommentResponses) {
+                                       Set<ArticleCommentResponse> articleCommentResponses,
+                                        boolean authChk) {
         return new ArticleWithCommentsResponse(
                 id,
                 content,
                 email,
                 nickName,
-                articleCommentResponses
+                articleCommentResponses,
+                authChk
         );
     }
 
-    public static ArticleWithCommentsResponse from(ArticleWithCommentsDto dto) {
+    public static ArticleWithCommentsResponse from(ArticleWithCommentsDto dto , TripUserPrincipal tripUserPrincipal) {
         return new ArticleWithCommentsResponse(
                 dto.id(),
                 dto.content(),
@@ -36,7 +40,8 @@ public record ArticleWithCommentsResponse (
                 dto.tripUserDto().nickName(),
                 dto.articleCommentDtos().stream()
                         .map(ArticleCommentResponse::from)
-                        .collect(Collectors.toCollection(LinkedHashSet::new))
+                        .collect(Collectors.toCollection(LinkedHashSet::new)),
+                tripUserPrincipal.id()== dto.tripUserDto().id() ? true : false
         );
     }
 }

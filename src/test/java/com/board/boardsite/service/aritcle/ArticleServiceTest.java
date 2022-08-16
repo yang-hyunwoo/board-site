@@ -7,7 +7,10 @@ import com.board.boardsite.domain.user.TripUser;
 import com.board.boardsite.dto.article.ArticleDto;
 import com.board.boardsite.dto.article.ArticleWithCommentsDto;
 import com.board.boardsite.dto.user.TripUserDto;
+import com.board.boardsite.exception.BoardSiteException;
+import com.board.boardsite.exception.ErrorCode;
 import com.board.boardsite.repository.article.ArticleRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +27,7 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
+import static org.mockito.Mockito.when;
 
 @DisplayName("게시글 페이지")
 @SpringBootTest
@@ -81,6 +85,15 @@ class ArticleServiceTest {
                 .hasFieldOrPropertyWithValue("content",article.getContent());
         then(articleRepository).should().findById(articleId);
 
+    }
+
+    @DisplayName("[GET][service] 게시물 상세 조회시 게시글이 없는 경우")
+    @Test
+    void givenErrorArticleId_whenRequesting_thenReturnException() {
+        Long articleId = 100L;
+
+        BoardSiteException e= Assertions.assertThrows(BoardSiteException.class,()->articleService.getArticleWithComment(articleId));
+        Assertions.assertEquals(ErrorCode.ARTICLE_NOT_FOUND,e.getErrorCode());
 
     }
 
