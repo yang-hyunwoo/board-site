@@ -1,8 +1,8 @@
 package com.board.boardsite.domain.user;
 
 
-import com.board.boardsite.domain.ArticleComment;
 import com.board.boardsite.domain.AuditingFields;
+import com.board.boardsite.domain.article.ArticleComment;
 import com.board.boardsite.domain.constant.Gender;
 import lombok.Getter;
 import lombok.Setter;
@@ -110,7 +110,7 @@ public class TripUser extends AuditingFields {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof ArticleComment that)) return false;
+        if (!(o instanceof TripUser that)) return false;
         return id != null && id.equals(that.getId());
     }
 

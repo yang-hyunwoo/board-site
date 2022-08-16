@@ -2,7 +2,6 @@ package com.board.boardsite.dto.user;
 
 import com.board.boardsite.domain.user.EmailAuth;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 public record EmailAuthDto(

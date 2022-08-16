@@ -14,7 +14,7 @@ import java.util.Optional;
 @Configuration
 @EnableJpaAuditing
 public class JpaConfig {
-
+    //TODO : 수정 일어날때 확인 해봐야 함
     @Bean
     public AuditorAware<String> auditorAware() {
 //

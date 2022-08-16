@@ -1,5 +1,6 @@
 package com.board.boardsite.domain;
 
+import com.board.boardsite.domain.article.ArticleComment;
 import com.board.boardsite.domain.user.TripUser;
 import lombok.Getter;
 import lombok.Setter;
@@ -71,7 +72,7 @@ public class TravelAgencyReservationList extends AuditingFields {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof ArticleComment that)) return false;
+        if (!(o instanceof TravelAgencyReservationList that)) return false;
         return id != null && id.equals(that.getId());
     }
 

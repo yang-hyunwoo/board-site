@@ -102,6 +102,15 @@ insert into article (title, content, created_at, created_by, modified_at, modifi
 insert into article (title, content, created_at, created_by, modified_at, modified_by, trip_user_id, deleted) values ('Sylvicapra grimma', 'Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.', '2021-10-08 12:19:11', 50, '2022-02-25 08:18:58', 50, 50,false);
 
 
+insert into article_comment (created_at, created_by, modified_at, modified_by, content, article_id, trip_user_id, deleted) values ('2022-02-25 08:18:58','1','2022-02-25 08:18:58','1','aaaa','1','10',false);
+insert into article_comment (created_at, created_by, modified_at, modified_by, content, article_id, trip_user_id, deleted) values ('2022-02-25 08:18:58','1','2022-02-25 08:18:58','1','aaaa','2','9',false);
+insert into article_comment (created_at, created_by, modified_at, modified_by, content, article_id, trip_user_id, deleted) values ('2022-02-25 08:18:58','1','2022-02-25 08:18:58','1','aaaa','2','8',false);
+insert into article_comment (created_at, created_by, modified_at, modified_by, content, article_id, trip_user_id, deleted) values ('2022-02-25 08:18:58','1','2022-02-25 08:18:58','1','aaaa','3','7',false);
+insert into article_comment (created_at, created_by, modified_at, modified_by, content, article_id, trip_user_id, deleted) values ('2022-02-25 08:18:58','1','2022-02-25 08:18:58','1','aaaa','4','6',false);
+insert into article_comment (created_at, created_by, modified_at, modified_by, content, article_id, trip_user_id, deleted) values ('2022-02-25 08:18:58','1','2022-02-25 08:18:58','1','aaaa','5','5',false);
+insert into article_comment (created_at, created_by, modified_at, modified_by, content, article_id, trip_user_id, deleted) values ('2022-02-25 08:18:58','1','2022-02-25 08:18:58','1','aaaa','1','4',false);
+insert into article_comment (created_at, created_by, modified_at, modified_by, content, article_id, trip_user_id, deleted) values ('2022-02-25 08:18:58','1','2022-02-25 08:18:58','1','aaaa','1','3',false);
+insert into article_comment (created_at, created_by, modified_at, modified_by, content, article_id, trip_user_id, deleted) values ('2022-02-25 08:18:58','1','2022-02-25 08:18:58','1','aaaa','1','2',false);
 insert into article_comment (created_at, created_by, modified_at, modified_by, content, article_id, trip_user_id, deleted) values ('2022-02-25 08:18:58','1','2022-02-25 08:18:58','1','aaaa','1','1',false);
 
 
