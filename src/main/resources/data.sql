@@ -54,7 +54,7 @@ insert into trip_user (deleted, email, gender, name, nick_name, password, point,
 
 
 
-insert into article (title, content, created_at, created_by, modified_at, modified_by, trip_user_id, deleted) values ('Felis silvestris lybica', 'Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.', '2021-08-13 16:15:04', 1, '2022-05-25 18:26:17', 1, 1,false);
+insert into article (title, content, created_at, created_by, modified_at, modified_by, trip_user_id, deleted) values ('Felis silvestris lybica', 'Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.', '2021-08-13 16:15:04', 1, '2022-05-25 18:26:17', 51, 51,false);
 insert into article (title, content, created_at, created_by, modified_at, modified_by, trip_user_id, deleted) values ('Ciconia ciconia', 'Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.', '2022-03-22 19:58:31', 2, '2022-03-16 00:54:42', 2, 2,false);
 insert into article (title, content, created_at, created_by, modified_at, modified_by, trip_user_id, deleted) values ('Plegadis ridgwayi', 'Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', '2021-10-20 13:19:42', 3, '2022-05-11 03:44:38', 3, 3,false);
 insert into article (title, content, created_at, created_by, modified_at, modified_by, trip_user_id, deleted) values ('Coendou prehensilis', 'Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.', '2022-08-02 04:28:21', 4, '2022-06-14 05:08:08', 4, 4,false);
