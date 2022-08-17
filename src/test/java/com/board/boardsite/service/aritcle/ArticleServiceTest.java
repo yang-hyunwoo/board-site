@@ -124,11 +124,11 @@ class ArticleServiceTest {
     void givenArticle_whenUpdateArticle_thenReturnSaveArticle() {
         ArticleDto dto = createArticleDto("new title", "new content");
         Article article = createArticle();
-//        given(tripUserRepository.getReferenceById(dto.tripUser().id())).willReturn(createTripUser2());
 
         // Given
         given(articleRepository.getReferenceById(dto.id())).willReturn(article);
-        given(tripUserRepository.getReferenceById(dto.tripUser().id())).willReturn(dto.tripUser().toEntity(encoder.encode(dto.tripUser().password())));
+        TripUser tripUser = dto.tripUser().toEntity(encoder.encode(dto.tripUser().password()));
+        given(tripUserRepository.getReferenceById(dto.tripUser().id())).willReturn(tripUser);
         // When
         articleService.updateArticle(dto.id(), dto);
 

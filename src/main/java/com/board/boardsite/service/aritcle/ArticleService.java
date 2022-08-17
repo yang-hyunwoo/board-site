@@ -56,7 +56,6 @@ public class ArticleService {
         try {
             Article article = articleRepository.getReferenceById(articleId);
             TripUser tripUser = tripUserRepository.getReferenceById(dto.tripUser().id());
-
             if (article.getTripUser().equals(tripUser)) {
                 if (dto.title() != null) { article.setTitle(dto.title()); }
                 if (dto.content() != null) { article.setContent(dto.content()); }

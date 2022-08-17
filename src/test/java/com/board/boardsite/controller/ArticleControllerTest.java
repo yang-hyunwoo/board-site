@@ -131,6 +131,25 @@ class ArticleControllerTest {
 
     }
 
+    @DisplayName("[POST][controller] 게시글 수정 - 정상 호출")
+    @Test
+    @WithUserDetails(value = "gusdnTest", setupBefore = TestExecutionEvent.TEST_EXECUTION)
+    public void givenUpdateArticle_whenRequestingArticle_thenReturnUpdArticle() throws Exception {
+        //Given
+        long articleId = 1L;
+        ArticleRequest articleRequest = ArticleRequest.of("new title", "new content");
+        willDoNothing().given(articleService).updateArticle(eq(articleId), any(ArticleDto.class));
+
+        //when then
+        mvc.perform(post("/api/trip/articles/"+articleId+"/form")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsBytes(articleRequest)))
+                .andDo(print())
+                .andExpect(status().isOk());
+        then(articleService).should().updateArticle(eq(articleId), any(ArticleDto.class));
+    }
+
+
 
     private Article createArticle() {
         Article article = Article.of(

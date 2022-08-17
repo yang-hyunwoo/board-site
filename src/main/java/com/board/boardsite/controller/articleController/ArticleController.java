@@ -42,11 +42,21 @@ public class ArticleController {
     }
 
     @PostMapping("/new-article")
-    public void saveArticle(@RequestBody ArticleRequest articleRequest ,
-                            @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal) {
+    public Response<Boolean> saveArticle(@RequestBody ArticleRequest articleRequest ,
+                                         @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal) {
         System.out.println(tripUserPrincipal);
-        articleService.saveArticle(articleRequest.toDto(tripUserPrincipal.toDto()));
+         articleService.saveArticle(articleRequest.toDto(tripUserPrincipal.toDto()));
+    return Response.success(true);
+    }
 
+    @PostMapping("/{articleId}/form")
+    public Response<Boolean> updateArticle(@PathVariable Long articleId ,
+                                           @RequestBody ArticleRequest articleRequest ,
+                                           @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal)
+    {
+
+        articleService.updateArticle(articleId,articleRequest.toDto(tripUserPrincipal.toDto()));
+        return Response.success(true);
     }
 
 
