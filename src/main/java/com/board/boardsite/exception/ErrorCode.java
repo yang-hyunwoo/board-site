@@ -16,6 +16,7 @@ public enum ErrorCode {
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error"),
     INVALID_TOKEN(HttpStatus.UNAUTHORIZED,"Token is invalid"),
 
+    ARTICLE_UPDATE_FAIL(HttpStatus.NOT_FOUND , "Article is failed"),
     ARTICLE_NOT_FOUND(HttpStatus.NOT_FOUND , "Article not founded"),
     ;
 

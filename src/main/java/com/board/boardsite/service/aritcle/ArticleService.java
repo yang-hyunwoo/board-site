@@ -1,6 +1,7 @@
 package com.board.boardsite.service.aritcle;
 
 
+import com.board.boardsite.domain.article.Article;
 import com.board.boardsite.domain.constant.SearchType;
 import com.board.boardsite.domain.user.TripUser;
 import com.board.boardsite.dto.article.ArticleDto;
@@ -48,6 +49,20 @@ public class ArticleService {
         System.out.println(dto.tripUser().id());
         TripUser tripUser = tripUserRepository.getReferenceById(dto.tripUser().id()) ;
         articleRepository.save(dto.toEntity(tripUser));
+    }
 
+    @Transactional
+    public void updateArticle(Long articleId, ArticleDto dto) {
+        try {
+            Article article = articleRepository.getReferenceById(articleId);
+            TripUser tripUser = tripUserRepository.getReferenceById(dto.tripUser().id());
+
+            if (article.getTripUser().equals(tripUser)) {
+                if (dto.title() != null) { article.setTitle(dto.title()); }
+                if (dto.content() != null) { article.setContent(dto.content()); }
+            }
+        } catch (Exception e) {
+            new BoardSiteException(ErrorCode.ARTICLE_UPDATE_FAIL);
+        }
     }
 }

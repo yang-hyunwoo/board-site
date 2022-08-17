@@ -19,6 +19,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.time.LocalDateTime;
@@ -44,13 +45,15 @@ class ArticleServiceTest {
     @MockBean
     private TripUserRepository tripUserRepository;
 
+    @MockBean
+    private BCryptPasswordEncoder encoder;
 
-    @DisplayName("[GET][service] 검색어 없이 게시글 리스트 조회" )
+    @DisplayName("[GET][service] 검색어 없이 게시글 리스트 조회")
     @Test
     void givenNoSearchParameters_whenSearchArticles_thenReturnArticleList() {
         Pageable pageable = Pageable.ofSize(10);
         given(articleRepository.findAll(pageable)).willReturn(Page.empty());
-        Page<ArticleDto> articles = articleService.articleSearchList(null,null,pageable);
+        Page<ArticleDto> articles = articleService.articleSearchList(null, null, pageable);
         assertThat(articles).isEmpty();
 
         then(articleRepository).should().findAll(pageable);
@@ -64,14 +67,14 @@ class ArticleServiceTest {
         Pageable pageable = Pageable.ofSize(10);
         SearchType searchType = SearchType.TITLE;
         String searchKeyWord = "title";
-        given(articleRepository.findByTitleContaining(searchKeyWord,pageable)).willReturn(Page.empty());
+        given(articleRepository.findByTitleContaining(searchKeyWord, pageable)).willReturn(Page.empty());
 
         // When
-        var articleDto = articleService.articleSearchList(searchType,searchKeyWord,pageable);
+        var articleDto = articleService.articleSearchList(searchType, searchKeyWord, pageable);
 
         // Then
         assertThat(articleDto).isEmpty();
-        then(articleRepository).should().findByTitleContaining(searchKeyWord,pageable);
+        then(articleRepository).should().findByTitleContaining(searchKeyWord, pageable);
     }
 
     @DisplayName("[GET][service] 게시글 상세 조회")
@@ -86,8 +89,8 @@ class ArticleServiceTest {
         // When & Then
         var dto = articleService.getArticleWithComment(articleId);
         assertThat(dto)
-                .hasFieldOrPropertyWithValue("title",article.getTitle())
-                .hasFieldOrPropertyWithValue("content",article.getContent());
+                .hasFieldOrPropertyWithValue("title", article.getTitle())
+                .hasFieldOrPropertyWithValue("content", article.getContent());
         then(articleRepository).should().findById(articleId);
 
     }
@@ -97,8 +100,8 @@ class ArticleServiceTest {
     void givenErrorArticleId_whenRequesting_thenReturnException() {
         Long articleId = 100L;
 
-        BoardSiteException e= Assertions.assertThrows(BoardSiteException.class,()->articleService.getArticleWithComment(articleId));
-        Assertions.assertEquals(ErrorCode.ARTICLE_NOT_FOUND,e.getErrorCode());
+        BoardSiteException e = Assertions.assertThrows(BoardSiteException.class, () -> articleService.getArticleWithComment(articleId));
+        Assertions.assertEquals(ErrorCode.ARTICLE_NOT_FOUND, e.getErrorCode());
 
     }
 
@@ -116,10 +119,25 @@ class ArticleServiceTest {
         then(articleRepository).should().save(any(Article.class));
     }
 
-    @DisplayName("[POST][service] 게시글 신규 등록 시 - email 이 없는 경우 에러 반환")
+    @DisplayName("[POST][service] 게시글 수정 시 - 정상")
     @Test
-    void givenArticle_whenSavingArticle_thenReturnErrorCode() {
+    void givenArticle_whenUpdateArticle_thenReturnSaveArticle() {
+        ArticleDto dto = createArticleDto("new title", "new content");
+        Article article = createArticle();
+//        given(tripUserRepository.getReferenceById(dto.tripUser().id())).willReturn(createTripUser2());
 
+        // Given
+        given(articleRepository.getReferenceById(dto.id())).willReturn(article);
+        given(tripUserRepository.getReferenceById(dto.tripUser().id())).willReturn(dto.tripUser().toEntity(encoder.encode(dto.tripUser().password())));
+        // When
+        articleService.updateArticle(dto.id(), dto);
+
+        // Then
+        assertThat(article)
+                .hasFieldOrPropertyWithValue("title", dto.title())
+                .hasFieldOrPropertyWithValue("content", dto.content());
+        then(articleRepository).should().getReferenceById(dto.id());
+        then(tripUserRepository).should().getReferenceById(dto.tripUser().id());
     }
 
     private Article createArticle() {
@@ -134,7 +152,7 @@ class ArticleServiceTest {
     }
     private TripUserDto createTripUser() {
         return TripUserDto.of(
-                "gus@naver.com",
+                "gus5162@naver.com",
                 "aaa",
                 "qqll",
                 "test",
@@ -154,7 +172,18 @@ class ArticleServiceTest {
                 false
         );
     }
-
+    private ArticleDto createArticleDto(String title, String content) {
+        return ArticleDto.of(
+                1L,
+                createTripUser(),
+                "title",
+                "content",
+                false,
+                null,
+                null,
+                null,
+                null);
+    }
     private ArticleDto createArticleDto() {
         return ArticleDto.of(
                 createTripUser(),
@@ -162,7 +191,6 @@ class ArticleServiceTest {
                 "content"
         );
     }
-
     private ArticleWithCommentsDto createArticleWithCommentsDto() {
         return ArticleWithCommentsDto.of(
                 1L,
