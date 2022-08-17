@@ -1,5 +1,6 @@
 package com.board.boardsite.controller;
 
+import com.board.boardsite.config.TestSecurityConfig;
 import com.board.boardsite.controller.articleController.ArticleController;
 import com.board.boardsite.domain.article.Article;
 import com.board.boardsite.domain.constant.Gender;
@@ -10,6 +11,7 @@ import com.board.boardsite.dto.article.ArticleWithCommentsDto;
 import com.board.boardsite.dto.request.article.ArticleRequest;
 import com.board.boardsite.dto.user.TripUserDto;
 import com.board.boardsite.service.aritcle.ArticleService;
+import com.board.boardsite.service.user.TripUserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,9 +20,14 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.TestExecutionEvent;
+import org.springframework.security.test.context.support.WithAnonymousUser;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
@@ -28,9 +35,9 @@ import java.util.Set;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.then;
+import static org.mockito.BDDMockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -39,6 +46,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @DisplayName("컨트롤러 - 게시글")
 @SpringBootTest
 @AutoConfigureMockMvc
+@Import(TestSecurityConfig.class)
 class ArticleControllerTest {
     @Autowired
     private final MockMvc mvc;
@@ -48,12 +56,14 @@ class ArticleControllerTest {
 
     @Autowired
     private ObjectMapper objectMapper;
+    @MockBean
+    private TripUserService tripUserService;
 
     public ArticleControllerTest(@Autowired MockMvc mvc) {
         this.mvc = mvc;
     }
 
-    @DisplayName("[GET] 게시글 리스트 조회 - 정상 호출")
+    @DisplayName("[GET][controller] 게시글 리스트 조회 - 정상 호출")
     @Test
     public void givenNothing_whenRequestingArticlesList_thenReturnsArticleList() throws Exception {
         // Given
@@ -70,7 +80,7 @@ class ArticleControllerTest {
         then(articleService).should().articleSearchList(eq(null), eq(null), any(Pageable.class));
     }
 
-    @DisplayName("[GET] 게시글 검색어 입력 리스트 조회")
+    @DisplayName("[GET][controller] 게시글 검색어 입력 리스트 조회")
     @Test
     public void givenSearchParameters_whenSearchArticles_thenReturnArticleList() throws Exception {
         SearchType searchType = SearchType.TITLE;
@@ -88,8 +98,9 @@ class ArticleControllerTest {
 
     }
 
-    @DisplayName("[view][GET] 게시글 리스트 상세 페이지 조회(댓글 포함) - 정상 호출")
+    @DisplayName("[GET][controller] 게시글 리스트 상세 페이지 조회(댓글 포함) - 정상 호출")
     @Test
+    @WithMockUser
     public void givenNothing_whenRequestingArticleDetail_thenReturnsArticleDetail() throws Exception {
         // Given
         Long articleId = 1L;
@@ -100,6 +111,24 @@ class ArticleControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON));
         then(articleService).should().getArticleWithComment(articleId);
+    }
+
+    @DisplayName("[POST][controller] 게시글 신규 등록  - 정상 호출")
+    @Test
+    @WithUserDetails(value = "gusdnTest", setupBefore = TestExecutionEvent.TEST_EXECUTION )
+    public void givenArticle_whenRequestingArticle_thenReturns() throws Exception {
+        // Given
+
+        ArticleRequest articleRequest = ArticleRequest.of("new title", "new content");
+        willDoNothing().given(articleService).saveArticle(any(ArticleDto.class));
+        // When & Then
+        mvc.perform(post("/api/trip/articles/new-article")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsBytes(articleRequest)))
+                .andDo(print())
+                .andExpect(status().isOk());
+        then(articleService).should().saveArticle(any(ArticleDto.class));
+
     }
 
 

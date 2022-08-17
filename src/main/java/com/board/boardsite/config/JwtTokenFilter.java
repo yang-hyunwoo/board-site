@@ -48,7 +48,6 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             //TODO : get username from token
             String email = JwtTokenUtils.getEmail(token , key);
             TripUserPrincipal user = tripUserService.loadUserByEmail(email);
-
             // TODO: check the user is valid
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                     user,null, user.getAuthorities()

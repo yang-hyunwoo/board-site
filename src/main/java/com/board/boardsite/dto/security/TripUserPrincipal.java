@@ -63,11 +63,19 @@ public record TripUserPrincipal(
 
     public TripUserDto toDto() {
         return TripUserDto.of(
+                id,
                 email,
                 name,
                 nickName,
+                point,
+                deleted,
                 password,
-                gender
+                gender,
+                true,
+                null,
+                null,
+                null,
+                null
         );
     }
 

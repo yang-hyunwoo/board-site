@@ -3,6 +3,7 @@ package com.board.boardsite.controller.articleController;
 
 
 import com.board.boardsite.domain.constant.SearchType;
+import com.board.boardsite.dto.request.article.ArticleRequest;
 import com.board.boardsite.dto.response.Response;
 import com.board.boardsite.dto.response.article.ArticleResponse;
 import com.board.boardsite.dto.response.article.ArticleWithCommentsResponse;
@@ -24,7 +25,7 @@ public class ArticleController {
     private final ArticleService articleService;
 
 
-    @GetMapping("/")
+    @GetMapping("")
     public Response<Page<ArticleResponse>> articles(@RequestParam(required = false) SearchType searchType,
                                               @RequestParam(required = false) String searchKeyWord,
                                               @PageableDefault(size=10,sort="createdAt",direction= Sort.Direction.DESC)Pageable pageable) {
@@ -38,6 +39,14 @@ public class ArticleController {
                                                                @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal) {
         var articleDetail = ArticleWithCommentsResponse.from(articleService.getArticleWithComment(articleId),tripUserPrincipal);
         return Response.success(articleDetail);
+    }
+
+    @PostMapping("/new-article")
+    public void saveArticle(@RequestBody ArticleRequest articleRequest ,
+                            @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal) {
+        System.out.println(tripUserPrincipal);
+        articleService.saveArticle(articleRequest.toDto(tripUserPrincipal.toDto()));
+
     }
 
 

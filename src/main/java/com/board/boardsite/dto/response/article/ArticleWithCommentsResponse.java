@@ -33,15 +33,29 @@ public record ArticleWithCommentsResponse (
     }
 
     public static ArticleWithCommentsResponse from(ArticleWithCommentsDto dto , TripUserPrincipal tripUserPrincipal) {
-        return new ArticleWithCommentsResponse(
-                dto.id(),
-                dto.content(),
-                dto.tripUserDto().email(),
-                dto.tripUserDto().nickName(),
-                dto.articleCommentDtos().stream()
-                        .map(ArticleCommentResponse::from)
-                        .collect(Collectors.toCollection(LinkedHashSet::new)),
-                tripUserPrincipal.id()== dto.tripUserDto().id() ? true : false
-        );
+        if(tripUserPrincipal == null) {
+            return new ArticleWithCommentsResponse(
+                    dto.id(),
+                    dto.content(),
+                    dto.tripUserDto().email(),
+                    dto.tripUserDto().nickName(),
+                    dto.articleCommentDtos().stream()
+                            .map(ArticleCommentResponse::from)
+                            .collect(Collectors.toCollection(LinkedHashSet::new)),
+                    false
+            );
+        } else {
+            return new ArticleWithCommentsResponse(
+                    dto.id(),
+                    dto.content(),
+                    dto.tripUserDto().email(),
+                    dto.tripUserDto().nickName(),
+                    dto.articleCommentDtos().stream()
+                            .map(ArticleCommentResponse::from)
+                            .collect(Collectors.toCollection(LinkedHashSet::new)),
+                    tripUserPrincipal.id() == dto.tripUserDto().id() ? true : false
+            );
+
+        }
     }
 }

@@ -5,12 +5,14 @@ import com.board.boardsite.dto.article.ArticleDto;
 import com.board.boardsite.dto.user.TripUserDto;
 
 public record ArticleRequest(
-        SearchType searchType,
         String title,
         String content
 
 )
 {
+    public static ArticleRequest of(String title, String content) {
+        return new ArticleRequest(title, content);
+    }
     public ArticleDto toDto(TripUserDto tripUserDto){
         return ArticleDto.of(
                 tripUserDto,
