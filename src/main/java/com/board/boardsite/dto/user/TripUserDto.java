@@ -29,6 +29,35 @@ public record TripUserDto(
         return new TripUserDto(null,email,name,nickName,0,false,password,gender,false,null,null,null,null);
     }
 
+    public static TripUserDto of(Long id,
+                       String email,
+                       String name,
+                       String nickName,
+                       int point,
+                       boolean deleted,
+                       String password,
+                       Gender gender,
+                       Boolean emailAuth,
+                       LocalDateTime createdAt,
+                       String createdBy,
+                       LocalDateTime modifiedAt,
+                       String modifiedBy) {
+       return new TripUserDto(
+               id,
+               email,
+               name,
+               nickName,
+               point,
+               deleted,
+               password,
+               gender,
+               emailAuth,
+               createdAt,
+               createdBy,
+               modifiedAt,
+               modifiedBy);
+    }
+
     public static TripUserDto from(TripUser entity) {
         return new TripUserDto(
                 entity.getId(),

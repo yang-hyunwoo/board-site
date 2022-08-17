@@ -49,6 +49,10 @@ insert into trip_user (deleted, email, gender, name, nick_name, password, point,
 insert into trip_user (deleted, email, gender, name, nick_name, password, point, created_at, created_by, modified_at, modified_by) values (false, 'dmarti1c@foxnews.com', 'M', 'Dollie', 'Female', 'c08024399569bf829ef04b59672eff7a7be8320b0c8b5eeb886202b989501b4d', 49, '2022-02-11 18:25:41', 49, '2022-06-10 09:22:35', 49);
 insert into trip_user (deleted, email, gender, name, nick_name, password, point, created_at, created_by, modified_at, modified_by) values (false, 'jklemencic1d@abc.net.au', 'F', 'Joy', 'Female', 'c5b0c26f53fbace02712eb0d24f8ca120a48eae4da088219f7f2c2200a9ad88a', 50, '2021-08-19 09:51:41', 50, '2022-04-15 13:14:37', 50);
 
+insert into trip_user (deleted, email, gender, name, nick_name, password, point, created_at, created_by, modified_at, modified_by) values (false, 'gus5162@naver.com','M','GUSDN','Male','$2a$10$kZ91AjwJixPBuojELVY7tu6SO1rWS7G02EQWZvSUQ8PI3cNrHhmkq',0,'2021-08-19 09:51:41',51,'2021-08-19 09:51:41',51);
+
+
+
 
 insert into article (title, content, created_at, created_by, modified_at, modified_by, trip_user_id, deleted) values ('Felis silvestris lybica', 'Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.', '2021-08-13 16:15:04', 1, '2022-05-25 18:26:17', 1, 1,false);
 insert into article (title, content, created_at, created_by, modified_at, modified_by, trip_user_id, deleted) values ('Ciconia ciconia', 'Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.', '2022-03-22 19:58:31', 2, '2022-03-16 00:54:42', 2, 2,false);

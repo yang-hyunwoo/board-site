@@ -2,11 +2,13 @@ package com.board.boardsite.service.aritcle;
 
 
 import com.board.boardsite.domain.constant.SearchType;
+import com.board.boardsite.domain.user.TripUser;
 import com.board.boardsite.dto.article.ArticleDto;
 import com.board.boardsite.dto.article.ArticleWithCommentsDto;
 import com.board.boardsite.exception.BoardSiteException;
 import com.board.boardsite.exception.ErrorCode;
 import com.board.boardsite.repository.article.ArticleRepository;
+import com.board.boardsite.repository.user.TripUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,8 @@ import org.springframework.data.domain.Pageable;
 public class ArticleService {
 
     private final ArticleRepository articleRepository;
+
+    private final TripUserRepository tripUserRepository;
 
     @Transactional(readOnly = true)
     public Page<ArticleDto> articleSearchList(SearchType searchType , String searchKeyWord , Pageable pageable) {
@@ -37,5 +41,13 @@ public class ArticleService {
         return articleRepository.findById(articleId)
                 .map(ArticleWithCommentsDto::from)
                 .orElseThrow(() -> new BoardSiteException(ErrorCode.ARTICLE_NOT_FOUND,"게시글이 없습니다."));
+    }
+
+    @Transactional
+    public void saveArticle(ArticleDto dto){
+        System.out.println(dto.tripUser().id());
+        TripUser tripUser = tripUserRepository.getReferenceById(dto.tripUser().id()) ;
+        articleRepository.save(dto.toEntity(tripUser));
+
     }
 }

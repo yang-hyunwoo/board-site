@@ -10,6 +10,7 @@ import com.board.boardsite.dto.user.TripUserDto;
 import com.board.boardsite.exception.BoardSiteException;
 import com.board.boardsite.exception.ErrorCode;
 import com.board.boardsite.repository.article.ArticleRepository;
+import com.board.boardsite.repository.user.TripUserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,6 +26,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.when;
@@ -38,6 +40,9 @@ class ArticleServiceTest {
 
     @MockBean
     private ArticleRepository articleRepository;
+
+    @MockBean
+    private TripUserRepository tripUserRepository;
 
 
     @DisplayName("[GET][service] 검색어 없이 게시글 리스트 조회" )
@@ -94,6 +99,26 @@ class ArticleServiceTest {
 
         BoardSiteException e= Assertions.assertThrows(BoardSiteException.class,()->articleService.getArticleWithComment(articleId));
         Assertions.assertEquals(ErrorCode.ARTICLE_NOT_FOUND,e.getErrorCode());
+
+    }
+
+    @DisplayName("[POST][service] 게시글 신규 등록 시  - 정상 ")
+    @Test
+    void givenArticle_whenSavingArticle_thenReturnSaveArticle() {
+        // Given
+        ArticleDto dto = createArticleDto();
+        given(tripUserRepository.getReferenceById(dto.tripUser().id())).willReturn(createTripUser2());
+        given(articleRepository.save(any(Article.class))).willReturn(createArticle());
+        // When
+        articleService.saveArticle(dto);
+        // Then
+        then(tripUserRepository).should().getReferenceById(dto.tripUser().id());
+        then(articleRepository).should().save(any(Article.class));
+    }
+
+    @DisplayName("[POST][service] 게시글 신규 등록 시 - email 이 없는 경우 에러 반환")
+    @Test
+    void givenArticle_whenSavingArticle_thenReturnErrorCode() {
 
     }
 
