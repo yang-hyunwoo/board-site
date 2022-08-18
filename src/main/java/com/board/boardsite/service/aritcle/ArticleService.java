@@ -46,7 +46,6 @@ public class ArticleService {
 
     @Transactional
     public void saveArticle(ArticleDto dto){
-        System.out.println(dto.tripUser().id());
         TripUser tripUser = tripUserRepository.getReferenceById(dto.tripUser().id()) ;
         articleRepository.save(dto.toEntity(tripUser));
     }
@@ -59,6 +58,8 @@ public class ArticleService {
             if (article.getTripUser().equals(tripUser)) {
                 if (dto.title() != null) { article.setTitle(dto.title()); }
                 if (dto.content() != null) { article.setContent(dto.content()); }
+            } else {
+                throw new BoardSiteException(ErrorCode.ARTICLE_COMMENT_UNAUTHORIZED);
             }
         } catch (Exception e) {
             new BoardSiteException(ErrorCode.ARTICLE_UPDATE_FAIL);
@@ -73,6 +74,8 @@ public class ArticleService {
             TripUser tripUser = tripUserRepository.getReferenceById(userId);
             if (article.getTripUser().equals(tripUser)) {
                 article.setDeleted(true);
+            } else{
+                throw new BoardSiteException(ErrorCode.ARTICLE_COMMENT_UNAUTHORIZED);
             }
         } catch (Exception e) {
             new BoardSiteException(ErrorCode.ARTICLE_DELETE_FAIL);

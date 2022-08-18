@@ -55,8 +55,8 @@ class ArticleControllerTest {
 
     @Autowired
     private ObjectMapper objectMapper;
-    @MockBean
-    private TripUserService tripUserService;
+
+
 
     public ArticleControllerTest(@Autowired MockMvc mvc) {
         this.mvc = mvc;
