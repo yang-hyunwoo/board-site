@@ -64,4 +64,18 @@ public class ArticleService {
             new BoardSiteException(ErrorCode.ARTICLE_UPDATE_FAIL);
         }
     }
+
+
+    @Transactional
+    public void deleteArticle(Long articleId ,Long userId){
+        try {
+            Article article = articleRepository.getReferenceById(articleId);
+            TripUser tripUser = tripUserRepository.getReferenceById(userId);
+            if (article.getTripUser().equals(tripUser)) {
+                article.setDeleted(true);
+            }
+        } catch (Exception e) {
+            new BoardSiteException(ErrorCode.ARTICLE_DELETE_FAIL);
+        }
+    }
 }

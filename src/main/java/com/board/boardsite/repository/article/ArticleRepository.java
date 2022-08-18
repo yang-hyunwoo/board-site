@@ -23,6 +23,8 @@ public interface ArticleRepository extends
 
             Page<Article> findByTripUser_NickNameContaining(String nickname , Pageable pageable);
 
+            void deleteByIdAndTripUser_Id(Long articleId, Long Id);
+
             @Override
             default void customize(QuerydslBindings bindings, QArticle root){
                 bindings.excludeUnlistedProperties(true);
