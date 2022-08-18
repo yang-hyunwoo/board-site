@@ -18,6 +18,10 @@ public enum ErrorCode {
     ARTICLE_DELETE_FAIL(HttpStatus.NOT_FOUND , "Article is deleted failed"),
     ARTICLE_UPDATE_FAIL(HttpStatus.NOT_FOUND , "Article is failed"),
     ARTICLE_NOT_FOUND(HttpStatus.NOT_FOUND , "Article not founded"),
+
+    ARTICLE_COMMENT_UNAUTHORIZED(HttpStatus.UNAUTHORIZED , "Article comment not unauthorized"),
+
+    ARTICLE_COMMENT_NOT_FOUND(HttpStatus.NOT_FOUND , "Article comment not founded"),
     ;
 
     private HttpStatus status;

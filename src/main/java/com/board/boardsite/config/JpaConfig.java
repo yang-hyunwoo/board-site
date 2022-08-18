@@ -20,7 +20,7 @@ public class JpaConfig {
                 .map(SecurityContext::getAuthentication)
                 .map(Authentication::getPrincipal)
                 .map(TripUserPrincipal.class::cast)
-                .map(TripUserPrincipal::email);
+                .map(TripUserPrincipal::getUsername);
 
     }
 }

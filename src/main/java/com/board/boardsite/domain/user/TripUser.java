@@ -81,6 +81,26 @@ public class TripUser extends AuditingFields {
         this.emailAuth = emailAuth;
     }
 
+    public TripUser(Long id,
+                    String name,
+                    String nickName,
+                    String email,
+                    String password,
+                    int point,
+                    Gender gender,
+                    boolean deleted,
+                    Boolean emailAuth) {
+        this.id = id;
+        this.name = name;
+        this.nickName = nickName;
+        this.email = email;
+        this.password = password;
+        this.point = point;
+        this.gender = gender;
+        this.deleted = deleted;
+        this.emailAuth = emailAuth;
+    }
+
     public static TripUser of(String name,
                               String nickName,
                               String email,
@@ -98,6 +118,27 @@ public class TripUser extends AuditingFields {
                           gender,
                           deleted,
                           emailAuth);
+    }
+
+    public static TripUser of(Long id,
+                              String name,
+                              String nickName,
+                              String email,
+                              String password,
+                              int point,
+                              Gender gender,
+                              boolean deleted,
+                              Boolean emailAuth)
+    {
+        return new TripUser(id,
+                name,
+                nickName,
+                email,
+                password,
+                point,
+                gender,
+                deleted,
+                emailAuth);
     }
 
     public void updateRefreshToken(String refreshToken) {
