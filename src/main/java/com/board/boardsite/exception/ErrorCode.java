@@ -15,7 +15,7 @@ public enum ErrorCode {
     USER_NOT_FOUND(HttpStatus.NOT_FOUND , "User not founded"),
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error"),
     INVALID_TOKEN(HttpStatus.UNAUTHORIZED,"Token is invalid"),
-
+    ARTICLE_DELETE_FAIL(HttpStatus.NOT_FOUND , "Article is deleted failed"),
     ARTICLE_UPDATE_FAIL(HttpStatus.NOT_FOUND , "Article is failed"),
     ARTICLE_NOT_FOUND(HttpStatus.NOT_FOUND , "Article not founded"),
     ;

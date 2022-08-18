@@ -59,5 +59,14 @@ public class ArticleController {
         return Response.success(true);
     }
 
+    @PutMapping("/{articleId}/delete")
+    public Response<Boolean> deleteArticle(@PathVariable Long articleId ,
+                                           @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal)
+    {
+        System.out.println(tripUserPrincipal);
+        articleService.deleteArticle(articleId , tripUserPrincipal.id());
+        return Response.success(true);
+    }
+
 
 }

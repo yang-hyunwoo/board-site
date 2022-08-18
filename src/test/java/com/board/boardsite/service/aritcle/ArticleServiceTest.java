@@ -28,8 +28,7 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.then;
+import static org.mockito.BDDMockito.*;
 import static org.mockito.Mockito.when;
 
 @DisplayName("게시글 페이지")
@@ -138,6 +137,19 @@ class ArticleServiceTest {
                 .hasFieldOrPropertyWithValue("content", dto.content());
         then(articleRepository).should().getReferenceById(dto.id());
         then(tripUserRepository).should().getReferenceById(dto.tripUser().id());
+    }
+
+    @DisplayName("[POST][service] 게시글 삭제 시- 정상")
+    @Test
+    void givenArticleId_whenDeleteArticle_thenReturnDeleteArticle() {
+        // Given
+        Long articleId = 1L;
+        Long id = 51L;
+        willDoNothing().given(articleRepository).deleteByIdAndTripUser_Id(articleId ,id);
+
+        // When
+        articleService.deleteArticle(articleId , id);
+
     }
 
     private Article createArticle() {
