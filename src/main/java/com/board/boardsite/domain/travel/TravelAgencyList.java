@@ -1,15 +1,12 @@
-package com.board.boardsite.domain;
+package com.board.boardsite.domain.travel;
 
 
-import com.board.boardsite.domain.article.ArticleComment;
+import com.board.boardsite.domain.AuditingFields;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
