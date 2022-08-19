@@ -11,6 +11,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.BDDMockito.*;
 
@@ -38,6 +40,50 @@ class TravelAgencyServiceTest {
         assertThat(travelAgencies.isEmpty());
         then(travelAgencyRepository).should().findAll(pageable);
 
+    }
+
+    @DisplayName("[GET][service] 여행사 상세 조회 (여행 리스트 제외) ")
+    @Test
+    void givenTravelAgencyId_whenTravelAgencyDetail_thenReturnTravelAgencyDetail() {
+        // Given
+        long travelAgencyId = 1L;
+        TravelAgency travelAgency = createTravelAgency();
+        given(travelAgencyRepository.findById(travelAgencyId)).willReturn(Optional.of(travelAgency));
+
+        // When & Then
+        var dto = travelAgencyService.travelAgencyDetail(travelAgencyId);
+        assertThat(dto)
+                .hasFieldOrPropertyWithValue("name",travelAgency.getName());
+        then(travelAgencyRepository).should().findById(travelAgencyId);
+
+    }
+
+    @DisplayName("[GET][service] 여행사 상세 조회 (여행 리스트 포함)")
+    @Test
+    void givenTravelAgencyId_whenTravelAgencyDetail_thenReturnTravelAgencyWithTravelAgencyLiST() {
+        // Given
+        long travelAgencyId = 1L;
+        TravelAgency travelAgency = createTravelAgency();
+        given(travelAgencyRepository.findById(travelAgencyId)).willReturn(Optional.of(travelAgency));
+
+        // When & Then
+        var dto = travelAgencyService.travelAgencyWithTravelAgencyList(travelAgencyId);
+        assertThat(dto)
+                .hasFieldOrPropertyWithValue("name",travelAgency.getName());
+        then(travelAgencyRepository).should().findById(travelAgencyId);
+
+    }
+
+
+    private TravelAgency createTravelAgency() {
+        TravelAgency travelAgency = TravelAgency.of(
+                "해양",
+                "서울특별시 ㅇ1ㅇ1",
+                "02-1234-5678",
+                "최선을 다하자.",
+                false
+        );
+        return travelAgency;
     }
 
 }

@@ -119,8 +119,12 @@ insert into article_comment (created_at, created_by, modified_at, modified_by, c
 
 
 insert into travel_agency (created_at, created_by, modified_at, modified_by, address,detail,name,tel,deleted) values ('2022-02-25 08:18:58','1','2022-02-25 08:18:58','1','1234','13256','adsf','1234',false);
-insert into travel_agency_list (created_at, created_by, modified_at, modified_by, city, content, like_count, person_count, person_max_count,read_count, real_paid,sale_paid, sale_percent, title,travel_end_at,travel_start_at, travel_agency_id)
-values ('2022-02-25 08:18:58', '1','2022-02-25 08:18:58','1','1234','13256',0,1, 2,3,4, 5,0,'tttt', '2021010','2022020','1');
+insert into travel_agency_list (created_at, created_by, modified_at, modified_by, city, content, like_count, person_count, person_max_count,read_count, real_paid,sale_paid, sale_percent, title,travel_end_at,travel_start_at, travel_agency_id,deleted)
+values ('2022-02-25 08:18:58', '1','2022-02-25 08:18:58','1','1234','13256',0,1, 2,3,4, 5,0,'tttt', '20220829','20220817','1',false);
+
+insert into travel_agency_list (created_at, created_by, modified_at, modified_by, city, content, like_count, person_count, person_max_count,read_count, real_paid,sale_paid, sale_percent, title,travel_end_at,travel_start_at, travel_agency_id,deleted)
+values ('2022-02-25 08:18:58', '1','2022-02-25 08:18:58','1','1234','13256',0,1, 2,3,4, 0,0,'tttt22', '20220829','20220820','1',false);
+
 
 
 insert into travel_agency_reservation_list (created_at, created_by, modified_at, modified_by, paid, sale_percent,deleted,travel_agency_id,travel_agency_list_id,trip_user_id) values ('2022-02-25 08:18:58','1','2022-02-25 08:18:58','1',1,1,false,1,1,1);
