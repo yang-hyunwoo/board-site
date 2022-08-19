@@ -69,6 +69,7 @@ public class TravelAgencyReservationList extends AuditingFields {
         return new TravelAgencyReservationList(paid,salePercent,deleted,tripUser,travelAgency,travelAgencyList);
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -23,6 +23,8 @@ public enum ErrorCode {
 
     ARTICLE_COMMENT_NOT_FOUND(HttpStatus.NOT_FOUND , "Article comment not founded"),
     TRAVEL_AGENCY_NOT_FOUND(HttpStatus.NOT_FOUND , "TravelAgency not founded"),
+
+    TRAVEL_AGENCY_DETAIL_NOT_FOUND(HttpStatus.NOT_FOUND , "TravelAgencyDetail not founded"),
     ;
 
     private HttpStatus status;

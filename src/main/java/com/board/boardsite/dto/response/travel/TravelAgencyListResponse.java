@@ -4,6 +4,8 @@ import com.board.boardsite.dto.travel.TravelAgencyListDto;
 
 public record TravelAgencyListResponse(
         Long id,
+        Long travel_agency_id,
+        String travelAgencyName,
         String city,
         String title,
         String content,
@@ -13,11 +15,14 @@ public record TravelAgencyListResponse(
         String travel_start_at,
         String travel_end_at,
         int like_count,
+        int read_count,
         int person_count,
         int person_max_count
 ) {
 
     public static TravelAgencyListResponse of(Long id,
+                                    Long travel_agency_id,
+                                    String travelAgencyName,
                                     String city,
                                     String title,
                                     String content,
@@ -27,10 +32,13 @@ public record TravelAgencyListResponse(
                                     String travel_start_at,
                                     String travel_end_at,
                                     int like_count,
+                                    int read_count,
                                     int person_count,
                                     int person_max_count) {
         return new TravelAgencyListResponse(
                 id,
+                travel_agency_id,
+                travelAgencyName,
                 city,
                 title,
                 content,
@@ -40,6 +48,7 @@ public record TravelAgencyListResponse(
                 travel_start_at,
                 travel_end_at,
                 like_count,
+                read_count,
                 person_count,
                 person_max_count);
     }
@@ -47,6 +56,8 @@ public record TravelAgencyListResponse(
     public static TravelAgencyListResponse from(TravelAgencyListDto dto){
         return new TravelAgencyListResponse(
                 dto.id(),
+                dto.travelAgency().getId(),
+                dto.travelAgency().getName(),
                 dto.city(),
                 dto.title(),
                 dto.content(),
@@ -56,6 +67,7 @@ public record TravelAgencyListResponse(
                 dto.travel_start_at(),
                 dto.travel_end_at(),
                 dto.like_count(),
+                dto.read_count(),
                 dto.person_count(),
                 dto.person_max_count()
         );
