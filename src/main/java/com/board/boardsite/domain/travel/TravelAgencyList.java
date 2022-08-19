@@ -156,4 +156,7 @@ public class TravelAgencyList extends AuditingFields {
         return Objects.hash(id);
     }
 
+    public void readCountPlus(int readCount){
+        this.readCount = readCount+1;
+    }
 }

@@ -24,7 +24,8 @@ public record TravelAgencyListDto(
         LocalDateTime createdAt,
         String createdBy,
         LocalDateTime modifiedAt,
-        String modifiedBy
+        String modifiedBy,
+        TravelAgency travelAgency
 ) {
 
     public static TravelAgencyListDto of(Long id,
@@ -44,7 +45,8 @@ public record TravelAgencyListDto(
                                LocalDateTime createdAt,
                                String createdBy,
                                LocalDateTime modifiedAt,
-                               String modifiedBy) {
+                               String modifiedBy,
+                               TravelAgency travelAgency) {
         return new TravelAgencyListDto(
                 id,
                 travel_agency_id,
@@ -63,7 +65,8 @@ public record TravelAgencyListDto(
                 createdAt,
                 createdBy,
                 modifiedAt,
-                modifiedBy);
+                modifiedBy,
+                travelAgency);
     }
 
     public static TravelAgencyListDto of(
@@ -79,7 +82,9 @@ public record TravelAgencyListDto(
                                          int sale_percent,
                                          String title,
                                          String travel_start_at,
-                                         String travel_end_at) {
+                                         String travel_end_at,
+                                         TravelAgency travelAgency)
+    {
         return new TravelAgencyListDto(
                 null,
                 travel_agency_id,
@@ -98,7 +103,8 @@ public record TravelAgencyListDto(
                 null,
                 null,
                 null,
-                null);
+                null,
+                travelAgency);
     }
 
     public static TravelAgencyListDto from(TravelAgencyList entity) {
@@ -120,7 +126,8 @@ public record TravelAgencyListDto(
                 entity.getCreatedAt(),
                 entity.getCreatedBy(),
                 entity.getModifiedAt(),
-                entity.getModifiedBy()
+                entity.getModifiedBy(),
+                entity.getTravelAgency()
         );
     }
 

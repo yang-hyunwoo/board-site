@@ -15,10 +15,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 
 @Service
@@ -29,7 +27,6 @@ public class TravelAgencyService {
 
     private final TravelAgencyListRepository travelAgencyListRepository;
 
-    //travelAgencyRepository.findByNameContaining(travelAgencyName , pageable) : travelAgency (entity) 여서 .map을 통해 dto에 담아준다.
     @Transactional(readOnly = true)
     public Page<TravelAgencyDto> travelAgencyList(String travelAgencyName , Pageable pageable) {
 
@@ -48,11 +45,12 @@ public class TravelAgencyService {
     public TravelAgencyWithTravelAgencyListDto travelAgencyWithTravelAgencyList(Long travelAgencyId) {
         TravelAgency travelAgency = travelAgencyRepository.findById(travelAgencyId).orElseThrow();
         List<TravelAgencyList> travelAgencyList = travelAgencyListRepository.findByTravelAgencyIdAndDeletedOrderByTitleAsc(travelAgencyId,false);
-        System.out.println("bb::"+travelAgencyList);
+
         travelAgency.getTravelAgencyLists().clear();
         travelAgency.getTravelAgencyLists().addAll(travelAgencyList);
-        System.out.println("aa::"+travelAgency.getTravelAgencyLists());
+
         Optional<TravelAgency> optionalTravelAgency = Optional.of(travelAgency);
+
         return optionalTravelAgency.map(TravelAgencyWithTravelAgencyListDto::from).orElseThrow(()->new BoardSiteException(ErrorCode.TRAVEL_AGENCY_NOT_FOUND));
     }
 
