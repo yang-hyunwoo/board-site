@@ -39,9 +39,6 @@ public record ArticleCommentResponse(
                 .map(SecurityContext::getAuthentication)
                 .map(Authentication::getPrincipal)
                 .map(TripUserPrincipal.class::cast);
-//        System.out.println("제발:::"+aa.get().email());
-        System.out.println("?????");
-//        System.out.println(tripUserPrincipal.email());
         return new ArticleCommentResponse(
                 dto.id(),
                 dto.content(),

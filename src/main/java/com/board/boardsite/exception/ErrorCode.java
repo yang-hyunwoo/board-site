@@ -22,6 +22,7 @@ public enum ErrorCode {
     ARTICLE_COMMENT_UNAUTHORIZED(HttpStatus.UNAUTHORIZED , "Article comment not unauthorized"),
 
     ARTICLE_COMMENT_NOT_FOUND(HttpStatus.NOT_FOUND , "Article comment not founded"),
+    TRAVEL_AGENCY_NOT_FOUND(HttpStatus.NOT_FOUND , "TravelAgency not founded"),
     ;
 
     private HttpStatus status;

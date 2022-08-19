@@ -4,11 +4,10 @@ import com.board.boardsite.domain.AuditingFields;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
-import java.util.LinkedHashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Getter
 @Entity
@@ -43,7 +42,8 @@ public class TravelAgency extends AuditingFields {
 
     @ToString.Exclude
     @OneToMany(mappedBy = "travelAgency", cascade = CascadeType.ALL)
-    private final Set<TravelAgencyList> travelAgencyLists = new LinkedHashSet<>();      //여행사 여행 목록 ID
+//    @Where(clause = "deleted = false")
+    private final List<TravelAgencyList> travelAgencyLists = new ArrayList<>();   //여행사 여행 목록 ID
 
     @ToString.Exclude
     @OneToMany(mappedBy = "travelAgency", cascade = CascadeType.ALL)

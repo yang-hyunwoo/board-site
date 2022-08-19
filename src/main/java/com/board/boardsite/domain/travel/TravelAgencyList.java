@@ -77,6 +77,10 @@ public class TravelAgencyList extends AuditingFields {
     @Setter
     private int likeCount;                          //좋아요 수
 
+    @Setter
+    @Column(nullable = false)
+    private boolean deleted;
+
 
     protected  TravelAgencyList() {
 

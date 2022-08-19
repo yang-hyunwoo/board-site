@@ -47,8 +47,6 @@ public class ArticleCommentService {
     public void updateArticleComment(Long articleCommentId , ArticleCommentDto dto){
 
         ArticleComment articleComment = articleCommentRepository.getReferenceById(articleCommentId);
-        System.out.println(articleComment.getTripUser().getName());
-        System.out.println(dto.tripUser());
         if(articleComment.getTripUser().equals(dto.tripUser())) {
             if (dto.content() != null) {
                 articleComment.setContent(dto.content());
