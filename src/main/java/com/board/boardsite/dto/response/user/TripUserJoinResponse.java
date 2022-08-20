@@ -8,6 +8,7 @@ public record TripUserJoinResponse(
         String name,
         String nickName,
         String email,
+        String phoneNumber,
         int point,
         Gender gender
     )
@@ -16,12 +17,14 @@ public record TripUserJoinResponse(
                                           String name,
                                           String nickName,
                                           String email,
+                                          String phoneNumber,
                                           int point,
                                           Gender gender) {
         return new TripUserJoinResponse(id,
                 name,
                 nickName,
                 email,
+                phoneNumber,
                 point,
                 gender);
     }
@@ -31,6 +34,7 @@ public record TripUserJoinResponse(
                 dto.name(),
                 dto.nickName(),
                 dto.email(),
+                dto.phoneNumber(),
                 dto.point(),
                 dto.gender()
         );

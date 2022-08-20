@@ -12,8 +12,8 @@ public class Response<T> {
 
 
 
-    public static Response<Void> error(String errorCode){
-        return new Response<>(errorCode,null);
+    public static Response<String> error(String errorCode,String message){
+        return new Response<String>(errorCode,message);
     }
 
 
@@ -22,11 +22,11 @@ public class Response<T> {
     }
 
     public String toStream() {
-        if(result == null){
-            return "{" +
-                    "\"resultCode\":" + "\"" + resultCode +"\"," +
-                    "\"result\":"  + null + "}";
-        }
+//        if(result == null){
+//            return "{" +
+//                    "\"resultCode\":" + "\"" + resultCode +"\"," +
+//                    "\"result\":"  + null + "}";
+//        }
         return "{" +
                 "\"resultCode\":" + "\"" + resultCode +"\"," +
                 "\"result\":" + "\"" + result + "\"" + "}";

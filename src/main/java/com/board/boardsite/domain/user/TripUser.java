@@ -45,6 +45,10 @@ public class TripUser extends AuditingFields {
     @Column(nullable = false , length = 1000)
     private String password;                                //패스워트
 
+    @Setter
+    @Column(nullable = false , length =20)
+    private String phoneNumber;                             //휴대폰 번호
+
     private int point;
     //포인트
     @Setter
@@ -66,6 +70,7 @@ public class TripUser extends AuditingFields {
                      String nickName,
                      String email,
                      String password,
+                     String phoneNumber,
                      int point,
                      Gender gender,
                      boolean deleted,
@@ -75,6 +80,7 @@ public class TripUser extends AuditingFields {
         this.nickName = nickName;
         this.email = email;
         this.password = password;
+        this.phoneNumber = phoneNumber;
         this.point = point;
         this.gender = gender;
         this.deleted = deleted;
@@ -86,6 +92,7 @@ public class TripUser extends AuditingFields {
                     String nickName,
                     String email,
                     String password,
+                    String phoneNumber,
                     int point,
                     Gender gender,
                     boolean deleted,
@@ -95,6 +102,7 @@ public class TripUser extends AuditingFields {
         this.nickName = nickName;
         this.email = email;
         this.password = password;
+        this.phoneNumber = phoneNumber;
         this.point = point;
         this.gender = gender;
         this.deleted = deleted;
@@ -105,6 +113,7 @@ public class TripUser extends AuditingFields {
                               String nickName,
                               String email,
                               String password,
+                              String phoneNumber,
                               int point,
                               Gender gender,
                               boolean deleted,
@@ -114,6 +123,7 @@ public class TripUser extends AuditingFields {
                           nickName,
                           email,
                           password,
+                          phoneNumber,
                           point,
                           gender,
                           deleted,
@@ -125,6 +135,7 @@ public class TripUser extends AuditingFields {
                               String nickName,
                               String email,
                               String password,
+                              String phoneNumber,
                               int point,
                               Gender gender,
                               boolean deleted,
@@ -135,6 +146,7 @@ public class TripUser extends AuditingFields {
                 nickName,
                 email,
                 password,
+                phoneNumber,
                 point,
                 gender,
                 deleted,

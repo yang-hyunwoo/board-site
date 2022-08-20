@@ -26,6 +26,7 @@ public class TestSecurityConfig {
                 "pw",
                 "gusdn-test@email.com" ,
                 "test",
+                "010",
                 0,
                 Gender.M,
                 false,

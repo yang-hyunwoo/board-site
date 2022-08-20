@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 @Getter
 public enum ErrorCode {
 
-    DUPLICATED_EMAIL(HttpStatus.CONFLICT,"User email is duplicated"),
+    DUPLICATED_EMAIL(HttpStatus.CONFLICT,"이미 사용중이거나 탈퇴한 이메일입니다."),
     EMAIL_NOT_FOUND(HttpStatus.NOT_FOUND , "Email not founded"),
     EMAIL_TIME_INVAILED(HttpStatus.UNAUTHORIZED, "Email expired"),
     INVALID_PASSWORD(HttpStatus.UNAUTHORIZED , "Password is invalid"),

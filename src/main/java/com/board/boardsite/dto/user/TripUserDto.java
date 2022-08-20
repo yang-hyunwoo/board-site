@@ -9,6 +9,7 @@ public record TripUserDto(
         String email,
         String name,
         String nickName,
+        String phoneNumber,
         int point,
         boolean deleted,
         String password,
@@ -24,15 +25,17 @@ public record TripUserDto(
                                  String email,
                                  String name,
                                  String nickName,
+                                 String phoneNumber,
                                  String password,
                                  Gender gender) {
-        return new TripUserDto(null,email,name,nickName,0,false,password,gender,false,null,null,null,null);
+        return new TripUserDto(null,email,name,nickName,phoneNumber,0,false,password,gender,false,null,null,null,null);
     }
 
     public static TripUserDto of(Long id,
                        String email,
                        String name,
                        String nickName,
+                       String phoneNumber,
                        int point,
                        boolean deleted,
                        String password,
@@ -47,6 +50,7 @@ public record TripUserDto(
                email,
                name,
                nickName,
+               phoneNumber,
                point,
                deleted,
                password,
@@ -64,6 +68,7 @@ public record TripUserDto(
                 entity.getEmail(),
                 entity.getName(),
                 entity.getNickName(),
+                entity.getPhoneNumber(),
                 entity.getPoint(),
                 entity.isDeleted(),
                 entity.getPassword(),
@@ -84,6 +89,7 @@ public record TripUserDto(
                 nickName,
                 email,
                 passwordEncode,
+                phoneNumber,
                 point,
                 gender,
                 deleted,

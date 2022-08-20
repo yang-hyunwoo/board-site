@@ -43,13 +43,12 @@ public class TripUserService {
 
     @Transactional
     public TripUserDto join(TripUserDto tripUserDto) {
-        tripUserRepository.findByEmail(tripUserDto.email()).ifPresent(it -> {
+        tripUserRepository.findByEmail(tripUserDto.email().trim()).ifPresent(it -> {
             throw new BoardSiteException(ErrorCode.DUPLICATED_EMAIL, String.format("%s is duplicated", tripUserDto.email()));
         });
 
         String passwordEncode = encoder.encode(tripUserDto.password());
         TripUser tripUser = tripUserRepository.save(tripUserDto.toEntity(passwordEncode));
-
         EmailAuthDto emailAuthDto = EmailAuthDto.of(tripUserDto.email(), UUID.randomUUID().toString(),false, LocalDateTime.now());
         emailAuthRepository.save(emailAuthDto.toEntity());
         emailService.send(emailAuthDto.email(),emailAuthDto.authToken());

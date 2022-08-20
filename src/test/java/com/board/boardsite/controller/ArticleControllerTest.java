@@ -175,6 +175,7 @@ class ArticleControllerTest {
                 "gus@naver.com",
                 "aaa",
                 "qqll",
+                "01234",
                 "test",
                 Gender.M
         );
@@ -186,6 +187,7 @@ class ArticleControllerTest {
                 "aaa",
                 "gus@naver.com",
                 "test",
+                "010123",
                 0,
                 Gender.M,
                 false,

@@ -167,6 +167,7 @@ class ArticleServiceTest {
                 "gus5162@naver.com",
                 "aaa",
                 "qqll",
+                "010",
                 "test",
                 Gender.M
         );
@@ -178,6 +179,7 @@ class ArticleServiceTest {
                 "aaa",
                 "gus@naver.com",
                 "test",
+                "010",
                 0,
                 Gender.M,
                 false,
