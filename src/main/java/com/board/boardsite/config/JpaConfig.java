@@ -1,6 +1,7 @@
 package com.board.boardsite.config;
 
 import com.board.boardsite.dto.security.TripUserPrincipal;
+import com.board.boardsite.dto.user.TripUserDto;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
@@ -16,11 +17,14 @@ import java.util.Optional;
 public class JpaConfig {
     @Bean
     public AuditorAware<String> auditorAware() {
-        return () -> Optional.ofNullable(SecurityContextHolder.getContext())
-                .map(SecurityContext::getAuthentication)
-                .map(Authentication::getPrincipal)
-                .map(TripUserPrincipal.class::cast)
-                .map(TripUserPrincipal::getUsername);
-
+        if(SecurityContextHolder.getContext().getAuthentication()==null){
+                return () ->Optional.of("userInit");
+        }else {
+            return () -> Optional.ofNullable(SecurityContextHolder.getContext())
+                    .map(SecurityContext::getAuthentication)
+                    .map(Authentication::getPrincipal)
+                    .map(TripUserPrincipal.class::cast)
+                    .map(TripUserPrincipal::getUsername);
+        }
     }
 }

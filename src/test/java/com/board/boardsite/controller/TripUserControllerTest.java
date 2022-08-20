@@ -53,6 +53,7 @@ class TripUserControllerTest {
                                 dto.nickName(),
                                 dto.email(),
                                 dto.password(),
+                                dto.phoneNumber(),
                                 dto.gender()))))
                 .andDo(print())
                 .andExpect(status().isOk());
@@ -71,6 +72,7 @@ class TripUserControllerTest {
                                 dto.nickName(),
                                 dto.email(),
                                 dto.password(),
+                                dto.phoneNumber(),
                                 dto.gender()))))
                 .andDo(print())
                 .andExpect(status().isConflict());
@@ -130,6 +132,7 @@ class TripUserControllerTest {
                 "aa@email.com",
                 "aa",
                 "bb",
+                "0101",
                 "cc",
                 Gender.M
         );

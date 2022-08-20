@@ -17,6 +17,9 @@ public class BoardSiteException extends RuntimeException{
         this.message =null;
     }
 
+
+
+
     @Override
     public String getMessage() {
         if (message == null) {

@@ -110,6 +110,7 @@ class TripUserServiceTest {
                 "aa@email.com",
                 "aa",
                 "bb",
+                "010",
                 "cc",
                 Gender.M
         );

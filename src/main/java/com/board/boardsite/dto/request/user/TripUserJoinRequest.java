@@ -8,15 +8,17 @@ public record TripUserJoinRequest(
         String nickName,
         String email,
         String password,
+        String phoneNumber,
         Gender gender
 )  {
     public static TripUserJoinRequest of(String name,
                                          String nickName,
                                          String email,
                                          String password,
+                                         String phoneNumber,
                                          Gender gender) {
         return new TripUserJoinRequest(
-            name,nickName,email,password,gender
+            name,nickName,email,password,phoneNumber,gender
         );
     }
 
@@ -24,6 +26,7 @@ public record TripUserJoinRequest(
         return TripUserDto.of(email,
                 name,
                 nickName,
+                phoneNumber,
                 password,
                 gender
         );
