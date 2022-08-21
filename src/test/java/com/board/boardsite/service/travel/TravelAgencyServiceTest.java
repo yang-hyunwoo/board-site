@@ -11,6 +11,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
@@ -72,6 +73,17 @@ class TravelAgencyServiceTest {
                 .hasFieldOrPropertyWithValue("name",travelAgency.getName());
         then(travelAgencyRepository).should().findById(travelAgencyId);
 
+    }
+
+    @DisplayName("[GET][service] 여행사 랜덤 3개 쿼리")
+    @Test
+    void givenNothing_whenTravelAgency_thenReturnTravelAgencyListThree() {
+
+        TravelAgency travelAgency = createTravelAgency();
+
+        List<TravelAgencyDto> list = travelAgencyService.travelAgencyRandomThree();
+        assertThat(list)
+                .hasSize(0);
     }
 
 

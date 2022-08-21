@@ -91,6 +91,20 @@ class TravelAgencyControllerTest {
         then(travelAgencyService).should().travelAgencyWithTravelAgencyList(travelAgencyId);
     }
 
+    @DisplayName("[GET][Controller] 여행사 랜덤 3개 조회")
+    @Test
+    public void givenNothing_whenRequestingTravelAgencyRandom_thenReturnTravelAgencyRandom() throws Exception {
+
+        // Given
+        // When & Then
+        mvc.perform(get("/api/trip/agency/random-travelagency")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk());
+
+    }
+
+
     private TravelAgency createTravelAgency() {
         TravelAgency travelAgency = TravelAgency.of(
                 "해양",

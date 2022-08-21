@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -52,6 +53,12 @@ public class TravelAgencyService {
         Optional<TravelAgency> optionalTravelAgency = Optional.of(travelAgency);
 
         return optionalTravelAgency.map(TravelAgencyWithTravelAgencyListDto::from).orElseThrow(()->new BoardSiteException(ErrorCode.TRAVEL_AGENCY_NOT_FOUND));
+    }
+
+    @Transactional(readOnly = true)
+    public List<TravelAgencyDto> travelAgencyRandomThree() {
+        int count = 3;
+        return travelAgencyRepository.findTravelAgencyRandomCount(count).stream().map(TravelAgencyDto::from).collect(Collectors.toList());
     }
 
 }

@@ -9,9 +9,9 @@ import org.springframework.http.HttpStatus;
 public enum ErrorCode {
 
     DUPLICATED_EMAIL(HttpStatus.CONFLICT,"이미 사용중이거나 탈퇴한 이메일입니다."),
-    EMAIL_NOT_FOUND(HttpStatus.NOT_FOUND , "Email not founded"),
+    EMAIL_NOT_FOUND(HttpStatus.NOT_FOUND , "이메일이 존재 하지 않거나 인증이 완료되지 않은 이메일 입니다."),
     EMAIL_TIME_INVAILED(HttpStatus.UNAUTHORIZED, "Email expired"),
-    INVALID_PASSWORD(HttpStatus.UNAUTHORIZED , "Password is invalid"),
+    INVALID_PASSWORD(HttpStatus.UNAUTHORIZED , "이메일이나 패스워드가 올바르지 않습니다."),
     USER_NOT_FOUND(HttpStatus.NOT_FOUND , "User not founded"),
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error"),
     INVALID_TOKEN(HttpStatus.UNAUTHORIZED,"Token is invalid"),

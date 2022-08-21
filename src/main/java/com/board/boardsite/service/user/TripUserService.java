@@ -56,9 +56,9 @@ public class TripUserService {
 
         return TripUserDto.from(tripUser);
     }
-    //TODO : 인증안되면 로그인 안되게 수정
+
     public String login(String email , String password) {
-        var tripUser = tripUserRepository.findByEmail(email).orElseThrow(() -> new BoardSiteException(ErrorCode.EMAIL_NOT_FOUND,String.format("%s not founded",email)));
+        var tripUser = tripUserRepository.findByEmailAndEmailAuthAndDeleted(email,true,false).orElseThrow(() -> new BoardSiteException(ErrorCode.EMAIL_NOT_FOUND,String.format("%s not founded",email)));
         if(!encoder.matches(password , tripUser.getPassword())) {
             throw new BoardSiteException(ErrorCode.INVALID_PASSWORD);
         }

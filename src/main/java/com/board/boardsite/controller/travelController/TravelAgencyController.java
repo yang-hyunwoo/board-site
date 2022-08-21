@@ -13,6 +13,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("/api/trip/agency")
 @RequiredArgsConstructor
@@ -38,6 +41,13 @@ public class TravelAgencyController {
     public Response<TravelAgencyWithTravelAgencyListResponse> travelAgencyWithTravelAgencyList(@PathVariable Long travelAgencyId){
         var travelDetail = TravelAgencyWithTravelAgencyListResponse.from(travelAgencyService.travelAgencyWithTravelAgencyList(travelAgencyId));
         return Response.success(travelDetail);
+    }
+
+    @GetMapping("/random-travelagency")
+    public Response<List<TravelAgencyResponse>> randomTravelAgencyList() {
+        List<TravelAgencyResponse> travelAgencyResponse = travelAgencyService.travelAgencyRandomThree().stream().map(TravelAgencyResponse::from).collect(Collectors.toList());
+
+        return Response.success(travelAgencyResponse);
     }
 
 

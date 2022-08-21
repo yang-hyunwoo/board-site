@@ -33,7 +33,7 @@ public class AuthenticationConfig {
         return http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/api/trip/agency-trip/**","/api/trip/agency/**","/api/trip/articles/**","/api/trip/articles","/api/trip/users/join","/api/trip/users/login","/api/trip/users/confirm-email").permitAll()
-                .antMatchers("/api/**").authenticated()
+                .antMatchers("/api/**","/api/tirp/articles/new-article").authenticated()
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

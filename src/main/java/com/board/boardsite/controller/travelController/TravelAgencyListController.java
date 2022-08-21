@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.SortDefault;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,7 +21,10 @@ public class TravelAgencyListController {
 
     @GetMapping("/triplist")
     public Response<Page<TravelAgencyListResponse>> travelAgencyTripList(@RequestParam(required = false) String travelAgencyTitleName,
-                                                                     @PageableDefault(size=9,sort="readCount",direction= Sort.Direction.DESC) Pageable pageable){
+                                                                         @PageableDefault(size=9)@SortDefault.SortDefaults(
+                                                                         { @SortDefault(sort="readCount" , direction = Sort.Direction.ASC),
+                                                                           @SortDefault(sort="title" , direction = Sort.Direction.ASC)}
+                                                                         ) Pageable pageable){
 
         Page<TravelAgencyListResponse> travelAgencyListResponses = travelAgencyListService.travelAgencyTripList(travelAgencyTitleName , pageable).map(TravelAgencyListResponse::from);
         return Response.success(travelAgencyListResponses);

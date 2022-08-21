@@ -37,6 +37,7 @@ public class ArticleController {
     @GetMapping("/{articleId}")
     public Response<ArticleWithCommentsResponse> articleDetail(@PathVariable Long articleId,
                                                                @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal) {
+
         var articleDetail = ArticleWithCommentsResponse.from(articleService.getArticleWithComment(articleId),tripUserPrincipal);
         return Response.success(articleDetail);
     }

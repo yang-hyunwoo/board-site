@@ -8,4 +8,6 @@ import java.util.Optional;
 public interface TripUserRepository extends JpaRepository<TripUser, Long> {
 
     Optional<TripUser> findByEmail(String email);
+
+    Optional<TripUser> findByEmailAndEmailAuthAndDeleted(String email,boolean emailAuth,boolean deleted);
 }

@@ -119,11 +119,73 @@ insert into article_comment (created_at, created_by, modified_at, modified_by, c
 
 
 insert into travel_agency (created_at, created_by, modified_at, modified_by, address,detail,name,tel,deleted) values ('2022-02-25 08:18:58','1','2022-02-25 08:18:58','1','1234','13256','adsf','1234',false);
-insert into travel_agency_list (created_at, created_by, modified_at, modified_by, city, content, like_count, person_count, person_max_count,read_count, real_paid,sale_paid, sale_percent, title,travel_end_at,travel_start_at, travel_agency_id,deleted)
-values ('2022-02-25 08:18:58', '1','2022-02-25 08:18:58','1','1234','13256',0,1, 2,3,4, 5,0,'tttt', '20220829','20220817','1',false);
+insert into travel_agency (created_at, created_by, modified_at, modified_by, address,detail,name,tel,deleted) values ('2022-02-25 08:18:58','1','2022-02-25 08:18:58','1','1234','13256','12','1234',false);
+insert into travel_agency (created_at, created_by, modified_at, modified_by, address,detail,name,tel,deleted) values ('2022-02-25 08:18:58','1','2022-02-25 08:18:58','1','1234','13256','34','1234',false);
+insert into travel_agency (created_at, created_by, modified_at, modified_by, address,detail,name,tel,deleted) values ('2022-02-25 08:18:58','1','2022-02-25 08:18:58','1','1234','13256','56','1234',false);
+insert into travel_agency (created_at, created_by, modified_at, modified_by, address,detail,name,tel,deleted) values ('2022-02-25 08:18:58','1','2022-02-25 08:18:58','1','1234','13256','78','1234',false);
 
 insert into travel_agency_list (created_at, created_by, modified_at, modified_by, city, content, like_count, person_count, person_max_count,read_count, real_paid,sale_paid, sale_percent, title,travel_end_at,travel_start_at, travel_agency_id,deleted)
-values ('2022-02-25 08:18:58', '1','2022-02-25 08:18:58','1','1234','13256',0,1, 2,3,4, 0,0,'tttt22', '20220829','20220820','1',false);
+values ('2022-02-25 08:18:58', '1','2022-02-25 08:18:58','1','1234','13256',0,1, 2,3,4, 1000,0,'tttt', '20220829','20220817','1',false);
+
+insert into travel_agency_list (created_at, created_by, modified_at, modified_by, city, content, like_count, person_count, person_max_count,read_count, real_paid,sale_paid, sale_percent, title,travel_end_at,travel_start_at, travel_agency_id,deleted)
+values ('2022-02-25 08:18:58', '1','2022-02-25 08:18:58','1','1234','13256',0,1, 2,3,4, 2000,0,'tttt22', '20220829','20220820','1',false);
+
+insert into travel_agency_list (created_at, created_by, modified_at, modified_by, city, content, like_count, person_count, person_max_count,read_count, real_paid,sale_paid, sale_percent, title,travel_end_at,travel_start_at, travel_agency_id,deleted)
+values ('2022-02-25 08:18:58', '1','2022-02-25 08:18:58','1','1234','13256',0,1, 2,3,4, 2500,0,'tttt33', '20220829','20220820','1',false);
+
+insert into travel_agency_list (created_at, created_by, modified_at, modified_by, city, content, like_count, person_count, person_max_count,read_count, real_paid,sale_paid, sale_percent, title,travel_end_at,travel_start_at, travel_agency_id,deleted)
+values ('2022-02-25 08:18:58', '1','2022-02-25 08:18:58','1','1234','13256',0,1, 2,3,4, 3000,0,'tttt44', '20220829','20220820','1',false);
+
+insert into travel_agency_list (created_at, created_by, modified_at, modified_by, city, content, like_count, person_count, person_max_count,read_count, real_paid,sale_paid, sale_percent, title,travel_end_at,travel_start_at, travel_agency_id,deleted)
+values ('2022-02-25 08:18:58', '1','2022-02-25 08:18:58','1','1234','13256',0,1, 2,3,4, 3500,0,'tttt55', '20220829','20220820','1',false);
+
+insert into travel_agency_list (created_at, created_by, modified_at, modified_by, city, content, like_count, person_count, person_max_count,read_count, real_paid,sale_paid, sale_percent, title,travel_end_at,travel_start_at, travel_agency_id,deleted)
+values ('2022-02-25 08:18:58', '1','2022-02-25 08:18:58','1','1234','13256',0,1, 2,3,4, 4000,0,'tttt66', '20220829','20220820','1',false);
+
+insert into travel_agency_list (created_at, created_by, modified_at, modified_by, city, content, like_count, person_count, person_max_count,read_count, real_paid,sale_paid, sale_percent, title,travel_end_at,travel_start_at, travel_agency_id,deleted)
+values ('2022-02-25 08:18:58', '1','2022-02-25 08:18:58','1','1234','13256',0,1, 2,3,4, 4500,0,'tttt77', '20220829','20220820','1',false);
+
+insert into travel_agency_list (created_at, created_by, modified_at, modified_by, city, content, like_count, person_count, person_max_count,read_count, real_paid,sale_paid, sale_percent, title,travel_end_at,travel_start_at, travel_agency_id,deleted)
+values ('2022-02-25 08:18:58', '1','2022-02-25 08:18:58','1','1234','13256',0,1, 2,3,4, 5000,0,'tttt88', '20220829','20220820','1',false);
+
+insert into travel_agency_list (created_at, created_by, modified_at, modified_by, city, content, like_count, person_count, person_max_count,read_count, real_paid,sale_paid, sale_percent, title,travel_end_at,travel_start_at, travel_agency_id,deleted)
+values ('2022-02-25 08:18:58', '1','2022-02-25 08:18:58','1','1234','13256',0,1, 2,3,4, 5500,0,'tttt99', '20220829','20220820','1',false);
+
+insert into travel_agency_list (created_at, created_by, modified_at, modified_by, city, content, like_count, person_count, person_max_count,read_count, real_paid,sale_paid, sale_percent, title,travel_end_at,travel_start_at, travel_agency_id,deleted)
+values ('2022-02-25 08:18:58', '1','2022-02-25 08:18:58','1','1234','13256',0,1, 2,3,4, 6000,0,'tttt1010', '20220829','20220820','1',false);
+
+insert into travel_agency_list (created_at, created_by, modified_at, modified_by, city, content, like_count, person_count, person_max_count,read_count, real_paid,sale_paid, sale_percent, title,travel_end_at,travel_start_at, travel_agency_id,deleted)
+values ('2022-02-25 08:18:58', '1','2022-02-25 08:18:58','1','1234','13256',0,1, 2,3,4, 6500,0,'tttt1111', '20220829','20220820','1',false);
+
+insert into travel_agency_list (created_at, created_by, modified_at, modified_by, city, content, like_count, person_count, person_max_count,read_count, real_paid,sale_paid, sale_percent, title,travel_end_at,travel_start_at, travel_agency_id,deleted)
+values ('2022-02-25 08:18:58', '1','2022-02-25 08:18:58','1','1234','13256',0,1, 2,3,4, 7000,0,'tttt1112', '20220829','20220820','1',false);
+
+insert into travel_agency_list (created_at, created_by, modified_at, modified_by, city, content, like_count, person_count, person_max_count,read_count, real_paid,sale_paid, sale_percent, title,travel_end_at,travel_start_at, travel_agency_id,deleted)
+values ('2022-02-25 08:18:58', '1','2022-02-25 08:18:58','1','1234','13256',0,1, 2,3,4, 7500,0,'tttt1113', '20220829','20220820','1',false);
+
+insert into travel_agency_list (created_at, created_by, modified_at, modified_by, city, content, like_count, person_count, person_max_count,read_count, real_paid,sale_paid, sale_percent, title,travel_end_at,travel_start_at, travel_agency_id,deleted)
+values ('2022-02-25 08:18:58', '1','2022-02-25 08:18:58','1','1234','13256',0,1, 2,3,4, 8000,0,'tttt1114', '20220829','20220820','1',false);
+
+insert into travel_agency_list (created_at, created_by, modified_at, modified_by, city, content, like_count, person_count, person_max_count,read_count, real_paid,sale_paid, sale_percent, title,travel_end_at,travel_start_at, travel_agency_id,deleted)
+values ('2022-02-25 08:18:58', '1','2022-02-25 08:18:58','1','1234','13256',0,1, 2,3,4, 8500,0,'tttt1115', '20220829','20220820','1',false);
+
+insert into travel_agency_list (created_at, created_by, modified_at, modified_by, city, content, like_count, person_count, person_max_count,read_count, real_paid,sale_paid, sale_percent, title,travel_end_at,travel_start_at, travel_agency_id,deleted)
+values ('2022-02-25 08:18:58', '1','2022-02-25 08:18:58','1','1234','13256',0,1, 2,3,4, 1000,0,'tttt1116', '20220829','20220820','1',false);
+
+insert into travel_agency_list (created_at, created_by, modified_at, modified_by, city, content, like_count, person_count, person_max_count,read_count, real_paid,sale_paid, sale_percent, title,travel_end_at,travel_start_at, travel_agency_id,deleted)
+values ('2022-02-25 08:18:58', '1','2022-02-25 08:18:58','1','1234','13256',0,1, 2,3,4, 1000,0,'tttt1117', '20220829','20220820','1',false);
+
+insert into travel_agency_list (created_at, created_by, modified_at, modified_by, city, content, like_count, person_count, person_max_count,read_count, real_paid,sale_paid, sale_percent, title,travel_end_at,travel_start_at, travel_agency_id,deleted)
+values ('2022-02-25 08:18:58', '1','2022-02-25 08:18:58','1','1234','13256',0,1, 2,3,4, 1000,0,'tttt1118', '20220829','20220820','1',false);
+
+insert into travel_agency_list (created_at, created_by, modified_at, modified_by, city, content, like_count, person_count, person_max_count,read_count, real_paid,sale_paid, sale_percent, title,travel_end_at,travel_start_at, travel_agency_id,deleted)
+values ('2022-02-25 08:18:58', '1','2022-02-25 08:18:58','1','1234','13256',0,1, 2,3,4, 1000,0,'tttt1119', '20220829','20220820','1',false);
+
+insert into travel_agency_list (created_at, created_by, modified_at, modified_by, city, content, like_count, person_count, person_max_count,read_count, real_paid,sale_paid, sale_percent, title,travel_end_at,travel_start_at, travel_agency_id,deleted)
+values ('2022-02-25 08:18:58', '1','2022-02-25 08:18:58','1','1234','13256',0,1, 2,3,4, 1000,0,'tttt111110', '20220829','20220820','1',false);
+
+
+
 
 
 

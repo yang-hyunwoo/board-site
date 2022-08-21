@@ -35,18 +35,23 @@ public record ArticleCommentResponse(
     }
 
     public static ArticleCommentResponse from(ArticleCommentDto dto){
-        var articleAuthChk = Optional.ofNullable(SecurityContextHolder.getContext())
-                .map(SecurityContext::getAuthentication)
-                .map(Authentication::getPrincipal)
-                .map(TripUserPrincipal.class::cast);
+        Long authChkLong = 0L;
+        if(!SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")){
+            var articleAuthChk = Optional.ofNullable(SecurityContextHolder.getContext())
+                    .map(SecurityContext::getAuthentication)
+                    .map(Authentication::getPrincipal)
+                    .map(TripUserPrincipal.class::cast);
+             authChkLong = articleAuthChk.get().id();
+        }
         return new ArticleCommentResponse(
                 dto.id(),
                 dto.content(),
                 dto.createdAt(),
                 dto.tripUser().email(),
                 dto.tripUser().nickName(),
-                dto.tripUser().id() == articleAuthChk.get().id() ? true : false
+                dto.tripUser().id() == authChkLong ? true : false
 
         );
+
     }
 }
