@@ -41,5 +41,10 @@ public class TravelAgencyListController {
         return Response.success(travelAgencyListDetail);
     }
 
-
+    @GetMapping("/count/{travelAgencyListId}")
+    public void travelAgencyTripCount(@PathVariable Long travelAgencyListId ,
+                                      @RequestParam String operland,
+                                      @RequestParam int count) {
+            travelAgencyListService.travelAgencyOperland(travelAgencyListId , operland,count);
+    }
 }
