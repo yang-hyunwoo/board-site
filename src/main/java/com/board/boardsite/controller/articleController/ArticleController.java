@@ -17,6 +17,10 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * 게시판 클래스
+ * @author cohouseol
+ */
 @RestController
 @RequestMapping("/api/trip/articles")
 @RequiredArgsConstructor
@@ -45,7 +49,6 @@ public class ArticleController {
     @PostMapping("/new-article")
     public Response<Boolean> saveArticle(@RequestBody ArticleRequest articleRequest ,
                                          @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal) {
-        System.out.println(tripUserPrincipal);
          articleService.saveArticle(articleRequest.toDto(tripUserPrincipal.toDto()));
     return Response.success(true);
     }

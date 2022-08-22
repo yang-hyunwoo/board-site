@@ -188,6 +188,3 @@ values ('2022-02-25 08:18:58', '1','2022-02-25 08:18:58','1','1234','13256',0,1,
 
 
 
-
-insert into travel_agency_reservation_list (created_at, created_by, modified_at, modified_by, paid, sale_percent,deleted,travel_agency_id,travel_agency_list_id,trip_user_id) values ('2022-02-25 08:18:58','1','2022-02-25 08:18:58','1',1,1,false,1,1,1);
-

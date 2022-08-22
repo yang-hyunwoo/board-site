@@ -8,6 +8,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * 게시판 댓글 클래스
+ * @author cohouseol
+ */
 @RestController
 @RequestMapping("/api/trip/articles")
 @RequiredArgsConstructor
