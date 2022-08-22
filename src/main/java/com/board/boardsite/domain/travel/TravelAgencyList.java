@@ -159,4 +159,11 @@ public class TravelAgencyList extends AuditingFields {
     public void readCountPlus(int readCount){
         this.readCount = readCount+1;
     }
+
+    public void personPlusCount(int personCount , int count){
+        this.personCount = personCount+count;
+    }
+    public void personMinusCount(int personCount , int count){
+        this.personCount = personCount-count;
+    }
 }

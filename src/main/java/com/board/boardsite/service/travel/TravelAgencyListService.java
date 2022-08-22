@@ -38,6 +38,13 @@ public class TravelAgencyListService {
 
         return optionalTravelAgencyList.map(TravelAgencyListDto::from).orElseThrow();
     }
-
-
+    @Transactional
+    public void travelAgencyOperland(Long travelAgencyId , String operland , int count){
+        var travelAgencyListDetail = travelAgencyListRepository.findByIdAndDeleted(travelAgencyId,false).orElseThrow(()->new BoardSiteException(ErrorCode.TRAVEL_AGENCY_DETAIL_NOT_FOUND));
+        if(operland.equals("plus")) {
+            travelAgencyListDetail.personPlusCount(travelAgencyListDetail.getPersonCount(),count);
+        } else {
+            travelAgencyListDetail.personMinusCount(travelAgencyListDetail.getPersonCount(),count);
+        }
+    }
 }
