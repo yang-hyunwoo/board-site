@@ -104,7 +104,7 @@ public class ArticleCommentServiceTest {
 
     private ArticleComment createArticleComment(String content) {
         return ArticleComment.of(
-                Article.of( "title", "content",false,createTripUser()),
+                Article.of( "title", "content",false,0,createTripUser()),
                 content,
                 false,
                 createTripUser()
@@ -131,6 +131,7 @@ public class ArticleCommentServiceTest {
                 "title",
                 "content",
                 false,
+                0,
                 createTripUser()
         );
     }

@@ -11,6 +11,8 @@ public record ArticleDto(
         String title,
         String content,
         boolean deleted,
+
+        int readCount,
         LocalDateTime createdAt,
         String createdBy,
         LocalDateTime modifiedAt,
@@ -26,6 +28,7 @@ public record ArticleDto(
                 title,
                 content,
                 false,
+                0,
                 null,
                 null,
                 null,
@@ -37,6 +40,7 @@ public record ArticleDto(
                       String title,
                       String content,
                       boolean deleted,
+                      int readCount,
                       LocalDateTime createdAt,
                       String createdBy,
                       LocalDateTime modifiedAt,
@@ -46,6 +50,7 @@ public record ArticleDto(
              title,
              content,
              deleted,
+             readCount,
              createdAt,
              createdBy,
              modifiedAt,
@@ -59,6 +64,7 @@ public record ArticleDto(
                 entity.getTitle(),
                 entity.getContent(),
                 entity.isDeleted(),
+                entity.getReadCount(),
                 entity.getCreatedAt(),
                 entity.getCreatedBy(),
                 entity.getModifiedAt(),
@@ -71,6 +77,7 @@ public record ArticleDto(
                 title,
                 content,
                 deleted,
+                readCount,
                 tripUser
         );
     }

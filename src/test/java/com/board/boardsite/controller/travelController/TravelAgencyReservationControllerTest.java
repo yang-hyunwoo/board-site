@@ -57,7 +57,6 @@ class TravelAgencyReservationControllerTest {
                 100,
                 200) ;
 
-        willDoNothing().given(travelAgencyReservationService).travelAgencyReserSave(any(TravelAgencyReservationDto.class));
 
         mvc.perform(post("/api/trip/reser/pay/complete")
                 .contentType(MediaType.APPLICATION_JSON)

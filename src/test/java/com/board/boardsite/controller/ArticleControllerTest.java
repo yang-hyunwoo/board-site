@@ -165,6 +165,7 @@ class ArticleControllerTest {
                 "title",
                 "content",
                 false,
+                0,
                 createTripUser2()
         );
 
@@ -209,6 +210,7 @@ class ArticleControllerTest {
                 createTripUser(),
                 Set.of(),
                 "title",
+                0,
                 "content",
                 LocalDateTime.now(),
                 "11",

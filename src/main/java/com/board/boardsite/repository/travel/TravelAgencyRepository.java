@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface TravelAgencyRepository extends JpaRepository<TravelAgency , Long> ,
         TravelAgencyCustomRespository {
 
-    Page<TravelAgency> findByNameContaining(String TravelAgencyName , Pageable pageable);
-
+    Page<TravelAgency> findByNameContainingAndDeleted(String TravelAgencyName , Pageable pageable,boolean deleted);
+    Page<TravelAgency> findAllByDeleted(Pageable pageable, boolean deleted);
     Optional<TravelAgency> findByIdAndDeleted(Long travelAgencyId , boolean deleted);
 }

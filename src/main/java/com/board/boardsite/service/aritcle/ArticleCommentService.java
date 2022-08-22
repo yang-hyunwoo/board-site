@@ -28,14 +28,14 @@ public class ArticleCommentService {
 
     @Transactional(readOnly = true)
     public List<ArticleCommentDto> searchArticleComments(Long articleId) {
-        return articleCommentRepository.findByArticle_Id(articleId)
+        return articleCommentRepository.findByArticle_IdAndDeleted(articleId,false)
                 .stream().map(ArticleCommentDto::from).toList();
     }
 
     @Transactional
     public void saveArticleComment(ArticleCommentDto dto) {
         try {
-            Article article = articleRepository.getReferenceById(dto.articleId());
+            Article article = articleRepository.findByIdAndDeleted(dto.articleId(),false).orElseThrow(()->new BoardSiteException(ErrorCode.ARTICLE_NOT_FOUND));
             TripUser tripUser = tripUserRepository.getReferenceById(dto.tripUser().id());
             articleCommentRepository.save(dto.toEntity(article, tripUser));
         } catch (Exception e) {
@@ -46,7 +46,7 @@ public class ArticleCommentService {
 //    @Transactional
     public void updateArticleComment(Long articleCommentId , ArticleCommentDto dto){
 
-        ArticleComment articleComment = articleCommentRepository.getReferenceById(articleCommentId);
+        ArticleComment articleComment = articleCommentRepository.findByIdAndDeleted(articleCommentId,false).orElseThrow(()->new BoardSiteException(ErrorCode.ARTICLE_NOT_FOUND));
         if(articleComment.getTripUser().equals(dto.tripUser())) {
             if (dto.content() != null) {
                 articleComment.setContent(dto.content());
@@ -58,7 +58,7 @@ public class ArticleCommentService {
     }
 
     public void deleteArticleComment(Long articleCommentId , Long userId) {
-            ArticleComment articleComment = articleCommentRepository.getReferenceById(articleCommentId);
+            ArticleComment articleComment = articleCommentRepository.findByIdAndDeleted(articleCommentId,false).orElseThrow(()->new BoardSiteException(ErrorCode.ARTICLE_NOT_FOUND));
             TripUser tripUser = tripUserRepository.getReferenceById(userId);
             if (articleComment.getTripUser().equals(tripUser)) {
                 articleComment.setDeleted(true);

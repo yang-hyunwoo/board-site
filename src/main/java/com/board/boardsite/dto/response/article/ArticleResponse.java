@@ -10,6 +10,7 @@ public record ArticleResponse(
         String title,
         String content ,
         String email,
+        int readCount,
         String nickName
 ) {
 
@@ -18,12 +19,14 @@ public record ArticleResponse(
                                      String title,
                                      String content,
                                      String email,
+                                     int readCount,
                                      String nickName) {
         return new ArticleResponse(id,
                 createdAt,
                 title,
                 content,
                 email,
+                readCount,
                 nickName);
     }
 
@@ -34,6 +37,7 @@ public record ArticleResponse(
                 dto.title(),
                 dto.content(),
                 dto.tripUser().email(),
+                dto.readCount(),
                 dto.tripUser().nickName()
         );
     }

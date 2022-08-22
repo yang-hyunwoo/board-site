@@ -32,19 +32,19 @@ public class TravelAgencyService {
     public Page<TravelAgencyDto> travelAgencyList(String travelAgencyName , Pageable pageable) {
 
         if (travelAgencyName == null || travelAgencyName.isBlank()) {
-            return travelAgencyRepository.findAll(pageable).map(TravelAgencyDto::from);
+            return travelAgencyRepository.findAllByDeleted(pageable,false).map(TravelAgencyDto::from);
         }
-        return travelAgencyRepository.findByNameContaining(travelAgencyName , pageable).map(TravelAgencyDto::from);
+        return travelAgencyRepository.findByNameContainingAndDeleted(travelAgencyName , pageable,false).map(TravelAgencyDto::from);
     }
 
     @Transactional(readOnly = true)
     public TravelAgencyDto travelAgencyDetail(Long travelAgencyId) {
-        return travelAgencyRepository.findById(travelAgencyId).map(TravelAgencyDto::from).orElseThrow(()->new BoardSiteException(ErrorCode.TRAVEL_AGENCY_NOT_FOUND));
+        return travelAgencyRepository.findByIdAndDeleted(travelAgencyId,false).map(TravelAgencyDto::from).orElseThrow(()->new BoardSiteException(ErrorCode.TRAVEL_AGENCY_NOT_FOUND));
     }
 
     @Transactional(readOnly = true)
     public TravelAgencyWithTravelAgencyListDto travelAgencyWithTravelAgencyList(Long travelAgencyId) {
-        TravelAgency travelAgency = travelAgencyRepository.findById(travelAgencyId).orElseThrow();
+        TravelAgency travelAgency = travelAgencyRepository.findByIdAndDeleted(travelAgencyId,false).orElseThrow();
         List<TravelAgencyList> travelAgencyList = travelAgencyListRepository.findByTravelAgencyIdAndDeletedOrderByTitleAsc(travelAgencyId,false);
 
         travelAgency.getTravelAgencyLists().clear();
