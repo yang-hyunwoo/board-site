@@ -12,6 +12,11 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.SortDefault;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * 여행사 여행 목록 리스트 클래스
+ * @author cohouseol
+ */
+
 @RestController
 @RequestMapping("/api/trip/agency-trip")
 @RequiredArgsConstructor
