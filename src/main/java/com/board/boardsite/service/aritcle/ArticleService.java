@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class ArticleService {
@@ -28,17 +30,21 @@ public class ArticleService {
     public Page<ArticleDto> articleSearchList(SearchType searchType , String searchKeyWord , Pageable pageable) {
 
         if (searchKeyWord == null || searchKeyWord.isBlank()) {
-            return articleRepository.findAll(pageable).map(ArticleDto::from);
+            return articleRepository.findAllByDeleted(pageable,false).map(ArticleDto::from);
         }
         return switch (searchType) {
-            case TITLE -> articleRepository.findByTitleContaining(searchKeyWord, pageable).map(ArticleDto::from);
-            case NICKNAME -> articleRepository.findByTripUser_NickNameContaining(searchKeyWord, pageable).map(ArticleDto::from);
+            case TITLE -> articleRepository.findByTitleContainingAndDeleted(searchKeyWord, pageable,false).map(ArticleDto::from);
+            case NICKNAME -> articleRepository.findByTripUser_NickNameContainingAndDeleted(searchKeyWord, pageable , false).map(ArticleDto::from);
         };
     }
 
-    @Transactional(readOnly = true)
+    //수정
+    @Transactional
     public ArticleWithCommentsDto getArticleWithComment(Long articleId) {
-        return articleRepository.findById(articleId)
+        var articleDetail = articleRepository.findByIdAndDeleted(articleId,false).orElseThrow(()->new BoardSiteException(ErrorCode.ARTICLE_NOT_FOUND));
+        articleDetail.readCountPlus(articleDetail.getReadCount());
+        Optional<Article> optionalArticle = Optional.of(articleDetail);
+        return optionalArticle
                 .map(ArticleWithCommentsDto::from)
                 .orElseThrow(() -> new BoardSiteException(ErrorCode.ARTICLE_NOT_FOUND,"게시글이 없습니다."));
     }
@@ -52,7 +58,7 @@ public class ArticleService {
     @Transactional
     public void updateArticle(Long articleId, ArticleDto dto) {
         try {
-            Article article = articleRepository.getReferenceById(articleId);
+            Article article = articleRepository.findByIdAndDeleted(articleId,false).orElseThrow(()->new BoardSiteException(ErrorCode.ARTICLE_NOT_FOUND));
             TripUser tripUser = tripUserRepository.getReferenceById(dto.tripUser().id());
             if (article.getTripUser().equals(tripUser)) {
                 if (dto.title() != null) { article.setTitle(dto.title()); }
@@ -69,7 +75,7 @@ public class ArticleService {
     @Transactional
     public void deleteArticle(Long articleId ,Long userId){
         try {
-            Article article = articleRepository.getReferenceById(articleId);
+            Article article = articleRepository.findByIdAndDeleted(articleId,false).orElseThrow(()->new BoardSiteException(ErrorCode.ARTICLE_NOT_FOUND));
             TripUser tripUser = tripUserRepository.getReferenceById(userId);
             if (article.getTripUser().equals(tripUser)) {
                 article.setDeleted(true);

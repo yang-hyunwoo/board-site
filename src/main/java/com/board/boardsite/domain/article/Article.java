@@ -45,6 +45,10 @@ public class Article extends AuditingFields {
     @Column(nullable = false)
     private boolean deleted;
 
+    @Setter
+    @Column(nullable = false)
+    private int readCount;
+
     @ToString.Exclude
     @OrderBy("createdAt DESC")
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
@@ -54,15 +58,16 @@ public class Article extends AuditingFields {
 
 
 
-    private Article(String title, String content , boolean deleted , TripUser tripUser) {
+    private Article(String title, String content , boolean deleted , int readCount , TripUser tripUser) {
         this.title = title;
         this.content = content;
         this.deleted = deleted;
         this.tripUser = tripUser;
+        this.readCount = readCount;
     }
 
-    public static Article of(String title, String content ,boolean deleted ,TripUser tripUser) {
-        return new Article(title, content,deleted, tripUser);
+    public static Article of(String title, String content ,boolean deleted ,int readCount,TripUser tripUser) {
+        return new Article(title, content,deleted, readCount,tripUser);
     }
 
 
@@ -78,5 +83,8 @@ public class Article extends AuditingFields {
         return Objects.hash(id);
     }
 
+    public void readCountPlus(int readCount){
+        this.readCount = readCount+1;
+    }
 }
 

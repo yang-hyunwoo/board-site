@@ -12,6 +12,9 @@ import org.springframework.data.querydsl.binding.QuerydslBinderCustomizer;
 import org.springframework.data.querydsl.binding.QuerydslBindings;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
+import javax.swing.text.html.Option;
+import java.util.Optional;
+
 @RepositoryRestResource
 public interface ArticleRepository extends
         JpaRepository<Article, Long>,
@@ -19,9 +22,13 @@ public interface ArticleRepository extends
         QuerydslBinderCustomizer<QArticle>      //선택적 검색 like 검색에서 사용
         {
 
-            Page<Article> findByTitleContaining(String title , Pageable pageable);
+            Page<Article> findByTitleContainingAndDeleted(String title , Pageable pageable,boolean deleted);
 
-            Page<Article> findByTripUser_NickNameContaining(String nickname , Pageable pageable);
+            Optional<Article> findByIdAndDeleted(Long articleId, boolean deleted);
+
+            Page<Article> findAllByDeleted(Pageable pageable , boolean deleted);
+
+            Page<Article> findByTripUser_NickNameContainingAndDeleted(String nickname , Pageable pageable,boolean deleted);
 
             void deleteByIdAndTripUser_Id(Long articleId, Long Id);
 

@@ -31,7 +31,7 @@ public class TravelAgencyListService {
 
     @Transactional
     public TravelAgencyListDto travelAgencyListDetail(Long travelAgencyListId){
-        var travelAgencyListDetail =  travelAgencyListRepository.findById(travelAgencyListId).orElseThrow(()->new BoardSiteException(ErrorCode.TRAVEL_AGENCY_DETAIL_NOT_FOUND));
+        var travelAgencyListDetail =  travelAgencyListRepository.findByIdAndDeleted(travelAgencyListId,false).orElseThrow(()->new BoardSiteException(ErrorCode.TRAVEL_AGENCY_DETAIL_NOT_FOUND));
 
         travelAgencyListDetail.readCountPlus(travelAgencyListDetail.getReadCount());
         Optional<TravelAgencyList> optionalTravelAgencyList = Optional.of(travelAgencyListDetail);
