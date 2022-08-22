@@ -16,6 +16,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * 여행사 클래스
+ * @author cohouseol
+ */
 @RestController
 @RequestMapping("/api/trip/agency")
 @RequiredArgsConstructor

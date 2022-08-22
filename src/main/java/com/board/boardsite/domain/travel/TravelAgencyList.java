@@ -33,7 +33,7 @@ public class TravelAgencyList extends AuditingFields {
 
     @ToString.Exclude
     @OneToMany(mappedBy = "travelAgencyList", cascade = CascadeType.ALL)
-    private final Set<TravelAgencyReservationList> travelAgencyReservationLists = new LinkedHashSet<>();      //여행사 여행 목록 ID
+    private final Set<TravelAgencyReservation> travelAgencyReservationLists = new LinkedHashSet<>();      //여행사 여행 목록 ID
 
 
     @Setter
