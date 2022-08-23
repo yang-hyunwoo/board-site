@@ -17,7 +17,7 @@ public enum ErrorCode {
     INVALID_TOKEN(HttpStatus.UNAUTHORIZED,"Token is invalid"),
     ARTICLE_DELETE_FAIL(HttpStatus.NOT_FOUND , "Article is deleted failed"),
     ARTICLE_UPDATE_FAIL(HttpStatus.NOT_FOUND , "Article is failed"),
-    ARTICLE_NOT_FOUND(HttpStatus.NOT_FOUND , "Article not founded"),
+    ARTICLE_NOT_FOUND(HttpStatus.NOT_FOUND , "게시글을 찾을 수 없습니다."),
 
     ARTICLE_COMMENT_UNAUTHORIZED(HttpStatus.UNAUTHORIZED , "Article comment not unauthorized"),
 

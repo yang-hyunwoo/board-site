@@ -1,10 +1,17 @@
 package com.board.boardsite.controller.articleController;
 
+import com.board.boardsite.domain.constant.SearchType;
 import com.board.boardsite.dto.request.article.ArticleCommentRequest;
 import com.board.boardsite.dto.response.Response;
+import com.board.boardsite.dto.response.article.ArticleCommentResponse;
+import com.board.boardsite.dto.response.article.ArticleResponse;
 import com.board.boardsite.dto.security.TripUserPrincipal;
 import com.board.boardsite.service.aritcle.ArticleCommentService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +26,16 @@ public class ArticleCommentController {
 
     private final ArticleCommentService articleCommentService;
 
-    @PostMapping("/comment/new")
+    @GetMapping("/comment/{articleId}")
+    public Response<Page<ArticleCommentResponse>> searchArticleCommentsPage(@PathVariable Long articleId ,
+                                                                            @PageableDefault(size=8,sort="createdAt",direction= Sort.Direction.DESC) Pageable pageable,
+                                                                            @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal) {
+
+        Page<ArticleCommentResponse> articleComments = articleCommentService.searchArticleCommentsPage(articleId,pageable).map(ArticleCommentResponse::from);
+        return Response.success(articleComments);
+    }
+
+        @PostMapping("/comment/new")
     public Response<Boolean> saveArticleComment(@RequestBody ArticleCommentRequest articleCommentRequest,
                                                 @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal){
         articleCommentService.saveArticleComment(articleCommentRequest.toDto(tripUserPrincipal.toDto()));

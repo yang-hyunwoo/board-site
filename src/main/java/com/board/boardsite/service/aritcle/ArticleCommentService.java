@@ -10,6 +10,8 @@ import com.board.boardsite.repository.article.ArticleCommentRepository;
 import com.board.boardsite.repository.article.ArticleRepository;
 import com.board.boardsite.repository.user.TripUserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,6 +34,11 @@ public class ArticleCommentService {
                 .stream().map(ArticleCommentDto::from).toList();
     }
 
+    @Transactional(readOnly = true)
+    public Page<ArticleCommentDto> searchArticleCommentsPage(Long articleId,Pageable pageable) {
+        return articleCommentRepository.findByArticle_IdAndDeleted(articleId,false,pageable).map(ArticleCommentDto::from);
+    }
+
     @Transactional
     public void saveArticleComment(ArticleCommentDto dto) {
         try {
@@ -43,11 +50,12 @@ public class ArticleCommentService {
         }
     }
 
-//    @Transactional
+    @Transactional
     public void updateArticleComment(Long articleCommentId , ArticleCommentDto dto){
 
         ArticleComment articleComment = articleCommentRepository.findByIdAndDeleted(articleCommentId,false).orElseThrow(()->new BoardSiteException(ErrorCode.ARTICLE_NOT_FOUND));
-        if(articleComment.getTripUser().equals(dto.tripUser())) {
+        TripUser tripUser = tripUserRepository.getReferenceById(dto.tripUser().id());
+        if(articleComment.getTripUser().getId().equals(tripUser.getId())) {
             if (dto.content() != null) {
                 articleComment.setContent(dto.content());
                 }
@@ -57,10 +65,12 @@ public class ArticleCommentService {
 
     }
 
+    @Transactional
     public void deleteArticleComment(Long articleCommentId , Long userId) {
             ArticleComment articleComment = articleCommentRepository.findByIdAndDeleted(articleCommentId,false).orElseThrow(()->new BoardSiteException(ErrorCode.ARTICLE_NOT_FOUND));
             TripUser tripUser = tripUserRepository.getReferenceById(userId);
-            if (articleComment.getTripUser().equals(tripUser)) {
+
+            if (articleComment.getTripUser().getId().equals(tripUser.getId())) {
                 articleComment.setDeleted(true);
             } else{
                 throw new BoardSiteException(ErrorCode.ARTICLE_COMMENT_UNAUTHORIZED);
