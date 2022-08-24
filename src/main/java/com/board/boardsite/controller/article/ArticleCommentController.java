@@ -1,10 +1,8 @@
-package com.board.boardsite.controller.articleController;
+package com.board.boardsite.controller.article;
 
-import com.board.boardsite.domain.constant.SearchType;
 import com.board.boardsite.dto.request.article.ArticleCommentRequest;
 import com.board.boardsite.dto.response.Response;
 import com.board.boardsite.dto.response.article.ArticleCommentResponse;
-import com.board.boardsite.dto.response.article.ArticleResponse;
 import com.board.boardsite.dto.security.TripUserPrincipal;
 import com.board.boardsite.service.aritcle.ArticleCommentService;
 import lombok.RequiredArgsConstructor;

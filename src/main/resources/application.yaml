@@ -44,7 +44,15 @@ spring:
   thymeleaf3.decoupled-logic: true
 server:
   port: 8081
-
+servlet:
+  multipart:
+    maxFileSize: 800MB
+    maxRequestSize: 800MB
+    enabled: true
+    location: C:\Git_project\board-site\src\main\resources\static\image
+custom:
+  path:
+    upload-images: C:\Git_project\board-site\src\main\resources\static\image
 jwt:
   secret-key: board_site.trip_web_application.secret_key
   #30 days

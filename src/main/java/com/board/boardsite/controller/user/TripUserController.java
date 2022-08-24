@@ -1,4 +1,4 @@
-package com.board.boardsite.controller.userController;
+package com.board.boardsite.controller.user;
 
 
 import com.board.boardsite.dto.request.user.EmailAuthRequest;

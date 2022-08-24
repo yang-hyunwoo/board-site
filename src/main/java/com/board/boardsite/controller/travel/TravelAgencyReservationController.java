@@ -1,11 +1,8 @@
-package com.board.boardsite.controller.travelController;
+package com.board.boardsite.controller.travel;
 
-import com.board.boardsite.domain.travel.TravelAgencyReservation;
-import com.board.boardsite.domain.user.TripUser;
 import com.board.boardsite.dto.request.travel.TravelAgencyReservationRequest;
 import com.board.boardsite.dto.response.Response;
 import com.board.boardsite.dto.security.TripUserPrincipal;
-import com.board.boardsite.repository.travel.TravelAgencyReservationRepository;
 import com.board.boardsite.service.travel.TravelAgencyReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
