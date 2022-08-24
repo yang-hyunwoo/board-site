@@ -1,4 +1,4 @@
-package com.board.boardsite.controller.travelController;
+package com.board.boardsite.controller.travel;
 
 import com.board.boardsite.config.TestSecurityConfig;
 import com.board.boardsite.domain.travel.TravelAgency;
@@ -17,10 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.Optional;
-
 import static org.mockito.BDDMockito.*;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

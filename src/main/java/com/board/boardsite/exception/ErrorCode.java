@@ -24,12 +24,16 @@ public enum ErrorCode {
     ARTICLE_COMMENT_NOT_FOUND(HttpStatus.NOT_FOUND , "Article comment not founded"),
     TRAVEL_AGENCY_NOT_FOUND(HttpStatus.NOT_FOUND , "여행사가 존재 하지 않습니다."),
 
+    ARTICLE_UNAUTHORIZED(HttpStatus.UNAUTHORIZED , "접근 권한이 없습니다."),
+
     TRAVEL_AGENCY_LIST_NOT_FOUND(HttpStatus.NOT_FOUND , "여행 목록이 존재 하지 않습니다."),
     TRAVEL_AGENCY_DETAIL_NOT_FOUND(HttpStatus.NOT_FOUND , "TravelAgencyDetail not founded"),
 
     INTERNAL_SERVER_ERROR2(HttpStatus.INTERNAL_SERVER_ERROR, "잠시 후 다시 이용해 주세요."),
 
     TRAVEL_PAY_NOT_FOUND(HttpStatus.NOT_FOUND, "결제 내역이 없습니다."),
+
+    FILE_NOT_FOUND(HttpStatus.NOT_FOUND, "첨부파일을 찾을수 없습니다."),
     ;
 
     private HttpStatus status;

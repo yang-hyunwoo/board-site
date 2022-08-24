@@ -50,6 +50,15 @@ public class ArticleService {
     }
 
     @Transactional
+    public ArticleDto articleValidDetail(Long articleId , Long userId){
+        Article article = articleRepository.findByIdAndDeleted(articleId,false).orElseThrow(()->new BoardSiteException(ErrorCode.ARTICLE_NOT_FOUND));
+        if(article.getTripUser().getId().equals(userId)){
+            return Optional.of(article).map(ArticleDto::from).orElseThrow(()->new BoardSiteException(ErrorCode.ARTICLE_NOT_FOUND));
+        }
+        throw  new BoardSiteException(ErrorCode.ARTICLE_UNAUTHORIZED);
+    }
+
+    @Transactional
     public void saveArticle(ArticleDto dto){
         TripUser tripUser = tripUserRepository.getReferenceById(dto.tripUser().id()) ;
         articleRepository.save(dto.toEntity(tripUser));
@@ -60,7 +69,7 @@ public class ArticleService {
         try {
             Article article = articleRepository.findByIdAndDeleted(articleId,false).orElseThrow(()->new BoardSiteException(ErrorCode.ARTICLE_NOT_FOUND));
             TripUser tripUser = tripUserRepository.getReferenceById(dto.tripUser().id());
-            if (article.getTripUser().equals(tripUser)) {
+            if (article.getTripUser().getId().equals(tripUser.getId())) {
                 if (dto.title() != null) { article.setTitle(dto.title()); }
                 if (dto.content() != null) { article.setContent(dto.content()); }
             } else {
@@ -77,7 +86,7 @@ public class ArticleService {
         try {
             Article article = articleRepository.findByIdAndDeleted(articleId,false).orElseThrow(()->new BoardSiteException(ErrorCode.ARTICLE_NOT_FOUND));
             TripUser tripUser = tripUserRepository.getReferenceById(userId);
-            if (article.getTripUser().equals(tripUser)) {
+            if (article.getTripUser().getId().equals(tripUser.getId())) {
                 article.setDeleted(true);
             } else{
                 throw new BoardSiteException(ErrorCode.ARTICLE_COMMENT_UNAUTHORIZED);

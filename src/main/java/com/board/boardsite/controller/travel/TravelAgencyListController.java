@@ -1,8 +1,7 @@
-package com.board.boardsite.controller.travelController;
+package com.board.boardsite.controller.travel;
 
 import com.board.boardsite.dto.response.Response;
 import com.board.boardsite.dto.response.travel.TravelAgencyListResponse;
-import com.board.boardsite.dto.response.travel.TravelAgencyResponse;
 import com.board.boardsite.service.travel.TravelAgencyListService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

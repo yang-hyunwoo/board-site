@@ -1,9 +1,7 @@
-package com.board.boardsite.controller.articleController;
+package com.board.boardsite.controller.article;
 
 import com.board.boardsite.config.TestSecurityConfig;
-import com.board.boardsite.domain.article.ArticleComment;
 import com.board.boardsite.dto.article.ArticleCommentDto;
-import com.board.boardsite.dto.article.ArticleDto;
 import com.board.boardsite.dto.request.article.ArticleCommentRequest;
 import com.board.boardsite.service.aritcle.ArticleCommentService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,7 +17,6 @@ import org.springframework.security.test.context.support.TestExecutionEvent;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.assertj.core.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.then;

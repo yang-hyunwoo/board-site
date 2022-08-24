@@ -1,4 +1,4 @@
-package com.board.boardsite.controller.articleController;
+package com.board.boardsite.controller.article;
 
 
 
@@ -44,6 +44,15 @@ public class ArticleController {
 
         var articleDetail = ArticleWithCommentsResponse.from(articleService.getArticleWithComment(articleId),tripUserPrincipal);
         return Response.success(articleDetail);
+    }
+
+    @GetMapping("/valid/{articleId}")
+    public Response<ArticleResponse> articleValidDetail(@PathVariable Long articleId,
+                                                               @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal) {
+
+        var articleValidDetail = ArticleResponse.from(articleService.articleValidDetail(articleId , tripUserPrincipal.id()));
+
+        return Response.success(articleValidDetail);
     }
 
     @PostMapping("/new-article")

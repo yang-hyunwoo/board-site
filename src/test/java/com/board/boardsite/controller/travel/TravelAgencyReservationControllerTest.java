@@ -1,14 +1,11 @@
-package com.board.boardsite.controller.travelController;
+package com.board.boardsite.controller.travel;
 
 import com.board.boardsite.config.TestSecurityConfig;
 import com.board.boardsite.dto.request.travel.TravelAgencyReservationRequest;
-import com.board.boardsite.dto.travel.TravelAgencyReservationDto;
-import com.board.boardsite.service.aritcle.ArticleCommentService;
 import com.board.boardsite.service.travel.TravelAgencyReservationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,9 +16,7 @@ import org.springframework.security.test.context.support.TestExecutionEvent;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.assertj.core.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.willDoNothing;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
