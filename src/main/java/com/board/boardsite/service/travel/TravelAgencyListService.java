@@ -23,10 +23,15 @@ public class TravelAgencyListService {
     public Page<TravelAgencyListDto> travelAgencyTripList(String travelAgencyTitleName , Pageable pageable) {
 
         if(travelAgencyTitleName == null || travelAgencyTitleName.isBlank()) {
-            return travelAgencyListRepository.findAll(pageable).map(TravelAgencyListDto::from);
+            return travelAgencyListRepository.findAllByDeleted(pageable,false).map(TravelAgencyListDto::from);
         }
 
-        return travelAgencyListRepository.findByTitleContaining(travelAgencyTitleName,pageable).map(TravelAgencyListDto::from);
+        return travelAgencyListRepository.findByTitleContainingAndDeleted(travelAgencyTitleName,pageable,false).map(TravelAgencyListDto::from);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<TravelAgencyListDto> searchTravelAgencyPage(Long travelAgencyId , Pageable pageable) {
+        return travelAgencyListRepository.findByTravelAgency_IdAndDeleted(travelAgencyId,pageable,false).map(TravelAgencyListDto::from);
     }
 
     @Transactional

@@ -51,11 +51,11 @@ class ArticleServiceTest {
     @Test
     void givenNoSearchParameters_whenSearchArticles_thenReturnArticleList() {
         Pageable pageable = Pageable.ofSize(10);
-        given(articleRepository.findAll(pageable)).willReturn(Page.empty());
+        given(articleRepository.findAllByDeleted(pageable,false)).willReturn(Page.empty());
         Page<ArticleDto> articles = articleService.articleSearchList(null, null, pageable);
         assertThat(articles).isEmpty();
 
-        then(articleRepository).should().findAll(pageable);
+        then(articleRepository).should().findAllByDeleted(pageable,false);
 
     }
 
@@ -66,14 +66,14 @@ class ArticleServiceTest {
         Pageable pageable = Pageable.ofSize(10);
         SearchType searchType = SearchType.TITLE;
         String searchKeyWord = "title";
-        given(articleRepository.findByTitleContaining(searchKeyWord, pageable)).willReturn(Page.empty());
+        given(articleRepository.findByTitleContainingAndDeleted(searchKeyWord, pageable,false)).willReturn(Page.empty());
 
         // When
         var articleDto = articleService.articleSearchList(searchType, searchKeyWord, pageable);
 
         // Then
         assertThat(articleDto).isEmpty();
-        then(articleRepository).should().findByTitleContaining(searchKeyWord, pageable);
+        then(articleRepository).should().findByTitleContainingAndDeleted(searchKeyWord, pageable,false);
     }
 
     @DisplayName("[GET][service] 게시글 상세 조회")
@@ -83,14 +83,14 @@ class ArticleServiceTest {
         // Given
         Long articleId = 1L;
         Article article = createArticle();
-        given(articleRepository.findById(articleId)).willReturn(Optional.of(article));
+        given(articleRepository.findByIdAndDeleted(articleId,false)).willReturn(Optional.of(article));
 
         // When & Then
         var dto = articleService.getArticleWithComment(articleId);
         assertThat(dto)
                 .hasFieldOrPropertyWithValue("title", article.getTitle())
                 .hasFieldOrPropertyWithValue("content", article.getContent());
-        then(articleRepository).should().findById(articleId);
+        then(articleRepository).should().findByIdAndDeleted(articleId,false);
 
     }
 
@@ -125,7 +125,7 @@ class ArticleServiceTest {
         Article article = createArticle();
 
         // Given
-        given(articleRepository.getReferenceById(dto.id())).willReturn(article);
+        given(articleRepository.findByIdAndDeleted(dto.id(),false)).willReturn(Optional.of(article));
         TripUser tripUser = dto.tripUser().toEntity(encoder.encode(dto.tripUser().password()));
         given(tripUserRepository.getReferenceById(dto.tripUser().id())).willReturn(tripUser);
         // When
@@ -135,7 +135,7 @@ class ArticleServiceTest {
         assertThat(article)
                 .hasFieldOrPropertyWithValue("title", dto.title())
                 .hasFieldOrPropertyWithValue("content", dto.content());
-        then(articleRepository).should().getReferenceById(dto.id());
+        then(articleRepository).should().findByIdAndDeleted(dto.id(),false);
         then(tripUserRepository).should().getReferenceById(dto.tripUser().id());
     }
 

@@ -11,6 +11,7 @@ public record TravelAgencyWithTravelAgencyListDto(
         Long id,
         String name,
         String detail,
+        String comment,
         String address,
         String tel,
         List<TravelAgencyListDto> travelAgencyListDtos
@@ -19,6 +20,7 @@ public record TravelAgencyWithTravelAgencyListDto(
     public static TravelAgencyWithTravelAgencyListDto of(Long id,
                                                String name,
                                                String detail,
+                                               String comment,
                                                String address,
                                                String tel,
                                                          List<TravelAgencyListDto> travelAgencyListDtos) {
@@ -26,6 +28,7 @@ public record TravelAgencyWithTravelAgencyListDto(
                 id,
                 name,
                 detail,
+                comment,
                 address,
                 tel,
                 travelAgencyListDtos);
@@ -36,6 +39,7 @@ public record TravelAgencyWithTravelAgencyListDto(
                 entity.getId(),
                 entity.getName(),
                 entity.getDetail(),
+                entity.getComment(),
                 entity.getAddress(),
                 entity.getTel(),
                 entity.getTravelAgencyLists().stream()

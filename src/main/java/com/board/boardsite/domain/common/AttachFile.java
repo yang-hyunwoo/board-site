@@ -37,6 +37,10 @@ public class AttachFile extends AuditingFields {
     private String filePath;
 
     @Setter
+    @Column(nullable = false , length=300)
+    private String thumbFilePath;
+
+    @Setter
     @Column(nullable = false)
     private Long fileSize;
 
@@ -51,6 +55,7 @@ public class AttachFile extends AuditingFields {
                        String originFileName,
                        String fileName ,
                        String filePath,
+                       String thumbFilePath,
                        Long fileSize,
                        boolean deleted)
     {
@@ -59,6 +64,7 @@ public class AttachFile extends AuditingFields {
         this.originFileName = originFileName;
         this.fileName = fileName;
         this.filePath = filePath;
+        this.thumbFilePath = thumbFilePath;
         this.fileSize =fileSize;
         this.deleted = deleted;
     }
@@ -68,6 +74,7 @@ public class AttachFile extends AuditingFields {
                                 String originFileName,
                                 String fileName ,
                                 String filePath,
+                                String thumbFilePath,
                                 Long fileSize,
                                 boolean deleted)
     {
@@ -76,6 +83,7 @@ public class AttachFile extends AuditingFields {
                 originFileName,
                 fileName,
                 filePath,
+                thumbFilePath,
                 fileSize,
                 deleted);
     }

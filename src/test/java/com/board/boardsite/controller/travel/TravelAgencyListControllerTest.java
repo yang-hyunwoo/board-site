@@ -86,6 +86,7 @@ class TravelAgencyListControllerTest {
                 0,
                 0,
                 0,
+                null,
                 createTravelAgency()
         );
         return travelAgencyList;
@@ -96,6 +97,8 @@ class TravelAgencyListControllerTest {
                 "서울특별시 ㅇ1ㅇ1",
                 "02-1234-5678",
                 "최선을 다하자.",
+                null,
+                null,
                 false
         );
         return travelAgency;

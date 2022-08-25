@@ -81,6 +81,9 @@ public class TravelAgencyList extends AuditingFields {
     @Column(nullable = false)
     private boolean deleted;
 
+    @Setter
+    private Long thumnbnailFileId;                  //썸네일 파일 아이디
+
 
     protected  TravelAgencyList() {
 
@@ -98,6 +101,7 @@ public class TravelAgencyList extends AuditingFields {
                             int personMaxCount,
                             int readCount,
                             int likeCount,
+                            Long thumnbnailFileId,
                              TravelAgency travelAgency)
     {
         this.city = city;
@@ -112,6 +116,7 @@ public class TravelAgencyList extends AuditingFields {
         this.personMaxCount = personMaxCount;
         this.readCount = readCount;
         this.likeCount = likeCount;
+        this.thumnbnailFileId = thumnbnailFileId;
         this.travelAgency = travelAgency;
     }
 
@@ -127,6 +132,7 @@ public class TravelAgencyList extends AuditingFields {
                                       int personMaxCount,
                                       int readCount,
                                       int likeCount ,
+                                      Long thumnbnailFileId,
                                       TravelAgency travelAgency)
     {
         return new TravelAgencyList(city,
@@ -141,6 +147,7 @@ public class TravelAgencyList extends AuditingFields {
                     personMaxCount,
                     readCount,
                     likeCount,
+                    thumnbnailFileId,
                     travelAgency);
     }
 

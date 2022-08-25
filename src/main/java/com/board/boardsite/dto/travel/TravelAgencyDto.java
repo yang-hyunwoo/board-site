@@ -11,6 +11,9 @@ public record TravelAgencyDto(
         String address,
         String tel,
         String detail,
+        Long fileId,
+
+        String comment,
         boolean deleted,
         LocalDateTime createdAt,
         String createdBy,
@@ -22,6 +25,8 @@ public record TravelAgencyDto(
                                      String address,
                                      String tel,
                                      String detail,
+                                     Long fileId,
+                                     String comment,
                                      boolean deleted,
                                      LocalDateTime createdAt,
                                      String createdBy,
@@ -33,6 +38,8 @@ public record TravelAgencyDto(
                 address,
                 tel,
                 detail,
+                fileId,
+                comment,
                 deleted,
                 createdAt,
                 createdBy,
@@ -47,6 +54,8 @@ public record TravelAgencyDto(
                 entity.getAddress(),
                 entity.getTel(),
                 entity.getDetail(),
+                entity.getFileId(),
+                entity.getComment(),
                 entity.isDeleted(),
                 entity.getCreatedAt(),
                 entity.getCreatedBy(),
@@ -61,6 +70,8 @@ public record TravelAgencyDto(
                 address,
                 tel,
                 detail,
+                comment,
+                fileId,
                 deleted
         );
     }

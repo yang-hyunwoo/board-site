@@ -33,11 +33,11 @@ class TravelAgencyListServiceTest {
     void givenNothing_whenTravelAgencyList_thenReturnTravelAgencyList() {
         // Given
         Pageable pageable = Pageable.ofSize(9);
-        given(travelAgencyListRepository.findAll(pageable)).willReturn(Page.empty());
+        given(travelAgencyListRepository.findAllByDeleted(pageable,false)).willReturn(Page.empty());
         // When & Then
         Page<TravelAgencyListDto> travelAgencyListDtos = travelAgencyListService.travelAgencyTripList(null,pageable);
         assertThat(travelAgencyListDtos.isEmpty());
-        then(travelAgencyListRepository).should().findAll(pageable);
+        then(travelAgencyListRepository).should().findAllByDeleted(pageable,false);
     }
 
     @DisplayName("[GET][service] 여행 상세 조회")
@@ -45,7 +45,7 @@ class TravelAgencyListServiceTest {
     void givenTravelAgencyListId_whenTravelAgencyDetail_thenReturnTravelAgencyDetail() {
         long travelAgencyListId = 1L;
         TravelAgencyList travelAgencyList = createdTravelAgency2();
-        given(travelAgencyListRepository.findById(travelAgencyListId)).willReturn(Optional.of(travelAgencyList));
+        given(travelAgencyListRepository.findByIdAndDeleted(travelAgencyListId,false)).willReturn(Optional.of(travelAgencyList));
 
         var dto = travelAgencyListService.travelAgencyListDetail(travelAgencyListId);
 
@@ -65,6 +65,7 @@ class TravelAgencyListServiceTest {
                 0,
                 0,
                 0,
+                null,
                 createTravelAgency()
         );
                 return travelAgencyList;
@@ -75,6 +76,8 @@ class TravelAgencyListServiceTest {
                 "서울특별시 ㅇ1ㅇ1",
                 "02-1234-5678",
                 "최선을 다하자.",
+                null,
+                null,
                 false
         );
         return travelAgency;

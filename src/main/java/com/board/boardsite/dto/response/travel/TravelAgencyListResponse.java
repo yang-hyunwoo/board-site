@@ -17,7 +17,8 @@ public record TravelAgencyListResponse(
         int like_count,
         int read_count,
         int person_count,
-        int person_max_count
+        int person_max_count,
+        Long thumnbnailFileId
 ) {
 
     public static TravelAgencyListResponse of(Long id,
@@ -34,7 +35,8 @@ public record TravelAgencyListResponse(
                                     int like_count,
                                     int read_count,
                                     int person_count,
-                                    int person_max_count) {
+                                    int person_max_count,
+                                    Long thumnbnailFileId) {
         return new TravelAgencyListResponse(
                 id,
                 travel_agency_id,
@@ -50,7 +52,8 @@ public record TravelAgencyListResponse(
                 like_count,
                 read_count,
                 person_count,
-                person_max_count);
+                person_max_count,
+                thumnbnailFileId);
     }
 
     public static TravelAgencyListResponse from(TravelAgencyListDto dto){
@@ -69,7 +72,8 @@ public record TravelAgencyListResponse(
                 dto.like_count(),
                 dto.read_count(),
                 dto.person_count(),
-                dto.person_max_count()
+                dto.person_max_count(),
+                dto.thumnbnailFileId()
         );
 
     }

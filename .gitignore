@@ -6,7 +6,7 @@ build/
 !**/src/test/**/build/
 
 
-/src/main/resoruces/static/
+/src/main/resoruces/static/**
 
 
 ### STS ###

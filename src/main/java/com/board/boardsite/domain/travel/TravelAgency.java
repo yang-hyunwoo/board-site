@@ -36,6 +36,12 @@ public class TravelAgency extends AuditingFields {
     @Setter
     private String detail;                                  //여행사 상세 정보
 
+    @Setter                                                 //여행사 파일 순번
+    private Long fileId;
+
+    @Setter
+    private String comment;                                 //여행사 설명 간단
+
     @Setter
     @Column(nullable = false )
     private boolean deleted;                                   //여행사 사용 여부
@@ -54,16 +60,30 @@ public class TravelAgency extends AuditingFields {
 
     }
 
-    private TravelAgency ( String name, String address, String tel, String detail, boolean deleted) {
+    private TravelAgency ( String name, String address, String tel, String detail,String comment, Long fileId , boolean deleted) {
         this.name = name;
         this.address = address;
         this.tel = tel;
         this.detail = detail;
+        this.comment = comment;
+        this.fileId = fileId;
         this.deleted = deleted;
     }
 
-    public static TravelAgency of( String name, String address, String tel, String detail, boolean deleted) {
-        return new TravelAgency(name,address,tel,detail,deleted);
+    public static TravelAgency of( String name,
+                                   String address,
+                                   String tel,
+                                   String detail,
+                                   String comment,
+                                   Long fileId ,
+                                   boolean deleted) {
+        return new TravelAgency(name,
+                address,
+                tel,
+                detail,
+                comment,
+                fileId,
+                deleted);
     }
 
     @Override

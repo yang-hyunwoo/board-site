@@ -5,6 +5,8 @@ import com.board.boardsite.dto.common.AttachFileDto;
 import com.board.boardsite.service.common.FileUploadService;
 import com.board.boardsite.service.common.SequenceService;
 import lombok.RequiredArgsConstructor;
+import net.coobird.thumbnailator.Thumbnailator;
+import net.coobird.thumbnailator.Thumbnails;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.UrlResource;
 import org.springframework.util.ObjectUtils;
@@ -30,6 +32,9 @@ public class FileUploadController {
     @Value("${custom.path.upload-images}")
     private String path;
 
+    @Value("${custom.path.thumbnail-images}")
+    private String thumbnailPath;
+
     private final FileUploadService fileUploadService;
 
     private final SequenceService sequenceService;
@@ -42,9 +47,13 @@ public class FileUploadController {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         String datefolder = sdf.format(nowDate).toString();
         File dir = new File(path, datefolder);
+        File thumbDir = new File(thumbnailPath , datefolder);
         List<AttachFileDto> fileList = new ArrayList<>();
         if (!dir.exists()) {
             dir.mkdirs();
+        }
+        if(!thumbDir.exists()){
+            thumbDir.mkdirs();
         }
         int count = 0;
         for (MultipartFile multipartFile : multipartFileList) {
@@ -64,36 +73,43 @@ public class FileUploadController {
                     break;
                 }
                 String new_file_name = UUID.randomUUID() + originalType;
+                String new_thumb_file_name = "thumb_"+new_file_name;
                 var attachFileDto = AttachFileDto.of(fileId,
                         count,
                         multipartFile.getOriginalFilename(),
                         new_file_name,
                         dir + File.separator + new_file_name,
+                        thumbDir + File.separator + new_thumb_file_name,
                         multipartFile.getSize()
                 );
-
                 fileList.add(attachFileDto);
                 multipartFile.transferTo(new File(dir + File.separator + new_file_name));
+                File thumbnailFile = new File(thumbDir + File.separator + new_thumb_file_name);
+                Thumbnailator.createThumbnail(new File(dir + File.separator + new_file_name),thumbnailFile,200,200);
             }
         }
         fileUploadService.saveImage(fileList);
         return fileList;
     }
 
-    //TODO : 에디터 제외
-    @GetMapping("/image/{fileId}")
-    public UrlResource fileUpload(@PathVariable Long fileId) throws IOException {
-        var filePath  = fileUploadService.findFilePath(fileId);
-        return new UrlResource("file:"+filePath);
-       }
+    //TODO : 다중 파일일시
+//    @GetMapping("/image/{fileId}")
+//    public UrlResource fileUpload(@PathVariable Long fileId) throws IOException {
+//        var filePath  = fileUploadService.findFilePath(fileId);
+//        return new UrlResource("file:"+filePath);
+//       }
 
-   //에디터 이미지 불러오기
-    @GetMapping("/image/editor/{fileId}")
-    public UrlResource EditorRead(@PathVariable Long fileId) throws IOException {
-        var filePath  = fileUploadService.findFilePath(fileId);
+    @GetMapping("/image/{fileId}/{fileChildId}")
+    public UrlResource fileRead(@PathVariable Long fileId,@PathVariable int fileChildId) throws IOException {
+        var filePath  = fileUploadService.findFilePath(fileId,fileChildId);
         return new UrlResource("file:"+filePath);
     }
 
+    @GetMapping("/image/thumb/{fileId}/{fileChildId}")
+    public UrlResource thumbFileRead(@PathVariable Long fileId,@PathVariable int fileChildId) throws IOException {
+        var filePath  = fileUploadService.findThumbFilePath(fileId,fileChildId);
+        return new UrlResource("file:"+filePath);
+    }
 }
 
 

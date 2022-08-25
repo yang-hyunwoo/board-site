@@ -30,14 +30,14 @@ spring:
 
   jpa:
     defer-datasource-initialization: true         # 2.5 이상 data.sql 실행
-    hibernate.ddl-auto: create                    # table 생성
+    hibernate.ddl-auto: update                    # table 생성
     open-in-view: false
     show-sql: true                                # 쿼리 보여줌
     properties:
       hibernate.format_sql: true
       hibernate.default_batch_fetch_size: 100 # N+1 이슈
   h2.console.enabled: false
-  sql.init.mode: always
+  sql.init.mode: NEVER
   data.rest:
     base-path: /hal-api
     detection-strategy: annotated
@@ -53,6 +53,7 @@ servlet:
 custom:
   path:
     upload-images: C:\Git_project\board-site\src\main\resources\static\image
+    thumbnail-images: C:\Git_project\board-site\src\main\resources\static\thumbnail
 jwt:
   secret-key: board_site.trip_web_application.secret_key
   #30 days
