@@ -34,12 +34,12 @@ class TravelAgencyServiceTest {
     void givenNothing_whenTravelAgency_thenReturnTravelAgency() {
         // Given
         Pageable pageable = Pageable.ofSize(10);
-        given(travelAgencyRepository.findAll(pageable)).willReturn(Page.empty());
+        given(travelAgencyRepository.findAllByDeleted(pageable,false)).willReturn(Page.empty());
 
         // When & Then
         Page<TravelAgencyDto> travelAgencies = travelAgencyService.travelAgencyList(null , pageable);
         assertThat(travelAgencies.isEmpty());
-        then(travelAgencyRepository).should().findAll(pageable);
+        then(travelAgencyRepository).should().findAllByDeleted(pageable,false);
 
     }
 
@@ -49,13 +49,13 @@ class TravelAgencyServiceTest {
         // Given
         long travelAgencyId = 1L;
         TravelAgency travelAgency = createTravelAgency();
-        given(travelAgencyRepository.findById(travelAgencyId)).willReturn(Optional.of(travelAgency));
+        given(travelAgencyRepository.findByIdAndDeleted(travelAgencyId,false)).willReturn(Optional.of(travelAgency));
 
         // When & Then
         var dto = travelAgencyService.travelAgencyDetail(travelAgencyId);
         assertThat(dto)
                 .hasFieldOrPropertyWithValue("name",travelAgency.getName());
-        then(travelAgencyRepository).should().findById(travelAgencyId);
+        then(travelAgencyRepository).should().findByIdAndDeleted(travelAgencyId,false);
 
     }
 
@@ -65,13 +65,13 @@ class TravelAgencyServiceTest {
         // Given
         long travelAgencyId = 1L;
         TravelAgency travelAgency = createTravelAgency();
-        given(travelAgencyRepository.findById(travelAgencyId)).willReturn(Optional.of(travelAgency));
+        given(travelAgencyRepository.findByIdAndDeleted(travelAgencyId,false)).willReturn(Optional.of(travelAgency));
 
         // When & Then
         var dto = travelAgencyService.travelAgencyWithTravelAgencyList(travelAgencyId);
         assertThat(dto)
                 .hasFieldOrPropertyWithValue("name",travelAgency.getName());
-        then(travelAgencyRepository).should().findById(travelAgencyId);
+        then(travelAgencyRepository).should().findByIdAndDeleted(travelAgencyId,false);
 
     }
 
@@ -93,6 +93,8 @@ class TravelAgencyServiceTest {
                 "서울특별시 ㅇ1ㅇ1",
                 "02-1234-5678",
                 "최선을 다하자.",
+                null,
+                null,
                 false
         );
         return travelAgency;

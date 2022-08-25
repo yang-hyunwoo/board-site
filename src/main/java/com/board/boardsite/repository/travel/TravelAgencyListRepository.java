@@ -1,5 +1,6 @@
 package com.board.boardsite.repository.travel;
 
+import com.board.boardsite.domain.article.Article;
 import com.board.boardsite.domain.travel.TravelAgencyList;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,8 +13,11 @@ public interface TravelAgencyListRepository extends JpaRepository<TravelAgencyLi
 
     List<TravelAgencyList> findByTravelAgencyIdAndDeletedOrderByTitleAsc(Long travelAgencyId , boolean deleted);
 
-    Page<TravelAgencyList> findByTitleContaining(String travelAgencyTitleName , Pageable pageable);
+    Page<TravelAgencyList> findByTitleContainingAndDeleted(String travelAgencyTitleName , Pageable pageable , boolean deleted);
 
     Optional<TravelAgencyList> findByIdAndDeleted(Long travelAgencyId , boolean deleted);
+    Page<TravelAgencyList> findAllByDeleted(Pageable pageable ,boolean deleted);
+
+    Page<TravelAgencyList> findByTravelAgency_IdAndDeleted(Long travelAgencyId, Pageable pageable, boolean deleted);
 
 }

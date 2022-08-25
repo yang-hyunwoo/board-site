@@ -5,6 +5,10 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+
+/src/main/resoruces/static/**
+
+
 ### STS ###
 .apt_generated
 .classpath

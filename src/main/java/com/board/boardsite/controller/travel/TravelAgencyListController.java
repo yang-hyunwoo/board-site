@@ -34,12 +34,20 @@ public class TravelAgencyListController {
         return Response.success(travelAgencyListResponses);
     }
 
+    @GetMapping("/triplist/{travelAgencyId}")
+    public Response<Page<TravelAgencyListResponse>> travelAgencyTripListId(@PathVariable Long travelAgencyId ,
+                                                                           @PageableDefault(size=3,sort="createdAt",direction= Sort.Direction.DESC) Pageable pageable){
+        Page<TravelAgencyListResponse> travelAgencyList = travelAgencyListService.searchTravelAgencyPage(travelAgencyId , pageable).map(TravelAgencyListResponse::from);
+        return Response.success(travelAgencyList);
+    }
+
     @GetMapping("{travelAgencyListId}")
     public Response<TravelAgencyListResponse> travelAgencyTripDetail(@PathVariable Long travelAgencyListId) {
         var travelAgencyListDetail = TravelAgencyListResponse.from(travelAgencyListService.travelAgencyListDetail(travelAgencyListId));
         return Response.success(travelAgencyListDetail);
     }
 
+    //아임포트 결제시 인원수 증감
     @GetMapping("/count/{travelAgencyListId}")
     public void travelAgencyTripCount(@PathVariable Long travelAgencyListId ,
                                       @RequestParam String operland,

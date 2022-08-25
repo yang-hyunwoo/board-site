@@ -9,6 +9,7 @@ public record AttachFileDto(
 
         String fileName,
         String filePath,
+        String thumbFilePath,
         Long fileSize,
         boolean deleted
 ) {
@@ -19,6 +20,7 @@ public record AttachFileDto(
                          String originFileName,
                          String fileName,
                          String filePath,
+                         String thumbFilePath,
                          Long fileSize)
     {
         return new AttachFileDto(fileId,
@@ -26,6 +28,7 @@ public record AttachFileDto(
                 originFileName,
                 fileName,
                 filePath,
+                thumbFilePath,
                 fileSize,
                 false
         );
@@ -40,6 +43,7 @@ public record AttachFileDto(
                 entity.getOriginFileName(),
                 entity.getFileName(),
                 entity.getFilePath(),
+                entity.getThumbFilePath(),
                 entity.getFileSize(),
                 entity.isDeleted()
         );
@@ -52,6 +56,7 @@ public record AttachFileDto(
                 originFileName,
                 fileName,
                 filePath,
+                thumbFilePath,
                 fileSize,
                 deleted
         );

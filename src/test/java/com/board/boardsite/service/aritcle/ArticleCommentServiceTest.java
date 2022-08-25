@@ -18,6 +18,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.BDDMockito.*;
@@ -45,14 +46,14 @@ public class ArticleCommentServiceTest {
     void giveArticleId_whenRequest_thenReturnArticleList() {
         Long articleId = 1L;
         ArticleComment articleComment = createArticleComment("test");
-        given(articleCommentRepository.findByArticle_Id(articleId)).willReturn(List.of(articleComment));
+        given(articleCommentRepository.findByArticle_IdAndDeleted(articleId,false)).willReturn(List.of(articleComment));
 
         List<ArticleCommentDto> articleCommentDtos = articleCommentService.searchArticleComments(articleId);
 
         assertThat(articleCommentDtos)
                 .hasSize(1)
                 .first().hasFieldOrPropertyWithValue("content",articleComment.getContent());
-        then(articleCommentRepository).should().findByArticle_Id(articleId);
+        then(articleCommentRepository).should().findByArticle_IdAndDeleted(articleId,false);
 
     }
 
@@ -61,13 +62,13 @@ public class ArticleCommentServiceTest {
     void giveArticleComment_whenRequestSavingArticleComment_thenReturnArticleComment() {
         // Given
         ArticleCommentDto dto = createArticleCommentDto("신규 댓글");
-        given(articleRepository.getReferenceById(dto.articleId())).willReturn(createArticle());
+        given(articleRepository.findByIdAndDeleted(dto.articleId(),false)).willReturn(Optional.of(createArticle()));
         given(tripUserRepository.getReferenceById(dto.tripUser().id())).willReturn(createTripUser());
         given(articleCommentRepository.save(any(ArticleComment.class))).willReturn(null);
         // When
         articleCommentService.saveArticleComment(dto);
         // Then
-        then(articleRepository).should().getReferenceById(dto.articleId());
+        then(articleRepository).should().findByIdAndDeleted(dto.articleId(),false);
         then(tripUserRepository).should().getReferenceById(dto.tripUser().id());
         then(articleCommentRepository).should().save(any(ArticleComment.class));
 

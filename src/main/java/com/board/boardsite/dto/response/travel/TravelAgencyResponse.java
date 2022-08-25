@@ -8,18 +8,24 @@ public record TravelAgencyResponse(
         String name,
         String tel,
         String detail,
+        String comment,
+        Long fileId,
         String address
 ) {
     public static TravelAgencyResponse of(Long id,
                                 String name,
                                 String tel,
                                 String detail,
+                                String comment,
+                                Long fileId,
                                 String address) {
         return new TravelAgencyResponse(
                 id,
                 name,
                 tel,
                 detail,
+                comment,
+                fileId,
                 address);
     }
 
@@ -29,6 +35,8 @@ public record TravelAgencyResponse(
                 dto.name(),
                 dto.tel(),
                 dto.detail(),
+                dto.comment(),
+                dto.fileId(),
                 dto.address()
         );
     }

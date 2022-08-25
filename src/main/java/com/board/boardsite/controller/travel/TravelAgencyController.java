@@ -27,7 +27,7 @@ public class TravelAgencyController {
 
     @GetMapping("/list")
     public Response<Page<TravelAgencyResponse>> travelAgencyList(@RequestParam(required = false) String travelAgencyName,
-                                                                 @PageableDefault(size=10,sort="name",direction= Sort.Direction.DESC) Pageable pageable){
+                                                                 @PageableDefault(size=12,sort="name",direction= Sort.Direction.DESC) Pageable pageable){
 
         Page<TravelAgencyResponse> travelAgencyResponses = travelAgencyService.travelAgencyList(travelAgencyName , pageable).map(TravelAgencyResponse::from);
         return Response.success(travelAgencyResponses);

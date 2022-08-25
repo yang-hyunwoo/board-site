@@ -26,9 +26,14 @@ public class FileUploadService {
     }
 
     @Transactional(readOnly = true)
-    public String findFilePath(Long fileId) {
-        var findfilePath = fileUploadRepository.findById(new AttachFileId(fileId,1)).orElseThrow(()->new BoardSiteException(ErrorCode.FILE_NOT_FOUND));
+    public String findFilePath(Long fileId,int fileChildId) {
+        var findfilePath = fileUploadRepository.findById(new AttachFileId(fileId,fileChildId)).orElseThrow(()->new BoardSiteException(ErrorCode.FILE_NOT_FOUND));
         return findfilePath.getFilePath();
     }
 
+    @Transactional(readOnly = true)
+    public String findThumbFilePath(Long fileId,int fileChildId) {
+        var findfilePath = fileUploadRepository.findById(new AttachFileId(fileId,fileChildId)).orElseThrow(()->new BoardSiteException(ErrorCode.FILE_NOT_FOUND));
+        return findfilePath.getThumbFilePath();
+    }
 }

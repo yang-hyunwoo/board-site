@@ -9,24 +9,27 @@ import java.util.stream.Collectors;
 
 public record TravelAgencyWithTravelAgencyListResponse(
         Long id,
-        String title,
-        String content,
-        String tel,
+        String name,
         String detail,
+        String comment,
+        String address,
+        String tel,
         List<TravelAgencyListResponse> travelAgencyListResponse
 ) {
     public static TravelAgencyWithTravelAgencyListResponse of(Long id,
-                                                    String title,
-                                                    String content,
-                                                    String tel,
+                                                    String name,
                                                     String detail,
-                                                              List<TravelAgencyListResponse> travelAgencyListResponse) {
+                                                    String comment,
+                                                    String address,
+                                                    String tel,
+                                                    List<TravelAgencyListResponse> travelAgencyListResponse) {
         return new TravelAgencyWithTravelAgencyListResponse(
                 id,
-                title,
-                content,
-                tel,
+                name,
                 detail,
+                comment,
+                address,
+                tel,
                 travelAgencyListResponse);
     }
 
@@ -34,9 +37,10 @@ public record TravelAgencyWithTravelAgencyListResponse(
         return new TravelAgencyWithTravelAgencyListResponse(
                 dto.id(),
                 dto.name(),
-                dto.name(),
-                dto.tel(),
                 dto.detail(),
+                dto.comment(),
+                dto.address(),
+                dto.tel(),
                 dto.travelAgencyListDtos().stream()
                         .map(TravelAgencyListResponse::from)
                         .toList()
