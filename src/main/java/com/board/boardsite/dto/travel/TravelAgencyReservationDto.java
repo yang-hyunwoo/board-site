@@ -6,6 +6,8 @@ import com.board.boardsite.domain.travel.TravelAgencyReservation;
 import com.board.boardsite.domain.user.TripUser;
 import com.board.boardsite.dto.user.TripUserDto;
 
+import java.time.LocalDateTime;
+
 public record TravelAgencyReservationDto(
         Long id ,
         Long travelAgencyId,
@@ -19,22 +21,28 @@ public record TravelAgencyReservationDto(
         int realPaid,
         int personCount,
         int salePercent,
-        boolean deleted
+        boolean deleted,
+        TravelAgencyDto travelAgencyDto,
+        TravelAgencyListDto travelAgencyListDto,
+        LocalDateTime createdAt
 ) {
 
     public static TravelAgencyReservationDto of(Long id,
-                                      Long travelAgencyId,
-                                      Long travelAgencyListId,
-                                      TripUserDto tripUser,
-                                      String merchantUid,
-                                      String impUid,
-                                      String payEmail,
-                                      String payName,
-                                      int paid,
-                                      int realPaid,
-                                      int personCount,
-                                      int salePercent,
-                                      boolean deleted) {
+                                                Long travelAgencyId,
+                                                Long travelAgencyListId,
+                                                TripUserDto tripUser,
+                                                String merchantUid,
+                                                String impUid,
+                                                String payEmail,
+                                                String payName,
+                                                int paid,
+                                                int realPaid,
+                                                int personCount,
+                                                int salePercent,
+                                                boolean deleted,
+                                                TravelAgencyDto travelAgencyDto,
+                                                TravelAgencyListDto travelAgencyListDto,
+                                                LocalDateTime createdAt) {
         return new TravelAgencyReservationDto(id,
                 travelAgencyId,
                 travelAgencyListId,
@@ -47,7 +55,10 @@ public record TravelAgencyReservationDto(
                 realPaid,
                 personCount,
                 salePercent,
-                deleted
+                deleted,
+                travelAgencyDto,
+                travelAgencyListDto,
+                createdAt
         );
     }
 
@@ -59,7 +70,9 @@ public record TravelAgencyReservationDto(
                                                 String payEmail,
                                                 String payName,
                                                 int paid,
-                                                int personCount)
+                                                int personCount,
+                                                TravelAgencyDto travelAgencyDto,
+                                                TravelAgencyListDto travelAgencyListDto)
     {
         return new TravelAgencyReservationDto(null,
                 travelAgencyId,
@@ -73,7 +86,10 @@ public record TravelAgencyReservationDto(
                 0,
                 personCount,
                 0,
-                true
+                true,
+                travelAgencyDto,
+                travelAgencyListDto,
+                null
         );
     }
 
@@ -93,7 +109,10 @@ public record TravelAgencyReservationDto(
                 entity.getRealPaid(),
                 entity.getPersonCount(),
                 entity.getSalePercent(),
-                entity.isDeleted()
+                entity.isDeleted(),
+                TravelAgencyDto.from(entity.getTravelAgency()),
+                TravelAgencyListDto.from(entity.getTravelAgencyList()),
+                entity.getCreatedAt()
         );
     }
 

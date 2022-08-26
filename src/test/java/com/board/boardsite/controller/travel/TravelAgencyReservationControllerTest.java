@@ -11,12 +11,18 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.TestExecutionEvent;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -58,9 +64,22 @@ class TravelAgencyReservationControllerTest {
                 .content(objectMapper.writeValueAsBytes(travelAgencyReservationRequest)))
                 .andDo(print())
                 .andExpect(status().isOk());
-
-
     }
 
+    @DisplayName("[POST][controller] 구매 내역 리스트 조회")
+    @Test
+    @WithUserDetails(value = "gusdnTest", setupBefore = TestExecutionEvent.TEST_EXECUTION )
+    void giveTravelUserId_whenRequestTravelAgencyPay_thenReturnTravelAgencyReservation() throws Exception{
+
+        given(travelAgencyReservationService.getReservationList(eq(null),any(Pageable.class))).willReturn(Page.empty());
+        // When & Then
+        mvc.perform(get("/api/trip/reser/purchaseList")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk());
+
+        then(travelAgencyReservationService).should().getReservationList(eq(null), any(Pageable.class));
+
+    }
 
 }

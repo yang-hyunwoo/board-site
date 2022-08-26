@@ -54,6 +54,9 @@ custom:
   path:
     upload-images: C:\Git_project\board-site\src\main\resources\static\image
     thumbnail-images: C:\Git_project\board-site\src\main\resources\static\thumbnail
+import:
+  rest-api: 아임포트 restapi
+  rest-api-secret: 아임포트 restapisecret키
 jwt:
   secret-key: board_site.trip_web_application.secret_key
   #30 days

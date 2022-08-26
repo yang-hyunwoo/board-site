@@ -1,10 +1,17 @@
 package com.board.boardsite.controller.travel;
 
+import com.board.boardsite.dto.request.travel.TravelAgencyRerservationRefundRequest;
 import com.board.boardsite.dto.request.travel.TravelAgencyReservationRequest;
 import com.board.boardsite.dto.response.Response;
+import com.board.boardsite.dto.response.travel.TravelAgencyReservationResponse;
 import com.board.boardsite.dto.security.TripUserPrincipal;
 import com.board.boardsite.service.travel.TravelAgencyReservationService;
 import lombok.RequiredArgsConstructor;
+import org.json.simple.parser.ParseException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +34,21 @@ public class TravelAgencyReservationController {
     return Response.success(chk);
     }
 
+    @GetMapping("/purchaseList")
+    public Response<Page<TravelAgencyReservationResponse>> getReservationList(@AuthenticationPrincipal TripUserPrincipal tripUserPrincipal,
+                                                                              @PageableDefault(size=10,sort="createdAt",direction= Sort.Direction.DESC)Pageable pageable) {
+
+        var response = travelAgencyReservationService.getReservationList(tripUserPrincipal.id(),pageable).map(TravelAgencyReservationResponse::from);
+        return Response.success(response);
+    }
+
+    @PostMapping("/pay/refund")
+    public Response<Boolean> payRefund(@RequestBody TravelAgencyRerservationRefundRequest travelAgencyRerservationRefundRequest) throws ParseException {
+        System.out.println(":::::"+travelAgencyRerservationRefundRequest.impUid());
+        System.out.println(":::::"+travelAgencyRerservationRefundRequest.money());
+        boolean chk = travelAgencyReservationService.iamPortRefund(travelAgencyRerservationRefundRequest);
+        return Response.success(chk);
+    }
 
 
 

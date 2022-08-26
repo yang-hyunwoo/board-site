@@ -41,7 +41,9 @@ public record TravelAgencyReservationRequest(
                 payEmail,
                 payName,
                 paid,
-                personCount
+                personCount,
+                null,
+                null
         );
     }
 }
