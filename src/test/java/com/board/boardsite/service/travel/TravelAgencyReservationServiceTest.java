@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -67,6 +68,19 @@ class TravelAgencyReservationServiceTest {
 
     }
 
+    @DisplayName("[GET][service] 구매 내역 리스트 조회")
+    @Test
+    void giveTravelUserId_whenRequestTravelAgencyPay_thenReturnTravelAgencyReservation() {
+        TripUserDto dto = createTripUserDto();
+        Pageable pageable = Pageable.ofSize(10);
+        given(tripUserRepository.findById(dto.id())).willReturn(Optional.of(createTripUser()));
+
+        travelAgencyReservationRepository.findByTripUser_Id(pageable,dto.id());
+
+        then(travelAgencyReservationRepository).should().findByTripUser_Id(pageable,dto.id());
+
+    }
+
     private TravelAgencyReservationDto createdTravelAgencyReservationDto(){
         return TravelAgencyReservationDto.of(
                 1L,
@@ -81,7 +95,10 @@ class TravelAgencyReservationServiceTest {
                 400,
                 1,
                 0,
-                false
+                false,
+                null,
+                null,
+                null
         );
     }
 

@@ -32,7 +32,7 @@ public class AuthenticationConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws  Exception {
         return http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/common/**","/api/trip/agency-trip/**","/api/trip/agency/**","/api/trip/articles/**","/api/trip/articles","/api/trip/users/join","/api/trip/users/login","/api/trip/users/confirm-email").permitAll()
+                .antMatchers("/**","/api/common/**","/api/trip/agency-trip/**","/api/trip/agency/**","/api/trip/articles/**","/api/trip/articles","/api/trip/users/join","/api/trip/users/login","/api/trip/users/confirm-email").permitAll()
                 .antMatchers("/api/**","/api/tirp/articles/new-article").authenticated()
                 .and()
                 .sessionManagement()

@@ -14,13 +14,13 @@ public record TravelAgencyReservationRequest(
         int personCount
 ) {
     public static TravelAgencyReservationRequest of(Long travelAgencyId,
-                                          Long travelAgencyListId,
-                                          String merchantUid,
-                                          String impUid,
-                                          String payEmail,
-                                          String payName,
-                                          int paid,
-                                          int personCount) {
+                                                    Long travelAgencyListId,
+                                                    String merchantUid,
+                                                    String impUid,
+                                                    String payEmail,
+                                                    String payName,
+                                                    int paid,
+                                                    int personCount) {
         return new TravelAgencyReservationRequest(travelAgencyId,
                 travelAgencyListId,
                 merchantUid,
@@ -41,7 +41,9 @@ public record TravelAgencyReservationRequest(
                 payEmail,
                 payName,
                 paid,
-                personCount
+                personCount,
+                null,
+                null
         );
     }
 }
