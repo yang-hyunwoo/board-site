@@ -77,6 +77,22 @@ public class TravelAgencyReservationService {
             updTravelAgencyReservation.setDeleted(true);
         }
         return updTravelAgencyReservation.isDeleted();
+            TripUser tripUser = tripUserRepository.findById(dto.tripUser().id()).orElseThrow(()->new BoardSiteException(ErrorCode.USER_NOT_FOUND));
+            TravelAgency travelAgency = travelAgencyRepository.findByIdAndDeleted(dto.travelAgencyId(),false).orElseThrow(()->new BoardSiteException(ErrorCode.TRAVEL_AGENCY_NOT_FOUND));
+            TravelAgencyList travelAgencyList = travelAgencyListRepository.findByIdAndDeleted(dto.travelAgencyListId(),false).orElseThrow(()->new BoardSiteException(ErrorCode.TRAVEL_AGENCY_LIST_NOT_FOUND));
+            travelAgencyReservationRepository.save(dto.toEntity(travelAgency,travelAgencyList,tripUser));
+            TravelAgencyReservation travelAgencyReservation =travelAgencyReservationRepository.findByImpUidAndMerchantUid(dto.impUid(),dto.merchantUid()).orElseThrow(()->new BoardSiteException(ErrorCode.TRAVEL_PAY_NOT_FOUND));
+            TravelAgencyReservation updTravelAgencyReservation = travelAgencyReservationRepository.findById(travelAgencyReservation.getId()).orElseThrow(()->new BoardSiteException(ErrorCode.TRAVEL_PAY_NOT_FOUND));
+                int userPaid   = updTravelAgencyReservation.getPaid();
+                int userCount  = updTravelAgencyReservation.getPersonCount();
+                int travelPaid = travelAgencyList.getSalePaid();
+            if(userPaid == (userCount*travelPaid)){
+                updTravelAgencyReservation.setDeleted(false);
+            } else {
+                updTravelAgencyReservation.setFailReason("스크립트 결제 금액 변조");
+                updTravelAgencyReservation.setDeleted(true);
+            }
+            return updTravelAgencyReservation.isDeleted();
     }
 
     @Transactional(readOnly = true)
@@ -123,6 +139,8 @@ public class TravelAgencyReservationService {
             throw  new BoardSiteException(ErrorCode.REFUND_FAIL);
         } else {
             var travelAgencyListDetail = travelAgencyListRepository.findByIdAndDeleted(travelAgencyRerservationRefundRequest.travelAgencyListId(),false).orElseThrow(()->new BoardSiteException(ErrorCode.TRAVEL_AGENCY_DETAIL_NOT_FOUND));
+            System.out.println(":::"+travelAgencyListDetail.getPersonCount());
+            System.out.println(":::"+travelAgencyRerservationRefundRequest.personCount());
             travelAgencyListDetail.personMinusCount(travelAgencyListDetail.getPersonCount(),travelAgencyRerservationRefundRequest.personCount());
             var refundId = travelAgencyReservationRepository.findById(travelAgencyRerservationRefundRequest.id()).orElseThrow();
             refundId.setDeleted(true);
