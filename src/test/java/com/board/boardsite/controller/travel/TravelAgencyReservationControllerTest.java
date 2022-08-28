@@ -60,8 +60,8 @@ class TravelAgencyReservationControllerTest {
 
 
         mvc.perform(post("/api/trip/reser/pay/complete")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsBytes(travelAgencyReservationRequest)))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsBytes(travelAgencyReservationRequest)))
                 .andDo(print())
                 .andExpect(status().isOk());
     }

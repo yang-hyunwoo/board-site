@@ -30,8 +30,8 @@ public class TravelAgencyReservationController {
     @PostMapping("/pay/complete")
     public Response<Boolean> savePaymentTravelAgency(@RequestBody TravelAgencyReservationRequest travelAgencyReservationRequest,
                                                      @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal) {
-       boolean chk =  travelAgencyReservationService.travelAgencyReserSave(travelAgencyReservationRequest.toDto(tripUserPrincipal.toDto()));
-    return Response.success(chk);
+        boolean chk =  travelAgencyReservationService.travelAgencyReserSave(travelAgencyReservationRequest.toDto(tripUserPrincipal.toDto()));
+        return Response.success(chk);
     }
 
     @GetMapping("/purchaseList")

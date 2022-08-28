@@ -55,6 +55,10 @@ custom:
     upload-images: C:\Git_project\board-site\src\main\resources\static\image
     thumbnail-images: C:\Git_project\board-site\src\main\resources\static\thumbnail
 import:
+
+  rest-api: rest-api
+  rest-api-secret: restp-api-key
+
   rest-api: 아임포트 restapi
   rest-api-secret: 아임포트 restapisecret키
 jwt:
