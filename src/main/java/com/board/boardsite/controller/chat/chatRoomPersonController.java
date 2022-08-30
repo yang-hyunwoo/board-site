@@ -1,12 +1,10 @@
 package com.board.boardsite.controller.chat;
 
 
-import com.board.boardsite.dto.request.chat.ChatRoomPersonRequest;
 import com.board.boardsite.dto.response.Response;
 import com.board.boardsite.dto.response.chat.ChatRoomPersonResponse;
 import com.board.boardsite.dto.security.TripUserPrincipal;
 import com.board.boardsite.service.chat.ChatRoomPersonService;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
