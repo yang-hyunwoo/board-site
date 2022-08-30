@@ -18,6 +18,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.TestExecutionEvent;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -83,6 +84,21 @@ class ChatControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk());
         then(chatService).should().roomSave(any(ChatRoomDto.class),eq(null));
+
+    }
+
+    @DisplayName("[POST][controller] 채팅방 입장   - 정상 호출")
+    @Test
+    @WithUserDetails(value = "gusdn5162@naver.com", setupBefore = TestExecutionEvent.TEST_EXECUTION)
+    public void givenChatRoom_whenRequestingChatRoom_thenReturns() throws Exception {
+        // Given
+
+        willDoNothing().given(chatService).roomEnter(eq(1L),eq(1L));
+        // When & Then
+        mvc.perform(get("/api/chat/enter/1")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk());
 
     }
 }

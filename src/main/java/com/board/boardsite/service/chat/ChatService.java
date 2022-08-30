@@ -28,18 +28,41 @@ public class ChatService {
     private final ChatRepository chatRepository;
     private final TripUserRepository tripUserRepository;
     private final ChatRoomPersonRepository chatRoomPersonRepository;
-
+    private final ChatRoomPersonService chatRoomPersonService;
     public Page<ChatRoomDto> roomList(Pageable pageable) {
         return chatRepository.findByDeletedAndPublicRoom(false,true,pageable).map(ChatRoomDto::from);
     }
 
     @Transactional
-    public void roomSave(ChatRoomDto dto , Long id) {
+    public String roomSave(ChatRoomDto dto , Long id) {
         var chatRoom =  chatRepository.saveAndFlush(dto.toEntity());
         chatRoom.personCountPlus(chatRoom.getRoomPersonIngCount());
         var tripUser = tripUserRepository.getReferenceById(id);
         var chatRoomPerson   = ChatRoomPerson.of(chatRoom,tripUser);
         chatRoomPersonRepository.save(chatRoomPerson);
+        return chatRoom.getId().toString();
+    }
+
+    @Transactional
+    public void roomEnter(Long chatRoomId , Long userId) {
+        var chatRoom = chatRepository.findById(chatRoomId).orElseThrow(() -> new BoardSiteException(ErrorCode.CHAT_ROOM_NOT_FOUND));
+        var chatRoomPersonChk = chatRoomPersonService.roomUserChk(chatRoomId, userId);
+        if (chatRoom.getRoomPersonIngCount() < chatRoom.getRoomCount()) {
+            if (chatRoomPersonChk == 0) {
+                chatRoom.personCountPlus(chatRoom.getRoomPersonIngCount());
+                var tripUser = tripUserRepository.getReferenceById(userId);
+                var chatRoomPerson = ChatRoomPerson.of(chatRoom, tripUser);
+                chatRoomPersonRepository.save(chatRoomPerson);
+            }
+        } else {
+            throw new BoardSiteException(ErrorCode.CHAT_ROOM_FULL_COUNT);
+        }
+    }
+
+    @Transactional(readOnly = true)
+    public String roomTitle(Long chatRoomId) {
+        var chatRoom = chatRepository.findById(chatRoomId).orElseThrow(() -> new BoardSiteException(ErrorCode.CHAT_ROOM_NOT_FOUND));
+        return chatRoom.getRoomName();
     }
 
 }
