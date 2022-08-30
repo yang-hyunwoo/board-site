@@ -56,8 +56,13 @@ public class ChatSocketController {
                 user,null, user.getAuthorities()
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
-
         var chatRoomMessageResponse = ChatRoomRealTimeMessageResponse.from(chatRoomMessageService.roomMessageSave(chatRoomMessageRequest.chatRoomId(),chatRoomMessageRequest.TripUserId(),chatRoomMessageRequest.content()));
         return Response.success(chatRoomMessageResponse);
+    }
+
+    @MessageMapping("/room-person/{roomId}")
+    @SendTo("/topic/room-person/{roomId}")
+    public String roomPerson() {
+        return "";
     }
 }
