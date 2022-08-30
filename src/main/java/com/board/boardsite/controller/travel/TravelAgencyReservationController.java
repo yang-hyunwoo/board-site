@@ -44,8 +44,6 @@ public class TravelAgencyReservationController {
 
     @PostMapping("/pay/refund")
     public Response<Boolean> payRefund(@RequestBody TravelAgencyRerservationRefundRequest travelAgencyRerservationRefundRequest) throws ParseException {
-        System.out.println(":::::"+travelAgencyRerservationRefundRequest.impUid());
-        System.out.println(":::::"+travelAgencyRerservationRefundRequest.money());
         boolean chk = travelAgencyReservationService.iamPortRefund(travelAgencyRerservationRefundRequest);
         return Response.success(chk);
     }

@@ -36,6 +36,10 @@ public enum ErrorCode {
     REFUND_FAIL(HttpStatus.NOT_FOUND, "환불 중 오류가 발생했습니다."),
 
     FILE_NOT_FOUND(HttpStatus.NOT_FOUND, "첨부파일을 찾을수 없습니다."),
+
+    CHAT_ROOM_NOT_FOUND(HttpStatus.NOT_FOUND, "채팅방을 찾을수 없습니다."),
+
+    CHAT_ROOM_NOT_PERMISSION(HttpStatus.UNAUTHORIZED, "권한이 없는 채팅방입니다."),
     ;
 
     private HttpStatus status;

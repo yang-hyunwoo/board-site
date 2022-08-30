@@ -22,6 +22,16 @@ public record ChatRoomPersonDto(
         );
     }
 
+    public static ChatRoomPersonDto of(
+                                       ChatRoomDto chatRoom,
+                                       TripUserDto tripUser) {
+        return new ChatRoomPersonDto(
+                null,
+                chatRoom,
+                tripUser
+        );
+    }
+
     public static ChatRoomPersonDto from(ChatRoomPerson entity){
         return new ChatRoomPersonDto(
                 entity.getId(),

@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 public record ChatRoomMessageDto(
         Long id,
-        ChatRoomDto chatRoom,
+        Long chatRoomId,
         TripUserDto tripUser,
         String content,
         LocalDateTime createdAt,
@@ -18,7 +18,7 @@ public record ChatRoomMessageDto(
         String modifiedBy
 ) {
     public static ChatRoomMessageDto of(Long id,
-                              ChatRoomDto chatRoom,
+                              Long chatRoom,
                               TripUserDto tripUser,
                               String content,
                               LocalDateTime createdAt,
@@ -36,7 +36,7 @@ public record ChatRoomMessageDto(
                 modifiedBy);
     }
 
-    public static ChatRoomMessageDto of(ChatRoomDto chatRoom,
+    public static ChatRoomMessageDto of(Long chatRoom,
                                         TripUserDto tripUser,
                                         String content
     ) {
@@ -53,7 +53,7 @@ public record ChatRoomMessageDto(
     public static ChatRoomMessageDto from(ChatRoomMessage entity) {
         return new ChatRoomMessageDto(
                 entity.getId(),
-                ChatRoomDto.from(entity.getChatRoom()),
+                entity.getChatRoom().getId(),
                 TripUserDto.from(entity.getTripUser()),
                 entity.getContent(),
                 entity.getCreatedAt(),
