@@ -40,6 +40,8 @@ public enum ErrorCode {
     CHAT_ROOM_NOT_FOUND(HttpStatus.NOT_FOUND, "채팅방을 찾을수 없습니다."),
 
     CHAT_ROOM_NOT_PERMISSION(HttpStatus.UNAUTHORIZED, "권한이 없는 채팅방입니다."),
+
+    CHAT_ROOM_FULL_COUNT(HttpStatus.NOT_FOUND, "인원이 꽉찬 채팅방입니다."),
     ;
 
     private HttpStatus status;

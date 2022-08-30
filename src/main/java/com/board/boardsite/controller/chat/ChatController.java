@@ -30,14 +30,24 @@ public class ChatController {
     }
 
     @PostMapping("/new-room")
-    public Response<Boolean> newRoom(@RequestBody ChatRoomRequest chatRoomRequest,
+    public Response<String> newRoom(@RequestBody ChatRoomRequest chatRoomRequest,
                                      @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal) {
-        chatService.roomSave(chatRoomRequest.toDto(),tripUserPrincipal.id());
+        String roomId = chatService.roomSave(chatRoomRequest.toDto(),tripUserPrincipal.id());
+        return Response.success(roomId);
+    }
+
+    @GetMapping("/enter/{roomId}")
+    public Response<Boolean> enterRoom(@PathVariable Long roomId,
+                                     @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal) {
+        chatService.roomEnter(roomId,tripUserPrincipal.id());
         return Response.success(true);
     }
 
-
-
+    @GetMapping("/{roomId}")
+    public Response<String> roomTitle(@PathVariable Long roomId) {
+        String roomName = chatService.roomTitle(roomId);
+        return Response.success(roomName);
+    }
 
 
 }
