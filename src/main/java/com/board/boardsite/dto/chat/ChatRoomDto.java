@@ -9,6 +9,7 @@ public record ChatRoomDto(
         Long id,
         String roomName,
         int roomCount,
+        int roomPersonIngCount,
         boolean deleted,
         boolean publicRoom,
         LocalDateTime createdAt,
@@ -20,6 +21,7 @@ public record ChatRoomDto(
     public static ChatRoomDto of(Long id,
                        String roomName,
                        int roomCount,
+                       int roomPersonIngCount,
                        boolean deleted,
                        boolean publicRoom,
                        LocalDateTime createdAt,
@@ -29,6 +31,7 @@ public record ChatRoomDto(
         return new ChatRoomDto(id,
                 roomName,
                 roomCount,
+                roomPersonIngCount,
                 deleted,
                 publicRoom,
                 createdAt,
@@ -43,6 +46,7 @@ public record ChatRoomDto(
         return new ChatRoomDto(null,
                 roomName,
                 roomCount,
+                0,
                 false,
                 publicRoom,
                 null,
@@ -56,6 +60,7 @@ public record ChatRoomDto(
                 entity.getId(),
                 entity.getRoomName(),
                 entity.getRoomCount(),
+                entity.getRoomPersonIngCount(),
                 entity.isDeleted(),
                 entity.isPublicRoom(),
                 entity.getCreatedAt(),
@@ -68,6 +73,7 @@ public record ChatRoomDto(
     public ChatRoom toEntity() {
         return ChatRoom.of(roomName,
                 roomCount,
+                roomPersonIngCount,
                 deleted,
                 publicRoom);
     }

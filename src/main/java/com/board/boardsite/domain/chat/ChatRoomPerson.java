@@ -1,5 +1,6 @@
 package com.board.boardsite.domain.chat;
 
+import com.board.boardsite.domain.AuditingFields;
 import com.board.boardsite.domain.article.Article;
 import com.board.boardsite.domain.user.TripUser;
 import lombok.Getter;
@@ -12,7 +13,7 @@ import java.util.Objects;
 @Getter
 @ToString(callSuper = true)
 @Entity
-public class ChatRoomPerson {
+public class ChatRoomPerson  extends AuditingFields {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
