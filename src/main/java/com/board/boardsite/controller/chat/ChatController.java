@@ -39,8 +39,8 @@ public class ChatController {
     @GetMapping("/enter/{roomId}")
     public Response<Boolean> enterRoom(@PathVariable Long roomId,
                                      @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal) {
-        chatService.roomEnter(roomId,tripUserPrincipal.id());
-        return Response.success(true);
+        var chk = chatService.roomEnter(roomId,tripUserPrincipal.id());
+        return Response.success(chk);
     }
 
     @GetMapping("/{roomId}")
@@ -48,6 +48,8 @@ public class ChatController {
         String roomName = chatService.roomTitle(roomId);
         return Response.success(roomName);
     }
+
+
 
 
 }

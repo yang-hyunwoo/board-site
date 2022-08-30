@@ -80,4 +80,8 @@ public class ChatRoom extends AuditingFields {
     public void personCountPlus(int roomPersonIngCount){
         this.roomPersonIngCount = roomPersonIngCount+1;
     }
+
+    public void personCountMinus(int roomPersonIngCount){
+        this.roomPersonIngCount = roomPersonIngCount-1;
+    }
 }

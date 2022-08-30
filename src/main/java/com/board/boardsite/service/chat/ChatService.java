@@ -43,8 +43,11 @@ public class ChatService {
         return chatRoom.getId().toString();
     }
 
+    /*
+     true / false 반환 이유 채팅방 인원을 다시 조회할지 말지 결정하기 때문에
+     */
     @Transactional
-    public void roomEnter(Long chatRoomId , Long userId) {
+    public boolean roomEnter(Long chatRoomId , Long userId) {
         var chatRoom = chatRepository.findById(chatRoomId).orElseThrow(() -> new BoardSiteException(ErrorCode.CHAT_ROOM_NOT_FOUND));
         var chatRoomPersonChk = chatRoomPersonService.roomUserChk(chatRoomId, userId);
         if (chatRoom.getRoomPersonIngCount() < chatRoom.getRoomCount()) {
@@ -53,7 +56,9 @@ public class ChatService {
                 var tripUser = tripUserRepository.getReferenceById(userId);
                 var chatRoomPerson = ChatRoomPerson.of(chatRoom, tripUser);
                 chatRoomPersonRepository.save(chatRoomPerson);
+                return true;
             }
+                return false;
         } else {
             throw new BoardSiteException(ErrorCode.CHAT_ROOM_FULL_COUNT);
         }
