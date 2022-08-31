@@ -20,4 +20,6 @@ public interface TravelAgencyListRepository extends JpaRepository<TravelAgencyLi
 
     Page<TravelAgencyList> findByTravelAgency_IdAndDeleted(Long travelAgencyId, Pageable pageable, boolean deleted);
 
+    List<TravelAgencyList> findByDeletedAndSortIsNotNullOrderBySort(boolean deleted);
+
 }

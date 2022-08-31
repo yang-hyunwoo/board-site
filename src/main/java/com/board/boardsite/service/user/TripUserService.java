@@ -1,6 +1,7 @@
 package com.board.boardsite.service.user;
 
 import com.board.boardsite.domain.user.TripUser;
+import com.board.boardsite.dto.request.user.TripUserJoinRequest;
 import com.board.boardsite.dto.security.TripUserPrincipal;
 import com.board.boardsite.dto.user.EmailAuthDto;
 import com.board.boardsite.dto.user.TripUserDto;
@@ -65,6 +66,30 @@ public class TripUserService {
         String token = JwtTokenUtils.generateToken(email,secretKey , expiredTimeMs);
 
         return token;
+    }
+
+    @Transactional(readOnly = true)
+    public TripUserDto myPage(Long tripUserId) {
+        var tripUser = tripUserRepository.findById(tripUserId).orElseThrow(()->new BoardSiteException(ErrorCode.USER_NOT_FOUND));
+
+        return TripUserDto.from(tripUser);
+    }
+
+    @Transactional
+    public void changePassword(Long tripUserId , String password) {
+        var tripUser = tripUserRepository.findById(tripUserId).orElseThrow(()->new BoardSiteException(ErrorCode.USER_NOT_FOUND));
+        String passwordEncode = encoder.encode(password);
+        tripUser.setPassword(passwordEncode);
+    }
+
+    @Transactional
+    public void changeUserOther(Long tripUserId , TripUserDto tripUserDto) {
+        var tripUser = tripUserRepository.findById(tripUserId).orElseThrow(()->new BoardSiteException(ErrorCode.USER_NOT_FOUND));
+        System.out.println(":::::::::::::"+tripUserDto.nickName());
+        tripUser.setProfileId(tripUserDto.profileId());
+        tripUser.setNickName(tripUserDto.nickName());
+        tripUser.setGender(tripUserDto.gender());
+        tripUser.setPhoneNumber(tripUserDto.phoneNumber());
     }
 
 }

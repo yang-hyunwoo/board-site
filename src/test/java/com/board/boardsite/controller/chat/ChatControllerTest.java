@@ -21,6 +21,7 @@ import org.springframework.security.test.context.support.TestExecutionEvent;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -75,7 +76,7 @@ class ChatControllerTest {
     public void givenChat_whenRequestingChat_thenReturns() throws Exception {
         // Given
 
-        ChatRoomRequest chatRoomRequest = ChatRoomRequest.of(true, 5, "aaaaa");
+        ChatRoomRequest chatRoomRequest = ChatRoomRequest.of(true, 170, "aaaaa");
         willDoNothing().given(chatService).roomSave(any(ChatRoomDto.class),eq(null));
         // When & Then
         mvc.perform(post("/api/chat/new-room")

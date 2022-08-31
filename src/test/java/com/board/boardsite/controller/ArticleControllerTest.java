@@ -194,6 +194,7 @@ class ArticleControllerTest {
                 0,
                 Gender.M,
                 false,
+                null,
                 false
         );
     }

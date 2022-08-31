@@ -84,6 +84,9 @@ public class TravelAgencyList extends AuditingFields {
     @Setter
     private Long thumnbnailFileId;                  //썸네일 파일 아이디
 
+    @Setter
+    private Integer sort;                           //사용자 메인 화면 보여줄 순서
+
 
     protected  TravelAgencyList() {
 
@@ -102,6 +105,7 @@ public class TravelAgencyList extends AuditingFields {
                             int readCount,
                             int likeCount,
                             Long thumnbnailFileId,
+                             Integer sort,
                              TravelAgency travelAgency)
     {
         this.city = city;
@@ -117,6 +121,7 @@ public class TravelAgencyList extends AuditingFields {
         this.readCount = readCount;
         this.likeCount = likeCount;
         this.thumnbnailFileId = thumnbnailFileId;
+        this.sort           = sort;
         this.travelAgency = travelAgency;
     }
 
@@ -133,6 +138,7 @@ public class TravelAgencyList extends AuditingFields {
                                       int readCount,
                                       int likeCount ,
                                       Long thumnbnailFileId,
+                                      Integer sort,
                                       TravelAgency travelAgency)
     {
         return new TravelAgencyList(city,
@@ -148,6 +154,7 @@ public class TravelAgencyList extends AuditingFields {
                     readCount,
                     likeCount,
                     thumnbnailFileId,
+                    sort,
                     travelAgency);
     }
 

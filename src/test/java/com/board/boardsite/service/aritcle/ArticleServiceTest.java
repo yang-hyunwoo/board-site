@@ -184,6 +184,7 @@ class ArticleServiceTest {
                 0,
                 Gender.M,
                 false,
+                null,
                 false
         );
     }

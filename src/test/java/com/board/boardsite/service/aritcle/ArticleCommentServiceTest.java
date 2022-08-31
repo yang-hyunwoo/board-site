@@ -123,6 +123,7 @@ public class ArticleCommentServiceTest {
                 0,
                 Gender.M,
                 false,
+                null,
                 false
         );
     }
@@ -163,6 +164,7 @@ public class ArticleCommentServiceTest {
                 "test",
                 Gender.M,
                 false,
+                null,
                 LocalDateTime.now(),
                 null,
                 LocalDateTime.now(),
