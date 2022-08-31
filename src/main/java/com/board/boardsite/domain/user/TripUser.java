@@ -56,11 +56,15 @@ public class TripUser extends AuditingFields {
     private boolean deleted;
 
     @Enumerated(value=EnumType.STRING)
+    @Setter
     private Gender gender;                                  //성별
 
     private Boolean emailAuth;
 
     private String refreshToken;
+
+    @Setter
+    private Long profileId;
 
     protected TripUser() {
 
@@ -74,6 +78,7 @@ public class TripUser extends AuditingFields {
                      int point,
                      Gender gender,
                      boolean deleted,
+                     Long profileId,
                      Boolean emailAuth)
     {
         this.name = name;
@@ -85,6 +90,7 @@ public class TripUser extends AuditingFields {
         this.gender = gender;
         this.deleted = deleted;
         this.emailAuth = emailAuth;
+        this.profileId = profileId;
     }
 
     public TripUser(Long id,
@@ -96,6 +102,7 @@ public class TripUser extends AuditingFields {
                     int point,
                     Gender gender,
                     boolean deleted,
+                    Long profileId,
                     Boolean emailAuth) {
         this.id = id;
         this.name = name;
@@ -106,6 +113,7 @@ public class TripUser extends AuditingFields {
         this.point = point;
         this.gender = gender;
         this.deleted = deleted;
+        this.profileId = profileId;
         this.emailAuth = emailAuth;
     }
 
@@ -117,6 +125,7 @@ public class TripUser extends AuditingFields {
                               int point,
                               Gender gender,
                               boolean deleted,
+                              Long profileId,
                               Boolean emailAuth)
     {
       return new TripUser(name,
@@ -127,6 +136,7 @@ public class TripUser extends AuditingFields {
                           point,
                           gender,
                           deleted,
+                          profileId,
                           emailAuth);
     }
 
@@ -139,6 +149,7 @@ public class TripUser extends AuditingFields {
                               int point,
                               Gender gender,
                               boolean deleted,
+                              Long profileId,
                               Boolean emailAuth)
     {
         return new TripUser(id,
@@ -150,6 +161,7 @@ public class TripUser extends AuditingFields {
                 point,
                 gender,
                 deleted,
+                profileId,
                 emailAuth);
     }
 

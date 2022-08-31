@@ -15,6 +15,7 @@ public record TripUserDto(
         String password,
         Gender gender,
         Boolean emailAuth,
+        Long profileId,
         LocalDateTime createdAt,
         String createdBy,
         LocalDateTime modifiedAt,
@@ -28,8 +29,45 @@ public record TripUserDto(
                                  String phoneNumber,
                                  String password,
                                  Gender gender) {
-        return new TripUserDto(null,email,name,nickName,phoneNumber,0,false,password,gender,false,null,null,null,null);
+        return new TripUserDto(null,
+                email,
+                name,
+                nickName,
+                phoneNumber,
+                0,
+                false,
+                password,
+                gender,
+                false,
+                null,
+                null,
+                null,
+                null,
+                null);
     }
+
+    public static TripUserDto of(
+            String nickName,
+            String phoneNumber,
+            Gender gender,
+            Long profileId) {
+        return new TripUserDto(null,
+                null,
+                null,
+                nickName,
+                phoneNumber,
+                0,
+                false,
+                null,
+                gender,
+                false,
+                profileId,
+                null,
+                null,
+                null,
+                null);
+    }
+
 
     public static TripUserDto of(Long id,
                        String email,
@@ -41,6 +79,7 @@ public record TripUserDto(
                        String password,
                        Gender gender,
                        Boolean emailAuth,
+                       Long profileId,
                        LocalDateTime createdAt,
                        String createdBy,
                        LocalDateTime modifiedAt,
@@ -56,6 +95,7 @@ public record TripUserDto(
                password,
                gender,
                emailAuth,
+               profileId,
                createdAt,
                createdBy,
                modifiedAt,
@@ -74,6 +114,7 @@ public record TripUserDto(
                 entity.getPassword(),
                 entity.getGender(),
                 entity.getEmailAuth(),
+                entity.getProfileId(),
                 entity.getCreatedAt(),
                 entity.getCreatedBy(),
                 entity.getModifiedAt(),
@@ -93,6 +134,7 @@ public record TripUserDto(
                 point,
                 gender,
                 deleted,
+                profileId,
                 emailAuth
         );
     }

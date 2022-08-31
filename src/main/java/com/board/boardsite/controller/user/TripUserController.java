@@ -3,6 +3,7 @@ package com.board.boardsite.controller.user;
 
 import com.board.boardsite.dto.request.user.EmailAuthRequest;
 import com.board.boardsite.dto.request.user.TripUserLoginRequest;
+import com.board.boardsite.dto.request.user.TripUserUpdateRequest;
 import com.board.boardsite.dto.response.user.TripUserLoginResponse;
 import com.board.boardsite.dto.security.TripUserPrincipal;
 import com.board.boardsite.dto.user.TripUserDto;
@@ -55,11 +56,25 @@ public class TripUserController {
 
     }
 
-    @GetMapping("/aaaa")
-    public String  aaa(@AuthenticationPrincipal TripUserPrincipal tripUserPrincipal){
-        return "aa";
-
+    @GetMapping("/my-page")
+    public Response<TripUserDto> myPage(@AuthenticationPrincipal TripUserPrincipal tripUserPrincipal) {
+        var myPage = tripUserService.myPage(tripUserPrincipal.id());
+        return Response.success(myPage);
     }
 
+    @PostMapping("/change/password")
+    public Response<Boolean> changePassword(@RequestBody TripUserLoginRequest request ,
+                                            @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal) {
+        tripUserService.changePassword(tripUserPrincipal.id(),request.password());
+        return Response.success(true);
+    }
+
+    @PostMapping("/change/other")
+    public Response<Boolean> changeUserOther(@RequestBody TripUserUpdateRequest request ,
+                                            @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal) {
+        System.out.println(":::::::::::::"+request);
+        tripUserService.changeUserOther(tripUserPrincipal.id(),request.toDto());
+        return Response.success(true);
+    }
 
 }

@@ -91,6 +91,7 @@ class ChatServiceTest {
                 0,
                 Gender.M,
                 false,
+                null,
                 false
         );
     }

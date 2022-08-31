@@ -113,6 +113,7 @@ class TravelAgencyReservationServiceTest {
                 0,
                 Gender.M,
                 false,
+                null,
                 false
         );
     }
@@ -129,6 +130,7 @@ class TravelAgencyReservationServiceTest {
                 "test",
                 Gender.M,
                 false,
+                null,
                 LocalDateTime.now(),
                 null,
                 LocalDateTime.now(),
@@ -164,6 +166,7 @@ class TravelAgencyReservationServiceTest {
                 0,
                 0,
                 0,
+                null,
                 null,
                 createTravelAgency()
         );

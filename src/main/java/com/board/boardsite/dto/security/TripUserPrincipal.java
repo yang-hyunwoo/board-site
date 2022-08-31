@@ -81,6 +81,7 @@ public record TripUserPrincipal(
                 null,
                 null,
                 null,
+                null,
                 null
         );
     }

@@ -11,6 +11,9 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.SortDefault;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * 여행사 여행 목록 리스트 클래스
  * @author cohouseol
@@ -47,11 +50,22 @@ public class TravelAgencyListController {
         return Response.success(travelAgencyListDetail);
     }
 
-    //아임포트 결제시 인원수 증감
+    /*
+    아임포트 결제시 인원수 증감
+     */
     @GetMapping("/count/{travelAgencyListId}")
     public void travelAgencyTripCount(@PathVariable Long travelAgencyListId ,
                                       @RequestParam String operland,
                                       @RequestParam int count) {
             travelAgencyListService.travelAgencyOperland(travelAgencyListId , operland,count);
+    }
+
+    /*
+
+     */
+    @GetMapping("/trip-sort")
+    public Response<List<TravelAgencyListResponse>> travelMainCarousel(){
+        List<TravelAgencyListResponse> travelAgencyListResponses = travelAgencyListService.travelMainCarousel().stream().map(TravelAgencyListResponse::from).collect(Collectors.toList());
+        return Response.success(travelAgencyListResponses);
     }
 }

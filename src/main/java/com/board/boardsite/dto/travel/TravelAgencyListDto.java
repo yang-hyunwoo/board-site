@@ -18,6 +18,7 @@ public record TravelAgencyListDto(
         int sale_paid,
         int sale_percent,
         Long thumnbnailFileId,
+        Integer sort,
         String title,
         String travel_start_at,
         String travel_end_at,
@@ -41,6 +42,7 @@ public record TravelAgencyListDto(
                                int sale_paid,
                                int sale_percent,
                                Long thumnbnailFileId,
+                               Integer sort,
                                String title,
                                String travel_start_at,
                                String travel_end_at,
@@ -62,6 +64,7 @@ public record TravelAgencyListDto(
                 sale_paid,
                 sale_percent,
                 thumnbnailFileId,
+                sort,
                 title,
                 travel_start_at,
                 travel_end_at,
@@ -102,6 +105,7 @@ public record TravelAgencyListDto(
                 sale_paid,
                 sale_percent,
                 thumnbnailFileId,
+                null,
                 title,
                 travel_start_at,
                 travel_end_at,
@@ -126,6 +130,7 @@ public record TravelAgencyListDto(
                 entity.getSalePaid(),
                 entity.getSalePercent(),
                 entity.getThumnbnailFileId(),
+                entity.getSort(),
                 entity.getTitle(),
                 entity.getTravelStartAt(),
                 entity.getTravelEndAt(),
@@ -152,6 +157,7 @@ public record TravelAgencyListDto(
                 read_count,
                 like_count,
                 thumnbnailFileId,
+                sort,
                 travelAgency
         );
     }

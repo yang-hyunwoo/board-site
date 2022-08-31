@@ -24,6 +24,9 @@ public class ArticleCommentController {
 
     private final ArticleCommentService articleCommentService;
 
+    /*
+       게시판 댓글 리스트 조회
+     */
     @GetMapping("/comment/{articleId}")
     public Response<Page<ArticleCommentResponse>> searchArticleCommentsPage(@PathVariable Long articleId ,
                                                                             @PageableDefault(size=8,sort="createdAt",direction= Sort.Direction.DESC) Pageable pageable,
@@ -33,13 +36,19 @@ public class ArticleCommentController {
         return Response.success(articleComments);
     }
 
-        @PostMapping("/comment/new")
+    /*
+        게시판 댓글 생성
+     */
+    @PostMapping("/comment/new")
     public Response<Boolean> saveArticleComment(@RequestBody ArticleCommentRequest articleCommentRequest,
                                                 @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal){
         articleCommentService.saveArticleComment(articleCommentRequest.toDto(tripUserPrincipal.toDto()));
         return Response.success(true);
     }
 
+    /*
+        게시판 댓글 수정
+     */
     @PutMapping("/comment/{articleCommentId}/form")
     public Response<Boolean> updateArticleComment(@PathVariable Long articleCommentId,
                                                   @RequestBody ArticleCommentRequest articleCommentRequest,
@@ -49,12 +58,17 @@ public class ArticleCommentController {
         return Response.success(true);
     }
 
+    /*
+        게시판 댓글 삭제(deleted = true) upd
+     */
     @PutMapping("/comment/{articleCommentId}/delete")
     public Response<Boolean> deleteArticleComment(@PathVariable Long articleCommentId,
                                                   @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal)
     {
         articleCommentService.deleteArticleComment(articleCommentId,tripUserPrincipal.id());
-        return Response.success(true);
 
+        return Response.success(true);
     }
+
+
 }
