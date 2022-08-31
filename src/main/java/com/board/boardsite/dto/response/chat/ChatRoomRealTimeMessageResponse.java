@@ -17,21 +17,24 @@ public record ChatRoomRealTimeMessageResponse(
         String content,
         Long chatRoomId,
         Long userId,
-        String nickName
+        String nickName,
+        Long profileId
 ) {
     public static ChatRoomRealTimeMessageResponse of(Long id,
                                                      LocalDateTime createdAt,
                                                      String content,
                                                      Long chatRoomId,
                                                      Long userId,
-                                                     String nickName) {
+                                                     String nickName,
+                                                     Long profileId) {
         return new ChatRoomRealTimeMessageResponse(
                 id,
                 createdAt,
                 content,
                 chatRoomId,
                 userId,
-                nickName);
+                nickName,
+                profileId);
     }
 
     public static ChatRoomRealTimeMessageResponse from(ChatRoomMessageDto dto){
@@ -41,7 +44,8 @@ public record ChatRoomRealTimeMessageResponse(
                 dto.content(),
                 dto.chatRoomId(),
                 dto.tripUser().id(),
-                dto.tripUser().nickName()
+                dto.tripUser().nickName(),
+                dto.tripUser().profileId()
         );
     }
 

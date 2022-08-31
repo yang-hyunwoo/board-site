@@ -18,21 +18,24 @@ public record ChatRoomMessageResponse(
         String content,
         Long chatRoomId,
         boolean idChk,
-        String nickName
+        String nickName,
+        Long profileId
 ) {
     public static ChatRoomMessageResponse of(Long id,
-                                   LocalDateTime createdAt,
-                                   String content,
-                                   Long chatRoomId,
-                                   boolean idChk,
-                                   String nickName) {
+                                             LocalDateTime createdAt,
+                                             String content,
+                                             Long chatRoomId,
+                                             boolean idChk,
+                                             String nickName,
+                                             Long profileId) {
         return new ChatRoomMessageResponse(
                 id,
                 createdAt,
                 content,
                 chatRoomId,
                 idChk,
-                nickName);
+                nickName,
+                profileId);
     }
 
     public static ChatRoomMessageResponse from(ChatRoomMessageDto dto){
@@ -51,7 +54,8 @@ public record ChatRoomMessageResponse(
                 dto.content(),
                 dto.chatRoomId(),
                 dto.tripUser().id() == authChkLong ? true : false,
-                dto.tripUser().nickName()
+                dto.tripUser().nickName(),
+                dto.tripUser().profileId()
         );
     }
 

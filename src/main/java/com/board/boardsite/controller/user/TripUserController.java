@@ -72,7 +72,6 @@ public class TripUserController {
     @PostMapping("/change/other")
     public Response<Boolean> changeUserOther(@RequestBody TripUserUpdateRequest request ,
                                             @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal) {
-        System.out.println(":::::::::::::"+request);
         tripUserService.changeUserOther(tripUserPrincipal.id(),request.toDto());
         return Response.success(true);
     }
