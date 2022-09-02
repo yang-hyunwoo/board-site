@@ -22,6 +22,7 @@ public record TravelAgencyReservationDto(
         int personCount,
         int salePercent,
         boolean deleted,
+        Long qrCodeId,
         TravelAgencyDto travelAgencyDto,
         TravelAgencyListDto travelAgencyListDto,
         LocalDateTime createdAt
@@ -40,6 +41,7 @@ public record TravelAgencyReservationDto(
                                                 int personCount,
                                                 int salePercent,
                                                 boolean deleted,
+                                                Long qrCodeId,
                                                 TravelAgencyDto travelAgencyDto,
                                                 TravelAgencyListDto travelAgencyListDto,
                                                 LocalDateTime createdAt) {
@@ -56,6 +58,7 @@ public record TravelAgencyReservationDto(
                 personCount,
                 salePercent,
                 deleted,
+                qrCodeId,
                 travelAgencyDto,
                 travelAgencyListDto,
                 createdAt
@@ -71,6 +74,7 @@ public record TravelAgencyReservationDto(
                                                 String payName,
                                                 int paid,
                                                 int personCount,
+                                                Long qrCodeId,
                                                 TravelAgencyDto travelAgencyDto,
                                                 TravelAgencyListDto travelAgencyListDto)
     {
@@ -87,6 +91,7 @@ public record TravelAgencyReservationDto(
                 personCount,
                 0,
                 true,
+                null,
                 travelAgencyDto,
                 travelAgencyListDto,
                 null
@@ -110,6 +115,7 @@ public record TravelAgencyReservationDto(
                 entity.getPersonCount(),
                 entity.getSalePercent(),
                 entity.isDeleted(),
+                entity.getQrCodeId(),
                 TravelAgencyDto.from(entity.getTravelAgency()),
                 TravelAgencyListDto.from(entity.getTravelAgencyList()),
                 entity.getCreatedAt()
@@ -127,6 +133,7 @@ public record TravelAgencyReservationDto(
                 personCount,
                 travelAgencyList.getSalePercent(),
                 deleted,
+                qrCodeId,
                 tripUser,
                 travelAgency,
                 travelAgencyList

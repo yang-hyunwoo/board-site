@@ -37,7 +37,7 @@ public class AttachFile extends AuditingFields {
     private String filePath;
 
     @Setter
-    @Column(nullable = false , length=300)
+    @Column(length=300)
     private String thumbFilePath;
 
     @Setter

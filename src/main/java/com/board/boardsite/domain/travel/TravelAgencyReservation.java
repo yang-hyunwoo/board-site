@@ -75,6 +75,9 @@ public class TravelAgencyReservation extends AuditingFields {
     @Column(length = 1000)
     private String failReason;
 
+    @Setter
+    private Long qrCodeId;
+
 
     @Setter
     @Column(nullable = false )
@@ -95,6 +98,7 @@ public class TravelAgencyReservation extends AuditingFields {
                                          int personCount,
                                          int salePercent,
                                          boolean deleted,
+                                         Long qrCodeId,
                                          TripUser tripUser,
                                          TravelAgency travelAgency,
                                          TravelAgencyList travelAgencyList) {
@@ -107,6 +111,7 @@ public class TravelAgencyReservation extends AuditingFields {
         this.personCount = personCount;
         this.salePercent = salePercent;
         this.deleted = deleted;
+        this.qrCodeId = qrCodeId;
         this.tripUser = tripUser;
         this.travelAgency = travelAgency;
         this.travelAgencyList = travelAgencyList;
@@ -121,6 +126,7 @@ public class TravelAgencyReservation extends AuditingFields {
                                                  int personCount,
                                                  int salePercent,
                                                  boolean deleted,
+                                                 Long qrCodeId,
                                                  TripUser tripUser,
                                                  TravelAgency travelAgency ,
                                                  TravelAgencyList travelAgencyList) {
@@ -133,6 +139,7 @@ public class TravelAgencyReservation extends AuditingFields {
                 personCount,
                 salePercent,
                 deleted,
+                qrCodeId,
                 tripUser,
                 travelAgency,
                 travelAgencyList);
