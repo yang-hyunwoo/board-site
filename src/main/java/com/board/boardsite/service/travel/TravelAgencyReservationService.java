@@ -5,6 +5,7 @@ import com.board.boardsite.domain.travel.TravelAgency;
 import com.board.boardsite.domain.travel.TravelAgencyList;
 import com.board.boardsite.domain.travel.TravelAgencyReservation;
 import com.board.boardsite.domain.user.TripUser;
+import com.board.boardsite.dto.common.AttachFileDto;
 import com.board.boardsite.dto.request.travel.TravelAgencyRerservationRefundRequest;
 import com.board.boardsite.dto.travel.TravelAgencyListDto;
 import com.board.boardsite.dto.travel.TravelAgencyReservationDto;
@@ -14,6 +15,13 @@ import com.board.boardsite.repository.travel.TravelAgencyListRepository;
 import com.board.boardsite.repository.travel.TravelAgencyRepository;
 import com.board.boardsite.repository.travel.TravelAgencyReservationRepository;
 import com.board.boardsite.repository.user.TripUserRepository;
+import com.board.boardsite.service.common.FileUploadService;
+import com.board.boardsite.service.common.SequenceService;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -32,7 +40,12 @@ import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.net.URI;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service
@@ -58,6 +71,13 @@ public class TravelAgencyReservationService {
     @Value("${import.rest-api-secret}")
     private String imPortRestApiSecret;
 
+    private final SequenceService sequenceService;
+
+    @Value("${custom.path.upload-images}")
+    private String path;
+
+    private final FileUploadService fileUploadService;
+
     @Transactional
     public Boolean travelAgencyReserSave(TravelAgencyReservationDto dto) {
 
@@ -72,6 +92,8 @@ public class TravelAgencyReservationService {
         int travelPaid = travelAgencyList.getSalePaid();
         if(userPaid == (userCount*travelPaid)){
             updTravelAgencyReservation.setDeleted(false);
+           Long qrId= saveQr(dto.tripUser().id(),travelAgencyReservation.getId(),updTravelAgencyReservation.getPersonCount(),updTravelAgencyReservation.isDeleted());
+            updTravelAgencyReservation.setQrCodeId(qrId);
         } else {
             updTravelAgencyReservation.setFailReason("스크립트 결제 금액 변조");
             updTravelAgencyReservation.setDeleted(true);
@@ -126,9 +148,44 @@ public class TravelAgencyReservationService {
             travelAgencyListDetail.personMinusCount(travelAgencyListDetail.getPersonCount(),travelAgencyRerservationRefundRequest.personCount());
             var refundId = travelAgencyReservationRepository.findById(travelAgencyRerservationRefundRequest.id()).orElseThrow();
             refundId.setDeleted(true);
+            refundId.setQrCodeId(null);
             return true;
         }
 
+    }
+
+    public Long saveQr(Long id , Long travelAgencyResId , int count , boolean isDeleted) {
+        Long fileId = sequenceService.getSeq();
+        Date nowDate = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        String datefolder = sdf.format(nowDate).toString();
+        File dir = new File(path, datefolder);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+
+        String content = "http://localhost:4000?id="+id+"&travelAgencyResId="+travelAgencyResId+"&count="+count+"&deleted="+isDeleted;
+        try{
+            QRCodeWriter qrCodeWriter = new QRCodeWriter();
+            BitMatrix bitMatrix = qrCodeWriter.encode(content, BarcodeFormat.QR_CODE, 200, 200);
+            BufferedImage bufferedImage = MatrixToImageWriter.toBufferedImage(bitMatrix);
+            String new_file_name = UUID.randomUUID()+".png";
+            File temp = new File(dir + File.separator + new_file_name);
+            ImageIO.write(bufferedImage, "png", temp);
+            var attachFileDto = AttachFileDto.of(fileId,
+                    1,
+                    new_file_name,
+                    new_file_name,
+                    dir + File.separator + new_file_name,
+                    "qrcode",
+                   0L
+            );
+            fileUploadService.saveImage(Collections.singletonList(attachFileDto));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return fileId;
     }
 
 

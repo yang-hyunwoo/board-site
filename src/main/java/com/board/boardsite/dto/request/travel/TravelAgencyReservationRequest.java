@@ -43,6 +43,7 @@ public record TravelAgencyReservationRequest(
                 paid,
                 personCount,
                 null,
+                null,
                 null
         );
     }

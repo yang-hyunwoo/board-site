@@ -17,6 +17,7 @@ public record TravelAgencyReservationResponse(
         Long travelAgencyId,
         Long travelAgencyListId,
         Long thumbFileId,
+        Long qrCodeId,
         LocalDateTime createdAt
 ) {
     public static TravelAgencyReservationResponse of(Long id,
@@ -30,6 +31,7 @@ public record TravelAgencyReservationResponse(
                                                      Long travelAgencyId,
                                                      Long travelAgencyListId,
                                                      Long thumbFileId,
+                                                     Long qrCodeId,
                                                      LocalDateTime createdAt)
     {
         return new TravelAgencyReservationResponse(id,
@@ -43,6 +45,7 @@ public record TravelAgencyReservationResponse(
                 travelAgencyId,
                 travelAgencyListId,
                 thumbFileId,
+                qrCodeId,
                 createdAt);
     }
 
@@ -59,6 +62,7 @@ public record TravelAgencyReservationResponse(
                 dto.travelAgencyDto().id(),
                 dto.travelAgencyListDto().id(),
                 dto.travelAgencyListDto().thumnbnailFileId(),
+                dto.qrCodeId(),
                 dto.createdAt()
         );
     }
