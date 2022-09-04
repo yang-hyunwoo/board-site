@@ -42,6 +42,8 @@ public enum ErrorCode {
     CHAT_ROOM_NOT_PERMISSION(HttpStatus.UNAUTHORIZED, "권한이 없는 채팅방입니다."),
 
     CHAT_ROOM_FULL_COUNT(HttpStatus.NOT_FOUND, "인원이 꽉찬 채팅방입니다."),
+
+    TOUR_NOT_FOUND(HttpStatus.NOT_FOUND , "관광지를 찾을 수 없습니다."),
     ;
 
     private HttpStatus status;

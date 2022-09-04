@@ -188,3 +188,35 @@ values ('2022-02-25 08:18:58', '1','2022-02-25 08:18:58','1','1234','13256',0,1,
 
 
 
+insert into
+    tour(created_at, created_by, modified_at, modified_by, content, deleted, read_count, thumbnail_id, title, trip_user_id, city)
+values('2022-08-31 22:53:59.130862','11','2022-08-31 22:53:59.130862','22','test',false,0,6,'test1',51,'부산');
+insert into
+    tour(created_at, created_by, modified_at, modified_by, content, deleted, read_count, thumbnail_id, title, trip_user_id, city)
+values('2022-08-31 22:53:59.130862','11','2022-08-31 22:53:59.130862','22','test2',false,0,6,'test2',51,'부산');
+insert into
+    tour(created_at, created_by, modified_at, modified_by, content, deleted, read_count, thumbnail_id, title, trip_user_id, city)
+values('2022-08-31 22:53:59.130862','11','2022-08-31 22:53:59.130862','22','test3',false,0,6,'test3',51,'부산');
+insert into
+    tour(created_at, created_by, modified_at, modified_by, content, deleted, read_count, thumbnail_id, title, trip_user_id, city)
+values('2022-08-31 22:53:59.130862','11','2022-08-31 22:53:59.130862','22','test4',false,0,6,'test4',51,'부산');
+insert into
+    tour(created_at, created_by, modified_at, modified_by, content, deleted, read_count, thumbnail_id, title, trip_user_id, city)
+values('2022-08-31 22:53:59.130862','11','2022-08-31 22:53:59.130862','22','test5',false,0,6,'test5',51,'부산3');
+insert into
+    tour(created_at, created_by, modified_at, modified_by, content, deleted, read_count, thumbnail_id, title, trip_user_id, city)
+values('2022-08-31 22:53:59.130862','11','2022-08-31 22:53:59.130862','22','test6',false,0,6,'test6',51,'부산');
+
+insert into
+    tour(created_at, created_by, modified_at, modified_by, content, deleted, read_count, thumbnail_id, title, trip_user_id, city)
+values('2022-08-31 22:53:59.130862','11','2022-08-31 22:53:59.130862','22','test7',false,0,6,'test7',51,'부산');
+insert into
+    tour(created_at, created_by, modified_at, modified_by, content, deleted, read_count, thumbnail_id, title, trip_user_id, city)
+values('2022-08-31 22:53:59.130862','11','2022-08-31 22:53:59.130862','22','test8',false,0,6,'test8',51,'독도');
+insert into
+    tour(created_at, created_by, modified_at, modified_by, content, deleted, read_count, thumbnail_id, title, trip_user_id, city)
+values('2022-08-31 22:53:59.130862','11','2022-08-31 22:53:59.130862','22','test9',false,0,6,'test9',51,'서울');
+insert into
+    tour(created_at, created_by, modified_at, modified_by, content, deleted, read_count, thumbnail_id, title, trip_user_id, city)
+values('2022-08-31 22:53:59.130862','11','2022-08-31 22:53:59.130862','22','test10',false,0,6,'test10',51,'부산11');
+
