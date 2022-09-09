@@ -11,6 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -58,5 +60,14 @@ public class TravelAgencyListService {
     @Transactional(readOnly = true)
     public List<TravelAgencyListDto> travelMainCarousel() {
         return travelAgencyListRepository.findByDeletedAndSortIsNotNullOrderBySort(false).stream().map(TravelAgencyListDto::from).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void searchEndDate() {
+        Date nowDate = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        String today = sdf.format(nowDate).toString();
+       var todayTravel =  travelAgencyListRepository.findByTravelEndAtLessThanEqualAndDeleted(today , false);
+        todayTravel.forEach(deletedChk->deletedChk.setDeleted(true));
     }
 }

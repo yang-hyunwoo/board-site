@@ -20,6 +20,9 @@ public class JpaConfig {
             return () -> {
                 Authentication authentication
                         = SecurityContextHolder.getContext().getAuthentication();
+                if(authentication==null){
+                    return Optional.of("System");
+                } else {
                 if(authentication.getPrincipal().equals("anonymousUser")){
                     return Optional.of("init");
                 }else {
@@ -27,6 +30,7 @@ public class JpaConfig {
                             .map(Authentication::getPrincipal)
                             .map(TripUserPrincipal.class::cast)
                             .map(TripUserPrincipal::getUsername);
+                }
                 }
             };
     }

@@ -92,13 +92,6 @@ public class FileUploadController {
         return fileList;
     }
 
-    //TODO : 다중 파일일시
-//    @GetMapping("/image/{fileId}")
-//    public UrlResource fileUpload(@PathVariable Long fileId) throws IOException {
-//        var filePath  = fileUploadService.findFilePath(fileId);
-//        return new UrlResource("file:"+filePath);
-//       }
-
     @GetMapping("/image/{fileId}/{fileChildId}")
     public UrlResource fileRead(@PathVariable Long fileId,@PathVariable int fileChildId) throws IOException {
         var filePath  = fileUploadService.findFilePath(fileId,fileChildId);

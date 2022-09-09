@@ -22,4 +22,6 @@ public interface TravelAgencyListRepository extends JpaRepository<TravelAgencyLi
 
     List<TravelAgencyList> findByDeletedAndSortIsNotNullOrderBySort(boolean deleted);
 
+    List<TravelAgencyList> findByTravelEndAtLessThanEqualAndDeleted(String endDe , boolean deleted);
+
 }
