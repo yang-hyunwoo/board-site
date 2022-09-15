@@ -14,7 +14,7 @@ public class ScheduleController {
     private final TravelAgencyListService travelAgencyListService;
 
 
-    @Scheduled(cron="0/10 * * * * *")
+//    @Scheduled(cron="0/10 * * * * *")
     public void test2() {
         travelAgencyListService.searchEndDate();
     }

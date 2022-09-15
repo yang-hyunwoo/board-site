@@ -21,7 +21,6 @@ public class ChatRoomMessageController {
     @GetMapping("/rooms/{roomId}")
     public Response<List<ChatRoomMessageResponse>> roomEnterAndMessage(@PathVariable Long roomId,
                                                                       @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal) {
-//       var chatRoomMessageResponse = ChatRoomMessageResponse.from(chatRoomMessageService.roomMessage(roomId,tripUserPrincipal.id()));
        var chatRoomMessageResponse = chatRoomMessageService.roomMessage(roomId,tripUserPrincipal.id()).stream().map(ChatRoomMessageResponse::from).collect(Collectors.toList());
         return Response.success(chatRoomMessageResponse);
     }

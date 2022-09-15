@@ -1,16 +1,17 @@
 package com.board.boardsite.dto.travel;
 
 import com.board.boardsite.domain.travel.TravelAgency;
+import com.board.boardsite.domain.travel.TravelAgencyLike;
 import com.board.boardsite.domain.travel.TravelAgencyList;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 public record TravelAgencyListDto(
         Long id,
         Long travel_agency_id,
         String city,
         String content,
-        int like_count,
         int person_count,
         int person_max_count,
         int read_count,
@@ -27,14 +28,15 @@ public record TravelAgencyListDto(
         String createdBy,
         LocalDateTime modifiedAt,
         String modifiedBy,
-        TravelAgency travelAgency
+        TravelAgency travelAgency,
+        int like_count,
+        Set<TravelAgencyLike> travelAgencyLike
 ) {
 
     public static TravelAgencyListDto of(Long id,
                                Long travel_agency_id,
                                String city,
                                String content,
-                               int like_count,
                                int person_count,
                                int person_max_count,
                                int read_count,
@@ -50,13 +52,14 @@ public record TravelAgencyListDto(
                                String createdBy,
                                LocalDateTime modifiedAt,
                                String modifiedBy,
-                               TravelAgency travelAgency) {
+                               TravelAgency travelAgency,
+                               int like_count,
+                               Set<TravelAgencyLike> travelAgencyLike) {
         return new TravelAgencyListDto(
                 id,
                 travel_agency_id,
                 city,
                 content,
-                like_count,
                 person_count,
                 person_max_count,
                 read_count,
@@ -72,14 +75,15 @@ public record TravelAgencyListDto(
                 createdBy,
                 modifiedAt,
                 modifiedBy,
-                travelAgency);
+                travelAgency,
+                like_count,
+                travelAgencyLike);
     }
 
     public static TravelAgencyListDto of(
                                          Long travel_agency_id,
                                          String city,
                                          String content,
-                                         int like_count,
                                          int person_count,
                                          int person_max_count,
                                          int read_count,
@@ -90,14 +94,15 @@ public record TravelAgencyListDto(
                                          String title,
                                          String travel_start_at,
                                          String travel_end_at,
-                                         TravelAgency travelAgency)
+                                         TravelAgency travelAgency,
+                                         int like_count,
+                                         Set<TravelAgencyLike> travelAgencyLike)
     {
         return new TravelAgencyListDto(
                 null,
                 travel_agency_id,
                 city,
                 content,
-                like_count,
                 person_count,
                 person_max_count,
                 read_count,
@@ -113,7 +118,9 @@ public record TravelAgencyListDto(
                 null,
                 null,
                 null,
-                travelAgency);
+                travelAgency,
+                like_count,
+                travelAgencyLike);
     }
 
     public static TravelAgencyListDto from(TravelAgencyList entity) {
@@ -122,7 +129,6 @@ public record TravelAgencyListDto(
                 entity.getTravelAgency().getId(),
                 entity.getCity(),
                 entity.getContent(),
-                entity.getLikeCount(),
                 entity.getPersonCount(),
                 entity.getPersonMaxCount(),
                 entity.getReadCount(),
@@ -138,7 +144,9 @@ public record TravelAgencyListDto(
                 entity.getCreatedBy(),
                 entity.getModifiedAt(),
                 entity.getModifiedBy(),
-                entity.getTravelAgency()
+                entity.getTravelAgency(),
+                entity.getTravelAgencyLikes().size(),
+                entity.getTravelAgencyLikes()
         );
     }
 
@@ -155,7 +163,6 @@ public record TravelAgencyListDto(
                 person_count,
                 person_max_count,
                 read_count,
-                like_count,
                 thumnbnailFileId,
                 sort,
                 travelAgency

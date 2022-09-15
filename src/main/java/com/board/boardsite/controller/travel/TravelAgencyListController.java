@@ -2,6 +2,7 @@ package com.board.boardsite.controller.travel;
 
 import com.board.boardsite.dto.response.Response;
 import com.board.boardsite.dto.response.travel.TravelAgencyListResponse;
+import com.board.boardsite.dto.security.TripUserPrincipal;
 import com.board.boardsite.service.travel.TravelAgencyListService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.SortDefault;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -67,5 +69,16 @@ public class TravelAgencyListController {
     public Response<List<TravelAgencyListResponse>> travelMainCarousel(){
         List<TravelAgencyListResponse> travelAgencyListResponses = travelAgencyListService.travelMainCarousel().stream().map(TravelAgencyListResponse::from).collect(Collectors.toList());
         return Response.success(travelAgencyListResponses);
+    }
+
+    /*
+       여행 리스트 좋아요 클릭
+     */
+    @PostMapping("/like/{travelAgencyListId}")
+    public Response<Boolean> travelAgencyListLike(@PathVariable Long travelAgencyListId,
+                                     @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal) {
+
+        travelAgencyListService.travelAgencyListLike(travelAgencyListId , tripUserPrincipal.id());
+        return Response.success(true);
     }
 }

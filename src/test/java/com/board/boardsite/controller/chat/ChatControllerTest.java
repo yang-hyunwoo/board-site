@@ -7,6 +7,7 @@ import com.board.boardsite.dto.request.article.ArticleRequest;
 import com.board.boardsite.dto.request.chat.ChatRoomRequest;
 import com.board.boardsite.service.chat.ChatService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,6 +73,7 @@ class ChatControllerTest {
 
     @DisplayName("[POST][controller] 채팅방 신규 등록  - 정상 호출")
     @Test
+    @Disabled
     @WithUserDetails(value = "gusdnTest", setupBefore = TestExecutionEvent.TEST_EXECUTION )
     public void givenChat_whenRequestingChat_thenReturns() throws Exception {
         // Given
@@ -90,6 +92,7 @@ class ChatControllerTest {
 
     @DisplayName("[POST][controller] 채팅방 입장   - 정상 호출")
     @Test
+    @Disabled
     @WithUserDetails(value = "gusdn5162@naver.com", setupBefore = TestExecutionEvent.TEST_EXECUTION)
     public void givenChatRoom_whenRequestingChatRoom_thenReturns() throws Exception {
         // Given

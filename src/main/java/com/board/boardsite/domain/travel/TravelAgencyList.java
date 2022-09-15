@@ -2,6 +2,7 @@ package com.board.boardsite.domain.travel;
 
 
 import com.board.boardsite.domain.AuditingFields;
+import com.board.boardsite.domain.article.ArticleComment;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -18,8 +19,7 @@ import java.util.Set;
         @Index(columnList = "city"),
         @Index(columnList = "travelStartAt"),
         @Index(columnList = "travelEndAt"),
-        @Index(columnList = "readCount"),
-        @Index(columnList = "likeCount"),
+        @Index(columnList = "readCount")
 })
 public class TravelAgencyList extends AuditingFields {
 
@@ -75,9 +75,6 @@ public class TravelAgencyList extends AuditingFields {
     private int readCount;                          //조회수
 
     @Setter
-    private int likeCount;                          //좋아요 수
-
-    @Setter
     @Column(nullable = false)
     private boolean deleted;
 
@@ -86,6 +83,11 @@ public class TravelAgencyList extends AuditingFields {
 
     @Setter
     private Integer sort;                           //사용자 메인 화면 보여줄 순서
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "travelAgencyList", cascade = CascadeType.ALL)
+    private final Set<TravelAgencyLike> travelAgencyLikes = new LinkedHashSet<>();
+
 
 
     protected  TravelAgencyList() {
@@ -103,7 +105,6 @@ public class TravelAgencyList extends AuditingFields {
                             int personCount,
                             int personMaxCount,
                             int readCount,
-                            int likeCount,
                             Long thumnbnailFileId,
                              Integer sort,
                              TravelAgency travelAgency)
@@ -119,7 +120,6 @@ public class TravelAgencyList extends AuditingFields {
         this.personCount = personCount;
         this.personMaxCount = personMaxCount;
         this.readCount = readCount;
-        this.likeCount = likeCount;
         this.thumnbnailFileId = thumnbnailFileId;
         this.sort           = sort;
         this.travelAgency = travelAgency;
@@ -136,7 +136,6 @@ public class TravelAgencyList extends AuditingFields {
                                       int personCount,
                                       int personMaxCount,
                                       int readCount,
-                                      int likeCount ,
                                       Long thumnbnailFileId,
                                       Integer sort,
                                       TravelAgency travelAgency)
@@ -152,7 +151,6 @@ public class TravelAgencyList extends AuditingFields {
                     personCount,
                     personMaxCount,
                     readCount,
-                    likeCount,
                     thumnbnailFileId,
                     sort,
                     travelAgency);
