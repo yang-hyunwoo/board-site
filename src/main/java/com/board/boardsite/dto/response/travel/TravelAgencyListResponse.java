@@ -70,7 +70,6 @@ public record TravelAgencyListResponse(
     public static TravelAgencyListResponse from(TravelAgencyListDto dto){
         Long authChkLong = 0L;
         AtomicBoolean chk = new AtomicBoolean(false);
-        System.out.println(":1:::::"+SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         if(!SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")){
             var articleAuthChk = Optional.ofNullable(SecurityContextHolder.getContext())
                     .map(SecurityContext::getAuthentication)
@@ -85,7 +84,6 @@ public record TravelAgencyListResponse(
             return ;
             }
         });
-        System.out.println(":::::::"+chk);
         return new TravelAgencyListResponse(
                 dto.id(),
                 dto.travelAgency().getId(),
