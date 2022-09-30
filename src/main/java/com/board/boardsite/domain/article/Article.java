@@ -9,6 +9,7 @@ import lombok.ToString;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -34,10 +35,12 @@ public class Article extends AuditingFields {
 
 
     @Setter
+    @NotNull(message = "제목을 입력해주세요")
     @Column(nullable = false , length = 100)
     private String title; // 제목
 
     @Setter
+    @NotNull(message = "본문을 입력해주세요")
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content; // 본문
 

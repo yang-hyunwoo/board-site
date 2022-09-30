@@ -15,6 +15,8 @@ import org.springframework.messaging.simp.annotation.support.SimpAnnotationMetho
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/chat")
 @RequiredArgsConstructor
@@ -30,7 +32,7 @@ public class ChatController {
     }
 
     @PostMapping("/new-room")
-    public Response<String> newRoom(@RequestBody ChatRoomRequest chatRoomRequest,
+    public Response<String> newRoom(@Valid @RequestBody ChatRoomRequest chatRoomRequest,
                                      @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal) {
         String roomId = chatService.roomSave(chatRoomRequest.toDto(),tripUserPrincipal.id());
         return Response.success(roomId);

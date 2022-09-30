@@ -17,6 +17,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 /**
  * 게시판 클래스
  * @author cohouseol
@@ -56,7 +58,7 @@ public class ArticleController {
     }
 
     @PostMapping("/new-article")
-    public Response<Boolean> saveArticle(@RequestBody ArticleRequest articleRequest ,
+    public Response<Boolean> saveArticle(@Valid @RequestBody ArticleRequest articleRequest ,
                                          @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal) {
          articleService.saveArticle(articleRequest.toDto(tripUserPrincipal.toDto()));
     return Response.success(true);
@@ -64,7 +66,7 @@ public class ArticleController {
 
     @PostMapping("/{articleId}/form")
     public Response<Boolean> updateArticle(@PathVariable Long articleId ,
-                                           @RequestBody ArticleRequest articleRequest ,
+                                           @Valid @RequestBody ArticleRequest articleRequest ,
                                            @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal)
     {
 

@@ -35,7 +35,6 @@ public class ChatSocketController {
 
     private SimpAnnotationMethodMessageHandler simpAnnotationMethodMessageHandler;
 
-    //    @Value("${jwt.secret-key}")
     private final String key =  "board_site.trip_web_application.secret_key";
 
     private  final TripUserService tripUserService;

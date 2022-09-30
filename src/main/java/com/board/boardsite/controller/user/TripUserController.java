@@ -17,6 +17,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/trip/users")
 @RequiredArgsConstructor
@@ -28,7 +30,7 @@ public class TripUserController {
     private final EmailService emailService;
 
     @PostMapping("/join")
-    public Response<TripUserJoinResponse> join(@RequestBody TripUserJoinRequest request) {
+    public Response<TripUserJoinResponse> join(@Valid @RequestBody TripUserJoinRequest request) {
         TripUserDto tripUserDto  = tripUserService.join(request.toDto());
         return Response.success(TripUserJoinResponse.from(tripUserDto));
     }

@@ -8,6 +8,9 @@ import lombok.ToString;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Getter
@@ -21,9 +24,12 @@ public class ChatRoom extends AuditingFields {
     private Long id;
 
     @Setter
+    @NotNull(message = "채팅방 제목을 입력해주세요")
     @Column(nullable = false , length = 100)
     private String roomName;
 
+    @Min(value = 2 , message = "최소 인원은 2명 입니다.")
+    @Max(value = 300 , message = "최대 인원은 300명 입니다.")
     @Setter
     private int roomCount;
 

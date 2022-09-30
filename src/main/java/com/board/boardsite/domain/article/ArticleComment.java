@@ -8,6 +8,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Getter
@@ -33,6 +34,7 @@ public class ArticleComment extends AuditingFields {
 
 
     @Setter
+    @NotNull(message = "댓글을 입력해주세요")
     @Column(nullable = false, length = 4000)
     private String content; // 본문
 
