@@ -46,6 +46,10 @@ public enum ErrorCode {
     TOUR_NOT_FOUND(HttpStatus.NOT_FOUND , "관광지를 찾을 수 없습니다."),
 
     LIKE_NOT(HttpStatus.CONFLICT,"좋아요 에러"),
+
+    NOT_PERMITTION(HttpStatus.CONFLICT,"권한이 없습니다."),
+
+    NOT_ALLOWED(HttpStatus.CONFLICT,"이메일 인증 및 승인이 완료 되지 않았습니다."),
     ;
 
     private HttpStatus status;

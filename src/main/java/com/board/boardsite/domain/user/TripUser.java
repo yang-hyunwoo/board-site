@@ -74,6 +74,15 @@ public class TripUser extends AuditingFields {
     @Setter
     private Long profileId;
 
+    private boolean authChk;
+
+    @Setter
+    @Column(nullable = false)
+    private String role;                                    //권한
+
+    @Setter
+    private Long travelAgencyId;
+
     protected TripUser() {
 
     }
@@ -87,7 +96,10 @@ public class TripUser extends AuditingFields {
                      Gender gender,
                      boolean deleted,
                      Long profileId,
-                     Boolean emailAuth)
+                     Boolean emailAuth,
+                     String role,
+                     Long travelAgencyId,
+                     boolean authChk)
     {
         this.name = name;
         this.nickName = nickName;
@@ -99,6 +111,9 @@ public class TripUser extends AuditingFields {
         this.deleted = deleted;
         this.emailAuth = emailAuth;
         this.profileId = profileId;
+        this.role = role;
+        this.travelAgencyId = travelAgencyId;
+        this.authChk = authChk;
     }
 
     public TripUser(Long id,
@@ -111,7 +126,10 @@ public class TripUser extends AuditingFields {
                     Gender gender,
                     boolean deleted,
                     Long profileId,
-                    Boolean emailAuth) {
+                    Boolean emailAuth,
+                    String role,
+                    Long travelAgencyId,
+                    boolean authChk) {
         this.id = id;
         this.name = name;
         this.nickName = nickName;
@@ -123,6 +141,9 @@ public class TripUser extends AuditingFields {
         this.deleted = deleted;
         this.profileId = profileId;
         this.emailAuth = emailAuth;
+        this.role =role;
+        this.travelAgencyId = travelAgencyId;
+        this.authChk =authChk;
     }
 
     public static TripUser of(String name,
@@ -134,7 +155,10 @@ public class TripUser extends AuditingFields {
                               Gender gender,
                               boolean deleted,
                               Long profileId,
-                              Boolean emailAuth)
+                              Boolean emailAuth,
+                              String role,
+                              Long travelAgencyId,
+                              boolean authChk)
     {
       return new TripUser(name,
                           nickName,
@@ -145,7 +169,10 @@ public class TripUser extends AuditingFields {
                           gender,
                           deleted,
                           profileId,
-                          emailAuth);
+                          emailAuth,
+                          role,
+                          travelAgencyId,
+                          authChk);
     }
 
     public static TripUser of(Long id,
@@ -158,7 +185,10 @@ public class TripUser extends AuditingFields {
                               Gender gender,
                               boolean deleted,
                               Long profileId,
-                              Boolean emailAuth)
+                              Boolean emailAuth,
+                              String role,
+                              Long travelAgencyId,
+                              boolean authChk)
     {
         return new TripUser(id,
                 name,
@@ -170,7 +200,10 @@ public class TripUser extends AuditingFields {
                 gender,
                 deleted,
                 profileId,
-                emailAuth);
+                emailAuth,
+                role,
+                travelAgencyId,
+                authChk);
     }
 
     public void updateRefreshToken(String refreshToken) {

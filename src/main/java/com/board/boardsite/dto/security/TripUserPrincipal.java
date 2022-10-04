@@ -22,6 +22,7 @@ public record TripUserPrincipal(
         int point,
         boolean deleted,
         Gender gender,
+        Long travelAgencyId,
         Collection<? extends GrantedAuthority> authorities
 ) implements UserDetails {
 
@@ -33,7 +34,8 @@ public record TripUserPrincipal(
                              String phoneNumber,
                              int point,
                              boolean deleted,
-                             Gender gender) {
+                             Gender gender,
+                             Long travelAgencyId) {
         Set<RoleType> roleTypes = Set.of(RoleType.USER);
         return new TripUserPrincipal(
                 id,
@@ -45,6 +47,7 @@ public record TripUserPrincipal(
                 point,
                 deleted,
                 gender,
+                travelAgencyId,
                 roleTypes.stream()
                         .map(RoleType::getName)
                         .map(SimpleGrantedAuthority::new)
@@ -62,7 +65,8 @@ public record TripUserPrincipal(
                 dto.phoneNumber(),
                 dto.point(),
                 dto.deleted(),
-                dto.gender()
+                dto.gender(),
+                dto.travelAgencyId()
         );
     }
 
@@ -77,6 +81,9 @@ public record TripUserPrincipal(
                 deleted,
                 password,
                 gender,
+                authorities.toString(),
+                travelAgencyId,
+                true,
                 true,
                 null,
                 null,
@@ -122,6 +129,8 @@ public record TripUserPrincipal(
     }
 
     public enum RoleType {
+        SUPER("ROLE_SUPER"),
+        ADMIN("ROLE_ADMIN"),
         USER("ROLE_USER");
 
         @Getter

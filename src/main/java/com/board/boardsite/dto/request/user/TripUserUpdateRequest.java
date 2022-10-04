@@ -7,14 +7,18 @@ public record TripUserUpdateRequest(
         String nickName,
         String phoneNumber,
         Gender gender ,
-        Long profileId
+        Long profileId,
+        String role,
+        Long travelAgencyId
 )  {
     public static TripUserUpdateRequest of(String nickName,
                                            String phoneNumber,
                                            Gender gender,
-                                           Long profileId) {
+                                           Long profileId,
+                                           String role,
+                                           Long travelAgencyId) {
         return new TripUserUpdateRequest(
-            nickName,phoneNumber,gender,profileId
+            nickName,phoneNumber,gender,profileId,role,travelAgencyId
         );
     }
 
@@ -23,7 +27,9 @@ public record TripUserUpdateRequest(
                 nickName,
                 phoneNumber,
                 gender,
-                profileId
+                profileId,
+                role,
+                travelAgencyId
         );
     }
 }

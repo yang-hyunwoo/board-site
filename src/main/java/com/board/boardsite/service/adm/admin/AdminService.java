@@ -1,14 +1,14 @@
-package com.board.boardsite.service.user;
+package com.board.boardsite.service.adm.admin;
 
 import com.board.boardsite.domain.user.TripUser;
-import com.board.boardsite.dto.request.user.TripUserJoinRequest;
 import com.board.boardsite.dto.security.TripUserPrincipal;
 import com.board.boardsite.dto.user.EmailAuthDto;
 import com.board.boardsite.dto.user.TripUserDto;
 import com.board.boardsite.exception.BoardSiteException;
 import com.board.boardsite.exception.ErrorCode;
-import com.board.boardsite.repository.user.TripUserRepository;
 import com.board.boardsite.repository.user.EmailAuthRepository;
+import com.board.boardsite.repository.user.TripUserRepository;
+import com.board.boardsite.service.user.EmailService;
 import com.board.boardsite.support.JwtTokenUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,7 +21,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class TripUserService {
+public class AdminService {
 
     private final TripUserRepository tripUserRepository;
     private final EmailAuthRepository emailAuthRepository;
@@ -59,12 +59,15 @@ public class TripUserService {
     }
 
     public String login(String email , String password) {
-        var tripUser = tripUserRepository.findByEmailAndEmailAuthAndDeleted(email,true,false).orElseThrow(() -> new BoardSiteException(ErrorCode.EMAIL_NOT_FOUND,String.format("%s not founded",email)));
+        var tripUser = tripUserRepository.findByEmailAndEmailAuthAndDeletedAndAuthChk(email,true,false,true).orElseThrow(() -> new BoardSiteException(ErrorCode.NOT_ALLOWED,String.format("%s not founded",email)));
         if(!encoder.matches(password , tripUser.getPassword())) {
             throw new BoardSiteException(ErrorCode.INVALID_PASSWORD);
         }
-        String token = JwtTokenUtils.generateToken(email,secretKey ,tripUser.getRole(), expiredTimeMs);
+        if(tripUser.getRole().equals("USER") || tripUser.getRole().length()==0){
+            throw new BoardSiteException(ErrorCode.NOT_PERMITTION);
+        }
 
+        String token = JwtTokenUtils.generateToken(email, secretKey, tripUser.getRole(), expiredTimeMs);
         return token;
     }
 

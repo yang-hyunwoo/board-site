@@ -9,16 +9,20 @@ public record TripUserJoinRequest(
         String email,
         String password,
         String phoneNumber,
-        Gender gender
+        Gender gender,
+        Long travelAgencyId,
+        String role
 )  {
     public static TripUserJoinRequest of(String name,
                                          String nickName,
                                          String email,
                                          String password,
                                          String phoneNumber,
-                                         Gender gender) {
+                                         Gender gender,
+                                         Long travelAgencyId,
+                                         String role) {
         return new TripUserJoinRequest(
-            name,nickName,email,password,phoneNumber,gender
+            name,nickName,email,password,phoneNumber,gender,travelAgencyId,role
         );
     }
 
@@ -28,7 +32,9 @@ public record TripUserJoinRequest(
                 nickName,
                 phoneNumber,
                 password,
-                gender
+                gender,
+                role,
+                travelAgencyId
         );
     }
 }

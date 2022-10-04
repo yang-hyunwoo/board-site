@@ -27,9 +27,10 @@ public class JwtTokenUtils {
                 .build().parseClaimsJws(token).getBody();
     }
 
-    public static String generateToken(String email , String key , long expiredTimeMs) {
+    public static String generateToken(String email , String key ,String role, long expiredTimeMs) {
         Claims claims = Jwts.claims();
         claims.put("email",email);
+        claims.put("role", role);
 
         return Jwts.builder()
                 .setClaims(claims)
