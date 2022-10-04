@@ -2,21 +2,27 @@ package com.board.boardsite.service.adm.admin;
 
 import com.board.boardsite.domain.user.TripUser;
 import com.board.boardsite.dto.security.TripUserPrincipal;
+import com.board.boardsite.dto.travel.TravelAgencyDto;
 import com.board.boardsite.dto.user.EmailAuthDto;
 import com.board.boardsite.dto.user.TripUserDto;
 import com.board.boardsite.exception.BoardSiteException;
 import com.board.boardsite.exception.ErrorCode;
+import com.board.boardsite.repository.travel.TravelAgencyListRepository;
+import com.board.boardsite.repository.travel.TravelAgencyRepository;
 import com.board.boardsite.repository.user.EmailAuthRepository;
 import com.board.boardsite.repository.user.TripUserRepository;
 import com.board.boardsite.service.user.EmailService;
 import com.board.boardsite.support.JwtTokenUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -28,19 +34,13 @@ public class AdminService {
     private final BCryptPasswordEncoder encoder;
     private final EmailService emailService;
 
+    private final TravelAgencyRepository travelAgencyRepository;
     @Value("${jwt.secret-key}")
     private String secretKey;
 
     @Value("${jwt.token.expired-time-ms}")
     private Long expiredTimeMs;
 
-    public TripUserPrincipal loadUserByEmail(String email) {
-        return  tripUserRepository.findByEmail(email)
-                .map(TripUserDto::from)
-                .map(TripUserPrincipal::from)
-                .orElseThrow(() -> new BoardSiteException(ErrorCode.USER_NOT_FOUND,String.format("%s not founded",email)));
-
-    }
 
     @Transactional
     public TripUserDto join(TripUserDto tripUserDto) {
@@ -57,6 +57,17 @@ public class AdminService {
 
         return TripUserDto.from(tripUser);
     }
+
+
+
+    //관리자 회원 가입 시 여행사 리스트 조회
+    @Transactional(readOnly = true)
+    public List<TravelAgencyDto> travelAgencyList() {
+
+//        return travelAgencyRepository.findAllByDeleted(false).map(TravelAgencyDto::from);
+        return travelAgencyRepository.findAllByDeleted(false).stream().map(TravelAgencyDto::from).toList();
+    }
+
 
     public String login(String email , String password) {
         var tripUser = tripUserRepository.findByEmailAndEmailAuthAndDeletedAndAuthChk(email,true,false,true).orElseThrow(() -> new BoardSiteException(ErrorCode.NOT_ALLOWED,String.format("%s not founded",email)));

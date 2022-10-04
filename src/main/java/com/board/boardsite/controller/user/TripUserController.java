@@ -29,6 +29,9 @@ public class TripUserController {
 
     private final EmailService emailService;
 
+    /*
+      사용자 / 관리자 회원가입 로직 동일
+     */
     @PostMapping("/join")
     public Response<TripUserJoinResponse> join(@Valid @RequestBody TripUserJoinRequest request) {
         TripUserDto tripUserDto  = tripUserService.join(request.toDto());
