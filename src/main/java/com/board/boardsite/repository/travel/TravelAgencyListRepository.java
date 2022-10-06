@@ -24,4 +24,6 @@ public interface TravelAgencyListRepository extends JpaRepository<TravelAgencyLi
 
     List<TravelAgencyList> findByTravelEndAtLessThanEqualAndDeleted(String endDe , boolean deleted);
 
+    List<TravelAgencyList> findByTravelAgencyId(Long travelAgencyId);
+
 }
