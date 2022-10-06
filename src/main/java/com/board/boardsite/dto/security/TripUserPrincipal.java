@@ -8,6 +8,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -23,7 +24,7 @@ public record TripUserPrincipal(
         boolean deleted,
         Gender gender,
         Long travelAgencyId,
-        Collection<? extends GrantedAuthority> authorities
+        String role
 ) implements UserDetails {
 
     public static TripUserPrincipal of(Long id ,
@@ -35,8 +36,8 @@ public record TripUserPrincipal(
                              int point,
                              boolean deleted,
                              Gender gender,
-                             Long travelAgencyId) {
-        Set<RoleType> roleTypes = Set.of(RoleType.USER);
+                             Long travelAgencyId,
+                                       String role) {
         return new TripUserPrincipal(
                 id,
                 name,
@@ -48,10 +49,7 @@ public record TripUserPrincipal(
                 deleted,
                 gender,
                 travelAgencyId,
-                roleTypes.stream()
-                        .map(RoleType::getName)
-                        .map(SimpleGrantedAuthority::new)
-                        .collect(Collectors.toUnmodifiableSet())
+                role
         );
     }
 
@@ -66,7 +64,8 @@ public record TripUserPrincipal(
                 dto.point(),
                 dto.deleted(),
                 dto.gender(),
-                dto.travelAgencyId()
+                dto.travelAgencyId(),
+                dto.role()
         );
     }
 
@@ -81,7 +80,7 @@ public record TripUserPrincipal(
                 deleted,
                 password,
                 gender,
-                authorities.toString(),
+                role,
                 travelAgencyId,
                 true,
                 true,
@@ -95,6 +94,11 @@ public record TripUserPrincipal(
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+        Collection<GrantedAuthority> authorities = new ArrayList<>();
+
+        for(String role : role.split(",")){
+            authorities.add(new SimpleGrantedAuthority(role));
+        }
         return authorities;
     }
 

@@ -78,7 +78,7 @@ public class AdminService {
             throw new BoardSiteException(ErrorCode.NOT_PERMITTION);
         }
 
-        String token = JwtTokenUtils.generateToken(email, secretKey, tripUser.getRole(), expiredTimeMs);
+        String token = JwtTokenUtils.generateToken(email, secretKey, tripUser.getRole(),tripUser.getTravelAgencyId(),expiredTimeMs);
         return token;
     }
 

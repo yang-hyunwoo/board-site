@@ -41,10 +41,14 @@ public class TravelAgencyList extends AuditingFields {
     private String city;
 
     @Column(nullable = false , length = 8)
-    private String travelStartAt; // 출발일시
+    private String travelStartAt; // 모집시작일
 
     @Column(nullable = false, length = 8)
-    private String travelEndAt   ; // 종료일시
+    private String travelEndAt   ; // 모집종료일
+
+
+    @Column(nullable = false, length = 8)
+    private String travelRealTripAt   ; //여행시작일
 
     @Setter
     @Column(nullable = false , length = 100)
@@ -96,7 +100,8 @@ public class TravelAgencyList extends AuditingFields {
 
     private TravelAgencyList(String city,
                             String travelStartAt,
-                             String travelEndAt,
+                            String travelEndAt,
+                            String travelRealTripAt,
                             String title,
                             String content,
                             int realPaid,
@@ -112,6 +117,7 @@ public class TravelAgencyList extends AuditingFields {
         this.city = city;
         this.travelStartAt = travelStartAt;
         this.travelEndAt = travelEndAt;
+        this.travelRealTripAt = travelRealTripAt;
         this.title = title;
         this.content = content;
         this.realPaid = realPaid;
@@ -128,6 +134,7 @@ public class TravelAgencyList extends AuditingFields {
     public static TravelAgencyList of(String city,
                                       String travelStartAt,
                                       String travelEndAt,
+                                      String travelRealTripAt,
                                       String title,
                                       String content,
                                       int realPaid,
@@ -143,6 +150,7 @@ public class TravelAgencyList extends AuditingFields {
         return new TravelAgencyList(city,
                     travelStartAt,
                     travelEndAt,
+                    travelRealTripAt,
                     title,
                     content,
                     realPaid,

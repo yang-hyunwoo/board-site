@@ -63,7 +63,7 @@ public class TripUserService {
         if(!encoder.matches(password , tripUser.getPassword())) {
             throw new BoardSiteException(ErrorCode.INVALID_PASSWORD);
         }
-        String token = JwtTokenUtils.generateToken(email,secretKey ,tripUser.getRole(), expiredTimeMs);
+        String token = JwtTokenUtils.generateToken(email,secretKey ,tripUser.getRole(), tripUser.getTravelAgencyId(),expiredTimeMs);
 
         return token;
     }
