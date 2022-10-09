@@ -25,15 +25,17 @@ public record TourDto(
     public static TourDto of(
                       TripUserDto tripUser,
                       String title,
-                      String content) {
+                      String content,
+                      Long thumbnailId,
+                      String city) {
         return new TourDto(null,
                 tripUser,
                 title,
                 content,
                 false,
                 0,
-                null,
-                null,
+                thumbnailId,
+                city,
                 null,
                 null,
                 null,

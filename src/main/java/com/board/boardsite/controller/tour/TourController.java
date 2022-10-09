@@ -4,6 +4,7 @@ package com.board.boardsite.controller.tour;
 
 import com.board.boardsite.domain.constant.SearchTourType;
 import com.board.boardsite.domain.constant.SearchType;
+import com.board.boardsite.dto.request.adm.tour.TourRequest;
 import com.board.boardsite.dto.request.article.ArticleRequest;
 import com.board.boardsite.dto.response.Response;
 import com.board.boardsite.dto.response.article.ArticleResponse;
@@ -21,6 +22,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,7 +50,7 @@ public class TourController {
     @GetMapping("/{tourId}")
     public Response<TourResponse> tourDetail(@PathVariable Long tourId,
                                                                @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal) {
-        var tourDetail = TourResponse.from(tourService.tourDetail(tourId));
+        var tourDetail = TourResponse.from(tourService.tourDetail(tourId,tripUserPrincipal.role()));
         return Response.success(tourDetail);
     }
 

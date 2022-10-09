@@ -4,6 +4,7 @@ package com.board.boardsite.service.tour;
 import com.board.boardsite.domain.article.Article;
 import com.board.boardsite.domain.constant.SearchTourType;
 import com.board.boardsite.domain.constant.SearchType;
+import com.board.boardsite.domain.tour.Tour;
 import com.board.boardsite.domain.user.TripUser;
 import com.board.boardsite.dto.article.ArticleDto;
 import com.board.boardsite.dto.article.ArticleWithCommentsDto;
@@ -46,9 +47,15 @@ public Page<TourDto> tourSearchList(SearchTourType searchType , String searchKey
 }
     //수정
     @Transactional
-    public TourDto tourDetail(Long tourId) {
-        var tourDetail = tourRepository.findByIdAndDeleted(tourId,false).orElseThrow(()->new BoardSiteException(ErrorCode.TOUR_NOT_FOUND));
-        tourDetail.readCountPlus(tourDetail.getReadCount());
+    public TourDto tourDetail(Long tourId,String role) {
+        Tour tourDetail;
+        if(role.equals("USER")) {
+            tourDetail = tourRepository.findByIdAndDeleted(tourId,false).orElseThrow(()->new BoardSiteException(ErrorCode.TOUR_NOT_FOUND));
+            tourDetail.readCountPlus(tourDetail.getReadCount());
+        } else {
+            tourDetail = tourRepository.findById(tourId).orElseThrow(()->new BoardSiteException(ErrorCode.TOUR_NOT_FOUND));
+
+        }
         return TourDto.from(tourDetail);
     }
 
@@ -57,5 +64,7 @@ public Page<TourDto> tourSearchList(SearchTourType searchType , String searchKey
         int count = 3;
         return tourRepository.findTourRandomCount(count).stream().map(TourDto::from).collect(Collectors.toList());
     }
+
+
 
 }

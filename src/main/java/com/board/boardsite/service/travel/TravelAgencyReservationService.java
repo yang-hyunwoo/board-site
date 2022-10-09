@@ -87,9 +87,11 @@ public class TravelAgencyReservationService {
         travelAgencyReservationRepository.save(dto.toEntity(travelAgency,travelAgencyList,tripUser));
         TravelAgencyReservation travelAgencyReservation =travelAgencyReservationRepository.findByImpUidAndMerchantUid(dto.impUid(),dto.merchantUid()).orElseThrow(()->new BoardSiteException(ErrorCode.TRAVEL_PAY_NOT_FOUND));
         TravelAgencyReservation updTravelAgencyReservation = travelAgencyReservationRepository.findById(travelAgencyReservation.getId()).orElseThrow(()->new BoardSiteException(ErrorCode.TRAVEL_PAY_NOT_FOUND));
+
         int userPaid   = updTravelAgencyReservation.getPaid();
         int userCount  = updTravelAgencyReservation.getPersonCount();
         int travelPaid = travelAgencyList.getSalePaid();
+
         if(userPaid == (userCount*travelPaid)){
             updTravelAgencyReservation.setDeleted(false);
            Long qrId= saveQr(dto.tripUser().id(),travelAgencyReservation.getId(),updTravelAgencyReservation.getPersonCount(),updTravelAgencyReservation.isDeleted());

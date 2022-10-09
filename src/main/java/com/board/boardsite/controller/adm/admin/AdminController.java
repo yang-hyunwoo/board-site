@@ -7,6 +7,7 @@ import com.board.boardsite.dto.response.tour.TourResponse;
 import com.board.boardsite.dto.response.travel.TravelAgencyResponse;
 import com.board.boardsite.dto.response.user.TripUserJoinResponse;
 import com.board.boardsite.dto.response.user.TripUserLoginResponse;
+import com.board.boardsite.dto.security.TripUserPrincipal;
 import com.board.boardsite.dto.user.TripUserDto;
 import com.board.boardsite.service.adm.admin.AdminService;
 import com.board.boardsite.service.travel.TravelAgencyService;
@@ -16,6 +17,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -43,6 +45,12 @@ public class AdminController {
     public Response<List<TravelAgencyResponse>> travelAgencyList(){
         List<TravelAgencyResponse> travelAgencyResponses = adminService.travelAgencyList().stream().map(TravelAgencyResponse::from).collect(Collectors.toList());
         return Response.success(travelAgencyResponses);
+    }
+
+
+    @GetMapping("/auth")
+    public Response<String> auth(@AuthenticationPrincipal TripUserPrincipal tripUserPrincipal ){
+        return Response.success(tripUserPrincipal.role());
     }
 
 
