@@ -9,6 +9,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -35,10 +36,12 @@ public class Tour extends AuditingFields {
 
     @Setter
     @Column(nullable = false , length = 100)
+    @NotEmpty
     private String title; // 제목
 
     @Setter
     @Column(nullable = false, columnDefinition = "TEXT")
+    @NotEmpty
     private String content; // 본문
 
     @Setter
@@ -54,6 +57,7 @@ public class Tour extends AuditingFields {
 
     @Setter
     @Column(nullable = false)
+    @NotEmpty
     private String city;
 
     @ToString.Exclude

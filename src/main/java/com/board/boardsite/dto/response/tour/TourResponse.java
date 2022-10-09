@@ -12,7 +12,9 @@ public record TourResponse(
         String content ,
         int readCount,
         Long thumbnailId,
-        String city
+        String city,
+
+        boolean deleted
 
 ) {
 
@@ -22,14 +24,16 @@ public record TourResponse(
                                   String content,
                                   int readCount,
                                   Long thumbnailId,
-                                  String city) {
+                                  String city,
+                                  boolean deleted) {
         return new TourResponse(id,
                 createdAt,
                 title,
                 content,
                 readCount,
                 thumbnailId,
-                city);
+                city,
+                deleted);
     }
 
     public static TourResponse from(TourDto dto){
@@ -40,7 +44,8 @@ public record TourResponse(
                 dto.content(),
                 dto.readCount(),
                 dto.thumbnailId(),
-                dto.city()
+                dto.city(),
+                dto.deleted()
         );
     }
 }
