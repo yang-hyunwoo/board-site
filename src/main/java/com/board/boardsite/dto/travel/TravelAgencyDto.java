@@ -47,6 +47,28 @@ public record TravelAgencyDto(
                 modifiedBy);
     }
 
+
+    public static TravelAgencyDto of(String name,
+                                     String address,
+                                     String tel,
+                                     String detail,
+                                     Long fileId,
+                                     String comment) {
+        return new TravelAgencyDto(
+                null,
+                name,
+                address,
+                tel,
+                detail,
+                fileId,
+                comment,
+                false,
+                null,
+                null,
+                null,
+                null);
+    }
+
     public static TravelAgencyDto from(TravelAgency entity) {
         return new TravelAgencyDto(
                 entity.getId(),

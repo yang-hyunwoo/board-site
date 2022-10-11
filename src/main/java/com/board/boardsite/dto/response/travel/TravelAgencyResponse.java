@@ -10,7 +10,8 @@ public record TravelAgencyResponse(
         String detail,
         String comment,
         Long fileId,
-        String address
+        String address,
+        boolean deleted
 ) {
     public static TravelAgencyResponse of(Long id,
                                 String name,
@@ -18,7 +19,8 @@ public record TravelAgencyResponse(
                                 String detail,
                                 String comment,
                                 Long fileId,
-                                String address) {
+                                String address,
+                                boolean deleted) {
         return new TravelAgencyResponse(
                 id,
                 name,
@@ -26,7 +28,8 @@ public record TravelAgencyResponse(
                 detail,
                 comment,
                 fileId,
-                address);
+                address,
+                deleted);
     }
 
     public static TravelAgencyResponse from(TravelAgencyDto dto){
@@ -37,7 +40,8 @@ public record TravelAgencyResponse(
                 dto.detail(),
                 dto.comment(),
                 dto.fileId(),
-                dto.address()
+                dto.address(),
+                dto.deleted()
         );
     }
 
