@@ -7,6 +7,8 @@ import lombok.ToString;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.*;
 
 @Getter
@@ -22,18 +24,22 @@ public class TravelAgency extends AuditingFields {
     private Long id;                                        //ID
 
     @Setter
+    @NotEmpty(message = "여행사 명을 입력하세요.")
     @Column(nullable = false , length = 50)
     private String name;                                    //여행사 이름
 
     @Setter
+    @NotEmpty(message = "주소를 입력해주세요.")
     @Column(nullable = false , length = 1000)
     private String address;                                 //여행사 주소
 
     @Setter
+    @NotEmpty(message = "번호를 입력해주세요.")
     @Column(nullable = false , length = 50)
     private String tel;                                     //여행사 전화번호
 
     @Setter
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String detail;                                  //여행사 상세 정보
 
     @Setter                                                 //여행사 파일 순번

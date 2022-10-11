@@ -52,9 +52,6 @@ public class TravelAgencyController {
         return Response.success(travelAgencyResponse);
     }
 
-    /*
-
-     */
 
 
 }
