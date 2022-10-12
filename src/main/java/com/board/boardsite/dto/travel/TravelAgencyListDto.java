@@ -30,6 +30,7 @@ public record TravelAgencyListDto(
         String modifiedBy,
         TravelAgency travelAgency,
         int like_count,
+        boolean deleted,
         Set<TravelAgencyLike> travelAgencyLike
 ) {
 
@@ -55,6 +56,7 @@ public record TravelAgencyListDto(
                                String modifiedBy,
                                TravelAgency travelAgency,
                                int like_count,
+                               boolean deleted,
                                Set<TravelAgencyLike> travelAgencyLike) {
         return new TravelAgencyListDto(
                 id,
@@ -79,6 +81,7 @@ public record TravelAgencyListDto(
                 modifiedBy,
                 travelAgency,
                 like_count,
+                deleted,
                 travelAgencyLike);
     }
 
@@ -124,6 +127,7 @@ public record TravelAgencyListDto(
                 null,
                 travelAgency,
                 like_count,
+                false,
                 travelAgencyLike);
     }
 
@@ -151,6 +155,7 @@ public record TravelAgencyListDto(
                 entity.getModifiedBy(),
                 entity.getTravelAgency(),
                 entity.getTravelAgencyLikes().size(),
+                entity.isDeleted(),
                 entity.getTravelAgencyLikes()
         );
     }
