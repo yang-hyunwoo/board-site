@@ -28,6 +28,8 @@ public record TravelAgencyListResponse(
         int person_max_count,
         Long thumnbnailFileId,
         int like_count,
+        boolean deleted,
+        Integer sort,
         AtomicBoolean auth
 ) {
 
@@ -48,6 +50,8 @@ public record TravelAgencyListResponse(
                                     int person_max_count,
                                     Long thumnbnailFileId,
                                     int like_count,
+                                    boolean deleted,
+                                    Integer sort,
                                     AtomicBoolean auth) {
         return new TravelAgencyListResponse(
                 id,
@@ -67,6 +71,8 @@ public record TravelAgencyListResponse(
                 person_max_count,
                 thumnbnailFileId,
                 like_count,
+                deleted,
+                sort,
                 auth);
     }
 
@@ -105,6 +111,8 @@ public record TravelAgencyListResponse(
                 dto.person_max_count(),
                 dto.thumnbnailFileId(),
                 dto.like_count(),
+                dto.deleted(),
+                dto.sort(),
                 chk
         );
 
