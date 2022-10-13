@@ -16,6 +16,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *  여행사 관리자 컨트롤러
@@ -100,6 +102,13 @@ public class AdmTravelAgencyController {
     }
 
 
+    /**
+     * 여행사 수정
+     * @param agencyId
+     * @param travelAgencyRequest
+     * @param tripUserPrincipal
+     * @return
+     */
     @PutMapping("/{agencyId}/form")
     public Response<Boolean> updateAgency(@PathVariable Long agencyId,
                                         @RequestBody TravelAgencyRequest travelAgencyRequest,
@@ -108,4 +117,5 @@ public class AdmTravelAgencyController {
         admTravelAgencyService.updateAgency(agencyId,tripUserPrincipal.role(), travelAgencyRequest.toDto());
         return Response.success(true);
     }
+
 }

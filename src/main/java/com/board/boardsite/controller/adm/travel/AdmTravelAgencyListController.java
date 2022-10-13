@@ -2,21 +2,19 @@ package com.board.boardsite.controller.adm.travel;
 
 
 import com.board.boardsite.domain.constant.SearchAdmTravelListType;
-import com.board.boardsite.domain.constant.SearchType;
+import com.board.boardsite.dto.request.adm.travel.TravelAgencyListRequest;
 import com.board.boardsite.dto.response.Response;
 import com.board.boardsite.dto.response.travel.TravelAgencyListResponse;
-import com.board.boardsite.dto.response.travel.TravelAgencyResponse;
 import com.board.boardsite.dto.security.TripUserPrincipal;
 import com.board.boardsite.service.adm.travel.AdmTravelAgencyListService;
-import com.board.boardsite.service.travel.TravelAgencyListService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.data.web.SortDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/adm/agency-trip")
@@ -70,6 +68,12 @@ public class AdmTravelAgencyListController {
     {
         admTravelAgencyListService.reDeleteTravelAgencyList(travelAgencyListId);
 
+        return Response.success(true);
+    }
+
+    @PostMapping("/new-travel-agency-list")
+    public Response<Boolean> saveTravelAgencyList(@Valid @RequestBody TravelAgencyListRequest TravelAgencyListRequest) {
+        admTravelAgencyListService.saveTravelAgencyList(TravelAgencyListRequest.toDto());
         return Response.success(true);
     }
 }

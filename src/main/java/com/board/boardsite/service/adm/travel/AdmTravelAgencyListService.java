@@ -4,10 +4,13 @@ package com.board.boardsite.service.adm.travel;
 import com.board.boardsite.domain.constant.SearchAdmTravelListType;
 import com.board.boardsite.domain.travel.TravelAgency;
 import com.board.boardsite.domain.travel.TravelAgencyList;
+import com.board.boardsite.domain.user.TripUser;
+import com.board.boardsite.dto.tour.TourDto;
 import com.board.boardsite.dto.travel.TravelAgencyListDto;
 import com.board.boardsite.exception.BoardSiteException;
 import com.board.boardsite.exception.ErrorCode;
 import com.board.boardsite.repository.adm.travel.AdmTravelAgencyListRepository;
+import com.board.boardsite.repository.adm.travel.AdmTravelAgencyRepository;
 import com.board.boardsite.repository.travel.TravelAgencyListRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -23,7 +26,8 @@ import java.time.format.DateTimeFormatter;
 public class AdmTravelAgencyListService {
 
     private final AdmTravelAgencyListRepository admTravelAgencyListRepository;
-    private final TravelAgencyListRepository travelAgencyListRepository;
+
+    private final AdmTravelAgencyRepository admTravelAgencyRepository;
 
     @Transactional(readOnly = true)
     public  Page<TravelAgencyListDto> travelAgencyTripList(SearchAdmTravelListType inputSearch, SearchAdmTravelListType dateSearch, String startAt, String endAt, String input, Pageable pageable) {
@@ -76,4 +80,9 @@ public class AdmTravelAgencyListService {
         travelAgencyList.setDeleted(false);
     }
 
+    @Transactional
+    public void saveTravelAgencyList(TravelAgencyListDto dto){
+        TravelAgency travelAgency = admTravelAgencyRepository.getReferenceById(dto.travel_agency_id());
+        admTravelAgencyListRepository.save(dto.toEntity(travelAgency));
+    }
 }
