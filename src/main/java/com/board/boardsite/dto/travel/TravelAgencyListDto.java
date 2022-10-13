@@ -5,6 +5,7 @@ import com.board.boardsite.domain.travel.TravelAgencyLike;
 import com.board.boardsite.domain.travel.TravelAgencyList;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
 public record TravelAgencyListDto(
@@ -130,7 +131,45 @@ public record TravelAgencyListDto(
                 false,
                 travelAgencyLike);
     }
-
+    public static TravelAgencyListDto of(
+            Long travel_agency_id,
+            String city,
+            String content,
+            int person_max_count,
+            int real_paid,
+            int sale_paid,
+            int sale_percent,
+            Long thumnbnailFileId,
+            String title,
+            String travel_end_at,
+            String travelRealTripAt)
+    {
+        return new TravelAgencyListDto(
+                null,
+                travel_agency_id,
+                city,
+                content,
+                0,
+                person_max_count,
+                0,
+                real_paid,
+                sale_paid,
+                sale_percent,
+                thumnbnailFileId,
+                null,
+                title,
+                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd")),
+                travel_end_at,
+                travelRealTripAt,
+                null,
+                null,
+                null,
+                null,
+                null,
+                0,
+                false,
+                null);
+    }
     public static TravelAgencyListDto from(TravelAgencyList entity) {
         return new TravelAgencyListDto(
                 entity.getId(),

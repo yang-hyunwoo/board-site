@@ -8,6 +8,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -38,20 +40,24 @@ public class TravelAgencyList extends AuditingFields {
 
     @Setter
     @Column(nullable = false , length = 50)
+    @NotEmpty(message = "도시 명을 입력하세요.")
     private String city;
 
     @Column(nullable = false , length = 8)
     private String travelStartAt; // 모집시작일
 
     @Column(nullable = false, length = 8)
+    @NotEmpty(message = "모집종료일을 입력하세요.")
     private String travelEndAt   ; // 모집종료일
 
 
     @Column(nullable = false, length = 8)
+    @NotEmpty(message = "여행시작일을 입력하세요.")
     private String travelRealTripAt   ; //여행시작일
 
     @Setter
     @Column(nullable = false , length = 100)
+    @NotEmpty(message = "제목을 입력하세요.")
     private String title;                           //제목
 
     @Setter
@@ -60,12 +66,15 @@ public class TravelAgencyList extends AuditingFields {
 
     @Setter
     @Column(nullable = false)
+    @NotNull(message = "비용 입력하세요.")
     private int realPaid;                           //실제 비용
 
     @Setter
     private int salePercent;                        //세일 퍼센트
 
     @Setter
+    @NotNull(message = "비용 입력하세요.")
+    @NotNull(message = "비용 입력하세요.")
     private int salePaid;                           //세일후 비용
 
     @Setter
@@ -73,6 +82,7 @@ public class TravelAgencyList extends AuditingFields {
 
     @Setter
     @Column(nullable = false)
+    @NotNull(message = "인원을 입력하세요.")
     private int personMaxCount;                     //예약 총 인원
 
     @Setter

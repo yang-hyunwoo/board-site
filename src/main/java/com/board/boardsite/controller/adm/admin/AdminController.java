@@ -21,7 +21,9 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -49,8 +51,11 @@ public class AdminController {
 
 
     @GetMapping("/auth")
-    public Response<String> auth(@AuthenticationPrincipal TripUserPrincipal tripUserPrincipal ){
-        return Response.success(tripUserPrincipal.role());
+    public Response<Map> auth(@AuthenticationPrincipal TripUserPrincipal tripUserPrincipal ){
+        HashMap auth = new HashMap();
+        auth.put("role",tripUserPrincipal.role());
+        auth.put("agencyId",tripUserPrincipal.travelAgencyId());
+        return Response.success(auth);
     }
 
 
