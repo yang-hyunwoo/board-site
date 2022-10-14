@@ -27,6 +27,8 @@ public interface AdmTravelAgencyListRepository extends JpaRepository<TravelAgenc
 
         Optional<TravelAgencyList> findByIdAndDeleted(Long travelAgencyListId , boolean deleted);
 
+        Optional<TravelAgencyList> findBySort(int sort);
+
 
         long countByTravelAgencyIdAndDeleted(Long travelAgencyId , boolean deleted);
 }

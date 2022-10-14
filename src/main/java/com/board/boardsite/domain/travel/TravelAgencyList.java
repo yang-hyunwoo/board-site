@@ -43,14 +43,18 @@ public class TravelAgencyList extends AuditingFields {
     @NotEmpty(message = "도시 명을 입력하세요.")
     private String city;
 
+    @Setter
     @Column(nullable = false , length = 8)
     private String travelStartAt; // 모집시작일
 
+
+    @Setter
     @Column(nullable = false, length = 8)
     @NotEmpty(message = "모집종료일을 입력하세요.")
     private String travelEndAt   ; // 모집종료일
 
 
+    @Setter
     @Column(nullable = false, length = 8)
     @NotEmpty(message = "여행시작일을 입력하세요.")
     private String travelRealTripAt   ; //여행시작일

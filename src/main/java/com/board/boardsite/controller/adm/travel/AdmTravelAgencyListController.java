@@ -2,6 +2,7 @@ package com.board.boardsite.controller.adm.travel;
 
 
 import com.board.boardsite.domain.constant.SearchAdmTravelListType;
+import com.board.boardsite.dto.request.adm.tour.TourRequest;
 import com.board.boardsite.dto.request.adm.travel.TravelAgencyListRequest;
 import com.board.boardsite.dto.response.Response;
 import com.board.boardsite.dto.response.travel.TravelAgencyListResponse;
@@ -62,6 +63,12 @@ public class AdmTravelAgencyListController {
     }
 
 
+    /**
+     * 여행 리스트 재등록
+     * @param travelAgencyListId
+     * @param tripUserPrincipal
+     * @return
+     */
     @PutMapping("/{travelAgencyListId}/re-delete")
     public Response<Boolean> reDeleteTravelAgencyList(@PathVariable Long travelAgencyListId,
                                                     @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal)
@@ -71,9 +78,54 @@ public class AdmTravelAgencyListController {
         return Response.success(true);
     }
 
+    /**
+     * 여행 리스트 신규 등록
+     * @param TravelAgencyListRequest
+     * @return
+     */
     @PostMapping("/new-travel-agency-list")
     public Response<Boolean> saveTravelAgencyList(@Valid @RequestBody TravelAgencyListRequest TravelAgencyListRequest) {
         admTravelAgencyListService.saveTravelAgencyList(TravelAgencyListRequest.toDto());
+        return Response.success(true);
+    }
+
+
+    /**
+     * 여행사 라스트 상세 조회
+     * @param travelAgencyListId
+     * @return
+     */
+    @GetMapping("{travelAgencyListId}")
+    public Response<TravelAgencyListResponse> travelAgencyListDetail(@PathVariable Long travelAgencyListId) {
+        var travelAgencyListDetail = TravelAgencyListResponse.from(admTravelAgencyListService.travelAgencyListDetail(travelAgencyListId));
+        return Response.success(travelAgencyListDetail);
+    }
+
+    /**
+     * 여행사 리스트 수정
+     * @param travelAgencyListId
+     * @param travelAgencyListRequest
+     * @param tripUserPrincipal
+     * @return
+     */
+    @PutMapping("/{travelAgencyListId}/form")
+    public Response<Boolean> updateTravelAgencyList(@PathVariable Long travelAgencyListId,
+                                        @RequestBody TravelAgencyListRequest travelAgencyListRequest,
+                                        @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal)
+    {
+        admTravelAgencyListService.updateTravelAgencyList(travelAgencyListId,travelAgencyListRequest.toDto());
+        return Response.success(true);
+    }
+
+
+    @PutMapping("/{travelAgencyListId}/{sort}/sort")
+    public Response<Boolean> sortTravelAgencyList(@PathVariable Long travelAgencyListId,
+                                                  @PathVariable  int sort ,
+                                                      @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal)
+    {
+        System.out.println("111111111111111111");
+        admTravelAgencyListService.sortTravelAgencyList(travelAgencyListId,sort);
+
         return Response.success(true);
     }
 }

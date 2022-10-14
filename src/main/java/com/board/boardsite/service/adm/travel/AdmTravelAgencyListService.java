@@ -2,6 +2,7 @@ package com.board.boardsite.service.adm.travel;
 
 
 import com.board.boardsite.domain.constant.SearchAdmTravelListType;
+import com.board.boardsite.domain.tour.Tour;
 import com.board.boardsite.domain.travel.TravelAgency;
 import com.board.boardsite.domain.travel.TravelAgencyList;
 import com.board.boardsite.domain.user.TripUser;
@@ -20,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -85,4 +87,51 @@ public class AdmTravelAgencyListService {
         TravelAgency travelAgency = admTravelAgencyRepository.getReferenceById(dto.travel_agency_id());
         admTravelAgencyListRepository.save(dto.toEntity(travelAgency));
     }
+
+    @Transactional
+    public TravelAgencyListDto travelAgencyListDetail(Long travelAgencyListId){
+        var travelAgencyListDetail =  admTravelAgencyListRepository.findById(travelAgencyListId).orElseThrow(()->new BoardSiteException(ErrorCode.TRAVEL_AGENCY_DETAIL_NOT_FOUND));
+
+        return Optional.of(travelAgencyListDetail).map(TravelAgencyListDto::from).orElseThrow(() -> new BoardSiteException(ErrorCode.TRAVEL_AGENCY_LIST_NOT_FOUND));
+    }
+
+
+    @Transactional
+    public void updateTravelAgencyList(Long TravelAgencyListId , TravelAgencyListDto dto){
+
+        TravelAgencyList travelAgencyList = admTravelAgencyListRepository.findById(TravelAgencyListId).orElseThrow(()->new BoardSiteException(ErrorCode.TRAVEL_AGENCY_LIST_NOT_FOUND));
+        TravelAgency travelAgency = admTravelAgencyRepository.findById(dto.travel_agency_id()).orElseThrow(()->new BoardSiteException(ErrorCode.TRAVEL_AGENCY_LIST_NOT_FOUND));
+        travelAgencyList.setTravelAgency(travelAgency);
+        travelAgencyList.setCity(dto.city());
+        travelAgencyList.setContent(dto.content());
+        travelAgencyList.setPersonMaxCount(dto.person_max_count());
+        travelAgencyList.setRealPaid(dto.real_paid());
+        travelAgencyList.setSalePaid(dto.sale_paid());
+        travelAgencyList.setSalePercent(dto.sale_percent());
+        travelAgencyList.setTitle(dto.title());
+        travelAgencyList.setTravelEndAt(dto.travel_end_at());
+        travelAgencyList.setTravelRealTripAt(dto.travelRealTripAt());
+        travelAgencyList.setThumnbnailFileId(dto.thumnbnailFileId());
+    }
+
+    @Transactional
+    public void sortTravelAgencyList(Long travelAgencyListId , int sort){
+        if(sort==0) {
+            var newTravelAgencyList =  admTravelAgencyListRepository.findById(travelAgencyListId).orElseThrow(()->new BoardSiteException(ErrorCode.TRAVEL_AGENCY_DETAIL_NOT_FOUND));
+            newTravelAgencyList.setSort(null);
+        } else {
+            var oldTravelAgencyList =  admTravelAgencyListRepository.findBySort(sort);
+            oldTravelAgencyList.ifPresent(travelAgencyList ->
+            {
+                travelAgencyList.setSort(null);
+            });
+
+            var newTravelAgencyList =  admTravelAgencyListRepository.findById(travelAgencyListId).orElseThrow(()->new BoardSiteException(ErrorCode.TRAVEL_AGENCY_DETAIL_NOT_FOUND));
+            newTravelAgencyList.setSort(sort);
+        }
+
+
+    }
+
+
 }
