@@ -15,7 +15,13 @@ public interface AdmTravelAgencyRepository extends JpaRepository<TravelAgency , 
 
     Page<TravelAgency> findByNameContaining(String TravelAgencyName , Pageable pageable);
 
+    Page<TravelAgency> findByIdAndNameContaining(Long travelAgencyId , String TravelAgencyName , Pageable pageable);
+
+
     Optional<TravelAgency> findByIdAndDeleted(Long travelAgencyId , boolean deleted);
+
+    Page<TravelAgency> findAllById(Long id , Pageable pageable);
+
 
     Optional<TravelAgency> findByName(String name);
 

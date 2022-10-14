@@ -3,6 +3,7 @@ package com.board.boardsite.service.adm.travel;
 import com.board.boardsite.domain.tour.Tour;
 import com.board.boardsite.domain.travel.TravelAgency;
 import com.board.boardsite.domain.user.TripUser;
+import com.board.boardsite.dto.security.TripUserPrincipal;
 import com.board.boardsite.dto.tour.TourDto;
 import com.board.boardsite.dto.travel.TravelAgencyDto;
 import com.board.boardsite.exception.BoardSiteException;
@@ -28,12 +29,19 @@ public class AdmTravelAgencyService {
 
 
     @Transactional(readOnly = true)
-    public Page<TravelAgencyDto> admTravelAgencyList(String travelAgencyName , Pageable pageable) {
+    public Page<TravelAgencyDto> admTravelAgencyList(String travelAgencyName ,String role , Long traveAgencyId, Pageable pageable) {
+        if(role.equals("SUPER")) {
+            if (travelAgencyName == null || travelAgencyName.isBlank()) {
+                return admTravelAgencyRepository.findAll(pageable).map(TravelAgencyDto::from);
+            }
+            return admTravelAgencyRepository.findByNameContaining(travelAgencyName, pageable).map(TravelAgencyDto::from);
+        } else {
+            if (travelAgencyName == null || travelAgencyName.isBlank()) {
+                return admTravelAgencyRepository.findAllById(traveAgencyId , pageable).map(TravelAgencyDto::from);
+            }
+            return admTravelAgencyRepository.findByIdAndNameContaining(traveAgencyId,travelAgencyName, pageable).map(TravelAgencyDto::from);
 
-        if (travelAgencyName == null || travelAgencyName.isBlank()) {
-            return admTravelAgencyRepository.findAll(pageable).map(TravelAgencyDto::from);
         }
-        return admTravelAgencyRepository.findByNameContaining(travelAgencyName , pageable).map(TravelAgencyDto::from);
     }
 
     @Transactional
@@ -61,8 +69,16 @@ public class AdmTravelAgencyService {
     }
 
     @Transactional(readOnly = true)
-    public TravelAgencyDto travelAgencyDetail(Long travelAgencyId) {
-        return admTravelAgencyRepository.findById(travelAgencyId).map(TravelAgencyDto::from).orElseThrow(()->new BoardSiteException(ErrorCode.TRAVEL_AGENCY_NOT_FOUND));
+    public TravelAgencyDto travelAgencyDetail(Long travelAgencyId, TripUserPrincipal tripUserPrincipal) {
+        if(tripUserPrincipal.role().equals("SUPER")){
+            return admTravelAgencyRepository.findById(travelAgencyId).map(TravelAgencyDto::from).orElseThrow(()->new BoardSiteException(ErrorCode.TRAVEL_AGENCY_NOT_FOUND));
+        } else {
+            if(tripUserPrincipal.travelAgencyId()!=travelAgencyId){
+                throw new BoardSiteException(ErrorCode.NOT_PERMITTION);
+            }
+            return admTravelAgencyRepository.findById(travelAgencyId).map(TravelAgencyDto::from).orElseThrow(()->new BoardSiteException(ErrorCode.TRAVEL_AGENCY_NOT_FOUND));
+
+        }
     }
 
     @Transactional
