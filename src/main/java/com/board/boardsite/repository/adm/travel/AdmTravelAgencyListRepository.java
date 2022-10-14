@@ -14,16 +14,28 @@ public interface AdmTravelAgencyListRepository extends JpaRepository<TravelAgenc
 
         Page<TravelAgencyList> findByCreatedAtBetweenOrderById(LocalDateTime startDate , LocalDateTime endDate , Pageable pageable );
 
+        Page<TravelAgencyList> findByTravelAgency_IdAndCreatedAtBetweenOrderById(Long agencyId , LocalDateTime startDate , LocalDateTime endDate , Pageable pageable );
+
         Page<TravelAgencyList> findByTitleContainingAndCreatedAtBetweenOrderById(String title , LocalDateTime startDate , LocalDateTime endDate , Pageable pageable );
+
+        Page<TravelAgencyList> findByTravelAgency_IdAndTitleContainingAndCreatedAtBetweenOrderById(Long agencyId , String title , LocalDateTime startDate , LocalDateTime endDate , Pageable pageable );
 
         Page<TravelAgencyList> findByTravelAgencyNameContainingAndCreatedAtBetweenOrderById(String title , LocalDateTime startDate , LocalDateTime endDate , Pageable pageable );
 
+        Page<TravelAgencyList> findByTravelAgency_IdAndTravelAgencyNameContainingAndCreatedAtBetweenOrderById(Long agencyId , String title , LocalDateTime startDate , LocalDateTime endDate , Pageable pageable );
+
         Page<TravelAgencyList> findByTravelRealTripAtBetweenOrderById(String startDate , String endDate , Pageable pageable );
+
+        Page<TravelAgencyList> findByTravelAgency_IdAndTravelRealTripAtBetweenOrderById(Long agencyId , String startDate , String endDate , Pageable pageable );
 
 
         Page<TravelAgencyList> findByTitleContainingAndTravelRealTripAtBetweenOrderById(String title , String startDate , String endDate , Pageable pageable );
 
+        Page<TravelAgencyList> findByTravelAgency_IdAndTitleContainingAndTravelRealTripAtBetweenOrderById(Long agencyId , String title , String startDate , String endDate , Pageable pageable );
+
         Page<TravelAgencyList> findByTravelAgencyNameContainingAndTravelRealTripAtBetweenOrderById(String title , String startDate , String endDate , Pageable pageable );
+
+        Page<TravelAgencyList> findByTravelAgency_IdAndTravelAgencyNameContainingAndTravelRealTripAtBetweenOrderById(Long agencyId , String title , String startDate , String endDate , Pageable pageable );
 
         Optional<TravelAgencyList> findByIdAndDeleted(Long travelAgencyListId , boolean deleted);
 

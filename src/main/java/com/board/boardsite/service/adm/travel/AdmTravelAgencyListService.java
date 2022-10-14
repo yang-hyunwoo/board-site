@@ -6,6 +6,7 @@ import com.board.boardsite.domain.tour.Tour;
 import com.board.boardsite.domain.travel.TravelAgency;
 import com.board.boardsite.domain.travel.TravelAgencyList;
 import com.board.boardsite.domain.user.TripUser;
+import com.board.boardsite.dto.security.TripUserPrincipal;
 import com.board.boardsite.dto.tour.TourDto;
 import com.board.boardsite.dto.travel.TravelAgencyListDto;
 import com.board.boardsite.exception.BoardSiteException;
@@ -32,38 +33,68 @@ public class AdmTravelAgencyListService {
     private final AdmTravelAgencyRepository admTravelAgencyRepository;
 
     @Transactional(readOnly = true)
-    public  Page<TravelAgencyListDto> travelAgencyTripList(SearchAdmTravelListType inputSearch, SearchAdmTravelListType dateSearch, String startAt, String endAt, String input, Pageable pageable) {
+    public  Page<TravelAgencyListDto> travelAgencyTripList(SearchAdmTravelListType inputSearch,
+                                                           SearchAdmTravelListType dateSearch,
+                                                           String startAt,
+                                                           String endAt,
+                                                           String input,
+                                                           TripUserPrincipal tripUserPrincipal,
+                                                           Pageable pageable) {
         //작성일 기준
         String localDateStartDate = startAt+" 00:00:00.000000";
         String localDateStartDate2 = endAt+" 23:59:59.999999";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS");
         LocalDateTime dateTime = LocalDateTime.parse(localDateStartDate, formatter);
         LocalDateTime dateTime2 = LocalDateTime.parse(localDateStartDate2, formatter);
-
-        //작성일 기준
-        if(dateSearch.toString().equals("CREATEDAT")) {
-        if (input == null || input.isBlank()) {
-            return admTravelAgencyListRepository.findByCreatedAtBetweenOrderById(dateTime,dateTime2,pageable).map(TravelAgencyListDto::from);
-        } else {
-            if(inputSearch.toString().equals("TITLE")){ //제목으로 검색 시
-                return admTravelAgencyListRepository.findByTitleContainingAndCreatedAtBetweenOrderById(input,dateTime,dateTime2,pageable).map(TravelAgencyListDto::from);
-            } else {    //여행사 이름으로 검색 시
-                return admTravelAgencyListRepository.findByTravelAgencyNameContainingAndCreatedAtBetweenOrderById(input,dateTime,dateTime2,pageable).map(TravelAgencyListDto::from);
-            }
-        }
-        //출발일 기준
-        } else {
-            if (input == null || input.isBlank()) {
-                return admTravelAgencyListRepository.findByTravelRealTripAtBetweenOrderById(startAt.replaceAll("-",""),endAt.replaceAll("-",""),pageable).map(TravelAgencyListDto::from);
-            } else {
-                if(inputSearch.toString().equals("TITLE")){
-                    return admTravelAgencyListRepository.findByTitleContainingAndTravelRealTripAtBetweenOrderById(input,startAt.replaceAll("-",""),endAt.replaceAll("-",""),pageable).map(TravelAgencyListDto::from);
+        if(tripUserPrincipal.role().equals("SUPER")) {
+            //작성일 기준
+            if (dateSearch.toString().equals("CREATEDAT")) {
+                if (input == null || input.isBlank()) {
+                    return admTravelAgencyListRepository.findByCreatedAtBetweenOrderById(dateTime, dateTime2, pageable).map(TravelAgencyListDto::from);
                 } else {
-                    return admTravelAgencyListRepository.findByTravelAgencyNameContainingAndTravelRealTripAtBetweenOrderById(input,startAt.replaceAll("-",""),endAt.replaceAll("-",""),pageable).map(TravelAgencyListDto::from);
+                    if (inputSearch.toString().equals("TITLE")) { //제목으로 검색 시
+                        return admTravelAgencyListRepository.findByTitleContainingAndCreatedAtBetweenOrderById(input, dateTime, dateTime2, pageable).map(TravelAgencyListDto::from);
+                    } else {    //여행사 이름으로 검색 시
+                        return admTravelAgencyListRepository.findByTravelAgencyNameContainingAndCreatedAtBetweenOrderById(input, dateTime, dateTime2, pageable).map(TravelAgencyListDto::from);
+                    }
+                }
+                //출발일 기준
+            } else {
+                if (input == null || input.isBlank()) {
+                    return admTravelAgencyListRepository.findByTravelRealTripAtBetweenOrderById(startAt.replaceAll("-", ""), endAt.replaceAll("-", ""), pageable).map(TravelAgencyListDto::from);
+                } else {
+                    if (inputSearch.toString().equals("TITLE")) {
+                        return admTravelAgencyListRepository.findByTitleContainingAndTravelRealTripAtBetweenOrderById(input, startAt.replaceAll("-", ""), endAt.replaceAll("-", ""), pageable).map(TravelAgencyListDto::from);
+                    } else {
+                        return admTravelAgencyListRepository.findByTravelAgencyNameContainingAndTravelRealTripAtBetweenOrderById(input, startAt.replaceAll("-", ""), endAt.replaceAll("-", ""), pageable).map(TravelAgencyListDto::from);
+                    }
+                }
+            }
+        }else {
+            //작성일 기준
+            if (dateSearch.toString().equals("CREATEDAT")) {
+                if (input == null || input.isBlank()) {
+                    return admTravelAgencyListRepository.findByTravelAgency_IdAndCreatedAtBetweenOrderById(tripUserPrincipal.travelAgencyId(),dateTime, dateTime2, pageable).map(TravelAgencyListDto::from);
+                } else {
+                    if (inputSearch.toString().equals("TITLE")) { //제목으로 검색 시
+                        return admTravelAgencyListRepository.findByTravelAgency_IdAndTitleContainingAndCreatedAtBetweenOrderById(tripUserPrincipal.travelAgencyId(),input, dateTime, dateTime2, pageable).map(TravelAgencyListDto::from);
+                    } else {    //여행사 이름으로 검색 시
+                        return admTravelAgencyListRepository.findByTravelAgency_IdAndTravelAgencyNameContainingAndCreatedAtBetweenOrderById(tripUserPrincipal.travelAgencyId() , input, dateTime, dateTime2, pageable).map(TravelAgencyListDto::from);
+                    }
+                }
+                //출발일 기준
+            } else {
+                if (input == null || input.isBlank()) {
+                    return admTravelAgencyListRepository.findByTravelAgency_IdAndTravelRealTripAtBetweenOrderById(tripUserPrincipal.travelAgencyId(), startAt.replaceAll("-", ""), endAt.replaceAll("-", ""), pageable).map(TravelAgencyListDto::from);
+                } else {
+                    if (inputSearch.toString().equals("TITLE")) {
+                        return admTravelAgencyListRepository.findByTravelAgency_IdAndTitleContainingAndTravelRealTripAtBetweenOrderById(tripUserPrincipal.travelAgencyId(),input, startAt.replaceAll("-", ""), endAt.replaceAll("-", ""), pageable).map(TravelAgencyListDto::from);
+                    } else {
+                        return admTravelAgencyListRepository.findByTravelAgency_IdAndTravelAgencyNameContainingAndTravelRealTripAtBetweenOrderById(tripUserPrincipal.travelAgencyId(),input, startAt.replaceAll("-", ""), endAt.replaceAll("-", ""), pageable).map(TravelAgencyListDto::from);
+                    }
                 }
             }
         }
-
     }
 
     @Transactional
@@ -89,10 +120,20 @@ public class AdmTravelAgencyListService {
     }
 
     @Transactional
-    public TravelAgencyListDto travelAgencyListDetail(Long travelAgencyListId){
-        var travelAgencyListDetail =  admTravelAgencyListRepository.findById(travelAgencyListId).orElseThrow(()->new BoardSiteException(ErrorCode.TRAVEL_AGENCY_DETAIL_NOT_FOUND));
+    public TravelAgencyListDto travelAgencyListDetail(Long travelAgencyListId , TripUserPrincipal tripUserPrincipal){
+        if(tripUserPrincipal.role().equals("SUPER")) {
+            var travelAgencyListDetail = admTravelAgencyListRepository.findById(travelAgencyListId).orElseThrow(() -> new BoardSiteException(ErrorCode.TRAVEL_AGENCY_DETAIL_NOT_FOUND));
 
-        return Optional.of(travelAgencyListDetail).map(TravelAgencyListDto::from).orElseThrow(() -> new BoardSiteException(ErrorCode.TRAVEL_AGENCY_LIST_NOT_FOUND));
+            return Optional.of(travelAgencyListDetail).map(TravelAgencyListDto::from).orElseThrow(() -> new BoardSiteException(ErrorCode.TRAVEL_AGENCY_LIST_NOT_FOUND));
+        } else {
+            var travelAgencyListDetail = admTravelAgencyListRepository.findById(travelAgencyListId).orElseThrow(() -> new BoardSiteException(ErrorCode.TRAVEL_AGENCY_DETAIL_NOT_FOUND));
+            if(travelAgencyListDetail.getTravelAgency().getId()!=tripUserPrincipal.travelAgencyId()){
+                throw new BoardSiteException(ErrorCode.NOT_PERMITTION);
+            }
+
+            return Optional.of(travelAgencyListDetail).map(TravelAgencyListDto::from).orElseThrow(() -> new BoardSiteException(ErrorCode.TRAVEL_AGENCY_LIST_NOT_FOUND));
+
+        }
     }
 
 

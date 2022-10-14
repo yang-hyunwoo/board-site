@@ -40,8 +40,9 @@ public class AdmTravelAgencyController {
      */
     @GetMapping("/list")
     public Response<Page<TravelAgencyResponse>> admTravelAgencyList(@RequestParam(required = false) String travelAgencyName,
+                                                                    @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal,
                                                                  @PageableDefault(size=12,sort="name",direction= Sort.Direction.DESC) Pageable pageable){
-        Page<TravelAgencyResponse> travelAgencyResponses = admTravelAgencyService.admTravelAgencyList(travelAgencyName , pageable).map(TravelAgencyResponse::from);
+        Page<TravelAgencyResponse> travelAgencyResponses = admTravelAgencyService.admTravelAgencyList(travelAgencyName,tripUserPrincipal.role(),tripUserPrincipal.travelAgencyId(), pageable).map(TravelAgencyResponse::from);
         return Response.success(travelAgencyResponses);
     }
 
@@ -52,8 +53,8 @@ public class AdmTravelAgencyController {
      * @return
      */
     @GetMapping("/{travelAgencyId}")
-    public Response<TravelAgencyResponse> travelAgencyDetail(@PathVariable Long travelAgencyId){
-        TravelAgencyResponse travelAgencyDto= TravelAgencyResponse.from(admTravelAgencyService.travelAgencyDetail(travelAgencyId));
+    public Response<TravelAgencyResponse> travelAgencyDetail(@PathVariable Long travelAgencyId ,  @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal){
+        TravelAgencyResponse travelAgencyDto= TravelAgencyResponse.from(admTravelAgencyService.travelAgencyDetail(travelAgencyId,tripUserPrincipal));
         return Response.success(travelAgencyDto);
     }
 

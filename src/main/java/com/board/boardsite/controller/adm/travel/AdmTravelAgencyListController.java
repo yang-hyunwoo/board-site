@@ -41,9 +41,10 @@ public class AdmTravelAgencyListController {
                                                                      @RequestParam String startedAt,
                                                                      @RequestParam String endAt,
                                                                      @RequestParam(required = false) String input,
+                                                                     @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal,
                                                                      @PageableDefault(size=10)Pageable pageable){
 
-        Page<TravelAgencyListResponse> travelAgencyListResponses = admTravelAgencyListService.travelAgencyTripList(inputSearch,dateSearch,startedAt,endAt,input , pageable).map(TravelAgencyListResponse::from);
+        Page<TravelAgencyListResponse> travelAgencyListResponses = admTravelAgencyListService.travelAgencyTripList(inputSearch,dateSearch,startedAt,endAt,input ,tripUserPrincipal, pageable).map(TravelAgencyListResponse::from);
         return Response.success(travelAgencyListResponses);
     }
 
@@ -96,8 +97,8 @@ public class AdmTravelAgencyListController {
      * @return
      */
     @GetMapping("{travelAgencyListId}")
-    public Response<TravelAgencyListResponse> travelAgencyListDetail(@PathVariable Long travelAgencyListId) {
-        var travelAgencyListDetail = TravelAgencyListResponse.from(admTravelAgencyListService.travelAgencyListDetail(travelAgencyListId));
+    public Response<TravelAgencyListResponse> travelAgencyListDetail(@PathVariable Long travelAgencyListId, @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal) {
+        var travelAgencyListDetail = TravelAgencyListResponse.from(admTravelAgencyListService.travelAgencyListDetail(travelAgencyListId,tripUserPrincipal));
         return Response.success(travelAgencyListDetail);
     }
 
@@ -123,7 +124,6 @@ public class AdmTravelAgencyListController {
                                                   @PathVariable  int sort ,
                                                       @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal)
     {
-        System.out.println("111111111111111111");
         admTravelAgencyListService.sortTravelAgencyList(travelAgencyListId,sort);
 
         return Response.success(true);
