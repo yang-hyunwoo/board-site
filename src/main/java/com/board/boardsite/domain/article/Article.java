@@ -22,7 +22,6 @@ import java.util.Set;
         @Index(columnList = "createdBy")
 })
 @Entity
-@Where(clause = "deleted = false")
 public class Article extends AuditingFields {
 
     @Id

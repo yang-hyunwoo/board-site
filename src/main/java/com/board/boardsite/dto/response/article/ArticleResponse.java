@@ -11,6 +11,7 @@ public record ArticleResponse(
         String content ,
         String email,
         int readCount,
+        boolean deleted,
         String nickName
 ) {
 
@@ -20,6 +21,7 @@ public record ArticleResponse(
                                      String content,
                                      String email,
                                      int readCount,
+                                     boolean deleted,
                                      String nickName) {
         return new ArticleResponse(id,
                 createdAt,
@@ -27,6 +29,7 @@ public record ArticleResponse(
                 content,
                 email,
                 readCount,
+                deleted,
                 nickName);
     }
 
@@ -38,6 +41,7 @@ public record ArticleResponse(
                 dto.content(),
                 dto.tripUser().email(),
                 dto.readCount(),
+                dto.deleted(),
                 dto.tripUser().nickName()
         );
     }
