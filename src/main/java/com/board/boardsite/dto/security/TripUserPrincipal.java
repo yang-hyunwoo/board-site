@@ -1,6 +1,7 @@
 package com.board.boardsite.dto.security;
 
 import com.board.boardsite.domain.constant.Gender;
+import com.board.boardsite.domain.travel.TravelAgency;
 import com.board.boardsite.dto.user.TripUserDto;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;

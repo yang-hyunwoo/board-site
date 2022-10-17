@@ -127,7 +127,7 @@ public class AdmTravelAgencyListService {
             return Optional.of(travelAgencyListDetail).map(TravelAgencyListDto::from).orElseThrow(() -> new BoardSiteException(ErrorCode.TRAVEL_AGENCY_LIST_NOT_FOUND));
         } else {
             var travelAgencyListDetail = admTravelAgencyListRepository.findById(travelAgencyListId).orElseThrow(() -> new BoardSiteException(ErrorCode.TRAVEL_AGENCY_DETAIL_NOT_FOUND));
-            if(travelAgencyListDetail.getTravelAgency().getId()!=tripUserPrincipal.travelAgencyId()){
+            if(travelAgencyListDetail.getTravelAgency().getId().equals(tripUserPrincipal.travelAgencyId())){
                 throw new BoardSiteException(ErrorCode.NOT_PERMITTION);
             }
 
