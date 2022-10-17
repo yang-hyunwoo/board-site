@@ -1,6 +1,7 @@
 package com.board.boardsite.dto.request.user;
 
 import com.board.boardsite.domain.constant.Gender;
+import com.board.boardsite.domain.travel.TravelAgency;
 import com.board.boardsite.dto.user.TripUserDto;
 
 public record TripUserUpdateRequest(

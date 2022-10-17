@@ -74,6 +74,7 @@ public class TripUser extends AuditingFields {
     @Setter
     private Long profileId;
 
+    @Setter
     private boolean authChk;
 
     @Setter
