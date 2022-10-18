@@ -10,8 +10,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -28,11 +31,18 @@ public class AuthenticationConfig {
 
     private final TripUserService tripUserService;
 
+
+
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring().antMatchers(HttpMethod.POST, "/api/trip/users/login", "/api/trip/users/join","/api/adm/admin/login");
+    }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws  Exception {
         return http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/chat/detail","/**","/api/common/**","/api/trip/agency-trip/**","/api/trip/agency/**","/api/trip/articles/**","/api/trip/articles","/api/trip/users/join","/api/trip/users/login","/api/trip/users/confirm-email","/api/adm/admin/login","/api/adm/admin/list").permitAll()
+                .antMatchers("/api/chat/detail","/**","/api/common/**","/api/trip/agency-trip/**","/api/trip/agency/**","/api/trip/articles/**","/api/trip/articles","/api/trip/users/confirm-email","/api/adm/admin/list").permitAll()
                 .antMatchers("/api/admin/**").hasRole("SUPER")
                 .antMatchers("/api/admin/**").hasRole("ADMIN")
                 .antMatchers("/api/**","/api/tirp/articles/new-article").authenticated()
