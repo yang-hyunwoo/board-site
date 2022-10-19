@@ -2,7 +2,6 @@ package com.board.boardsite.dto.response.chat;
 
 
 
-import com.board.boardsite.dto.chat.ChatRoomDto;
 import com.board.boardsite.dto.chat.ChatRoomMessageDto;
 import com.board.boardsite.dto.security.TripUserPrincipal;
 import org.springframework.security.core.Authentication;

@@ -1,13 +1,11 @@
 package com.board.boardsite.service.adm.admin;
 
 import com.board.boardsite.domain.user.TripUser;
-import com.board.boardsite.dto.security.TripUserPrincipal;
 import com.board.boardsite.dto.travel.TravelAgencyDto;
 import com.board.boardsite.dto.user.EmailAuthDto;
 import com.board.boardsite.dto.user.TripUserDto;
 import com.board.boardsite.exception.BoardSiteException;
 import com.board.boardsite.exception.ErrorCode;
-import com.board.boardsite.repository.travel.TravelAgencyListRepository;
 import com.board.boardsite.repository.travel.TravelAgencyRepository;
 import com.board.boardsite.repository.user.EmailAuthRepository;
 import com.board.boardsite.repository.user.TripUserRepository;
@@ -15,12 +13,9 @@ import com.board.boardsite.service.user.EmailService;
 import com.board.boardsite.support.JwtTokenUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;

@@ -1,26 +1,14 @@
 package com.board.boardsite.controller.adm.admin;
 
-import com.board.boardsite.dto.request.user.TripUserJoinRequest;
 import com.board.boardsite.dto.request.user.TripUserLoginRequest;
 import com.board.boardsite.dto.response.Response;
-import com.board.boardsite.dto.response.tour.TourResponse;
 import com.board.boardsite.dto.response.travel.TravelAgencyResponse;
-import com.board.boardsite.dto.response.user.TripUserJoinResponse;
 import com.board.boardsite.dto.response.user.TripUserLoginResponse;
 import com.board.boardsite.dto.security.TripUserPrincipal;
-import com.board.boardsite.dto.user.TripUserDto;
 import com.board.boardsite.service.adm.admin.AdminService;
-import com.board.boardsite.service.travel.TravelAgencyService;
-import com.board.boardsite.service.user.TripUserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

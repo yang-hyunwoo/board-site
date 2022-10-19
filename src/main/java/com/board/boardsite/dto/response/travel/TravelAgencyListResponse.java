@@ -6,7 +6,6 @@ import com.board.boardsite.dto.travel.TravelAgencyListDto;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 

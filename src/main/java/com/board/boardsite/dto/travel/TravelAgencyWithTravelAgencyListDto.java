@@ -1,11 +1,7 @@
 package com.board.boardsite.dto.travel;
 
 import com.board.boardsite.domain.travel.TravelAgency;
-
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public record TravelAgencyWithTravelAgencyListDto(
         Long id,

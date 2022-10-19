@@ -1,18 +1,13 @@
 package com.board.boardsite.dto.security;
 
 import com.board.boardsite.domain.constant.Gender;
-import com.board.boardsite.domain.travel.TravelAgency;
 import com.board.boardsite.dto.user.TripUserDto;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public record TripUserPrincipal(
         Long id,

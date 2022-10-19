@@ -5,7 +5,6 @@ import com.board.boardsite.domain.article.ArticleComment;
 import com.board.boardsite.domain.user.TripUser;
 import com.board.boardsite.dto.user.TripUserDto;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 public record ArticleCommentDto(

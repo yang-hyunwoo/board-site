@@ -3,16 +3,9 @@ package com.board.boardsite.controller.tour;
 
 
 import com.board.boardsite.domain.constant.SearchTourType;
-import com.board.boardsite.domain.constant.SearchType;
-import com.board.boardsite.dto.request.adm.tour.TourRequest;
-import com.board.boardsite.dto.request.article.ArticleRequest;
 import com.board.boardsite.dto.response.Response;
-import com.board.boardsite.dto.response.article.ArticleResponse;
-import com.board.boardsite.dto.response.article.ArticleWithCommentsResponse;
 import com.board.boardsite.dto.response.tour.TourResponse;
-import com.board.boardsite.dto.response.travel.TravelAgencyResponse;
 import com.board.boardsite.dto.security.TripUserPrincipal;
-import com.board.boardsite.service.aritcle.ArticleService;
 import com.board.boardsite.service.tour.TourService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -22,7 +15,6 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 

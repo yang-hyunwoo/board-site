@@ -2,9 +2,7 @@ package com.board.boardsite.controller.adm.tour;
 
 import com.board.boardsite.domain.constant.SearchTourType;
 import com.board.boardsite.dto.request.adm.tour.TourRequest;
-import com.board.boardsite.dto.request.tour.TourCommentRequest;
 import com.board.boardsite.dto.response.Response;
-import com.board.boardsite.dto.response.article.ArticleResponse;
 import com.board.boardsite.dto.response.tour.TourResponse;
 import com.board.boardsite.dto.security.TripUserPrincipal;
 import com.board.boardsite.service.adm.tour.AdmTourService;

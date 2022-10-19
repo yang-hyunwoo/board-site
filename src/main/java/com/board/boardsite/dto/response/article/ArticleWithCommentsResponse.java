@@ -1,6 +1,5 @@
 package com.board.boardsite.dto.response.article;
 
-import com.board.boardsite.dto.article.ArticleCommentDto;
 import com.board.boardsite.dto.article.ArticleWithCommentsDto;
 import com.board.boardsite.dto.security.TripUserPrincipal;
 

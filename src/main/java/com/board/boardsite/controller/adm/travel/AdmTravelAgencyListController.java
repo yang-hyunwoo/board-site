@@ -2,7 +2,6 @@ package com.board.boardsite.controller.adm.travel;
 
 
 import com.board.boardsite.domain.constant.SearchAdmTravelListType;
-import com.board.boardsite.dto.request.adm.tour.TourRequest;
 import com.board.boardsite.dto.request.adm.travel.TravelAgencyListRequest;
 import com.board.boardsite.dto.response.Response;
 import com.board.boardsite.dto.response.travel.TravelAgencyListResponse;

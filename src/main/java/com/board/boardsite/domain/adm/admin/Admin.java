@@ -2,7 +2,6 @@ package com.board.boardsite.domain.adm.admin;
 
 
 import com.board.boardsite.domain.AuditingFields;
-import com.board.boardsite.domain.constant.Gender;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -11,7 +10,6 @@ import org.hibernate.annotations.Where;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 

@@ -1,7 +1,6 @@
 package com.board.boardsite.service.user;
 
 import com.board.boardsite.domain.user.TripUser;
-import com.board.boardsite.dto.request.user.TripUserJoinRequest;
 import com.board.boardsite.dto.security.TripUserPrincipal;
 import com.board.boardsite.dto.user.EmailAuthDto;
 import com.board.boardsite.dto.user.TripUserDto;
@@ -15,7 +14,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.time.LocalDateTime;
 import java.util.UUID;
 

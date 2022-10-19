@@ -6,7 +6,6 @@ import com.board.boardsite.domain.user.TripUserHistory;
 import com.board.boardsite.repository.user.TripUserHistoryRepository;
 import com.board.boardsite.support.BeanUtils;
 import org.springframework.stereotype.Component;
-
 import javax.persistence.PostPersist;
 import javax.persistence.PostUpdate;
 

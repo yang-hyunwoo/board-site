@@ -5,14 +5,10 @@ import com.board.boardsite.dto.security.TripUserPrincipal;
 import com.board.boardsite.dto.travel.TravelAgencyListDto;
 import com.board.boardsite.repository.travel.TravelAgencyListRepository;
 import com.board.boardsite.repository.travel.TravelAgencyReservationRepository;
-import com.querydsl.core.Tuple;
-import com.sun.xml.bind.v2.TODO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.management.relation.Role;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;

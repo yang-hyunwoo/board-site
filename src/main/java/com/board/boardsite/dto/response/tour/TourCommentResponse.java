@@ -1,12 +1,10 @@
 package com.board.boardsite.dto.response.tour;
 
-import com.board.boardsite.dto.article.ArticleCommentDto;
 import com.board.boardsite.dto.security.TripUserPrincipal;
 import com.board.boardsite.dto.tour.TourCommentDto;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-
 import java.time.LocalDateTime;
 import java.util.Optional;
 

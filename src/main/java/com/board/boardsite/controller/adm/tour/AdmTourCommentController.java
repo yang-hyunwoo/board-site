@@ -5,7 +5,6 @@ import com.board.boardsite.dto.response.Response;
 import com.board.boardsite.dto.response.tour.TourCommentResponse;
 import com.board.boardsite.dto.security.TripUserPrincipal;
 import com.board.boardsite.service.adm.tour.AdmTourCommentService;
-import com.board.boardsite.service.tour.TourCommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -7,7 +7,6 @@ import com.board.boardsite.domain.user.TripUser;
 import com.board.boardsite.dto.travel.TravelAgencyDto;
 import com.board.boardsite.dto.travel.TravelAgencyListDto;
 import com.board.boardsite.dto.user.AdmTripUserDto;
-import com.board.boardsite.dto.user.TripUserDto;
 
 import java.time.LocalDateTime;
 

@@ -3,7 +3,6 @@ package com.board.boardsite.dto.travel;
 import com.board.boardsite.domain.travel.TravelAgency;
 import com.board.boardsite.domain.travel.TravelAgencyLike;
 import com.board.boardsite.domain.travel.TravelAgencyList;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Set;

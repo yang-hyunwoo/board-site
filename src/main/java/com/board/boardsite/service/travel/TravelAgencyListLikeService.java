@@ -1,8 +1,6 @@
 package com.board.boardsite.service.travel;
 
-import com.board.boardsite.dto.travel.TravelAgencyDto;
 import com.board.boardsite.dto.travel.TravelAgencyLikeDto;
-import com.board.boardsite.dto.travel.TravelAgencyListDto;
 import com.board.boardsite.repository.travel.TravelAgencyListLikeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

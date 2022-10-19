@@ -1,9 +1,7 @@
 package com.board.boardsite.controller.adm.travel;
 
-import com.board.boardsite.dto.request.adm.tour.TourRequest;
 import com.board.boardsite.dto.request.adm.travel.TravelAgencyRequest;
 import com.board.boardsite.dto.response.Response;
-import com.board.boardsite.dto.response.tour.TourResponse;
 import com.board.boardsite.dto.response.travel.TravelAgencyResponse;
 import com.board.boardsite.dto.security.TripUserPrincipal;
 import com.board.boardsite.service.adm.travel.AdmTravelAgencyService;
@@ -16,8 +14,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  *  여행사 관리자 컨트롤러

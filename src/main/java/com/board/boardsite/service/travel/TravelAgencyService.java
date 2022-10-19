@@ -2,7 +2,6 @@ package com.board.boardsite.service.travel;
 
 import com.board.boardsite.domain.travel.TravelAgency;
 import com.board.boardsite.domain.travel.TravelAgencyList;
-import com.board.boardsite.dto.article.ArticleDto;
 import com.board.boardsite.dto.travel.TravelAgencyDto;
 import com.board.boardsite.dto.travel.TravelAgencyWithTravelAgencyListDto;
 import com.board.boardsite.exception.BoardSiteException;
@@ -14,7 +13,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

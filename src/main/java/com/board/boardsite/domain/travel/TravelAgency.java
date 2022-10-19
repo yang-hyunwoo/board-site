@@ -1,16 +1,12 @@
 package com.board.boardsite.domain.travel;
 
 import com.board.boardsite.domain.AuditingFields;
-import com.board.boardsite.domain.article.ArticleComment;
-import com.board.boardsite.domain.user.TripUser;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.*;
 
 @Getter

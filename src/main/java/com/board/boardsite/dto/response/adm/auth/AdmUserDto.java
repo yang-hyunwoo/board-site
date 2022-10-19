@@ -1,11 +1,9 @@
 package com.board.boardsite.dto.response.adm.auth;
 
-import com.board.boardsite.domain.constant.Gender;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @Getter

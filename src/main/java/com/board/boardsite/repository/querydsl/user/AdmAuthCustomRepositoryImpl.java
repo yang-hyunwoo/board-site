@@ -1,24 +1,14 @@
 package com.board.boardsite.repository.querydsl.user;
 
 import com.board.boardsite.domain.travel.QTravelAgency;
-import com.board.boardsite.domain.travel.TravelAgency;
 import com.board.boardsite.domain.user.QTripUser;
 import com.board.boardsite.domain.user.TripUser;
 import com.board.boardsite.dto.response.adm.auth.AdmUserDto;
-import com.board.boardsite.repository.querydsl.travel.TravelAgencyCustomRepository;
-import com.board.boardsite.repository.querydsl.travel.template.MySQLJPATemplates;
 import com.querydsl.core.types.Projections;
-import com.querydsl.core.types.dsl.NumberExpression;
-import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.util.List;
 
 public class AdmAuthCustomRepositoryImpl extends QuerydslRepositorySupport implements AdmAuthCustomRepository {
 

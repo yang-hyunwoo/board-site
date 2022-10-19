@@ -5,7 +5,6 @@ import com.board.boardsite.domain.travel.TravelAgencyList;
 import com.board.boardsite.domain.travel.TravelAgencyReservation;
 import com.board.boardsite.domain.user.TripUser;
 import com.board.boardsite.dto.user.TripUserDto;
-
 import java.time.LocalDateTime;
 
 public record TravelAgencyReservationDto(

@@ -1,11 +1,7 @@
 package com.board.boardsite.dto.response.travel;
 
 import com.board.boardsite.dto.travel.TravelAgencyWithTravelAgencyListDto;
-
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public record TravelAgencyWithTravelAgencyListResponse(
         Long id,

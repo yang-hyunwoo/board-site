@@ -1,9 +1,7 @@
 package com.board.boardsite.dto.user;
 
 import com.board.boardsite.domain.constant.Gender;
-import com.board.boardsite.domain.travel.TravelAgency;
 import com.board.boardsite.domain.user.TripUser;
-
 import java.time.LocalDateTime;
 public record TripUserDto(
         Long id,

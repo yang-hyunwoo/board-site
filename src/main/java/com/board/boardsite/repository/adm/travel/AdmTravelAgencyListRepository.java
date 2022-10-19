@@ -1,16 +1,16 @@
 package com.board.boardsite.repository.adm.travel;
 
-import com.board.boardsite.domain.travel.TravelAgency;
 import com.board.boardsite.domain.travel.TravelAgencyList;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 public interface AdmTravelAgencyListRepository extends JpaRepository<TravelAgencyList, Long>  {
+
+        List<TravelAgencyList> findByTravelAgency_Id(Long travelAgencyId);
 
         Page<TravelAgencyList> findByCreatedAtBetweenOrderById(LocalDateTime startDate , LocalDateTime endDate , Pageable pageable );
 

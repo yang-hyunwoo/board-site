@@ -1,28 +1,18 @@
 package com.board.boardsite.controller.chat;
 
-import com.board.boardsite.domain.chat.ChatRoom;
 import com.board.boardsite.dto.request.chat.ChatRoomMessageRequest;
 import com.board.boardsite.dto.response.Response;
-import com.board.boardsite.dto.response.chat.ChatRoomMessageResponse;
 import com.board.boardsite.dto.response.chat.ChatRoomRealTimeMessageResponse;
-import com.board.boardsite.dto.response.chat.ChatRoomResponse;
 import com.board.boardsite.dto.security.TripUserPrincipal;
 import com.board.boardsite.service.chat.ChatRoomMessageService;
-import com.board.boardsite.service.chat.ChatService;
 import com.board.boardsite.service.user.TripUserService;
 import com.board.boardsite.support.JwtTokenUtils;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.simp.annotation.support.SimpAnnotationMethodMessageHandler;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RestController;
 

@@ -1,10 +1,6 @@
 package com.board.boardsite.dto.response.travel;
 
-import com.board.boardsite.domain.travel.TravelAgencyLike;
 import com.board.boardsite.dto.travel.TravelAgencyLikeDto;
-import com.board.boardsite.dto.travel.TravelAgencyListDto;
-import com.board.boardsite.dto.user.TripUserDto;
-
 import java.time.LocalDateTime;
 
 public record TravelAgencyLikeResponse(
