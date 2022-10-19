@@ -1,7 +1,5 @@
 package com.board.boardsite.dto.tour;
 
-import com.board.boardsite.domain.article.Article;
-import com.board.boardsite.domain.article.ArticleComment;
 import com.board.boardsite.domain.tour.Tour;
 import com.board.boardsite.domain.tour.TourComment;
 import com.board.boardsite.domain.user.TripUser;

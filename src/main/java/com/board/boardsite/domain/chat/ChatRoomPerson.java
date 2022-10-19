@@ -1,7 +1,6 @@
 package com.board.boardsite.domain.chat;
 
 import com.board.boardsite.domain.AuditingFields;
-import com.board.boardsite.domain.article.Article;
 import com.board.boardsite.domain.user.TripUser;
 import lombok.Getter;
 import lombok.Setter;

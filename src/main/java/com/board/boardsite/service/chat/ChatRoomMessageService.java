@@ -1,13 +1,7 @@
 package com.board.boardsite.service.chat;
 
 import com.board.boardsite.domain.chat.ChatRoomMessage;
-import com.board.boardsite.domain.chat.ChatRoomPerson;
-import com.board.boardsite.domain.user.TripUser;
-import com.board.boardsite.dto.chat.ChatRoomDto;
 import com.board.boardsite.dto.chat.ChatRoomMessageDto;
-import com.board.boardsite.dto.response.chat.ChatRoomMessageResponse;
-import com.board.boardsite.dto.travel.TravelAgencyDto;
-import com.board.boardsite.dto.user.TripUserDto;
 import com.board.boardsite.exception.BoardSiteException;
 import com.board.boardsite.exception.ErrorCode;
 import com.board.boardsite.repository.chat.ChatRepository;
@@ -16,7 +10,6 @@ import com.board.boardsite.repository.user.TripUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 import java.util.stream.Collectors;
 

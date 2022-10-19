@@ -5,7 +5,6 @@ import com.board.boardsite.domain.chat.ChatRoomPerson;
 import com.board.boardsite.domain.user.TripUser;
 import com.board.boardsite.dto.user.TripUserDto;
 
-import java.io.Serializable;
 
 public record ChatRoomPersonDto(
         Long id,

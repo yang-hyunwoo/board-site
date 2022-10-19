@@ -1,9 +1,7 @@
 package com.board.boardsite.dto.response.adm.travel;
 
 import com.board.boardsite.dto.adm.travel.AdmTravelAgencyReservationDto;
-import com.board.boardsite.dto.travel.TravelAgencyReservationDto;
 import com.board.boardsite.dto.user.AdmTripUserDto;
-import com.board.boardsite.dto.user.TripUserDto;
 
 import java.time.LocalDateTime;
 

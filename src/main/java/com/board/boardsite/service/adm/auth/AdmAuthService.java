@@ -1,21 +1,14 @@
 package com.board.boardsite.service.adm.auth;
 
-import com.board.boardsite.domain.constant.Gender;
-import com.board.boardsite.domain.travel.TravelAgencyList;
-import com.board.boardsite.domain.user.TripUser;
 import com.board.boardsite.dto.response.adm.auth.AdmUserDto;
-import com.board.boardsite.dto.user.AdmTripUserDto;
 import com.board.boardsite.exception.BoardSiteException;
 import com.board.boardsite.exception.ErrorCode;
 import com.board.boardsite.repository.user.TripUserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

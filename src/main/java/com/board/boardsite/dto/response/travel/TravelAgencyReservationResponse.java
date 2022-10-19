@@ -1,8 +1,6 @@
 package com.board.boardsite.dto.response.travel;
 
-import com.board.boardsite.dto.travel.TravelAgencyDto;
 import com.board.boardsite.dto.travel.TravelAgencyReservationDto;
-
 import java.time.LocalDateTime;
 
 public record TravelAgencyReservationResponse(

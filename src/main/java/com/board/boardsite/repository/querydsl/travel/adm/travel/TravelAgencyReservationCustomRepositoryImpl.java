@@ -1,25 +1,16 @@
 package com.board.boardsite.repository.querydsl.travel.adm.travel;
 
 import com.board.boardsite.domain.travel.QTravelAgencyReservation;
-import com.board.boardsite.domain.travel.TravelAgency;
 import com.board.boardsite.domain.travel.TravelAgencyReservation;
 import com.board.boardsite.dto.response.adm.dashboard.TravelListCountDto;
-import com.querydsl.core.Tuple;
 import com.querydsl.core.types.ConstantImpl;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.core.types.dsl.StringTemplate;
-import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 import java.util.List;
 
 public class TravelAgencyReservationCustomRepositoryImpl extends QuerydslRepositorySupport implements TravelAgencyReservationCustomRepository {

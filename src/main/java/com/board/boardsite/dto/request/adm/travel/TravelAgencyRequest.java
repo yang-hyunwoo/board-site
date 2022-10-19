@@ -1,7 +1,6 @@
 package com.board.boardsite.dto.request.adm.travel;
 
 import com.board.boardsite.dto.travel.TravelAgencyDto;
-import com.board.boardsite.dto.user.TripUserDto;
 
 public record TravelAgencyRequest(
         String name ,

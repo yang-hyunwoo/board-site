@@ -1,13 +1,9 @@
 package com.board.boardsite.repository.adm.travel;
 
-import com.board.boardsite.domain.tour.Tour;
 import com.board.boardsite.domain.travel.TravelAgency;
-import com.board.boardsite.domain.user.TripUser;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.util.List;
 import java.util.Optional;
 
 public interface AdmTravelAgencyRepository extends JpaRepository<TravelAgency , Long> {

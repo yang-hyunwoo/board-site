@@ -2,7 +2,6 @@ package com.board.boardsite.domain.travel;
 
 
 import com.board.boardsite.domain.AuditingFields;
-import com.board.boardsite.domain.article.ArticleComment;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

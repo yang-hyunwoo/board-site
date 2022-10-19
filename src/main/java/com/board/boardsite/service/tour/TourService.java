@@ -1,18 +1,11 @@
 package com.board.boardsite.service.tour;
 
 
-import com.board.boardsite.domain.article.Article;
 import com.board.boardsite.domain.constant.SearchTourType;
-import com.board.boardsite.domain.constant.SearchType;
 import com.board.boardsite.domain.tour.Tour;
-import com.board.boardsite.domain.user.TripUser;
-import com.board.boardsite.dto.article.ArticleDto;
-import com.board.boardsite.dto.article.ArticleWithCommentsDto;
 import com.board.boardsite.dto.tour.TourDto;
-import com.board.boardsite.dto.travel.TravelAgencyDto;
 import com.board.boardsite.exception.BoardSiteException;
 import com.board.boardsite.exception.ErrorCode;
-import com.board.boardsite.repository.article.ArticleRepository;
 import com.board.boardsite.repository.tour.TourRepository;
 import com.board.boardsite.repository.user.TripUserRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,9 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service

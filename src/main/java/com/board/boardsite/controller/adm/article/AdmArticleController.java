@@ -9,7 +9,6 @@ import com.board.boardsite.dto.response.article.ArticleResponse;
 import com.board.boardsite.dto.response.article.ArticleWithCommentsResponse;
 import com.board.boardsite.dto.security.TripUserPrincipal;
 import com.board.boardsite.service.adm.article.AdmArticleService;
-import com.board.boardsite.service.aritcle.ArticleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

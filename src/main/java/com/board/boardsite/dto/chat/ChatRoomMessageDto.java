@@ -1,10 +1,7 @@
 package com.board.boardsite.dto.chat;
 
-import com.board.boardsite.domain.chat.ChatRoom;
 import com.board.boardsite.domain.chat.ChatRoomMessage;
 import com.board.boardsite.dto.user.TripUserDto;
-
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 public record ChatRoomMessageDto(

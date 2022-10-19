@@ -1,50 +1,19 @@
 package com.board.boardsite.service.adm.travel;
 
 
-import com.board.boardsite.domain.travel.TravelAgency;
-import com.board.boardsite.domain.travel.TravelAgencyList;
-import com.board.boardsite.domain.travel.TravelAgencyReservation;
-import com.board.boardsite.domain.user.TripUser;
 import com.board.boardsite.dto.adm.travel.AdmTravelAgencyReservationDto;
-import com.board.boardsite.dto.common.AttachFileDto;
-import com.board.boardsite.dto.request.travel.TravelAgencyRerservationRefundRequest;
-import com.board.boardsite.dto.travel.TravelAgencyReservationDto;
-import com.board.boardsite.exception.BoardSiteException;
-import com.board.boardsite.exception.ErrorCode;
 import com.board.boardsite.repository.adm.travel.AdmTravelAgencyReservationRepository;
 import com.board.boardsite.repository.travel.TravelAgencyListRepository;
 import com.board.boardsite.repository.travel.TravelAgencyRepository;
-import com.board.boardsite.repository.travel.TravelAgencyReservationRepository;
 import com.board.boardsite.repository.user.TripUserRepository;
 import com.board.boardsite.service.common.FileUploadService;
 import com.board.boardsite.service.common.SequenceService;
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.client.j2se.MatrixToImageWriter;
-import com.google.zxing.common.BitMatrix;
-import com.google.zxing.qrcode.QRCodeWriter;
 import lombok.RequiredArgsConstructor;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.reactive.function.BodyInserters;
-import org.springframework.web.reactive.function.client.WebClient;
-
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Collections;
-import java.util.Date;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor

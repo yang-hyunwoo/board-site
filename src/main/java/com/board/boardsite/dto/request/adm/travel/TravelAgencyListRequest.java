@@ -2,7 +2,6 @@ package com.board.boardsite.dto.request.adm.travel;
 
 import com.board.boardsite.dto.travel.TravelAgencyListDto;
 
-import java.time.LocalDateTime;
 
 public record TravelAgencyListRequest(
         Long travel_agency_id ,

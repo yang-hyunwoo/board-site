@@ -8,15 +8,12 @@ import com.board.boardsite.exception.BoardSiteException;
 import com.board.boardsite.exception.ErrorCode;
 import com.board.boardsite.repository.adm.tour.AdmTourCommentRepository;
 import com.board.boardsite.repository.adm.tour.AdmTourRepository;
-import com.board.boardsite.repository.tour.TourCommentRepository;
-import com.board.boardsite.repository.tour.TourRepository;
 import com.board.boardsite.repository.user.TripUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 
 @Service

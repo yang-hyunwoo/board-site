@@ -1,8 +1,6 @@
 package com.board.boardsite.dto.response.tour;
 
-import com.board.boardsite.dto.article.ArticleDto;
 import com.board.boardsite.dto.tour.TourDto;
-
 import java.time.LocalDateTime;
 
 public record TourResponse(

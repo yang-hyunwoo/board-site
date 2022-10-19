@@ -2,7 +2,6 @@ package com.board.boardsite.domain.user;
 
 
 import com.board.boardsite.domain.AuditingFields;
-import com.board.boardsite.domain.article.ArticleComment;
 import com.board.boardsite.domain.constant.Gender;
 import lombok.Getter;
 import lombok.Setter;

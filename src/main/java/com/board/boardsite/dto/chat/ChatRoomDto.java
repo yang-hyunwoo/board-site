@@ -2,7 +2,6 @@ package com.board.boardsite.dto.chat;
 
 import com.board.boardsite.domain.chat.ChatRoom;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 public record ChatRoomDto(

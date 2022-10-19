@@ -1,6 +1,5 @@
 package com.board.boardsite.dto.response.travel;
 
-import com.board.boardsite.domain.travel.TravelAgency;
 import com.board.boardsite.dto.travel.TravelAgencyDto;
 
 public record TravelAgencyResponse(

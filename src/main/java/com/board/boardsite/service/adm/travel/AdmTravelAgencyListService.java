@@ -2,18 +2,14 @@ package com.board.boardsite.service.adm.travel;
 
 
 import com.board.boardsite.domain.constant.SearchAdmTravelListType;
-import com.board.boardsite.domain.tour.Tour;
 import com.board.boardsite.domain.travel.TravelAgency;
 import com.board.boardsite.domain.travel.TravelAgencyList;
-import com.board.boardsite.domain.user.TripUser;
 import com.board.boardsite.dto.security.TripUserPrincipal;
-import com.board.boardsite.dto.tour.TourDto;
 import com.board.boardsite.dto.travel.TravelAgencyListDto;
 import com.board.boardsite.exception.BoardSiteException;
 import com.board.boardsite.exception.ErrorCode;
 import com.board.boardsite.repository.adm.travel.AdmTravelAgencyListRepository;
 import com.board.boardsite.repository.adm.travel.AdmTravelAgencyRepository;
-import com.board.boardsite.repository.travel.TravelAgencyListRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

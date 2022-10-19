@@ -1,7 +1,6 @@
 package com.board.boardsite.repository.querydsl.user;
 
 import com.board.boardsite.dto.response.adm.auth.AdmUserDto;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 

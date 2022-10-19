@@ -1,13 +1,9 @@
 package com.board.boardsite.controller.tour;
 
-import com.board.boardsite.dto.request.article.ArticleCommentRequest;
 import com.board.boardsite.dto.request.tour.TourCommentRequest;
 import com.board.boardsite.dto.response.Response;
-import com.board.boardsite.dto.response.article.ArticleCommentResponse;
 import com.board.boardsite.dto.response.tour.TourCommentResponse;
 import com.board.boardsite.dto.security.TripUserPrincipal;
-import com.board.boardsite.repository.tour.TourCommentRepository;
-import com.board.boardsite.service.aritcle.ArticleCommentService;
 import com.board.boardsite.service.tour.TourCommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

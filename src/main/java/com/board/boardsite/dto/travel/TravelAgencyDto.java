@@ -1,8 +1,6 @@
 package com.board.boardsite.dto.travel;
 
 import com.board.boardsite.domain.travel.TravelAgency;
-
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 public record TravelAgencyDto(

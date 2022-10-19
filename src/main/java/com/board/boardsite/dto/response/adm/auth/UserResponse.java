@@ -1,9 +1,5 @@
 package com.board.boardsite.dto.response.adm.auth;
 
-import com.board.boardsite.domain.constant.Gender;
-import com.board.boardsite.dto.user.AdmTripUserDto;
-
-import java.time.LocalDateTime;
 
 public record UserResponse(
         Long id ,

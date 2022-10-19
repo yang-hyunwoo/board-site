@@ -6,7 +6,6 @@ import com.board.boardsite.domain.user.TripUser;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
