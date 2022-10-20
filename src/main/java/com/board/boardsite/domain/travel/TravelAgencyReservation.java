@@ -78,6 +78,9 @@ public class TravelAgencyReservation extends AuditingFields {
     @Setter
     private Long qrCodeId;
 
+    @Setter
+    @Column(nullable = false )
+    private boolean qrChk;                       //사용 여부
 
     @Setter
     @Column(nullable = false )
@@ -99,6 +102,7 @@ public class TravelAgencyReservation extends AuditingFields {
                                          int salePercent,
                                          boolean deleted,
                                          Long qrCodeId,
+                                         boolean qrChk,
                                          TripUser tripUser,
                                          TravelAgency travelAgency,
                                          TravelAgencyList travelAgencyList) {
@@ -112,6 +116,7 @@ public class TravelAgencyReservation extends AuditingFields {
         this.salePercent = salePercent;
         this.deleted = deleted;
         this.qrCodeId = qrCodeId;
+        this.qrChk = qrChk;
         this.tripUser = tripUser;
         this.travelAgency = travelAgency;
         this.travelAgencyList = travelAgencyList;
@@ -127,6 +132,7 @@ public class TravelAgencyReservation extends AuditingFields {
                                                  int salePercent,
                                                  boolean deleted,
                                                  Long qrCodeId,
+                                                 boolean qrChk,
                                                  TripUser tripUser,
                                                  TravelAgency travelAgency ,
                                                  TravelAgencyList travelAgencyList) {
@@ -140,6 +146,7 @@ public class TravelAgencyReservation extends AuditingFields {
                 salePercent,
                 deleted,
                 qrCodeId,
+                qrChk,
                 tripUser,
                 travelAgency,
                 travelAgencyList);
