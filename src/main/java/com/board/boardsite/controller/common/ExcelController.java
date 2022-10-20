@@ -22,9 +22,11 @@ public class ExcelController {
 
     @GetMapping("/excel")
     public void downloadExcel(@RequestParam(required = false) String excelType ,
+                              @RequestParam(required = false) String purchYn ,
+                              @RequestParam(required = false) Long Sn ,
                               HttpServletResponse res ,
                                 @AuthenticationPrincipal TripUserPrincipal tripuserPrincipal)throws IOException {
-        excelService.downloadExcel(excelType,res,tripuserPrincipal);
+        excelService.downloadExcel(excelType,purchYn,Sn,res,tripuserPrincipal);
 
 
 
