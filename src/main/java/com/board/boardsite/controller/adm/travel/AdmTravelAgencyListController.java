@@ -2,10 +2,14 @@ package com.board.boardsite.controller.adm.travel;
 
 
 import com.board.boardsite.domain.constant.SearchAdmTravelListType;
+import com.board.boardsite.dto.request.adm.travel.QrcodeUserUpdateRequest;
 import com.board.boardsite.dto.request.adm.travel.TravelAgencyListRequest;
 import com.board.boardsite.dto.response.Response;
+import com.board.boardsite.dto.response.adm.travel.AdmTravelAgencyReservationResponse;
 import com.board.boardsite.dto.response.travel.TravelAgencyListResponse;
+import com.board.boardsite.dto.response.travel.TravelAgencyReservationResponse;
 import com.board.boardsite.dto.security.TripUserPrincipal;
+import com.board.boardsite.dto.travel.TravelAgencyReservationDto;
 import com.board.boardsite.service.adm.travel.AdmTravelAgencyListService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -125,6 +129,66 @@ public class AdmTravelAgencyListController {
     {
         admTravelAgencyListService.sortTravelAgencyList(travelAgencyListId,sort);
 
+        return Response.success(true);
+    }
+
+
+    /**
+     * 금일 qr가능한 여행 리스트 목록
+     * @param startedAt
+     * @param endAt
+     * @param tripUserPrincipal
+     * @param pageable
+     * @return
+     */
+    @GetMapping("/qrcode/triplist")
+    public Response<Page<TravelAgencyListResponse>> qrcodeTravelAgencyTripList(@RequestParam String startedAt,
+                                                                         @RequestParam String endAt,
+                                                                         @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal,
+                                                                         @PageableDefault(size=10)Pageable pageable){
+
+        Page<TravelAgencyListResponse> travelAgencyListResponses = admTravelAgencyListService.qrcodeTravelAgencyTripList(startedAt,endAt,tripUserPrincipal, pageable).map(TravelAgencyListResponse::from);
+        return Response.success(travelAgencyListResponses);
+    }
+
+    /**
+     * qr코드 확인 상세
+     * @param travelAgencyListId
+     * @param tripUserPrincipal
+     * @return
+     */
+    @GetMapping("/qrcode/{travelAgencyListId}")
+    public Response<TravelAgencyListResponse> qrcodeTravelAgencyListDetail(@PathVariable Long travelAgencyListId,
+                                                                           @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal) {
+        var travelAgencyListDetail = TravelAgencyListResponse.from(admTravelAgencyListService.qrcodeTravelAgencyListDetail(travelAgencyListId,tripUserPrincipal));
+        return Response.success(travelAgencyListDetail);
+    }
+
+    /**
+     * qr코드 화면 유저 리스트 조회
+     * @param travelAgencyListId
+     * @param tripUserPrincipal
+     * @param pageable
+     * @return
+     */
+    @GetMapping("/qrcode/{travelAgencyListId}/userlist")
+    public Response<Page<AdmTravelAgencyReservationResponse>> qrcodeTravelUserList(@PathVariable Long travelAgencyListId,
+                                                                                   @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal,
+                                                                                   @PageableDefault(size=10)Pageable pageable) {
+        var travelAgencyUserList =admTravelAgencyListService.qrcodeTravelUserList(travelAgencyListId,pageable).map(AdmTravelAgencyReservationResponse::from);
+        return Response.success(travelAgencyUserList);
+    }
+
+
+
+    /**
+     *
+     * @param TravelAgencyListRequest
+     * @return
+     */
+    @PutMapping("/qrcode/qr-upd")
+    public Response<Boolean> qrcodeUserUpd(@RequestBody QrcodeUserUpdateRequest qrcodeUserUpdateRequest) {
+        admTravelAgencyListService.qrcodeUserUpd(qrcodeUserUpdateRequest);
         return Response.success(true);
     }
 }

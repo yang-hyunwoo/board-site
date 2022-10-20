@@ -4,12 +4,16 @@ package com.board.boardsite.service.adm.travel;
 import com.board.boardsite.domain.constant.SearchAdmTravelListType;
 import com.board.boardsite.domain.travel.TravelAgency;
 import com.board.boardsite.domain.travel.TravelAgencyList;
+import com.board.boardsite.dto.adm.travel.AdmTravelAgencyReservationDto;
+import com.board.boardsite.dto.request.adm.travel.QrcodeUserUpdateRequest;
 import com.board.boardsite.dto.security.TripUserPrincipal;
 import com.board.boardsite.dto.travel.TravelAgencyListDto;
 import com.board.boardsite.exception.BoardSiteException;
 import com.board.boardsite.exception.ErrorCode;
 import com.board.boardsite.repository.adm.travel.AdmTravelAgencyListRepository;
 import com.board.boardsite.repository.adm.travel.AdmTravelAgencyRepository;
+import com.board.boardsite.repository.adm.travel.AdmTravelAgencyReservationRepository;
+import com.board.boardsite.repository.user.TripUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,7 +30,11 @@ public class AdmTravelAgencyListService {
 
     private final AdmTravelAgencyListRepository admTravelAgencyListRepository;
 
+    private final AdmTravelAgencyReservationRepository admTravelAgencyReservationRepository;
+
     private final AdmTravelAgencyRepository admTravelAgencyRepository;
+
+    private final TripUserRepository tripUserRepository;
 
     @Transactional(readOnly = true)
     public  Page<TravelAgencyListDto> travelAgencyTripList(SearchAdmTravelListType inputSearch,
@@ -123,7 +131,7 @@ public class AdmTravelAgencyListService {
             return Optional.of(travelAgencyListDetail).map(TravelAgencyListDto::from).orElseThrow(() -> new BoardSiteException(ErrorCode.TRAVEL_AGENCY_LIST_NOT_FOUND));
         } else {
             var travelAgencyListDetail = admTravelAgencyListRepository.findById(travelAgencyListId).orElseThrow(() -> new BoardSiteException(ErrorCode.TRAVEL_AGENCY_DETAIL_NOT_FOUND));
-            if(travelAgencyListDetail.getTravelAgency().getId().equals(tripUserPrincipal.travelAgencyId())){
+            if(!travelAgencyListDetail.getTravelAgency().getId().equals(tripUserPrincipal.travelAgencyId())){
                 throw new BoardSiteException(ErrorCode.NOT_PERMITTION);
             }
 
@@ -166,6 +174,61 @@ public class AdmTravelAgencyListService {
             var newTravelAgencyList =  admTravelAgencyListRepository.findById(travelAgencyListId).orElseThrow(()->new BoardSiteException(ErrorCode.TRAVEL_AGENCY_DETAIL_NOT_FOUND));
             newTravelAgencyList.setSort(sort);
         }
+    }
+
+
+
+    @Transactional(readOnly = true)
+    public  Page<TravelAgencyListDto> qrcodeTravelAgencyTripList(String startAt,
+                                                           String endAt,
+                                                           TripUserPrincipal tripUserPrincipal,
+                                                           Pageable pageable) {
+
+        if(tripUserPrincipal.role().equals("SUPER")) {
+            return admTravelAgencyListRepository.findByTravelRealTripAtBetweenOrderById(startAt.replaceAll("-", ""), endAt.replaceAll("-", ""), pageable).map(TravelAgencyListDto::from);
+        }else {
+            return admTravelAgencyListRepository.findByTravelAgency_IdAndTravelRealTripAtBetweenOrderById(tripUserPrincipal.travelAgencyId(), startAt.replaceAll("-", ""), endAt.replaceAll("-", ""), pageable).map(TravelAgencyListDto::from);
+
+        }
+    }
+
+    @Transactional
+    public TravelAgencyListDto qrcodeTravelAgencyListDetail(Long travelAgencyListId , TripUserPrincipal tripUserPrincipal){
+        var date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+
+        if(tripUserPrincipal.role().equals("SUPER")) {
+            var travelAgencyListDetail = admTravelAgencyListRepository.findByIdAndTravelRealTripAtBetweenAndDeleted(travelAgencyListId,date,date,false).orElseThrow(() -> new BoardSiteException(ErrorCode.TRAVEL_AGENCY_LIST_DATE));
+            return Optional.of(travelAgencyListDetail).map(TravelAgencyListDto::from).orElseThrow(() -> new BoardSiteException(ErrorCode.TRAVEL_AGENCY_LIST_NOT_FOUND));
+        } else {
+            var travelAgencyListDetail = admTravelAgencyListRepository.findByIdAndTravelRealTripAtBetweenAndDeleted(travelAgencyListId,date,date,false).orElseThrow(() -> new BoardSiteException(ErrorCode.TRAVEL_AGENCY_LIST_DATE));
+            if(!travelAgencyListDetail.getTravelAgency().getId().equals(tripUserPrincipal.travelAgencyId())){
+                throw new BoardSiteException(ErrorCode.NOT_PERMITTION);
+            }
+
+            return Optional.of(travelAgencyListDetail).map(TravelAgencyListDto::from).orElseThrow(() -> new BoardSiteException(ErrorCode.TRAVEL_AGENCY_LIST_NOT_FOUND));
+        }
+    }
+    @Transactional(readOnly = true)
+    public Page<AdmTravelAgencyReservationDto> qrcodeTravelUserList(Long travelAgencyListId , Pageable pageable) {
+            return admTravelAgencyReservationRepository.findByTravelAgencyList_IdAndDeleted(travelAgencyListId , false,pageable).map(AdmTravelAgencyReservationDto::from);
+    }
+
+    @Transactional
+    public void qrcodeUserUpd(QrcodeUserUpdateRequest qrcodeUserUpdateRequest) {
+        if(!tripUserRepository.findById(qrcodeUserUpdateRequest.userId()).isPresent()) {
+            throw new BoardSiteException(ErrorCode.USER_NOT_FOUND);
+        }
+        var reservation = admTravelAgencyReservationRepository.findById(qrcodeUserUpdateRequest.id()).orElseThrow(()-> new BoardSiteException(ErrorCode.NOT_TRAVEL_AGENCY_RESERVATION));
+        if(reservation.getPersonCount() != qrcodeUserUpdateRequest.count()) {
+            throw new BoardSiteException(ErrorCode.NOT_TRAVEL_AGENCY_RESERVATION);
+        }
+        if(reservation.getTripUser().getId() != qrcodeUserUpdateRequest.userId()) {
+            throw new BoardSiteException(ErrorCode.NOT_TRAVEL_AGENCY_RESERVATION);
+        }
+        if(reservation.getTravelAgencyList().getId() != qrcodeUserUpdateRequest.travelAgencyListId()) {
+            throw new BoardSiteException(ErrorCode.NOT_TRAVEL_AGENCY_RESERVATION);
+        }
+        reservation.setQrChk(true);
 
 
     }

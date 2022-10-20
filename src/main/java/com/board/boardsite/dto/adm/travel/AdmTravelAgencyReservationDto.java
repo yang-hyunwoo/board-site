@@ -25,6 +25,7 @@ public record AdmTravelAgencyReservationDto(
         int salePercent,
         boolean deleted,
         Long qrCodeId,
+        boolean qrChk ,
         TravelAgencyDto travelAgencyDto,
         TravelAgencyListDto travelAgencyListDto,
         LocalDateTime createdAt
@@ -44,6 +45,7 @@ public record AdmTravelAgencyReservationDto(
                                                    int salePercent,
                                                    boolean deleted,
                                                    Long qrCodeId,
+                                                   boolean qrChk,
                                                    TravelAgencyDto travelAgencyDto,
                                                    TravelAgencyListDto travelAgencyListDto,
                                                    LocalDateTime createdAt) {
@@ -61,6 +63,7 @@ public record AdmTravelAgencyReservationDto(
                 salePercent,
                 deleted,
                 qrCodeId,
+                qrChk,
                 travelAgencyDto,
                 travelAgencyListDto,
                 createdAt
@@ -92,8 +95,9 @@ public record AdmTravelAgencyReservationDto(
                 0,
                 personCount,
                 0,
-                true,
+                false,
                 null,
+                false,
                 travelAgencyDto,
                 travelAgencyListDto,
                 null
@@ -118,6 +122,7 @@ public record AdmTravelAgencyReservationDto(
                 entity.getSalePercent(),
                 entity.isDeleted(),
                 entity.getQrCodeId(),
+                entity.isQrChk(),
                 TravelAgencyDto.from(entity.getTravelAgency()),
                 TravelAgencyListDto.from(entity.getTravelAgencyList()),
                 entity.getCreatedAt()
@@ -136,6 +141,7 @@ public record AdmTravelAgencyReservationDto(
                 travelAgencyList.getSalePercent(),
                 deleted,
                 qrCodeId,
+                qrChk,
                 tripUser,
                 travelAgency,
                 travelAgencyList

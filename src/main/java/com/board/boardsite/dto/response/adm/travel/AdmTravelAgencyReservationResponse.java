@@ -18,6 +18,7 @@ public record AdmTravelAgencyReservationResponse(
         Long travelAgencyListId,
         Long thumbFileId,
         Long qrCodeId,
+        boolean qrChk,
         LocalDateTime createdAt,
         AdmTripUserDto tripUserDto
 ) {
@@ -33,6 +34,7 @@ public record AdmTravelAgencyReservationResponse(
                                                         Long travelAgencyListId,
                                                         Long thumbFileId,
                                                         Long qrCodeId,
+                                                        boolean qrChk,
                                                         LocalDateTime createdAt,
                                                         AdmTripUserDto tripUserDto)
     {
@@ -48,6 +50,7 @@ public record AdmTravelAgencyReservationResponse(
                 travelAgencyListId,
                 thumbFileId,
                 qrCodeId,
+                qrChk,
                 createdAt,
                 tripUserDto);
     }
@@ -66,6 +69,7 @@ public record AdmTravelAgencyReservationResponse(
                 dto.travelAgencyListDto().id(),
                 dto.travelAgencyListDto().thumnbnailFileId(),
                 dto.qrCodeId(),
+                dto.qrChk(),
                 dto.createdAt(),
                 dto.admTripUser()
         );

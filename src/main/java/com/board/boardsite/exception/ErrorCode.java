@@ -35,6 +35,9 @@ public enum ErrorCode {
 
     INTERNAL_SERVER_ERROR2(HttpStatus.INTERNAL_SERVER_ERROR, "잠시 후 다시 이용해 주세요."),
 
+
+    TRAVEL_AGENCY_LIST_DATE(HttpStatus.NOT_FOUND , "금일 여행 일정이 아닙니다."),
+
     TRAVEL_PAY_NOT_FOUND(HttpStatus.NOT_FOUND, "결제 내역이 없습니다."),
 
     REFUND_FAIL(HttpStatus.NOT_FOUND, "환불 중 오류가 발생했습니다."),
@@ -56,6 +59,8 @@ public enum ErrorCode {
     NOT_ALLOWED(HttpStatus.CONFLICT,"이메일 인증 및 승인이 완료 되지 않았습니다."),
 
     NOT_DELETE_TRAVEL_AGENCY(HttpStatus.UNAUTHORIZED,"사용 중인 여행 리스트가 있습니다."),
+
+    NOT_TRAVEL_AGENCY_RESERVATION(HttpStatus.NOT_FOUND,"존재하지 않은 예약 입니다."),
     ;
 
     private HttpStatus status;

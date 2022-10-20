@@ -22,6 +22,7 @@ public record TravelAgencyReservationDto(
         int salePercent,
         boolean deleted,
         Long qrCodeId,
+        boolean qrChk,
         TravelAgencyDto travelAgencyDto,
         TravelAgencyListDto travelAgencyListDto,
         LocalDateTime createdAt
@@ -41,6 +42,7 @@ public record TravelAgencyReservationDto(
                                                 int salePercent,
                                                 boolean deleted,
                                                 Long qrCodeId,
+                                                boolean qrChk,
                                                 TravelAgencyDto travelAgencyDto,
                                                 TravelAgencyListDto travelAgencyListDto,
                                                 LocalDateTime createdAt) {
@@ -58,6 +60,7 @@ public record TravelAgencyReservationDto(
                 salePercent,
                 deleted,
                 qrCodeId,
+                qrChk,
                 travelAgencyDto,
                 travelAgencyListDto,
                 createdAt
@@ -91,6 +94,7 @@ public record TravelAgencyReservationDto(
                 0,
                 true,
                 null,
+                false,
                 travelAgencyDto,
                 travelAgencyListDto,
                 null
@@ -115,6 +119,7 @@ public record TravelAgencyReservationDto(
                 entity.getSalePercent(),
                 entity.isDeleted(),
                 entity.getQrCodeId(),
+                entity.isQrChk(),
                 TravelAgencyDto.from(entity.getTravelAgency()),
                 TravelAgencyListDto.from(entity.getTravelAgencyList()),
                 entity.getCreatedAt()
@@ -133,6 +138,7 @@ public record TravelAgencyReservationDto(
                 travelAgencyList.getSalePercent(),
                 deleted,
                 qrCodeId,
+                qrChk,
                 tripUser,
                 travelAgency,
                 travelAgencyList
