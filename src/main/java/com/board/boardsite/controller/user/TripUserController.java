@@ -54,6 +54,11 @@ public class TripUserController {
         return Response.success("인증이 완료되었습니다.");
     }
 
+    /**
+     * 로그인
+     * @param request
+     * @return
+     */
     @PostMapping("/login")
     public Response<TripUserLoginResponse> login(@RequestBody TripUserLoginRequest request) {
         String token = tripUserService.login(request.email(),request.password());
@@ -61,12 +66,23 @@ public class TripUserController {
 
     }
 
+    /**
+     * 마이페이지 데이터 조회
+     * @param tripUserPrincipal
+     * @return
+     */
     @GetMapping("/my-page")
     public Response<TripUserDto> myPage(@AuthenticationPrincipal TripUserPrincipal tripUserPrincipal) {
         var myPage = tripUserService.myPage(tripUserPrincipal.id());
         return Response.success(myPage);
     }
 
+    /**
+     * 패스워드 변경
+     * @param request
+     * @param tripUserPrincipal
+     * @return
+     */
     @PostMapping("/change/password")
     public Response<Boolean> changePassword(@RequestBody TripUserLoginRequest request ,
                                             @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal) {
@@ -74,6 +90,12 @@ public class TripUserController {
         return Response.success(true);
     }
 
+    /**
+     * 패스워드 제외 정보 수정
+     * @param request
+     * @param tripUserPrincipal
+     * @return
+     */
     @PostMapping("/change/other")
     public Response<Boolean> changeUserOther(@RequestBody TripUserUpdateRequest request ,
                                             @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal) {

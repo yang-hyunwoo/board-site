@@ -83,6 +83,11 @@ public class TripUserService {
     @Transactional
     public void changeUserOther(Long tripUserId , TripUserDto tripUserDto) {
         var tripUser = tripUserRepository.findById(tripUserId).orElseThrow(()->new BoardSiteException(ErrorCode.USER_NOT_FOUND));
+
+        tripUserRepository.findByNickName(tripUserDto.nickName().trim()).ifPresent(it -> {
+            throw new BoardSiteException(ErrorCode.DUPLICATED_NICKNAME, String.format("%s is duplicated", tripUserDto.nickName()));
+        });
+
         tripUser.setProfileId(tripUserDto.profileId());
         tripUser.setNickName(tripUserDto.nickName());
         tripUser.setGender(tripUserDto.gender());
