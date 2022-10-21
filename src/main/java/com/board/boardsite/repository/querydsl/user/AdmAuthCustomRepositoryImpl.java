@@ -24,7 +24,19 @@ public class AdmAuthCustomRepositoryImpl extends QuerydslRepositorySupport imple
 
     @Override
     public PageImpl<AdmUserDto> findUser(String auth ,Pageable pageable) {
-        var user=  queryFactory.select(Projections.bean(AdmUserDto.class,tripUser.id.as("id"),tripUser.email.as("email"),tripUser.name.as("name"),tripUser.nickName.as("nickName"),tripUser.phoneNumber.as("phoneNumber"),tripUser.deleted.as("deleted"),tripUser.emailAuth.as("emailAuth"),tripUser.role.as("role"),tripUser.travelAgencyId.as("travelAgencyId"),tripUser.authChk.as("authChk"),tripUser.profileId.as("profileId"),travelAgency.name.as("travelAgencyName")))
+        var user=  queryFactory.select(Projections.bean(AdmUserDto.class,
+                        tripUser.id.as("id"),
+                        tripUser.email.as("email"),
+                        tripUser.name.as("name"),
+                        tripUser.nickName.as("nickName"),
+                        tripUser.phoneNumber.as("phoneNumber"),
+                        tripUser.deleted.as("deleted"),
+                        tripUser.emailAuth.as("emailAuth"),
+                        tripUser.role.as("role"),
+                        tripUser.travelAgencyId.as("travelAgencyId"),
+                        tripUser.authChk.as("authChk"),
+                        tripUser.profileId.as("profileId"),
+                        travelAgency.name.as("travelAgencyName")))
                 .from(tripUser)
                 .innerJoin(travelAgency)
                 .on(tripUser.travelAgencyId.eq(travelAgency.id))
@@ -34,7 +46,19 @@ public class AdmAuthCustomRepositoryImpl extends QuerydslRepositorySupport imple
 
     @Override
     public PageImpl<AdmUserDto> findUserEmailContaining(String auth ,String email , Pageable pageable) {
-        var user=  queryFactory.select(Projections.bean(AdmUserDto.class,tripUser.id.as("id"),tripUser.email.as("email"),tripUser.name.as("name"),tripUser.nickName.as("nickName"),tripUser.phoneNumber.as("phoneNumber"),tripUser.deleted.as("deleted"),tripUser.emailAuth.as("emailAuth"),tripUser.role.as("role"),tripUser.travelAgencyId.as("travelAgencyId"),tripUser.authChk.as("authChk"),tripUser.profileId.as("profileId"),travelAgency.name.as("travelAgencyName")))
+        var user=  queryFactory.select(Projections.bean(AdmUserDto.class,
+                        tripUser.id.as("id"),
+                        tripUser.email.as("email"),
+                        tripUser.name.as("name"),
+                        tripUser.nickName.as("nickName"),
+                        tripUser.phoneNumber.as("phoneNumber"),
+                        tripUser.deleted.as("deleted"),
+                        tripUser.emailAuth.as("emailAuth"),
+                        tripUser.role.as("role"),
+                        tripUser.travelAgencyId.as("travelAgencyId"),
+                        tripUser.authChk.as("authChk"),
+                        tripUser.profileId.as("profileId"),
+                        travelAgency.name.as("travelAgencyName")))
                 .from(tripUser)
                 .innerJoin(travelAgency)
                 .on(tripUser.travelAgencyId.eq(travelAgency.id))
