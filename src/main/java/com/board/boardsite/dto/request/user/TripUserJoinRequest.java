@@ -11,7 +11,8 @@ public record TripUserJoinRequest(
         String phoneNumber,
         Gender gender,
         Long travelAgencyId,
-        String role
+        String role,
+        String loginType
 )  {
     public static TripUserJoinRequest of(String name,
                                          String nickName,
@@ -20,9 +21,10 @@ public record TripUserJoinRequest(
                                          String phoneNumber,
                                          Gender gender,
                                          Long travelAgencyId,
-                                         String role) {
+                                         String role,
+                                         String loginType) {
         return new TripUserJoinRequest(
-            name,nickName,email,password,phoneNumber,gender,travelAgencyId,role
+            name,nickName,email,password,phoneNumber,gender,travelAgencyId,role,loginType
         );
     }
 
@@ -34,6 +36,7 @@ public record TripUserJoinRequest(
                 password,
                 gender,
                 role,
+                loginType,
                 travelAgencyId
         );
     }
