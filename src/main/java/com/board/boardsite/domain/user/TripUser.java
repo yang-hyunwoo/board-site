@@ -83,6 +83,9 @@ public class TripUser extends AuditingFields {
     @Setter
     private Long travelAgencyId;
 
+    @Setter
+    private String loginType;                                    //로그인 타입
+
     protected TripUser() {
 
     }
@@ -99,6 +102,7 @@ public class TripUser extends AuditingFields {
                      Boolean emailAuth,
                      String role,
                      Long travelAgencyId,
+                     String loginType,
                      boolean authChk)
     {
         this.name = name;
@@ -113,6 +117,7 @@ public class TripUser extends AuditingFields {
         this.profileId = profileId;
         this.role = role;
         this.travelAgencyId = travelAgencyId;
+        this.loginType = loginType;
         this.authChk = authChk;
     }
 
@@ -128,6 +133,7 @@ public class TripUser extends AuditingFields {
                     Long profileId,
                     Boolean emailAuth,
                     String role,
+                    String loginType,
                     Long travelAgencyId,
                     boolean authChk) {
         this.id = id;
@@ -142,6 +148,7 @@ public class TripUser extends AuditingFields {
         this.profileId = profileId;
         this.emailAuth = emailAuth;
         this.role =role;
+        this.loginType = loginType;
         this.travelAgencyId = travelAgencyId;
         this.authChk =authChk;
     }
@@ -158,6 +165,7 @@ public class TripUser extends AuditingFields {
                               Boolean emailAuth,
                               String role,
                               Long travelAgencyId,
+                              String loginType,
                               boolean authChk)
     {
       return new TripUser(name,
@@ -172,6 +180,7 @@ public class TripUser extends AuditingFields {
                           emailAuth,
                           role,
                           travelAgencyId,
+                          loginType,
                           authChk);
     }
 
@@ -187,6 +196,7 @@ public class TripUser extends AuditingFields {
                               Long profileId,
                               Boolean emailAuth,
                               String role,
+                              String loginType,
                               Long travelAgencyId,
                               boolean authChk)
     {
@@ -202,6 +212,7 @@ public class TripUser extends AuditingFields {
                 profileId,
                 emailAuth,
                 role,
+                loginType,
                 travelAgencyId,
                 authChk);
     }

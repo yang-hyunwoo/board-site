@@ -15,6 +15,7 @@ public record TripUserDto(
         Gender gender,
         Boolean emailAuth,
         String role,
+        String loginType,
         Long travelAgencyId,
         boolean authChk,
         Long profileId,
@@ -32,6 +33,7 @@ public record TripUserDto(
                                  String password,
                                  Gender gender,
                                  String role,
+                                 String loginType,
                                  Long travelAgencyId) {
         return new TripUserDto(null,
                 email,
@@ -44,7 +46,38 @@ public record TripUserDto(
                 gender,
                 false,
                 role,
+                loginType,
                 travelAgencyId,
+                false,
+                null,
+                null,
+                null,
+                null,
+                null);
+    }
+
+    /* 네이버 */
+    public static TripUserDto of(
+            String email,
+            String name,
+            String nickName,
+            String phoneNumber,
+            Gender gender,
+            String role,
+            String loginType) {
+        return new TripUserDto(null,
+                email,
+                name,
+                nickName,
+                phoneNumber,
+                0,
+                false,
+                "naverLogin@@",
+                gender,
+                true,
+                role,
+                loginType,
+                null,
                 false,
                 null,
                 null,
@@ -59,6 +92,7 @@ public record TripUserDto(
             Gender gender,
             Long profileId,
             String role,
+            String loginType,
             Long travelAgencyId) {
         return new TripUserDto(null,
                 null,
@@ -71,6 +105,7 @@ public record TripUserDto(
                 gender,
                 false,
                 role,
+                loginType,
                 travelAgencyId,
                 false,
                 profileId,
@@ -91,6 +126,7 @@ public record TripUserDto(
                        String password,
                        Gender gender,
                        String role,
+                       String loginType,
                        Long travelAgencyId,
                        boolean authChk,
                        Boolean emailAuth,
@@ -111,6 +147,7 @@ public record TripUserDto(
                gender,
                emailAuth,
                role,
+               loginType,
                travelAgencyId,
                authChk,
                profileId,
@@ -133,6 +170,7 @@ public record TripUserDto(
                 entity.getGender(),
                 entity.getEmailAuth(),
                 entity.getRole(),
+                entity.getLoginType(),
                 entity.getTravelAgencyId(),
                 entity.isAuthChk(),
                 entity.getProfileId(),
@@ -159,6 +197,7 @@ public record TripUserDto(
                 emailAuth,
                 role,
                 travelAgencyId,
+                loginType,
                 authChk
         );
     }

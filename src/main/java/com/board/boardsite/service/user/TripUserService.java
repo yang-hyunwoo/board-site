@@ -48,19 +48,29 @@ public class TripUserService {
 
         String passwordEncode = encoder.encode(tripUserDto.password());
         TripUser tripUser = tripUserRepository.save(tripUserDto.toEntity(passwordEncode));
-        EmailAuthDto emailAuthDto = EmailAuthDto.of(tripUserDto.email(), UUID.randomUUID().toString(),false, LocalDateTime.now());
-        emailAuthRepository.save(emailAuthDto.toEntity());
-        emailService.send(emailAuthDto.email(),emailAuthDto.authToken());
+      if(tripUserDto.loginType()=="" && tripUserDto.loginType().isBlank()) {
+          EmailAuthDto emailAuthDto = EmailAuthDto.of(tripUserDto.email(), UUID.randomUUID().toString(), false, LocalDateTime.now());
+          emailAuthRepository.save(emailAuthDto.toEntity());
+          emailService.send(emailAuthDto.email(), emailAuthDto.authToken());
+      }
 
 
         return TripUserDto.from(tripUser);
     }
 
     public String login(String email , String password) {
-        var tripUser = tripUserRepository.findByEmailAndEmailAuthAndDeleted(email,true,false).orElseThrow(() -> new BoardSiteException(ErrorCode.EMAIL_NOT_FOUND,String.format("%s not founded",email)));
+        var tripUser = tripUserRepository.findByEmailAndEmailAuthAndDeletedAndLoginTypeIsNull(email,true,false).orElseThrow(() -> new BoardSiteException(ErrorCode.EMAIL_NOT_FOUND,String.format("%s not founded",email)));
         if(!encoder.matches(password , tripUser.getPassword())) {
             throw new BoardSiteException(ErrorCode.INVALID_PASSWORD);
         }
+        String token = JwtTokenUtils.generateToken(email,secretKey ,tripUser.getRole(), tripUser.getTravelAgencyId(),expiredTimeMs);
+
+        return token;
+    }
+
+    public String NaverLogin(String email) {
+        var tripUser = tripUserRepository.findByEmailAndDeletedAndLoginType(email,false,"NAVER").orElseThrow(() -> new BoardSiteException(ErrorCode.EMAIL_NOT_FOUND,String.format("%s not founded",email)));
+
         String token = JwtTokenUtils.generateToken(email,secretKey ,tripUser.getRole(), tripUser.getTravelAgencyId(),expiredTimeMs);
 
         return token;

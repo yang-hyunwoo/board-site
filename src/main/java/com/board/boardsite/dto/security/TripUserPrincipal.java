@@ -19,6 +19,7 @@ public record TripUserPrincipal(
         int point,
         boolean deleted,
         Gender gender,
+        String loginType,
         Long travelAgencyId,
         String role
 ) implements UserDetails {
@@ -32,8 +33,9 @@ public record TripUserPrincipal(
                              int point,
                              boolean deleted,
                              Gender gender,
+                             String loginType,
                              Long travelAgencyId,
-                                       String role) {
+                             String role) {
         return new TripUserPrincipal(
                 id,
                 name,
@@ -44,6 +46,7 @@ public record TripUserPrincipal(
                 point,
                 deleted,
                 gender,
+                loginType,
                 travelAgencyId,
                 role
         );
@@ -60,6 +63,7 @@ public record TripUserPrincipal(
                 dto.point(),
                 dto.deleted(),
                 dto.gender(),
+                dto.loginType(),
                 dto.travelAgencyId(),
                 dto.role()
         );
@@ -77,6 +81,7 @@ public record TripUserPrincipal(
                 password,
                 gender,
                 role,
+                loginType,
                 travelAgencyId,
                 true,
                 true,

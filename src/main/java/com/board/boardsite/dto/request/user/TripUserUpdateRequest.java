@@ -9,6 +9,7 @@ public record TripUserUpdateRequest(
         Gender gender ,
         Long profileId,
         String role,
+        String loginType,
         Long travelAgencyId
 )  {
     public static TripUserUpdateRequest of(String nickName,
@@ -16,9 +17,10 @@ public record TripUserUpdateRequest(
                                            Gender gender,
                                            Long profileId,
                                            String role,
+                                           String loginType,
                                            Long travelAgencyId) {
         return new TripUserUpdateRequest(
-            nickName,phoneNumber,gender,profileId,role,travelAgencyId
+            nickName,phoneNumber,gender,profileId,role,loginType,travelAgencyId
         );
     }
 
@@ -29,6 +31,7 @@ public record TripUserUpdateRequest(
                 gender,
                 profileId,
                 role,
+                loginType,
                 travelAgencyId
         );
     }

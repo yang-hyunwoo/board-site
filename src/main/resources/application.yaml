@@ -15,8 +15,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username:  username
-    password: 구글앱 비밀번호
+    username: cohouseol@gmail.com
+    password: skdxecuyxmkiabcb
     properties:
       mail:
         smtp:
@@ -54,13 +54,14 @@ custom:
   path:
     upload-images: C:\Git_project\board-site\src\main\resources\static\image
     thumbnail-images: C:\Git_project\board-site\src\main\resources\static\thumbnail
+
 import:
-
-  rest-api: rest-api
-  rest-api-secret: restp-api-key
-
-  rest-api: 아임포트 restapi
-  rest-api-secret: 아임포트 restapisecret키
+  rest-api: 3071870338636273
+  rest-api-secret: 0nejijihcCxf0Fi7io0zia5NNtaw0tv7z15FUDhLJi8w0h85ieWdC2zgRyqK9KAS0T2yA0PHeABpwYOd
+naver:
+  client-id: VI3PelSRuX5_E4NdPZHj
+  client-secret: CHD4HaNzd4
+  callback-url: http://localhost:4000/NaverLoginCallback
 jwt:
   secret-key: board_site.trip_web_application.secret_key
   #30 days
