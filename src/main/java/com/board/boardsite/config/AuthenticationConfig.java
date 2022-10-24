@@ -34,7 +34,8 @@ public class AuthenticationConfig {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().antMatchers(HttpMethod.POST, "/api/trip/users/login", "/api/trip/users/join","/api/adm/admin/login");
+        return (web) -> web.ignoring().antMatchers( "/api/trip/users/login", "/api/trip/users/join","/api/adm/admin/login","/api/naver/**","/api/kakao/**");
+
     }
 
     @Bean

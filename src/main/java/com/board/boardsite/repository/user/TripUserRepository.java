@@ -9,6 +9,8 @@ public interface TripUserRepository extends JpaRepository<TripUser, Long>, AdmAu
 
     Optional<TripUser> findByEmail(String email);
 
+    Optional<TripUser> findByEmailAndLoginType(String email,String loginType);
+
     Optional<TripUser> findByNickName(String nickName);
 
     Optional<TripUser> findByEmailAndEmailAuthAndDeletedAndLoginTypeIsNull(String email,boolean emailAuth,boolean deleted);

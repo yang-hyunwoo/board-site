@@ -62,6 +62,10 @@ naver:
   client-id: VI3PelSRuX5_E4NdPZHj
   client-secret: CHD4HaNzd4
   callback-url: http://localhost:4000/NaverLoginCallback
+kakao:
+  rest-api-key: fa8b9147c368820f00315b9e2b68eae5
+  callback-url: http://localhost:4000/KakaoLoginCallback
+  admin-key: cce05f289cb3058bb7a61d4d1fce24b2
 jwt:
   secret-key: board_site.trip_web_application.secret_key
   #30 days
