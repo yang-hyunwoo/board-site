@@ -68,13 +68,15 @@ public class TripUserService {
         return token;
     }
 
-    public String NaverLogin(String email) {
-        var tripUser = tripUserRepository.findByEmailAndDeletedAndLoginType(email,false,"NAVER").orElseThrow(() -> new BoardSiteException(ErrorCode.EMAIL_NOT_FOUND,String.format("%s not founded",email)));
+    public String snsLogin(String email,String loginType) {
+        var tripUser = tripUserRepository.findByEmailAndDeletedAndLoginType(email,false,loginType).orElseThrow(() -> new BoardSiteException(ErrorCode.EMAIL_NOT_FOUND,String.format("%s not founded",email)));
 
         String token = JwtTokenUtils.generateToken(email,secretKey ,tripUser.getRole(), tripUser.getTravelAgencyId(),expiredTimeMs);
 
         return token;
     }
+
+
 
     @Transactional(readOnly = true)
     public TripUserDto myPage(Long tripUserId) {

@@ -1,6 +1,7 @@
 package com.board.boardsite.service.common;
 
 import com.board.boardsite.domain.constant.Gender;
+import com.board.boardsite.domain.user.TripUser;
 import com.board.boardsite.dto.user.TripUserDto;
 import com.board.boardsite.exception.BoardSiteException;
 import com.board.boardsite.exception.ErrorCode;
@@ -15,55 +16,53 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class NaverService {
+public class KakaoService {
 
     private static WebClient webClient = WebClient.create();
     private final TripUserRepository tripUserRepository;
 
+
     private final TripUserService tripUserService;
-    public String naverService(String code ,
-                             String state,
-                             String grant_type,
-                             String client_id ,
-                             String client_secret,
-                             String refresh_token) throws ParseException {
-        final String uri = UriComponentsBuilder.fromUriString("https://nid.naver.com")
-                .path("/oauth2.0/token")
-                .queryParam("grant_type",grant_type)
-                .queryParam("client_id",client_id)
-                .queryParam("client_secret",client_secret)
+
+    public String kakaoService(String code ,
+                             String resApiKey ,
+                             String redirect_uri,
+                             String adminKey) throws ParseException {
+        final String uri = UriComponentsBuilder.fromUriString("https://kauth.kakao.com")
+                .path("/oauth/token")
+                .queryParam("grant_type","authorization_code")
+                .queryParam("client_id",resApiKey)
                 .queryParam("code",code)
-                .queryParam("state",state)
-                .queryParam("refresh_token",refresh_token)
+                .queryParam("redirect_uri",redirect_uri)
                 .build()
                 .encode()
                 .toUriString();
 
 
-        var naverId =  webClient
+        var kakaoId =  webClient
                 .get()
                 .uri(uri)
                 .retrieve()
                 .bodyToMono(JSONObject.class)
                 .block();
 
-        return naverUserChk(naverId.get("access_token"));
-
+        return kakaoUserChk(kakaoId.get("access_token"));
 
 
     }
 
-    public String naverUserChk(Object access_token) throws ParseException {
+    public String kakaoUserChk(Object access_token) throws ParseException {
         final String profileUri = UriComponentsBuilder
-                .fromUriString("https://openapi.naver.com")
-                .path("/v1/nid/me")
+                .fromUriString("https://kapi.kakao.com")
+                .path("/v2/user/me")
                 .build()
                 .encode()
                 .toUriString();
-        var naverInfo = webClient
+        var kakaoInfo = webClient
                 .get()
                 .uri(profileUri)
                 .header("Authorization", "Bearer "+ access_token)
@@ -71,26 +70,26 @@ public class NaverService {
                 .bodyToMono(String.class)
                 .block();
 
+        log.info("kakaoInfo : {}" , kakaoInfo);
         JSONParser jsonParser = new JSONParser();
-        JSONObject jsonObject = (JSONObject) jsonParser.parse(naverInfo);
-        JSONObject jsonObject1 = (JSONObject) jsonObject.get("response");
-        log.info("naverInfo : {}" , jsonObject1.get("nickname"));
-        log.info("naverInfo : {}" , jsonObject1);
-
+        JSONObject jsonObject = (JSONObject) jsonParser.parse(kakaoInfo);
+        JSONObject jsonObject1 = (JSONObject) jsonObject.get("kakao_account");
+        JSONObject jsonObject2 = (JSONObject) jsonObject1.get("profile");
+        log.info("naverInfo : {}" , jsonObject2.get("nickname").toString());
 
         if(!join(jsonObject1.get("email").toString())){
             TripUserDto tripUserDto = TripUserDto.of(jsonObject1.get("email").toString(),
-                    jsonObject1.get("name").toString(),
-                    jsonObject1.get("nickname").toString(),
-                    jsonObject1.get("mobile").toString(),
-                    jsonObject1.get("gender").toString()=="M"? Gender.M:Gender.F,
+                    jsonObject2.get("nickname").toString(),
+                    jsonObject2.get("nickname").toString(),
+                    "010-9999-9999",
+                    jsonObject1.get("gender").toString()=="mail"? Gender.M:Gender.F,
                     "USER",
-                    "NAVER");
-
+                    "KAKAO");
+            System.out.println("tripUserDto:::"+tripUserDto);
             tripUserService.join(tripUserDto);
-        }
 
-        return tripUserService.snsLogin(jsonObject1.get("email").toString(),"NAVER");
+        }
+        return tripUserService.snsLogin(jsonObject1.get("email").toString(),"KAKAO");
 
     }
 
