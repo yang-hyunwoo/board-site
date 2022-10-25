@@ -95,6 +95,6 @@ public class NaverService {
     }
 
     public boolean join(String email) {
-      return tripUserRepository.findByEmail(email.trim()).isPresent();
+      return tripUserRepository.findByEmailAndLoginType(email.trim(),"NAVER").isPresent();
     }
 }

@@ -14,6 +14,10 @@ public class JwtTokenUtils {
         return extractClaims(token , key).get("email",String.class);
     }
 
+    public static Long getId(String token , String key) {
+        return extractClaims(token , key).get("id",Long.class);
+    }
+
     //토큰 기간이 만료 되었는지 확인하는 메소드
     public static boolean isExpired(String token , String key) {
         Date expiredDate = extractClaims(token,key).getExpiration();
@@ -26,10 +30,11 @@ public class JwtTokenUtils {
                 .build().parseClaimsJws(token).getBody();
     }
 
-    public static String generateToken(String email , String key ,String role,Long travelAgencyId,long expiredTimeMs) {
+    public static String generateToken(String email , String key ,String role,Long id , Long travelAgencyId,long expiredTimeMs) {
         Claims claims = Jwts.claims();
         claims.put("email",email);
         claims.put("role", role);
+        claims.put("id", id);
         claims.put("travelId", travelAgencyId);
 
         return Jwts.builder()
