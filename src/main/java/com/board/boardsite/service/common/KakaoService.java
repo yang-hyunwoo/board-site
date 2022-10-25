@@ -94,6 +94,6 @@ public class KakaoService {
     }
 
     public boolean join(String email) {
-      return tripUserRepository.findByEmail(email.trim()).isPresent();
+      return tripUserRepository.findByEmailAndLoginType(email.trim(),"KAKAO").isPresent();
     }
 }

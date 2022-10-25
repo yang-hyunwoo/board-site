@@ -10,6 +10,7 @@ import com.board.boardsite.repository.user.TripUserRepository;
 import com.board.boardsite.repository.user.EmailAuthRepository;
 import com.board.boardsite.support.JwtTokenUtils;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class TripUserService {
@@ -40,9 +42,17 @@ public class TripUserService {
 
     }
 
+    public TripUserPrincipal loadUserById(Long id) {
+        return  tripUserRepository.findById(id)
+                .map(TripUserDto::from)
+                .map(TripUserPrincipal::from)
+                .orElseThrow(() -> new BoardSiteException(ErrorCode.USER_NOT_FOUND,String.format("%users not founded")));
+
+    }
+
     @Transactional
     public TripUserDto join(TripUserDto tripUserDto) {
-        tripUserRepository.findByEmail(tripUserDto.email().trim()).ifPresent(it -> {
+        tripUserRepository.findByEmailAndLoginType(tripUserDto.email().trim(),tripUserDto.loginType()).ifPresent(it -> {
             throw new BoardSiteException(ErrorCode.DUPLICATED_EMAIL, String.format("%s is duplicated", tripUserDto.email()));
         });
 
@@ -59,19 +69,21 @@ public class TripUserService {
     }
 
     public String login(String email , String password) {
-        var tripUser = tripUserRepository.findByEmailAndEmailAuthAndDeletedAndLoginTypeIsNull(email,true,false).orElseThrow(() -> new BoardSiteException(ErrorCode.EMAIL_NOT_FOUND,String.format("%s not founded",email)));
+        var tripUser = tripUserRepository.findByEmailAndEmailAuthAndDeletedAndLoginTypeIsNull(email,true,false).orElseThrow(() -> new BoardSiteException(ErrorCode.EMAIL_NOT_FOUND,String.format("%s not founded2222",email)));
         if(!encoder.matches(password , tripUser.getPassword())) {
             throw new BoardSiteException(ErrorCode.INVALID_PASSWORD);
         }
-        String token = JwtTokenUtils.generateToken(email,secretKey ,tripUser.getRole(), tripUser.getTravelAgencyId(),expiredTimeMs);
+        String token = JwtTokenUtils.generateToken(email,secretKey ,tripUser.getRole(), tripUser.getId(), tripUser.getTravelAgencyId(),expiredTimeMs);
 
         return token;
     }
 
     public String snsLogin(String email,String loginType) {
-        var tripUser = tripUserRepository.findByEmailAndDeletedAndLoginType(email,false,loginType).orElseThrow(() -> new BoardSiteException(ErrorCode.EMAIL_NOT_FOUND,String.format("%s not founded",email)));
+        log.info("email : {}",email);
+        log.info("email222 : {}",loginType);
+        var tripUser = tripUserRepository.findByEmailAndDeletedAndLoginType(email,false,loginType).orElseThrow(() -> new BoardSiteException(ErrorCode.EMAIL_NOT_FOUND,String.format("%s not founded3333",email)));
 
-        String token = JwtTokenUtils.generateToken(email,secretKey ,tripUser.getRole(), tripUser.getTravelAgencyId(),expiredTimeMs);
+        String token = JwtTokenUtils.generateToken(email,secretKey ,tripUser.getRole(),tripUser.getId(), tripUser.getTravelAgencyId(),expiredTimeMs);
 
         return token;
     }
