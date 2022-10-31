@@ -100,6 +100,7 @@ class TravelAgencyReservationServiceTest {
                 0,
                 false,
                 null,
+                false,
                 null,
                 null,
                 null
@@ -118,6 +119,10 @@ class TravelAgencyReservationServiceTest {
                 Gender.M,
                 false,
                 null,
+                false,
+                null,
+                null,
+                null,
                 false
         );
     }
@@ -133,6 +138,10 @@ class TravelAgencyReservationServiceTest {
                 false,
                 "test",
                 Gender.M,
+                null,
+                null,
+                null,
+                false,
                 false,
                 null,
                 LocalDateTime.now(),
@@ -163,7 +172,7 @@ class TravelAgencyReservationServiceTest {
                 "20221010",
                 "어서오세유",
                 "반갑슈",
-                100,
+                "100",
                 20,
                 80,
                 0,

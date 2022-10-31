@@ -92,6 +92,10 @@ class ChatServiceTest {
                 Gender.M,
                 false,
                 null,
+                false,
+                null,
+                null,
+                null,
                 false
         );
     }
@@ -102,7 +106,10 @@ class ChatServiceTest {
                 "qqll",
                 "010",
                 "test",
-                Gender.M
+                Gender.M,
+                null,
+                null,
+                null
         );
     }
 }

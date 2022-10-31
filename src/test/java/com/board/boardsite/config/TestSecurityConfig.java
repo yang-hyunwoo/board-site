@@ -31,6 +31,10 @@ public class TestSecurityConfig {
                 Gender.M,
                 false,
                 null,
+                false,
+                "USER",
+                null,
+                null,
                 false
         )));
     }

@@ -58,7 +58,7 @@ class TravelAgencyListServiceTest {
                 "20221010",
                 "어서오세유",
                 "반갑슈",
-                100,
+                "100",
                 20,
                 80,
                 0,

@@ -170,7 +170,10 @@ class ArticleServiceTest {
                 "qqll",
                 "010",
                 "test",
-                Gender.M
+                Gender.M,
+                null,
+                null,
+                null
         );
     }
 
@@ -184,6 +187,10 @@ class ArticleServiceTest {
                 0,
                 Gender.M,
                 false,
+                null,
+                false,
+                null,
+                null,
                 null,
                 false
         );

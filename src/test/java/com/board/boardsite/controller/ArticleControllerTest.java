@@ -180,7 +180,10 @@ class ArticleControllerTest {
                 "qqll",
                 "01234",
                 "test",
-                Gender.M
+                Gender.M,
+                "User",
+                null,
+                null
         );
     }
 
@@ -194,6 +197,10 @@ class ArticleControllerTest {
                 0,
                 Gender.M,
                 false,
+                null,
+                false,
+                "user",
+                null,
                 null,
                 false
         );

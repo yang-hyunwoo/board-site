@@ -54,7 +54,10 @@ class TripUserControllerTest {
                                 dto.email(),
                                 dto.password(),
                                 dto.phoneNumber(),
-                                dto.gender()))))
+                                dto.gender(),
+                                dto.travelAgencyId(),
+                                dto.role(),
+                                dto.loginType()))))
                 .andDo(print())
                 .andExpect(status().isOk());
 
@@ -73,7 +76,10 @@ class TripUserControllerTest {
                                 dto.email(),
                                 dto.password(),
                                 dto.phoneNumber(),
-                                dto.gender()))))
+                                dto.gender(),
+                                dto.travelAgencyId(),
+                                dto.role(),
+                                dto.loginType()))))
                 .andDo(print())
                 .andExpect(status().isConflict());
 
@@ -134,7 +140,10 @@ class TripUserControllerTest {
                 "bb",
                 "0101",
                 "cc",
-                Gender.M
+                Gender.M,
+                "User",
+                null,
+                null
         );
     }
 
