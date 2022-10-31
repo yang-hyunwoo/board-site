@@ -90,7 +90,7 @@ jar {
     }
 }
 
-// Herouku 설정 
+// Herouku 설정
 jar {
     manifest {
         attributes('Main-Class': 'com.board.boardsite.BoardSiteApplication')
