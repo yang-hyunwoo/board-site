@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.board'
-version = '0.0.1-SNAPSHOT'
+version = 'v1.1'
 sourceCompatibility = '17'
 
 configurations {
@@ -28,7 +28,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation group: 'org.springframework.security.oauth', name: 'spring-security-oauth2', version: '2.5.2.RELEASE'
     implementation 'org.apache.poi:poi:4.1.2'
-
+    implementation 'org.springframework.boot:spring-boot-starter-batch'
+    testImplementation 'org.springframework.batch:spring-batch-test'
     runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
     runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
     implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
@@ -86,5 +87,12 @@ clean {
 jar {
     manifest {
         attributes('Main-Class': 'com.board.projectboard.ProjectBoardApplication')
+    }
+}
+
+// Herouku 설정 
+jar {
+    manifest {
+        attributes('Main-Class': 'com.board.boardsite.BoardSiteApplication')
     }
 }
