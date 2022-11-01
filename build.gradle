@@ -35,6 +35,8 @@ dependencies {
     implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
     implementation group: 'net.coobird', name: 'thumbnailator', version: '0.4.8'
 
+    runtimeOnly 'org.postgresql:postgresql'
+    
     implementation group: 'com.google.zxing', name: 'core', version: '3.5.0'
     implementation group: 'com.google.zxing', name: 'javase', version: '3.5.0'
 
