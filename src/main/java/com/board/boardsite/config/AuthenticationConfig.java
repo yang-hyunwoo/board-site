@@ -8,6 +8,7 @@ import com.board.boardsite.repository.user.TripUserRepository;
 import com.board.boardsite.service.user.TripUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -34,7 +35,7 @@ public class AuthenticationConfig {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().antMatchers( "/api/trip/users/login", "/api/trip/users/join","/api/adm/admin/login","/api/naver/**","/api/kakao/**");
+        return (web) -> web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations()).antMatchers( "/api/trip/users/login", "/api/trip/users/join","/api/adm/admin/login","/api/naver/**","/api/kakao/**");
 
     }
 

@@ -158,7 +158,7 @@ public class TravelAgencyReservationService {
             dir.mkdirs();
         }
 
-        String content = "http://localhost:4000?id="+id+"&travelAgencyResId="+travelAgencyResId+"&count="+count+"&deleted="+isDeleted;
+        String content = "http://localhost:8081?id="+id+"&travelAgencyResId="+travelAgencyResId+"&count="+count+"&deleted="+isDeleted;
         try{
             QRCodeWriter qrCodeWriter = new QRCodeWriter();
             BitMatrix bitMatrix = qrCodeWriter.encode(content, BarcodeFormat.QR_CODE, 200, 200);
