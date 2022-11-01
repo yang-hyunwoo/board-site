@@ -23,8 +23,8 @@ public class TravelAgencyCustomRepositoryImpl extends QuerydslRepositorySupport 
         JPAQuery<TravelAgency> query = new JPAQuery<>(em , MySQLJPATemplates.DEFAULT);
         QTravelAgency travelAgency = QTravelAgency.travelAgency;
         return query.from(travelAgency)
-                .distinct()
                 .where(travelAgency.deleted.eq(false))
+                .groupBy(travelAgency.id)
                 .orderBy(NumberExpression.random().asc())
                 .limit(count)
                 .fetch();

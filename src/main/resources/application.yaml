@@ -8,10 +8,10 @@ logging:
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3307/boardsite
-    username: gusdn
-    password: thisisTEST!@#
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:postgresql://localhost:5432/boardsite
+    username: postgres
+    password: dkahffk11
+    driver-class-name: org.postgresql.Driver
   mail:
     host: smtp.gmail.com
     port: 587
@@ -83,3 +83,14 @@ spring:
     driver-class-name: org.postgresql.Driver
   jpa.hibernate.ddl-auto: update
 #  sql.init.mode: never
+
+servlet:
+  multipart:
+    maxFileSize: 800MB
+    maxRequestSize: 800MB
+    enabled: true
+    location: C:\Git_project\board-site\src\main\resources\templates\image
+custom:
+  path:
+    upload-images: C:\Git_project\board-site\src\main\resources\templates\image
+    thumbnail-images: C:\Git_project\board-site\src\main\resources\templates\thumbnail
