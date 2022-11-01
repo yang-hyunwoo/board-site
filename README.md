@@ -1,3 +1,6 @@
+https://board-site-back.herokuapp.com/
+
+
 # board-site
 # 2022/08/10
 여행 관련 프로젝트 도메인 설계 완료
