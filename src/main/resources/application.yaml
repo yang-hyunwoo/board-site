@@ -76,7 +76,7 @@ batch:
 spring:
   config.activate.on-profile: heroku
   datasource:
-    url: ${JAWSDB_URL}
+    url: ${DATABASE_URL}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa.hibernate.ddl-auto: update
 #  sql.init.mode: never
