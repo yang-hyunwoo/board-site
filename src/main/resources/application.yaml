@@ -76,7 +76,10 @@ batch:
 spring:
   config.activate.on-profile: heroku
   datasource:
-    url: ${DATABASE_URL}
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:postgresql://ec2-3-213-66-35.compute-1.amazonaws.com:5432/d2uku28in0vnr7
+    username: txwxckyioaetcl
+    password: c4cf86f02a9886d487b8c59bda5051dea8ae4370d1f3177318241ca211ba975f
+    platform: postgres
+    driver-class-name: org.postgresql.Driver
   jpa.hibernate.ddl-auto: update
 #  sql.init.mode: never
