@@ -105,3 +105,12 @@ custom:
   path:
     upload-images: C:\Git_project\board-site\src\main\resources\templates\image
     thumbnail-images: C:\Git_project\board-site\src\main\resources\templates\thumbnail
+
+naver:
+  client-id: YVyQcRuuS0DEIWEcmGqq
+  client-secret: s4OJ1om1oB
+  callback-url: https://board-site-back.herokuapp.com/NaverLoginCallback
+kakao:
+  rest-api-key: 91b0e992b73843a23b5553a8fa5b6601
+  callback-url: https://board-site-back.herokuapp.com/KakaoLoginCallback
+  admin-key: cce05f289cb3058bb7a61d4d1fce24b2
