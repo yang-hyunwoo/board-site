@@ -91,9 +91,9 @@ spring:
 #  sql.init.mode: never
 
 cloudinary:
-  cloud_name: hhnetuz2l
-  api_key: 165883987375785
-  api_secret: TM8jN2lzQtwyQpLkyZpYwsG0EjM
+  cloud_name:  ${CLOUDINARY_NAME}
+  api_key: ${CLOUDINARY_KEY}
+  api_secret: ${CLOUDINARY_SECRET}
 
 servlet:
   multipart:
