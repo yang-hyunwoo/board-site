@@ -40,12 +40,16 @@ public Page<TourDto> tourSearchList(SearchTourType searchType , String searchKey
     @Transactional
     public TourDto tourDetail(Long tourId,String role) {
         Tour tourDetail;
-        if(role.equals("USER")) {
-            tourDetail = tourRepository.findByIdAndDeleted(tourId,false).orElseThrow(()->new BoardSiteException(ErrorCode.TOUR_NOT_FOUND));
-            tourDetail.readCountPlus(tourDetail.getReadCount());
-        } else {
-            tourDetail = tourRepository.findById(tourId).orElseThrow(()->new BoardSiteException(ErrorCode.TOUR_NOT_FOUND));
 
+        if(role==null) {
+            tourDetail = tourRepository.findById(tourId).orElseThrow(()->new BoardSiteException(ErrorCode.TOUR_NOT_FOUND));
+        } else {
+            if (role.equals("USER")) {
+                tourDetail = tourRepository.findByIdAndDeleted(tourId, false).orElseThrow(() -> new BoardSiteException(ErrorCode.TOUR_NOT_FOUND));
+                tourDetail.readCountPlus(tourDetail.getReadCount());
+            } else {
+                tourDetail = tourRepository.findById(tourId).orElseThrow(() -> new BoardSiteException(ErrorCode.TOUR_NOT_FOUND));
+            }
         }
         return TourDto.from(tourDetail);
     }

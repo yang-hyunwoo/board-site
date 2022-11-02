@@ -42,7 +42,7 @@ public class TourController {
     @GetMapping("/{tourId}")
     public Response<TourResponse> tourDetail(@PathVariable Long tourId,
                                                                @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal) {
-        var tourDetail = TourResponse.from(tourService.tourDetail(tourId,tripUserPrincipal.role()));
+        var tourDetail = TourResponse.from(tourService.tourDetail(tourId,tripUserPrincipal==null?null:tripUserPrincipal.role()));
         return Response.success(tourDetail);
     }
 

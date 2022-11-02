@@ -34,8 +34,8 @@ public class EmailService {
         SimpleMailMessage sim = new SimpleMailMessage();
         sim.setTo(email);
         sim.setSubject("회원가입 이메일 인증");
-//        sim.setText("http://localhost:8081/api/trip/users/confirm-email?email="+email+"&authToken="+authToken);
-        sim.setText("https://board-site-back.herokuapp.com/api/trip/users/confirm-email?email="+email+"&authToken="+authToken);
+        sim.setText("http://localhost:8081/api/trip/users/confirm-email?email="+email+"&authToken="+authToken);
+//        sim.setText("https://board-site-back.herokuapp.com/api/trip/users/confirm-email?email="+email+"&authToken="+authToken);
 
         javaMailSender.send(sim);
     }
