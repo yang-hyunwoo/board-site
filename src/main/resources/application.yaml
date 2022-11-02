@@ -74,9 +74,9 @@ batch:
   initialize-schema: never
 
 cloudinary:
-  cloud_name: hhnetuz2l
-  api_key: 165883987375785
-  api_secret: TM8jN2lzQtwyQpLkyZpYwsG0EjM
+  cloud_name: df1m1qh0o
+  api_key: 176668919675916
+  api_secret: 65speCbjat7h5uCf_HZ1_WwEpRM
 
 ---
 spring:
@@ -89,6 +89,11 @@ spring:
     driver-class-name: org.postgresql.Driver
   jpa.hibernate.ddl-auto: update
 #  sql.init.mode: never
+
+cloudinary:
+  cloud_name: hhnetuz2l
+  api_key: 165883987375785
+  api_secret: TM8jN2lzQtwyQpLkyZpYwsG0EjM
 
 servlet:
   multipart:
