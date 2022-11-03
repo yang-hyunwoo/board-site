@@ -1,4 +1,19 @@
-https://board-site-back.herokuapp.com/
+https://board-site-back.herokuapp.com/  (사용자)
+https://board-site-adm.herokuapp.com/  (관리자)
+
+# 2022/11/03
+현재 문제점
+1.개발당시 이미지를 프로젝트 내에서 저장을 하여 불러왔으나 <br>
+헤로쿠 이미지 업로드시에는 저장 스토리지를 이용하여야 함으로 수정을 하는 중이며 <br>
+그 부분으로 인해 이미지를 조회 할때 file_id를 조인 걸지 않고 Long 타입의 id를 컬럼에 추가 하여
+url을 호출 하는 방식이였다.<br>
+허나 이 부분에서 이미지를 조회 시 불러오는 속도로 인하여 이미지가 나오지 않는 현상이 발생 중<br>
+수정 방법으로는 <br>
+1.file을 사용하는 테이블에 jointable로 수정 하기<br>
+2.querydsl을 이용하여 reftouter join을 사용 하기<br>
+이 두가지 방법이 있는거 같다 <br>
+
+
 
 무료 클라우드라 많이 느림 <br>
 
