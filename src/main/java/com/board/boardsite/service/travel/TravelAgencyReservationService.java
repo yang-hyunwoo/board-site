@@ -16,6 +16,7 @@ import com.board.boardsite.repository.travel.TravelAgencyReservationRepository;
 import com.board.boardsite.repository.user.TripUserRepository;
 import com.board.boardsite.service.common.FileUploadService;
 import com.board.boardsite.service.common.SequenceService;
+import com.cloudinary.Cloudinary;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
@@ -67,6 +68,15 @@ public class TravelAgencyReservationService {
 
     @Value("${custom.path.upload-images}")
     private String path;
+
+    @Value("${cloudinary.cloud_name}")
+    private String cloud_name;
+
+    @Value("${cloudinary.api_key}")
+    private String api_key;
+
+    @Value("${cloudinary.api_secret}")
+    private String api_secret;
 
     private final FileUploadService fileUploadService;
 
@@ -149,6 +159,15 @@ public class TravelAgencyReservationService {
     }
 
     public Long saveQr(Long id , Long travelAgencyResId , int count , boolean isDeleted) {
+
+        Map config = new HashMap();
+
+        config.put("cloud_name", cloud_name);
+        config.put("api_key", api_key);
+        config.put("api_secret", api_secret);
+
+        Cloudinary cloudinary = new Cloudinary(config);
+
         Long fileId = sequenceService.getSeq();
         Date nowDate = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
@@ -158,7 +177,10 @@ public class TravelAgencyReservationService {
             dir.mkdirs();
         }
 
-        String content = "http://localhost:8081?id="+id+"&travelAgencyResId="+travelAgencyResId+"&count="+count+"&deleted="+isDeleted;
+        //개발
+//        String content = "http://localhost:8081?id="+id+"&travelAgencyResId="+travelAgencyResId+"&count="+count+"&deleted="+isDeleted;
+        //heroku
+        String content = "https://board-site-back.herokuapp.com?id="+id+"&travelAgencyResId="+travelAgencyResId+"&count="+count+"&deleted="+isDeleted;
         try{
             QRCodeWriter qrCodeWriter = new QRCodeWriter();
             BitMatrix bitMatrix = qrCodeWriter.encode(content, BarcodeFormat.QR_CODE, 200, 200);
@@ -166,12 +188,17 @@ public class TravelAgencyReservationService {
             String new_file_name = UUID.randomUUID()+".png";
             File temp = new File(dir + File.separator + new_file_name);
             ImageIO.write(bufferedImage, "png", temp);
+
+            String filePath = cloudinary.uploader().upload(temp, null).get("secure_url").toString();
+            String[] fileFileName = filePath.split("/");
+
+
             var attachFileDto = AttachFileDto.of(fileId,
                     1,
                     new_file_name,
-                    new_file_name,
-                    dir + File.separator + new_file_name,
-                    "qrcode",
+                    fileFileName[7],
+                    filePath,
+                    filePath,
                    0L
             );
             fileUploadService.saveImage(Collections.singletonList(attachFileDto));

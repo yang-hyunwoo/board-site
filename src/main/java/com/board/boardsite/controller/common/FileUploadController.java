@@ -70,10 +70,10 @@ public class FileUploadController {
                     break;
                 }
                 File file = multipartFileToFile(multipartFile);
+
                 String filePath = cloudinary.uploader().upload(file, null).get("secure_url").toString();
-                System.out.println(filePath);
                 String[] fileFileName = filePath.split("/");
-                System.out.println(fileFileName[7]);
+
                 var attachFileDto = AttachFileDto.of(fileId,
                         count,
                         file.getName(),
