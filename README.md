@@ -2,7 +2,7 @@ https://board-site-back.herokuapp.com/  (사용자)<br>
 https://board-site-adm.herokuapp.com/  (관리자)
 
 # 2022/11/03
-현재 문제점
+현재 문제점 
 1.개발당시 이미지를 프로젝트 내에서 저장을 하여 불러왔으나 <br>
 헤로쿠 이미지 업로드시에는 저장 스토리지를 이용하여야 함으로 수정을 하는 중이며 <br>
 그 부분으로 인해 이미지를 조회 할때 file_id를 조인 걸지 않고 Long 타입의 id를 컬럼에 추가 하여
@@ -12,6 +12,16 @@ url을 호출 하는 방식이였다.<br>
 1.file을 사용하는 테이블에 jointable로 수정 하기<br>
 2.querydsl을 이용하여 reftouter join을 사용 하기<br>
 이 두가지 방법이 있는거 같다 <br>
+(완료)
+결제 완료시 qr 코드 이미지 확인 하기 (진행 중)
+
+--해결 방법:
+ querydsl을 reftouter join으로 걸고 return 을 file 를경로 포함 하는 dto 로 생성을 하였다.<br>
+ 이 방법이 정답은 아니라고 생각한다.. <br>
+ 더 좋은 방법을 찾으면 수정을 해야겠다.<br>
+ 
+
+
 
 
 
