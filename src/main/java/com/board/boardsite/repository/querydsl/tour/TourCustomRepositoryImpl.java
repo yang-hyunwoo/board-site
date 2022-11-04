@@ -52,6 +52,7 @@ public class TourCustomRepositoryImpl extends QuerydslRepositorySupport implemen
                 .where(tour.deleted.eq(false))
                  .groupBy(tour.id,attachFile.filePath)
                  .orderBy(NumberExpression.random().asc())
+                 .limit(count)
                 .fetch();
     }
 
