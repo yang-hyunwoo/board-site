@@ -3,6 +3,7 @@ package com.board.boardsite.service.tour;
 
 import com.board.boardsite.domain.constant.SearchTourType;
 import com.board.boardsite.domain.tour.Tour;
+import com.board.boardsite.dto.tour.TourOnlyListDto;
 import com.board.boardsite.dto.tour.TourDto;
 import com.board.boardsite.exception.BoardSiteException;
 import com.board.boardsite.exception.ErrorCode;
@@ -26,19 +27,18 @@ public class TourService {
 
 //
 @Transactional(readOnly = true)
-public Page<TourDto> tourSearchList(SearchTourType searchType , String searchKeyWord , Pageable pageable) {
-
+public Page<TourOnlyListDto> tourSearchList(SearchTourType searchType , String searchKeyWord , Pageable pageable) {
     if (searchKeyWord == null || searchKeyWord.isBlank()) {
-        return tourRepository.findAllByDeleted(pageable,false).map(TourDto::from);
+        return tourRepository.findCustomAllByDeleted(false, pageable);
     }
     return switch (searchType) {
-        case TITLE -> tourRepository.findByTitleContainingAndDeleted(searchKeyWord, pageable,false).map(TourDto::from);
-        case CITY -> tourRepository.findByCityContainingAndDeleted(searchKeyWord, pageable , false).map(TourDto::from);
+        case TITLE -> tourRepository.findCustomByTitleContainingAndDeleted(searchKeyWord,false, pageable);
+        case CITY -> tourRepository.findCustomByCityContainingAndDeleted(searchKeyWord,false,pageable );
     };
 }
     //수정
     @Transactional
-    public TourDto tourDetail(Long tourId,String role) {
+    public TourDto tourDetail(Long tourId, String role) {
         Tour tourDetail;
 
         if(role==null) {

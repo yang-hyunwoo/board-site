@@ -96,7 +96,7 @@ public class TravelAgencyReservationService {
 
         if(userPaid == (userCount*travelPaid)){
             updTravelAgencyReservation.setDeleted(false);
-           Long qrId= saveQr(dto.tripUser().id(),travelAgencyReservation.getId(),updTravelAgencyReservation.getPersonCount(),updTravelAgencyReservation.isDeleted());
+            var qrId= saveQr(dto.tripUser().id(),travelAgencyReservation.getId(),updTravelAgencyReservation.getPersonCount(),updTravelAgencyReservation.isDeleted());
             updTravelAgencyReservation.setQrCodeId(qrId);
         } else {
             updTravelAgencyReservation.setFailReason("스크립트 결제 금액 변조");

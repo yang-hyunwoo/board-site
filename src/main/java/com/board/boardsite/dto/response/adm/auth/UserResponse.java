@@ -1,6 +1,7 @@
 package com.board.boardsite.dto.response.adm.auth;
 
 
+
 public record UserResponse(
         Long id ,
         String email,
@@ -26,7 +27,7 @@ public record UserResponse(
                         String role,
                         Long travelAgencyId,
                         boolean authChk,
-                        Long profileId,
+                                  Long profileId,
                                   String travelAgencyName) {
         return new UserResponse(id,
                 email,

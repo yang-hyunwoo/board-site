@@ -183,6 +183,7 @@ public record TripUserDto(
 
 
 
+
     public TripUser toEntity(String passwordEncode){
         return TripUser.of(
                 name,

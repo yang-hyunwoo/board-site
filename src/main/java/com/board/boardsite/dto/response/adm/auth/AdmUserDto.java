@@ -1,7 +1,6 @@
 package com.board.boardsite.dto.response.adm.auth;
 
 import com.board.boardsite.domain.user.TripUser;
-import com.board.boardsite.dto.travel.TravelAgencyDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

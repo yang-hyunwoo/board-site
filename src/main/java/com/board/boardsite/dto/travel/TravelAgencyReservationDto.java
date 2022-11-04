@@ -126,7 +126,9 @@ public record TravelAgencyReservationDto(
         );
     }
 
-    public  TravelAgencyReservation toEntity(TravelAgency travelAgency, TravelAgencyList travelAgencyList , TripUser tripUser) {
+    public  TravelAgencyReservation toEntity(TravelAgency travelAgency,
+                                             TravelAgencyList travelAgencyList ,
+                                             TripUser tripUser) {
         return TravelAgencyReservation.of(
                 merchantUid,
                 impUid,

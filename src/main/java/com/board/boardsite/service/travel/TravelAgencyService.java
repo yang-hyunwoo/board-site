@@ -56,6 +56,7 @@ public class TravelAgencyService {
     @Transactional(readOnly = true)
     public List<TravelAgencyDto> travelAgencyRandomThree() {
         int count = 3;
+
         return travelAgencyRepository.findTravelAgencyRandomCount(count).stream().map(TravelAgencyDto::from).collect(Collectors.toList());
     }
 

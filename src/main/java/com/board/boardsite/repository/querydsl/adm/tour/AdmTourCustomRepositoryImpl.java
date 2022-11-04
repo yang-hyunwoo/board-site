@@ -1,4 +1,4 @@
-package com.board.boardsite.repository.querydsl.tour;
+package com.board.boardsite.repository.querydsl.adm.tour;
 
 import com.board.boardsite.domain.common.QAttachFile;
 import com.board.boardsite.domain.tour.QTour;
@@ -12,17 +12,18 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-public class TourCustomRepositoryImpl extends QuerydslRepositorySupport implements TourCustomRepository {
+public class AdmTourCustomRepositoryImpl extends QuerydslRepositorySupport implements AdmTourCustomRepository {
     @PersistenceContext
     EntityManager em;
 
     private final JPAQueryFactory queryFactory;
 
-    public TourCustomRepositoryImpl(JPAQueryFactory queryFactory) {
+    public AdmTourCustomRepositoryImpl(JPAQueryFactory queryFactory) {
         super(Tour.class);
         this.queryFactory = queryFactory;
     }
@@ -42,7 +43,7 @@ public class TourCustomRepositoryImpl extends QuerydslRepositorySupport implemen
     QTour tour = QTour.tour;
     QAttachFile attachFile = QAttachFile.attachFile;
     @Override
-    public PageImpl<TourOnlyListDto> findCustomAllByDeleted(boolean deleted, Pageable pageable) {
+    public PageImpl<TourOnlyListDto> findCustomAll(Pageable pageable) {
 
         var aa =  queryFactory.select(Projections.bean(TourOnlyListDto.class,
                         tour.id.as("id"),
@@ -61,13 +62,12 @@ public class TourCustomRepositoryImpl extends QuerydslRepositorySupport implemen
                 .from(tour)
                 .leftJoin(attachFile)
                 .on(tour.thumbnailId.eq(attachFile.fileId))
-                .where(tour.deleted.eq(deleted))
                 .fetch();
         return new PageImpl<>(aa, pageable, aa.size());
     }
 
     @Override
-    public PageImpl<TourOnlyListDto> findCustomByTitleContainingAndDeleted(String searchKeyWord, boolean deleted, Pageable pageable) {
+    public PageImpl<TourOnlyListDto> findCustomByTitleContaining(String searchKeyWord,Pageable pageable) {
         var tourList =  queryFactory.select(Projections.bean(TourOnlyListDto.class,
                         tour.id.as("id"),
                         tour.tripUser,
@@ -85,14 +85,13 @@ public class TourCustomRepositoryImpl extends QuerydslRepositorySupport implemen
                 .from(tour)
                 .leftJoin(attachFile)
                 .on(tour.thumbnailId.eq(attachFile.fileId))
-                .where(tour.title.contains(searchKeyWord),
-                        tour.deleted.eq(deleted))
+                .where(tour.title.contains(searchKeyWord))
                 .fetch();
         return new PageImpl<>(tourList, pageable, tourList.size());
     }
 
     @Override
-    public PageImpl<TourOnlyListDto> findCustomByCityContainingAndDeleted(String searchKeyWord, boolean deleted, Pageable pageable) {
+    public PageImpl<TourOnlyListDto> findCustomByCityContaining(String searchKeyWord,Pageable pageable) {
         var tourList =  queryFactory.select(Projections.bean(TourOnlyListDto.class,
                         tour.id.as("id"),
                         tour.tripUser,
@@ -110,8 +109,7 @@ public class TourCustomRepositoryImpl extends QuerydslRepositorySupport implemen
                 .from(tour)
                 .leftJoin(attachFile)
                 .on(tour.thumbnailId.eq(attachFile.fileId))
-                .where(tour.city.contains(searchKeyWord),
-                        tour.deleted.eq(deleted))
+                .where(tour.city.contains(searchKeyWord))
                 .fetch();
         return new PageImpl<>(tourList, pageable, tourList.size());
     }

@@ -1,5 +1,6 @@
 package com.board.boardsite.dto.request.adm.travel;
 
+import com.board.boardsite.domain.common.AttachFile;
 import com.board.boardsite.dto.travel.TravelAgencyListDto;
 
 

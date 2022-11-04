@@ -3,6 +3,7 @@ package com.board.boardsite.service.adm.tour;
 import com.board.boardsite.domain.constant.SearchTourType;
 import com.board.boardsite.domain.tour.Tour;
 import com.board.boardsite.domain.user.TripUser;
+import com.board.boardsite.dto.tour.TourOnlyListDto;
 import com.board.boardsite.dto.tour.TourDto;
 import com.board.boardsite.exception.BoardSiteException;
 import com.board.boardsite.exception.ErrorCode;
@@ -24,14 +25,14 @@ public class AdmTourService {
     private final TripUserRepository tripUserRepository;
 
     @Transactional(readOnly = true)
-    public Page<TourDto> tourList(SearchTourType searchType , String searchKeyWord , Pageable pageable) {
+    public Page<TourOnlyListDto> tourList(SearchTourType searchType , String searchKeyWord , Pageable pageable) {
 
         if (searchKeyWord == null || searchKeyWord.isBlank()) {
-            return admTourRepository.findAll(pageable).map(TourDto::from);
+            return admTourRepository.findCustomAll(pageable);
         }
         return switch (searchType) {
-            case TITLE -> admTourRepository.findByTitleContaining(searchKeyWord, pageable).map(TourDto::from);
-            case CITY -> admTourRepository.findByCityContaining(searchKeyWord, pageable).map(TourDto::from);
+            case TITLE -> admTourRepository.findCustomByTitleContaining(searchKeyWord, pageable);
+            case CITY -> admTourRepository.findCustomByCityContaining(searchKeyWord, pageable);
         };
     }
 

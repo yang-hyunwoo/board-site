@@ -10,7 +10,7 @@ public record ChatRoomPersonResponse(
 ) {
     public static ChatRoomPersonResponse of(Long id,
                                   String nickname,
-                                  Long profileId,
+                                            Long profileId,
                                   Long tripUserId) {
         return new ChatRoomPersonResponse(
                 id,
