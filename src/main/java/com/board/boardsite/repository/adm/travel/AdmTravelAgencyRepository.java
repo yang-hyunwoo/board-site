@@ -1,12 +1,13 @@
 package com.board.boardsite.repository.adm.travel;
 
 import com.board.boardsite.domain.travel.TravelAgency;
+import com.board.boardsite.repository.querydsl.travel.adm.travel.AdmTravelAgencyCustomRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
-public interface AdmTravelAgencyRepository extends JpaRepository<TravelAgency , Long> {
+public interface AdmTravelAgencyRepository extends JpaRepository<TravelAgency , Long> , AdmTravelAgencyCustomRepository {
 
 
     Page<TravelAgency> findByNameContaining(String TravelAgencyName , Pageable pageable);

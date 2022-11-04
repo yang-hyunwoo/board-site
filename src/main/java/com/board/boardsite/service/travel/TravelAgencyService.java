@@ -28,12 +28,12 @@ public class TravelAgencyService {
     private final TravelAgencyListRepository travelAgencyListRepository;
 
     @Transactional(readOnly = true)
-    public Page<TravelAgencyDto> travelAgencyList(String travelAgencyName , Pageable pageable) {
+    public Page<TravelAgencyOnlyListDto> travelAgencyList(String travelAgencyName , Pageable pageable) {
 
         if (travelAgencyName == null || travelAgencyName.isBlank()) {
-            return travelAgencyRepository.findAllByDeleted(pageable,false).map(TravelAgencyDto::from);
+            return travelAgencyRepository.findCustomAllByDeleted(false,pageable);
         }
-        return travelAgencyRepository.findByNameContainingAndDeleted(travelAgencyName , pageable,false).map(TravelAgencyDto::from);
+        return travelAgencyRepository.findCustomByNameContainingAndDeleted(travelAgencyName , false,pageable);
     }
 
     @Transactional(readOnly = true)

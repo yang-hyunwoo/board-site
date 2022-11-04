@@ -41,8 +41,8 @@ public class TravelAgencyListService {
     }
 
     @Transactional(readOnly = true)
-    public Page<TravelAgencyListDto> searchTravelAgencyPage(Long travelAgencyId , Pageable pageable) {
-        return travelAgencyListRepository.findByTravelAgency_IdAndDeleted(travelAgencyId,pageable,false).map(TravelAgencyListDto::from);
+    public Page<TravelAgencyListOnlyListDto> searchTravelAgencyPage(Long travelAgencyId , Pageable pageable) {
+        return travelAgencyListRepository.findByCustomTravelAgency_IdAndDeleted(travelAgencyId,false,pageable);
     }
 
     @Transactional

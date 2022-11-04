@@ -34,7 +34,6 @@ public class TravelAgencyListController {
                                                                          { @SortDefault(sort="readCount" , direction = Sort.Direction.ASC),
                                                                            @SortDefault(sort="title" , direction = Sort.Direction.ASC)}
                                                                          ) Pageable pageable){
-
         Page<TravelAgencyListResponse> travelAgencyListResponses = travelAgencyListService.travelAgencyTripList(travelAgencyTitleName , pageable).map(TravelAgencyListResponse::from);
         return Response.success(travelAgencyListResponses);
     }
