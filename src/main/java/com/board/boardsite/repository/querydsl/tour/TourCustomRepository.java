@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface TourCustomRepository {
 
-    List<Tour> findTourRandomCount(int count);
+    List<TourOnlyListDto> findTourRandomCount(int count);
 
 
     PageImpl<TourOnlyListDto> findCustomAllByDeleted(boolean deleted , Pageable pageable);

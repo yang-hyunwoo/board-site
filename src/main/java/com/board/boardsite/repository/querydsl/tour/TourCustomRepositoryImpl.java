@@ -27,20 +27,34 @@ public class TourCustomRepositoryImpl extends QuerydslRepositorySupport implemen
         this.queryFactory = queryFactory;
     }
 
-
-    @Override
-    public List<Tour> findTourRandomCount(int count) {
-        JPAQuery<Tour> query = new JPAQuery<>(em , MySQLJPATemplates.DEFAULT);
-        QTour tour = QTour.tour;
-        return query.from(tour)
-                .where(tour.deleted.eq(false))
-                .groupBy(tour.id)
-                .orderBy(NumberExpression.random().asc())
-                .limit(count)
-                .fetch();
-    }
     QTour tour = QTour.tour;
     QAttachFile attachFile = QAttachFile.attachFile;
+
+    @Override
+    public List<TourOnlyListDto> findTourRandomCount(int count) {
+
+         return queryFactory.select(Projections.bean(TourOnlyListDto.class,
+                        tour.id.as("id"),
+                        tour.title.as("title"),
+                        tour.content.as("content"),
+                        tour.deleted.as("deleted"),
+                        tour.readCount.as("readCount"),
+                        tour.thumbnailId.as("thumbnailId"),
+                        attachFile.filePath.as("filePath"),
+                        tour.city.as("city"),
+                        tour.createdAt.as("createdAt"),
+                        tour.createdBy.as("createdBy"),
+                        tour.modifiedAt.as("modifiedAt"),
+                        tour.modifiedBy.as("modifiedBy")))
+                .from(tour)
+                .leftJoin(attachFile)
+                .on(tour.thumbnailId.eq(attachFile.fileId))
+                .where(tour.deleted.eq(false))
+                 .groupBy(tour.id,attachFile.filePath)
+                 .orderBy(NumberExpression.random().asc())
+                .fetch();
+    }
+
     @Override
     public PageImpl<TourOnlyListDto> findCustomAllByDeleted(boolean deleted, Pageable pageable) {
 

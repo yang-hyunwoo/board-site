@@ -3,6 +3,7 @@ package com.board.boardsite.service.travel;
 import com.board.boardsite.domain.travel.TravelAgencyLike;
 import com.board.boardsite.domain.travel.TravelAgencyList;
 import com.board.boardsite.dto.travel.TravelAgencyListDto;
+import com.board.boardsite.dto.travel.TravelAgencyListOnlyListDto;
 import com.board.boardsite.exception.BoardSiteException;
 import com.board.boardsite.exception.ErrorCode;
 import com.board.boardsite.repository.travel.TravelAgencyListLikeRepository;
@@ -64,8 +65,8 @@ public class TravelAgencyListService {
     }
 
     @Transactional(readOnly = true)
-    public List<TravelAgencyListDto> travelMainCarousel() {
-        return travelAgencyListRepository.findByDeletedAndSortIsNotNullOrderBySort(false).stream().map(TravelAgencyListDto::from).collect(Collectors.toList());
+    public List<TravelAgencyListOnlyListDto> travelMainCarousel() {
+        return travelAgencyListRepository.findByDeletedAndSortIsNotNullOrderBySort();
     }
 
     @Transactional

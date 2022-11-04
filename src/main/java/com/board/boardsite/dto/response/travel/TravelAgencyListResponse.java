@@ -3,6 +3,7 @@ package com.board.boardsite.dto.response.travel;
 import com.board.boardsite.domain.travel.TravelAgencyLike;
 import com.board.boardsite.dto.security.TripUserPrincipal;
 import com.board.boardsite.dto.travel.TravelAgencyListDto;
+import com.board.boardsite.dto.travel.TravelAgencyListOnlyListDto;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -26,6 +27,7 @@ public record TravelAgencyListResponse(
         int person_count,
         int person_max_count,
         Long thumnbnailFileId,
+        String filePath,
         int like_count,
         boolean deleted,
         Integer sort,
@@ -48,6 +50,7 @@ public record TravelAgencyListResponse(
                                     int person_count,
                                     int person_max_count,
                                     Long thumnbnailFileId,
+                                    String filePath,
                                     int like_count,
                                     boolean deleted,
                                     Integer sort,
@@ -69,6 +72,7 @@ public record TravelAgencyListResponse(
                 person_count,
                 person_max_count,
                 thumnbnailFileId,
+                filePath,
                 like_count,
                 deleted,
                 sort,
@@ -109,9 +113,39 @@ public record TravelAgencyListResponse(
                 dto.person_count(),
                 dto.person_max_count(),
                 dto.thumnbnailFileId(),
+                null,
                 dto.like_count(),
                 dto.deleted(),
                 dto.sort(),
+                chk
+        );
+
+    }
+
+
+    public static TravelAgencyListResponse from(TravelAgencyListOnlyListDto dto){
+        AtomicBoolean chk = new AtomicBoolean(false);
+        return new TravelAgencyListResponse(
+                dto.getId(),
+                dto.getTravel_agency_id(),
+                dto.getTravel_name(),
+                dto.getCity(),
+                dto.getTitle(),
+                dto.getContent(),
+                dto.getSale_percent(),
+                dto.getReal_paid(),
+                dto.getSale_paid(),
+                dto.getTravel_start_at(),
+                dto.getTravel_end_at(),
+                dto.getTravelRealTripAt(),
+                dto.getRead_count(),
+                dto.getPerson_count(),
+                dto.getPerson_max_count(),
+                dto.getThumnbnailFileId(),
+                dto.getFilePath(),
+                dto.getLike_count(),
+                dto.isDeleted(),
+                dto.getSort(),
                 chk
         );
 

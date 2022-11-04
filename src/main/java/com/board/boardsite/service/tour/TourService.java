@@ -55,9 +55,9 @@ public Page<TourOnlyListDto> tourSearchList(SearchTourType searchType , String s
     }
 
     @Transactional(readOnly = true)
-    public List<TourDto> tourRandomThree() {
+    public List<TourOnlyListDto> tourRandomThree() {
         int count = 3;
-        return tourRepository.findTourRandomCount(count).stream().map(TourDto::from).collect(Collectors.toList());
+        return tourRepository.findTourRandomCount(count);
     }
 
 
