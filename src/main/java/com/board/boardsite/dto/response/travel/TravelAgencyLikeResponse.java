@@ -1,6 +1,8 @@
 package com.board.boardsite.dto.response.travel;
 
 import com.board.boardsite.dto.travel.TravelAgencyLikeDto;
+import com.board.boardsite.dto.travel.TravelAgencyLikeOnlyDto;
+
 import java.time.LocalDateTime;
 
 public record TravelAgencyLikeResponse(
@@ -10,6 +12,7 @@ public record TravelAgencyLikeResponse(
         String taName,
         String talCity,
         Long talThumbnail,
+        String filePath,
         int talReadCount,
         String talTravelStartAt,
         String talTravelEndAt,
@@ -28,6 +31,7 @@ public record TravelAgencyLikeResponse(
                                               String taName,
                                               String talCity,
                                               Long talThumbnail,
+                                              String filePath,
                                               int talReadCount,
                                               String talTravelStartAt,
                                               String talTravelEndAt,
@@ -45,6 +49,7 @@ public record TravelAgencyLikeResponse(
                 taName,
                 talCity,
                 talThumbnail,
+                null,
                 talReadCount,
                 talTravelStartAt,
                 talTravelEndAt,
@@ -66,6 +71,7 @@ public record TravelAgencyLikeResponse(
                 dto.travelAgencyList().travelAgency().getName(),
                 dto.travelAgencyList().city(),
                 dto.travelAgencyList().thumnbnailFileId(),
+                null,
                 dto.travelAgencyList().read_count(),
                 dto.travelAgencyList().travel_start_at(),
                 dto.travelAgencyList().travel_end_at(),
@@ -77,6 +83,29 @@ public record TravelAgencyLikeResponse(
                 dto.createdBy(),
                 dto.modifiedAt(),
                 dto.modifiedBy()
+        );
+    }
+
+    public static TravelAgencyLikeResponse from(TravelAgencyLikeOnlyDto dto) {
+        return new TravelAgencyLikeResponse(
+                dto.getId(),
+                dto.getTravelAgencyList().getId(),
+                dto.getTravelAgencyList().getTitle(),
+                dto.getTravelAgencyList().getTravelAgency().getName(),
+                dto.getTravelAgencyList().getCity(),
+                dto.getTravelAgencyList().getThumnbnailFileId(),
+                dto.getFilePath(),
+                dto.getTravelAgencyList().getReadCount(),
+                dto.getTravelAgencyList().getTravelStartAt(),
+                dto.getTravelAgencyList().getTravelEndAt(),
+                dto.getTravelAgencyList().getRealPaid(),
+                dto.getTravelAgencyList().getSalePaid(),
+                dto.getTravelAgencyList().getSalePercent(),
+                dto.isDeleted(),
+                dto.getCreatedAt(),
+                dto.getCreatedBy(),
+                dto.getModifiedAt(),
+                dto.getModifiedBy()
         );
     }
 }
