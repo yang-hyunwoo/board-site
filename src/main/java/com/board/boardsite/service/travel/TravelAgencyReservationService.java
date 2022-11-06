@@ -8,6 +8,7 @@ import com.board.boardsite.domain.user.TripUser;
 import com.board.boardsite.dto.common.AttachFileDto;
 import com.board.boardsite.dto.request.travel.TravelAgencyRerservationRefundRequest;
 import com.board.boardsite.dto.travel.TravelAgencyReservationDto;
+import com.board.boardsite.dto.travel.TravelAgencyReservationOnlyListDto;
 import com.board.boardsite.exception.BoardSiteException;
 import com.board.boardsite.exception.ErrorCode;
 import com.board.boardsite.repository.travel.TravelAgencyListRepository;
@@ -27,6 +28,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -106,8 +108,8 @@ public class TravelAgencyReservationService {
     }
 
     @Transactional(readOnly = true)
-    public Page<TravelAgencyReservationDto> getReservationList(Long tripUserId , Pageable pageable) {
-        return travelAgencyReservationRepository.findByTripUser_Id(pageable,tripUserId).map(TravelAgencyReservationDto::from);
+    public Page<TravelAgencyReservationOnlyListDto> getReservationList(Long tripUserId , Pageable pageable) {
+        return travelAgencyReservationRepository.findCustomList(tripUserId,pageable);
     }
 
     @Transactional
