@@ -82,16 +82,16 @@ cloudinary:
 spring:
   config.activate.on-profile: heroku
   datasource:
-    url: jdbc:postgresql://ec2-3-213-66-35.compute-1.amazonaws.com:5432/d2uku28in0vnr7
-    username: txwxckyioaetcl
-    password: c4cf86f02a9886d487b8c59bda5051dea8ae4370d1f3177318241ca211ba975f
+    url: ${POST_URL}
+    username: ${POST_NAME}
+    password: ${POST_PW}
     platform: postgres
     driver-class-name: org.postgresql.Driver
   jpa.hibernate.ddl-auto: update
 #  sql.init.mode: never
 
 cloudinary:
-  cloud_name:  ${CLOUDINARY_NAME}
+  cloud_name: ${CLOUDINARY_NAME}
   api_key: ${CLOUDINARY_KEY}
   api_secret: ${CLOUDINARY_SECRET}
 
@@ -107,10 +107,10 @@ custom:
     thumbnail-images: C:\Git_project\board-site\src\main\resources\templates\thumbnail
 
 naver:
-  client-id: YVyQcRuuS0DEIWEcmGqq
-  client-secret: s4OJ1om1oB
+  client-id: ${NAVER_CLIENT}
+  client-secret: ${NAVER_SECRET}
   callback-url: https://board-site-back.herokuapp.com/NaverLoginCallback
 kakao:
-  rest-api-key: 91b0e992b73843a23b5553a8fa5b6601
+  rest-api-key: ${KAKAO_KEY}
   callback-url: https://board-site-back.herokuapp.com/KakaoLoginCallback
-  admin-key: cce05f289cb3058bb7a61d4d1fce24b2
+  admin-key: ${KAKAO_ADMIN_KEY}
