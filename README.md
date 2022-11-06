@@ -1,6 +1,39 @@
 https://board-site-back.herokuapp.com/  (사용자)<br>
 https://board-site-adm.herokuapp.com/  (관리자)
 
+
+# 작업 일 : 2022 08 ~ 2022 11
+
+사용 툴 및 프로그램:
+spring boot 2.7.2<br>
+java 17<br>
+postgresql<br>
+vue.js<br>
+cloudinary<br>
+postman<br>
+sourcetree<br>
+gitKraken<br>
+intellij<br>
+dbeaver<br>
+
+
+사용 라이브러리:
+spring :
+jwt<br>
+boot-starter-mail<br>
+spring-security<br>
+webSocket<br>
+querydsl<br>
+webClient<br>
+
+vue :
+toast-ui-editor<br>
+webstomp-client<br>
+axios<br>
+
+이정도의 라이브러리를 사용하였다.
+
+
 # 2022/11/03
 현재 문제점 
 1.개발당시 이미지를 프로젝트 내에서 저장을 하여 불러왔으나 <br>
