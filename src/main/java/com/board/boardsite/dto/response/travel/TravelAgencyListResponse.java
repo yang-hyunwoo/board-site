@@ -1,14 +1,9 @@
 package com.board.boardsite.dto.response.travel;
 
-import com.board.boardsite.domain.travel.TravelAgencyLike;
-import com.board.boardsite.dto.security.TripUserPrincipal;
+
 import com.board.boardsite.dto.travel.TravelAgencyListDto;
 import com.board.boardsite.dto.travel.TravelAgencyListOnlyListDto;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
-import java.util.Optional;
-import java.util.concurrent.atomic.AtomicBoolean;
+
 
 public record TravelAgencyListResponse(
         Long id,
@@ -31,7 +26,7 @@ public record TravelAgencyListResponse(
         int like_count,
         boolean deleted,
         Integer sort,
-        AtomicBoolean auth
+        boolean auth
 ) {
 
     public static TravelAgencyListResponse of(Long id,
@@ -54,7 +49,7 @@ public record TravelAgencyListResponse(
                                     int like_count,
                                     boolean deleted,
                                     Integer sort,
-                                    AtomicBoolean auth) {
+                                    boolean auth) {
         return new TravelAgencyListResponse(
                 id,
                 travel_agency_id,
@@ -80,22 +75,7 @@ public record TravelAgencyListResponse(
     }
 
     public static TravelAgencyListResponse from(TravelAgencyListDto dto){
-        Long authChkLong = 0L;
-        AtomicBoolean chk = new AtomicBoolean(false);
-        if(!SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")){
-            var articleAuthChk = Optional.ofNullable(SecurityContextHolder.getContext())
-                    .map(SecurityContext::getAuthentication)
-                    .map(Authentication::getPrincipal)
-                    .map(TripUserPrincipal.class::cast);
-            authChkLong = articleAuthChk.get().id();
-        }
 
-        Long vaildAuth = authChkLong;
-        dto.travelAgencyLike().stream().map(TravelAgencyLike::getTripUser).forEach(s-> {if (s.getId().equals(vaildAuth)) {
-            chk.set(true);
-            return ;
-            }
-        });
         return new TravelAgencyListResponse(
                 dto.id(),
                 dto.travelAgency().getId(),
@@ -117,14 +97,14 @@ public record TravelAgencyListResponse(
                 dto.like_count(),
                 dto.deleted(),
                 dto.sort(),
-                chk
+                false
         );
 
     }
 
 
     public static TravelAgencyListResponse from(TravelAgencyListOnlyListDto dto){
-        AtomicBoolean chk = new AtomicBoolean(false);
+
         return new TravelAgencyListResponse(
                 dto.getId(),
                 dto.getTravel_agency_id(),
@@ -146,7 +126,7 @@ public record TravelAgencyListResponse(
                 dto.getLike_count(),
                 dto.isDeleted(),
                 dto.getSort(),
-                chk
+                dto.isTravelAgencyLike()
         );
 
     }

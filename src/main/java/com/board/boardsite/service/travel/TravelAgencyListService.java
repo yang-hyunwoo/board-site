@@ -2,6 +2,7 @@ package com.board.boardsite.service.travel;
 
 import com.board.boardsite.domain.travel.TravelAgencyLike;
 import com.board.boardsite.domain.travel.TravelAgencyList;
+import com.board.boardsite.dto.security.TripUserPrincipal;
 import com.board.boardsite.dto.travel.TravelAgencyListDto;
 import com.board.boardsite.dto.travel.TravelAgencyListOnlyListDto;
 import com.board.boardsite.exception.BoardSiteException;
@@ -31,13 +32,12 @@ public class TravelAgencyListService {
     private final TripUserRepository tripUserRepository;
 
     @Transactional(readOnly = true)
-    public Page<TravelAgencyListOnlyListDto> travelAgencyTripList(String travelAgencyTitleName , Pageable pageable) {
-
+    public Page<TravelAgencyListOnlyListDto> travelAgencyTripList(String travelAgencyTitleName , TripUserPrincipal tripUserPrincipal, Pageable pageable) {
         if(travelAgencyTitleName == null || travelAgencyTitleName.isBlank()) {
-            return travelAgencyListRepository.findCustomByAllDeleted(false,pageable);
+            return travelAgencyListRepository.findCustomByAllDeleted(false,tripUserPrincipal,pageable);
         }
 
-        return travelAgencyListRepository.findCustomByTitleContaingAndDeleted(travelAgencyTitleName,false,pageable);
+        return travelAgencyListRepository.findCustomByTitleContaingAndDeleted(travelAgencyTitleName,tripUserPrincipal,false,pageable);
     }
 
     @Transactional(readOnly = true)
