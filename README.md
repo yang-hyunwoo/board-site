@@ -1,6 +1,9 @@
 https://board-site-back.herokuapp.com/  (사용자)<br>
 https://board-site-adm.herokuapp.com/  (관리자)
 
+관리자 :
+id : test@test.com
+pw :1q2w3e4r!!
 
 # 작업 일 : 2022 08 ~ 2022 11
 
