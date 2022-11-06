@@ -35,6 +35,7 @@ public class AdmUserCustomRepositoryImpl extends QuerydslRepositorySupport imple
                         tripUser.deleted.as("deleted"),
                         tripUser.emailAuth.as("emailAuth"),
                         tripUser.role.as("role"),
+                        tripUser.loginType.as("loginType"),
                         tripUser.travelAgencyId.as("travelAgencyId"),
                         tripUser.authChk.as("authChk"),
                         tripUser.profileId.as("profileId")))
@@ -59,6 +60,7 @@ public class AdmUserCustomRepositoryImpl extends QuerydslRepositorySupport imple
                         tripUser.deleted.as("deleted"),
                         tripUser.emailAuth.as("emailAuth"),
                         tripUser.role.as("role"),
+                        tripUser.loginType.as("loginType"),
                         tripUser.travelAgencyId.as("travelAgencyId"),
                         tripUser.authChk.as("authChk"),
                         tripUser.profileId.as("profileId")))
@@ -84,6 +86,7 @@ public class AdmUserCustomRepositoryImpl extends QuerydslRepositorySupport imple
                         tripUser.deleted.as("deleted"),
                         tripUser.emailAuth.as("emailAuth"),
                         tripUser.role.as("role"),
+                        tripUser.loginType.as("loginType"),
                         tripUser.travelAgencyId.as("travelAgencyId"),
                         tripUser.authChk.as("authChk"),
                         tripUser.profileId.as("profileId")))
@@ -109,6 +112,7 @@ public class AdmUserCustomRepositoryImpl extends QuerydslRepositorySupport imple
                         tripUser.deleted.as("deleted"),
                         tripUser.emailAuth.as("emailAuth"),
                         tripUser.role.as("role"),
+                        tripUser.loginType.as("loginType"),
                         tripUser.travelAgencyId.as("travelAgencyId"),
                         tripUser.authChk.as("authChk"),
                         tripUser.profileId.as("profileId")))

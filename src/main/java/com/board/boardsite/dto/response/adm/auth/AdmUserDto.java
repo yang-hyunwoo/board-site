@@ -18,6 +18,7 @@ public class AdmUserDto {
     boolean deleted;
     Boolean emailAuth;
     String role;
+    String loginType;
     Long travelAgencyId;
     boolean authChk;
     Long profileId;
@@ -31,6 +32,7 @@ public class AdmUserDto {
                       boolean deleted,
                       Boolean emailAuth,
                       String role,
+                      String loginType,
                       Long travelAgencyId,
                       boolean authChk,
                       Long profileId,
@@ -43,6 +45,7 @@ public class AdmUserDto {
         this.deleted = deleted;
         this.emailAuth = emailAuth;
         this.role = role;
+        this.loginType = loginType;
         this.travelAgencyId = travelAgencyId;
         this.authChk = authChk;
         this.profileId = profileId;
@@ -58,6 +61,7 @@ public class AdmUserDto {
                 entity.isDeleted(),
                 entity.getEmailAuth(),
                 entity.getRole(),
+                entity.getLoginType(),
                 entity.getTravelAgencyId(),
                 entity.isAuthChk(),
                 entity.getProfileId(),
