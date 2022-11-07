@@ -50,6 +50,7 @@ public class TravelAgencyCustomRepositoryImpl extends QuerydslRepositorySupport 
                 .where(travelAgency.deleted.eq(false))
                 .groupBy(travelAgency.id,attachFile.filePath)
                 .orderBy(NumberExpression.random().asc())
+                .limit(count)
                 .fetch();
     }
 
