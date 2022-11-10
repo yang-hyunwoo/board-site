@@ -38,9 +38,11 @@ public class ChatSocketController {
     @MessageMapping("/new-Message/{roomId}")
     @SendTo("/topic/new-Message/{roomId}")
     public Response<ChatRoomRealTimeMessageResponse> newMessage(ChatRoomMessageRequest chatRoomMessageRequest , @Header("Authorization") String token) {
+
         final String jwt = token.split(" ")[1].trim();
-        String email = JwtTokenUtils.getEmail(jwt , key);
-        TripUserPrincipal user = tripUserService.loadUserByEmail(email);
+        Long id  = JwtTokenUtils.getId(jwt , key);
+        TripUserPrincipal user = tripUserService.loadUserById(id);
+
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                 user,null, user.getAuthorities()
         );
