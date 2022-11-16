@@ -23,7 +23,6 @@ public class ChatSocketController {
 
     private final ChatRoomMessageService chatRoomMessageService;
 
-    private SimpAnnotationMethodMessageHandler simpAnnotationMethodMessageHandler;
 
     private final String key =  "board_site.trip_web_application.secret_key";
 

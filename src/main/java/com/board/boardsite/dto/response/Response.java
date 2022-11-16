@@ -17,6 +17,14 @@ public class Response<T> {
     }
 
 
+    @Override
+    public String toString() {
+        return "Response{" +
+                "resultCode='" + resultCode + '\'' +
+                ", result=" + result +
+                '}';
+    }
+
     public static <T> Response<T> success(T result){
         return new Response<>("SUCCESS",result);
     }

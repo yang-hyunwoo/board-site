@@ -23,7 +23,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @RequiredArgsConstructor
-@EnableWebSecurity
+@EnableWebSecurity //웹보안 활성화를위한 annotation
 public class AuthenticationConfig {
 
     @Value("${jwt.secret-key}")
@@ -42,7 +42,7 @@ public class AuthenticationConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws  Exception {
         return http.csrf().disable()
-                .authorizeRequests()
+                .authorizeRequests()    //보안 시작
                 .antMatchers("/api/adm/excel/**","p/api/chat/detail","/**","/api/common/**","/api/trip/agency-trip/**","/api/trip/agency/**","/api/trip/articles/**","/api/trip/articles","/api/trip/users/confirm-email","/api/adm/admin/list").permitAll()
                 .antMatchers("/api/admin/**").hasRole("SUPER")
                 .antMatchers("/api/admin/**").hasRole("ADMIN")
