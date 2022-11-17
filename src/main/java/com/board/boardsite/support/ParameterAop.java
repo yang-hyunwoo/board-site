@@ -28,7 +28,9 @@ public class ParameterAop {
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         Method method = methodSignature.getMethod(); //메소드의 이름
         for(Object obj : args) {
-            log.info("before controller : {} , method : {} , type : {} , value : {}",method,method.getName(),obj.getClass().getSimpleName(),obj);
+            if(obj!=null) {
+                log.info("before controller : {} , method : {} , type : {} , value : {}", method, method.getName(), obj.getClass().getSimpleName(), obj);
+            }
         }
     }
 
