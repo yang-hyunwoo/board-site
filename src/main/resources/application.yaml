@@ -8,15 +8,15 @@ logging:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/boardsite
+    url: ${SPRING_DATABASE_URL}
     username: postgres
-    password: dkahffk11
+    password: ${SPRING_POSTGRESQL_PWD}
     driver-class-name: org.postgresql.Driver
   mail:
     host: smtp.gmail.com
     port: 587
-    username: cohouseol@gmail.com
-    password: skdxecuyxmkiabcb
+    username: ${SPRING_GMAIL_ID}
+    password: ${SPRING_GMAIL_PW}
     properties:
       mail:
         smtp:
@@ -56,8 +56,8 @@ custom:
     thumbnail-images: C:\Git_project\board-site\src\main\resources\templates\thumbnail
 
 import:
-  rest-api: 3071870338636273
-  rest-api-secret: 0nejijihcCxf0Fi7io0zia5NNtaw0tv7z15FUDhLJi8w0h85ieWdC2zgRyqK9KAS0T2yA0PHeABpwYOd
+  rest-api: ${IMPORT_API}
+  rest-api-secret: ${IMPORT_API_KEY}
 naver:
   client-id: VI3PelSRuX5_E4NdPZHj
   client-secret: CHD4HaNzd4
@@ -79,38 +79,38 @@ cloudinary:
   api_secret: 65speCbjat7h5uCf_HZ1_WwEpRM
 
 ---
-spring:
-  config.activate.on-profile: heroku
-  datasource:
-    url: ${POST_URL}
-    username: ${POST_NAME}
-    password: ${POST_PW}
-    platform: postgres
-    driver-class-name: org.postgresql.Driver
-  jpa.hibernate.ddl-auto: update
-#  sql.init.mode: never
-
-cloudinary:
-  cloud_name: ${CLOUDINARY_NAME}
-  api_key: ${CLOUDINARY_KEY}
-  api_secret: ${CLOUDINARY_SECRET}
-
-servlet:
-  multipart:
-    maxFileSize: 800MB
-    maxRequestSize: 800MB
-    enabled: true
-    location: C:\Git_project\board-site\src\main\resources\templates\image
-custom:
-  path:
-    upload-images: C:\Git_project\board-site\src\main\resources\templates\image
-    thumbnail-images: C:\Git_project\board-site\src\main\resources\templates\thumbnail
-
-naver:
-  client-id: ${NAVER_CLIENT}
-  client-secret: ${NAVER_SECRET}
-  callback-url: https://board-site-back.herokuapp.com/NaverLoginCallback
-kakao:
-  rest-api-key: ${KAKAO_KEY}
-  callback-url: https://board-site-back.herokuapp.com/KakaoLoginCallback
-  admin-key: ${KAKAO_ADMIN_KEY}
+#spring:
+#  config.activate.on-profile: heroku
+#  datasource:
+#    url: ${POST_URL}
+#    username: ${POST_NAME}
+#    password: ${POST_PW}
+#    platform: postgres
+#    driver-class-name: org.postgresql.Driver
+#  jpa.hibernate.ddl-auto: update
+##  sql.init.mode: never
+#
+#cloudinary:
+#  cloud_name: ${CLOUDINARY_NAME}
+#  api_key: ${CLOUDINARY_KEY}
+#  api_secret: ${CLOUDINARY_SECRET}
+#
+#servlet:
+#  multipart:
+#    maxFileSize: 800MB
+#    maxRequestSize: 800MB
+#    enabled: true
+#    location: C:\Git_project\board-site\src\main\resources\templates\image
+#custom:
+#  path:
+#    upload-images: C:\Git_project\board-site\src\main\resources\templates\image
+#    thumbnail-images: C:\Git_project\board-site\src\main\resources\templates\thumbnail
+#
+#naver:
+#  client-id: ${NAVER_CLIENT}
+#  client-secret: ${NAVER_SECRET}
+#  callback-url: https://board-site-back.herokuapp.com/NaverLoginCallback
+#kakao:
+#  rest-api-key: ${KAKAO_KEY}
+#  callback-url: https://board-site-back.herokuapp.com/KakaoLoginCallback
+#  admin-key: ${KAKAO_ADMIN_KEY}
