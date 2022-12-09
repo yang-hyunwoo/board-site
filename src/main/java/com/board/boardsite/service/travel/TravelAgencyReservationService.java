@@ -182,7 +182,7 @@ public class TravelAgencyReservationService {
         //개발
 //        String content = "http://localhost:8081?id="+id+"&travelAgencyResId="+travelAgencyResId+"&count="+count+"&deleted="+isDeleted;
         //heroku
-        String content = "https://board-site-back.herokuapp.com?id="+id+"&travelAgencyResId="+travelAgencyResId+"&count="+count+"&deleted="+isDeleted;
+        String content = "https://board-site-production.up.railway.app?id="+id+"&travelAgencyResId="+travelAgencyResId+"&count="+count+"&deleted="+isDeleted;
         try{
             QRCodeWriter qrCodeWriter = new QRCodeWriter();
             BitMatrix bitMatrix = qrCodeWriter.encode(content, BarcodeFormat.QR_CODE, 200, 200);
