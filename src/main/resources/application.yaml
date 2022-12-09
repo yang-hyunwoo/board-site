@@ -8,15 +8,15 @@ logging:
 
 spring:
   datasource:
-    url: ${SPRING_DATABASE_URL}
+    url: jdbc:postgresql://containers-us-west-155.railway.app:6558/railway
     username: postgres
-    password: ${SPRING_POSTGRESQL_PWD}
+    password: mMPrheU9cycQTO9WLba9
     driver-class-name: org.postgresql.Driver
   mail:
     host: smtp.gmail.com
     port: 587
-    username: ${SPRING_GMAIL_ID}
-    password: ${SPRING_GMAIL_PW}
+    username: cohouseol@gmail.com
+    password: vbikziwhmhkazoow
     properties:
       mail:
         smtp:
@@ -56,8 +56,8 @@ custom:
     thumbnail-images: C:\Git_project\board-site\src\main\resources\templates\thumbnail
 
 import:
-  rest-api: ${IMPORT_API}
-  rest-api-secret: ${IMPORT_API_KEY}
+  rest-api: 3071870338636273
+  rest-api-secret: 0nejijihcCxf0Fi7io0zia5NNtaw0tv7z15FUDhLJi8w0h85ieWdC2zgRyqK9KAS0T2yA0PHeABpwYOd
 naver:
   client-id: VI3PelSRuX5_E4NdPZHj
   client-secret: CHD4HaNzd4
