@@ -8,7 +8,7 @@ logging:
 
 spring:
   datasource:
-    url: jdbc:postgresql://containers-us-west-155.railway.app:6558/railway
+    url: ${POSTGRE_SQL_URL}
     username: postgres
     password: mMPrheU9cycQTO9WLba9
     driver-class-name: org.postgresql.Driver
