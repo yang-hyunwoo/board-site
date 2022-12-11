@@ -5,7 +5,11 @@
 
 사이트 :<br>
 https://board-site-production.up.railway.app <사용자> <br>
+id : user@user.com
+pw : user123!@#
 https://board-site-adm-production-cd2b.up.railway.app <관리자> <br>
+id : admin@admin.com
+pw : admin123!@#
 
 
 ---------------------------------------------------------
