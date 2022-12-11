@@ -53,7 +53,7 @@ public class EmailService {
 
 
         EmailAuth emailAuth = emailAuthRepository.findValidAuthByEmail(request.email(), request.authToken(), LocalDateTime.now()).get();
-        TripUser tripUser = tripUserRepository.findByEmail(request.email()).get();
+        TripUser tripUser = tripUserRepository.findByEmailAndLoginTypeIsNull(request.email()).get();
         emailAuth.useToken();
         tripUser.emailVerifiedSuccess();
         return true;
