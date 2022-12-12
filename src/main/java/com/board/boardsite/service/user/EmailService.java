@@ -44,10 +44,8 @@ public class EmailService {
     public boolean confirmEmail(EmailAuthRequest request) {
         if(emailAuthRepository.findValidAuthByEmail(request.email(), request.authToken(), LocalDateTime.now()).isEmpty()){
             if(tripUserRepository.findByEmail(request.email()).isEmpty()) {
-//                throw new BoardSiteException(ErrorCode.DUPLICATED_EMAIL, String.format("%s is duplicated", request.email()));
                 return  false;
             }
-//                throw new BoardSiteException(ErrorCode.EMAIL_TIME_INVAILED);
             return  false;
         }
 

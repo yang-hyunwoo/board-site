@@ -27,7 +27,9 @@ spring:
             connectiontimeout: 5000
             timeout: 5000
             writetimeout: 5000
-
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
   jpa:
     defer-datasource-initialization: true         # 2.5 이상 data.sql 실행
     hibernate.ddl-auto: update                    # table 생성

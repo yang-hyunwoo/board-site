@@ -47,7 +47,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
     implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
-
+    implementation group: 'io.springfox', name: 'springfox-boot-starter', version: '3.0.0'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
     implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
 
