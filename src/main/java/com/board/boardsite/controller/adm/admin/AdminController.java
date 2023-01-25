@@ -28,16 +28,13 @@ public class AdminController {
 
     @PostMapping("/login")
     @ApiOperation(value = "로그인", notes = "관리자 로그인을 한다.")
-
     public Response<TripUserLoginResponse> login(@RequestBody TripUserLoginRequest request) {
         String token = adminService.login(request.email(),request.password());
         return Response.success(new TripUserLoginResponse(token));
     }
 
-    /*
-       관리자 회원가입시 여행사 리스트 불러오기
-     */
     @GetMapping("/list")
+    @ApiOperation(value = "여행사 리스트", notes = "관리자 회원가입시 여행사 리스트를 불러온다.")
     public Response<List<TravelAgencyResponse>> travelAgencyList(){
         List<TravelAgencyResponse> travelAgencyResponses = adminService.travelAgencyList().stream().map(TravelAgencyResponse::from).collect(Collectors.toList());
         return Response.success(travelAgencyResponses);
@@ -45,6 +42,7 @@ public class AdminController {
 
 
     @GetMapping("/auth")
+    @ApiOperation(value = "권한 조회", notes = "관리자의 권한을 조회후 리턴한다.")
     public Response<Map> auth(@AuthenticationPrincipal TripUserPrincipal tripUserPrincipal ){
         HashMap auth = new HashMap();
         auth.put("role",tripUserPrincipal.role());

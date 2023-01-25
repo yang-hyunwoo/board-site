@@ -2,6 +2,7 @@ package com.board.boardsite.dto.security;
 
 import com.board.boardsite.domain.constant.Gender;
 import com.board.boardsite.dto.user.TripUserDto;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -10,17 +11,40 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public record TripUserPrincipal(
+        @ApiModelProperty(value ="id" , example = "1" , required = true)
         Long id,
+
+        @ApiModelProperty(value ="이름" , example = "관리자" , required = true)
         String name,
+
+        @ApiModelProperty(value ="닉네임" , example = "관리자" , required = true)
         String nickName,
+
+        @ApiModelProperty(value ="email" , example = "test@test.com" , required = true)
         String email,
+
+        @ApiModelProperty(value ="패스워드" , example = "pw" , required = true)
         String password,
+
+        @ApiModelProperty(value ="휴대폰 번호" , example = "010-1111-2222" , required = true)
         String phoneNumber,
+
+        @ApiModelProperty(value ="포인트" , example = "100" , required = true)
         int point,
+
+        @ApiModelProperty(value ="삭제여부" , example = "fasle" , required = true)
         boolean deleted,
+
+        @ApiModelProperty(value ="성별" , example = "M" , required = true)
         Gender gender,
+
+        @ApiModelProperty(value ="로그인 타입" , example = "NAVER" , required = true)
         String loginType,
+
+        @ApiModelProperty(value ="여행사 ID" , example = "1" , required = true)
         Long travelAgencyId,
+
+        @ApiModelProperty(value ="권한" , example = "ADMIN" , required = true)
         String role
 ) implements UserDetails {
 

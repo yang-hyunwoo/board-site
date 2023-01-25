@@ -12,6 +12,8 @@ import com.board.boardsite.dto.response.Response;
 import com.board.boardsite.dto.response.user.TripUserJoinResponse;
 import com.board.boardsite.service.user.EmailService;
 import com.board.boardsite.service.user.TripUserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+@Api(tags ={"사용자 로그인 정보 제공하는 Controller"})
 @RestController
 @RequestMapping("/api/trip/users")
 @RequiredArgsConstructor
@@ -33,6 +36,7 @@ public class TripUserController {
       사용자 / 관리자 회원가입 로직 동일
      */
     @PostMapping("/join")
+    @ApiOperation(value = "회원 가입", notes = "관리자/사용자 회원가입을 한다.")
     public Response<TripUserJoinResponse> join(@Valid @RequestBody TripUserJoinRequest request) {
         TripUserDto tripUserDto  = tripUserService.join(request.toDto());
         return Response.success(TripUserJoinResponse.from(tripUserDto));
@@ -41,6 +45,7 @@ public class TripUserController {
 
 
     @GetMapping("/confirm-email")
+    @ApiOperation(value = "이메일 인증", notes = "관리자/사용자 이메일 인증을 한다.")
     public Response<String> confirmEmail(@ModelAttribute EmailAuthRequest request) {
 
            boolean test =  emailService.confirmEmail(request);
@@ -60,6 +65,7 @@ public class TripUserController {
      * @return
      */
     @PostMapping("/login")
+    @ApiOperation(value = "로그인", notes = "관리자/사용자 로그인 한다.")
     public Response<TripUserLoginResponse> login(@RequestBody TripUserLoginRequest request) {
         String token = tripUserService.login(request.email(),request.password());
         return Response.success(new TripUserLoginResponse(token));
@@ -72,6 +78,7 @@ public class TripUserController {
      * @return
      */
     @GetMapping("/my-page")
+    @ApiOperation(value = "마이 페이지", notes = "마이페이지의 사용자 정보를 조회한다.")
     public Response<TripUserDto> myPage(@AuthenticationPrincipal TripUserPrincipal tripUserPrincipal) {
         var myPage = tripUserService.myPage(tripUserPrincipal.id());
         return Response.success(myPage);
@@ -84,6 +91,7 @@ public class TripUserController {
      * @return
      */
     @PostMapping("/change/password")
+    @ApiOperation(value = "비밀번호 변경", notes = "마이페이지의 사용자 비밀번호를 변경한다.")
     public Response<Boolean> changePassword(@RequestBody TripUserLoginRequest request ,
                                             @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal) {
         tripUserService.changePassword(tripUserPrincipal.id(),request.password());
@@ -97,6 +105,7 @@ public class TripUserController {
      * @return
      */
     @PostMapping("/change/other")
+    @ApiOperation(value = "비밀번호 제외 변경", notes = "마이페이지의 사용자 비밀번호 제외한 정보를 변경한다.")
     public Response<Boolean> changeUserOther(@RequestBody TripUserUpdateRequest request ,
                                             @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal) {
         tripUserService.changeUserOther(tripUserPrincipal.id(),request.toDto());

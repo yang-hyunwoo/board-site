@@ -4,6 +4,8 @@ import com.board.boardsite.dto.response.Response;
 import com.board.boardsite.dto.response.user.TripUserLoginResponse;
 import com.board.boardsite.service.common.KakaoService;
 import com.board.boardsite.service.common.NaverService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 
 
+@Api(tags ={"카카오 로그인 관련 Controller"})
 @RestController
 @RequestMapping("/api/kakao")
 @RequiredArgsConstructor
@@ -32,6 +35,7 @@ public class KakaoLoginController {
     private String adminKey;
 
     @GetMapping("/kakao-client")
+    @ApiOperation(value = "카카오 로그인", notes = "카카오 관련 로그인")
     public Response<HashMap> kakaoClient() {
 
         HashMap<String, String> map = new HashMap<>();
@@ -43,8 +47,8 @@ public class KakaoLoginController {
 
 
     @GetMapping("/callback")
+    @ApiOperation(value = "카카오 로그인 후 콜백", notes = "카카오 관련 로그인후 콜백 ")
     public Response<TripUserLoginResponse> kakaoCallbackUrl(@RequestParam String code) throws ParseException {
-        System.out.println(code);
         String token = kakaoService.kakaoService(code, resApiKey, callbackUrl,adminKey);
         return Response.success(new TripUserLoginResponse(token));
 

@@ -5,6 +5,8 @@ import com.board.boardsite.dto.common.AttachFileDto;
 import com.board.boardsite.service.common.FileUploadService;
 import com.board.boardsite.service.common.SequenceService;
 import com.cloudinary.Cloudinary;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import net.coobird.thumbnailator.Thumbnailator;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
-
+@Api(tags ={"파일 업로드 관련 Controller"})
 @RestController
 @RequestMapping("/api/common")
 @RequiredArgsConstructor
@@ -43,6 +45,7 @@ public class FileUploadController {
 
 
     @PostMapping("/file-upload")
+    @ApiOperation(value = "파일 업로드", notes = "cloudinary 외부 저장소에 업로드 및 DB 저장을 한다.")
     public List<AttachFileDto> fileUpload(@RequestParam("multiFile") List<MultipartFile> multipartFileList) throws IOException {
         Map config = new HashMap();
 
@@ -101,6 +104,7 @@ public class FileUploadController {
     }
 
     @GetMapping("/image/{fileId}/{fileChildId}")
+    @ApiOperation(value = "파일 조회", notes = "파일 조회를 한다.")
     public String fileRead(@PathVariable Long fileId,@PathVariable int fileChildId) throws IOException {
         var filePath  = fileUploadService.findFilePath(fileId,fileChildId);
         return filePath;
@@ -170,7 +174,9 @@ public class FileUploadController {
 //    }
 
     @GetMapping("/image/thumb/{fileId}/{fileChildId}")
-    public UrlResource thumbFileRead(@PathVariable Long fileId,@PathVariable int fileChildId) throws IOException {
+    @ApiOperation(value = "썸네일 조회", notes = "썸네일을 조회 한다.")
+    public UrlResource thumbFileRead(@PathVariable Long fileId,
+                                     @PathVariable int fileChildId) throws IOException {
         var filePath  = fileUploadService.findThumbFilePath(fileId,fileChildId);
         return new UrlResource("file:"+filePath);
     }

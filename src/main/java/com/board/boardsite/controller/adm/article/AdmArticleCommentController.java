@@ -5,6 +5,7 @@ import com.board.boardsite.dto.response.Response;
 import com.board.boardsite.dto.response.article.ArticleCommentResponse;
 import com.board.boardsite.dto.security.TripUserPrincipal;
 import com.board.boardsite.service.adm.article.AdmArticleCommentService;
+import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
  * 게시판 댓글 클래스
  * @author cohouseol
  */
+@Api(tags ={"관리자가 게시판 댓글 관리하는 Controller"})
 @RestController
 @RequestMapping("/api/adm/articles")
 @RequiredArgsConstructor

@@ -20,8 +20,7 @@ public class GlobalControllerAdvice {
     @ExceptionHandler(BoardSiteException.class)
     public ResponseEntity<?> applicationHandler(BoardSiteException e) {
         return ResponseEntity.status(e.getErrorCode().getStatus())
-                .body(Response.error(e.getErrorCode().name(),e.getErrorCode().getMessage()))
-                ;
+                .body(Response.error(e.getErrorCode().name(),e.getErrorCode().getMessage()));
     }
 
     //Runtime excepitonHandler

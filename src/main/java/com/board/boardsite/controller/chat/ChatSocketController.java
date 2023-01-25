@@ -7,6 +7,7 @@ import com.board.boardsite.dto.security.TripUserPrincipal;
 import com.board.boardsite.service.chat.ChatRoomMessageService;
 import com.board.boardsite.service.user.TripUserService;
 import com.board.boardsite.support.JwtTokenUtils;
+import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -15,7 +16,6 @@ import org.springframework.messaging.simp.annotation.support.SimpAnnotationMetho
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RestController;
-
 
 @RestController
 @RequiredArgsConstructor
