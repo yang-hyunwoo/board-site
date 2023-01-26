@@ -6,6 +6,8 @@ import com.board.boardsite.dto.response.Response;
 import com.board.boardsite.dto.response.tour.TourResponse;
 import com.board.boardsite.dto.security.TripUserPrincipal;
 import com.board.boardsite.service.adm.tour.AdmTourService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,6 +22,7 @@ import javax.validation.Valid;
  * 관광지 관리자 controller
  * @author cohouseol
  */
+@Api(tags ={"관리자 여행 목록 정보 조회 Controller"})
 @RestController
 @RequestMapping("/api/adm/tour")
 @RequiredArgsConstructor
@@ -36,6 +39,7 @@ public class AdmTourController {
      * @return
      */
     @GetMapping("")
+    @ApiOperation(value = "여행 목록 조회", notes = "여행 목록을 조회 한다.")
     public Response<Page<TourResponse>> articles(@RequestParam(required = false) SearchTourType searchType,
                                                  @RequestParam(required = false) String searchKeyWord,
                                                  @PageableDefault(size=9,sort="createdAt",direction= Sort.Direction.DESC) Pageable pageable) {
@@ -52,6 +56,7 @@ public class AdmTourController {
      * @return
      */
     @PutMapping("/{tourId}/delete")
+    @ApiOperation(value = "여행 목록을 삭제", notes = "여행 목록을 삭제 한다.")
     public Response<Boolean> deleteArticleComment(@PathVariable Long tourId,
                                                   @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal)
     {
@@ -67,6 +72,7 @@ public class AdmTourController {
      * @return
      */
     @PutMapping("/{tourId}/re-delete")
+    @ApiOperation(value = "여행 목록을 재등록", notes = "여행 목록을 재등록 한다.")
     public Response<Boolean> reDeleteArticleComment(@PathVariable Long tourId,
                                                   @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal)
     {
@@ -82,6 +88,7 @@ public class AdmTourController {
      * @return
      */
     @PostMapping("/new-tour")
+    @ApiOperation(value = "여행 목록을 신규 등록", notes = "여행 목록을 신규 등록 한다.")
     public Response<Boolean> saveTour(@Valid @RequestBody TourRequest TourRequest ,
                                       @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal) {
         admTourService.saveTour(TourRequest.toDto(tripUserPrincipal.toDto()));
@@ -89,6 +96,7 @@ public class AdmTourController {
     }
 
     @GetMapping("/valid/{tourId}")
+    @ApiOperation(value = "여행 목록 권한 체크", notes = "여행 목록을 권한을 체크 한다.")
     public Response<TourResponse> articleValidDetail(@PathVariable Long tourId,
                                                         @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal) {
 
@@ -105,6 +113,7 @@ public class AdmTourController {
      * @return
      */
     @PutMapping("/{tourId}/form")
+    @ApiOperation(value = "여행 목록 수정", notes = "여행 목록을 수정 한다.")
     public Response<Boolean> updateTour(@PathVariable Long tourId,
                                                @RequestBody TourRequest tourRequest,
                                                @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal)

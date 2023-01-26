@@ -4,6 +4,8 @@ import com.board.boardsite.dto.response.Response;
 import com.board.boardsite.dto.response.adm.travel.AdmTravelAgencyReservationResponse;
 import com.board.boardsite.dto.security.TripUserPrincipal;
 import com.board.boardsite.service.adm.travel.AdmTravelAgencyReservationService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
  * @author cohouseol
  */
 
+@Api(tags ={"관리자 여행 결제 내역 조회 Controller"})
 @RestController
 @RequestMapping("/api/adm/reser")
 @RequiredArgsConstructor
@@ -25,6 +28,7 @@ public class AdmTravelAgencyReservationController {
     private final AdmTravelAgencyReservationService admTravelAgencyReservationService;
 
     @GetMapping("/{travelAgencyListId}/purchaseList")
+    @ApiOperation(value = "여행 결제 조회", notes = "여행 결제 조회 한다.")
     public Response<Page<AdmTravelAgencyReservationResponse>> getReservationList(@PathVariable Long travelAgencyListId,
                                                                                  @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal,
                                                                                  @PageableDefault(size=10,sort="createdAt",direction= Sort.Direction.DESC)Pageable pageable) {

@@ -7,6 +7,8 @@ import com.board.boardsite.dto.response.adm.travel.AdmTravelAgencyReservationRes
 import com.board.boardsite.dto.security.TripUserPrincipal;
 import com.board.boardsite.service.adm.travel.AdmTravelAgencyService;
 import com.board.boardsite.service.adm.user.AdmUserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
  *  사용자 정보 컨트롤러
  *  @author cohouseol
  */
+@Api(tags ={"관리자 사용자 정보 조회 Controller"})
 @RestController
 @RequestMapping("/api/adm/user")
 @RequiredArgsConstructor
@@ -38,6 +41,7 @@ public class AdmUserController {
      * @return
      */
     @GetMapping("/list")
+    @ApiOperation(value = "사용자 정보 리스트 조회", notes = "사용자 정보 리스트 조회 (SUPER : 전체  / ADMIN : 결제한 사용자만) 조회 한다.")
     public Response<Page<UserResponse>> userList(@RequestParam(required = false) SearchAdmUserType searchAdmUserType,
                                                  @RequestParam(required = false) String input,
                                                  @PageableDefault(size=10,sort="id",direction= Sort.Direction.ASC) Pageable pageable,
@@ -48,6 +52,7 @@ public class AdmUserController {
     }
 
     @GetMapping("/reser/list")
+    @ApiOperation(value = "사용자 예약 정보 목록 조회", notes = "사용자 예약 정보 목록 조회 한다")
     public Response<Page<AdmTravelAgencyReservationResponse>> userPayList(@RequestParam(required = true) Long userId,
                                                                               @PageableDefault(size=10,sort="createdAt",direction= Sort.Direction.DESC) Pageable pageable,
                                                                               @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal) {

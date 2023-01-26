@@ -5,6 +5,8 @@ import com.board.boardsite.dto.response.Response;
 import com.board.boardsite.dto.response.travel.TravelAgencyResponse;
 import com.board.boardsite.dto.security.TripUserPrincipal;
 import com.board.boardsite.service.adm.travel.AdmTravelAgencyService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,6 +22,7 @@ import javax.validation.Valid;
  *  @author cohouseol
  */
 
+@Api(tags ={"관리자 여행사 관련 조회 Controller"})
 @RestController
 @RequestMapping("/api/adm/agency")
 @RequiredArgsConstructor
@@ -35,6 +38,7 @@ public class AdmTravelAgencyController {
      * @return
      */
     @GetMapping("/list")
+    @ApiOperation(value = "여행사 목록  조회", notes = "여행사 목록을 조회 한다.")
     public Response<Page<TravelAgencyResponse>> admTravelAgencyList(@RequestParam(required = false) String travelAgencyName,
                                                                     @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal,
                                                                  @PageableDefault(size=12,sort="name",direction= Sort.Direction.DESC) Pageable pageable){
@@ -49,7 +53,9 @@ public class AdmTravelAgencyController {
      * @return
      */
     @GetMapping("/{travelAgencyId}")
-    public Response<TravelAgencyResponse> travelAgencyDetail(@PathVariable Long travelAgencyId ,  @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal){
+    @ApiOperation(value = "여행사 여행 목록 조회", notes = "여행사  목록을 조회 한다.")
+    public Response<TravelAgencyResponse> travelAgencyDetail(@PathVariable Long travelAgencyId ,
+                                                             @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal){
         TravelAgencyResponse travelAgencyDto= TravelAgencyResponse.from(admTravelAgencyService.travelAgencyDetail(travelAgencyId,tripUserPrincipal));
         return Response.success(travelAgencyDto);
     }
@@ -61,6 +67,7 @@ public class AdmTravelAgencyController {
      * @return
      */
     @PutMapping("/{travelAgencyId}/delete")
+    @ApiOperation(value = "여행사 여행 목록 삭제", notes = "여행사  목록을 삭제한다.")
     public Response<Boolean> deleteArticleComment(@PathVariable Long travelAgencyId,
                                                   @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal)
     {
@@ -76,6 +83,7 @@ public class AdmTravelAgencyController {
      * @return
      */
     @PutMapping("/{travelAgencyId}/re-delete")
+    @ApiOperation(value = "여행사 여행 목록 재등록", notes = "여행사 목록을 재등록 한다.")
     public Response<Boolean> reDeleteArticleComment(@PathVariable Long travelAgencyId,
                                                   @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal)
     {
@@ -92,6 +100,7 @@ public class AdmTravelAgencyController {
      * @return
      */
     @PostMapping("/new-agency")
+    @ApiOperation(value = "여행사 여행 목록 신규 등록", notes = "여행사 목록을 신규 등록 한다.")
     public Response<Boolean> saveAgency(@Valid @RequestBody TravelAgencyRequest travelAgencyRequest ,
                                       @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal) {
         admTravelAgencyService.saveAgency(travelAgencyRequest.toDto());
@@ -107,6 +116,7 @@ public class AdmTravelAgencyController {
      * @return
      */
     @PutMapping("/{agencyId}/form")
+    @ApiOperation(value = "여행사 여행 목록 수정", notes = "여행사 목록을 수정 한다.")
     public Response<Boolean> updateAgency(@PathVariable Long agencyId,
                                         @RequestBody TravelAgencyRequest travelAgencyRequest,
                                         @AuthenticationPrincipal TripUserPrincipal tripUserPrincipal)
