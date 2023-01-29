@@ -40,6 +40,16 @@ public class EmailService {
         javaMailSender.send(sim);
     }
 
+
+    @Async
+    public void sendPw(String email, String name, String pwReset) {
+        SimpleMailMessage sim = new SimpleMailMessage();
+        sim.setTo(email);
+        sim.setSubject("비밀번호 변경");
+        sim.setText(name+" 님의 비밀번호는 " + pwReset+" 으로 변경 되었습니다. 로그인 후 비밀번호를 변경해주세요.");
+        javaMailSender.send(sim);
+    }
+
     @Transactional
     public boolean confirmEmail(EmailAuthRequest request) {
         if(emailAuthRepository.findValidAuthByEmail(request.email(), request.authToken(), LocalDateTime.now()).isEmpty()){

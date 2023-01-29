@@ -1,13 +1,10 @@
 package com.board.boardsite.controller.user;
 
 
-import com.board.boardsite.dto.request.user.EmailAuthRequest;
-import com.board.boardsite.dto.request.user.TripUserLoginRequest;
-import com.board.boardsite.dto.request.user.TripUserUpdateRequest;
+import com.board.boardsite.dto.request.user.*;
 import com.board.boardsite.dto.response.user.TripUserLoginResponse;
 import com.board.boardsite.dto.security.TripUserPrincipal;
 import com.board.boardsite.dto.user.TripUserDto;
-import com.board.boardsite.dto.request.user.TripUserJoinRequest;
 import com.board.boardsite.dto.response.Response;
 import com.board.boardsite.dto.response.user.TripUserJoinResponse;
 import com.board.boardsite.service.user.EmailService;
@@ -69,6 +66,20 @@ public class TripUserController {
     public Response<TripUserLoginResponse> login(@RequestBody TripUserLoginRequest request) {
         String token = tripUserService.login(request.email(),request.password());
         return Response.success(new TripUserLoginResponse(token));
+
+    }
+
+    /**
+     * 23.01.29 비밀번호 찾기 (추가)
+     * @param request
+     * @return
+     */
+    @PostMapping("/pw-find")
+    @ApiOperation(value = "비밀번호 찾기", notes = "사용자의 비밀번호를 random으로 변경 후 이메일 전송을 한다.")
+    public Response<Boolean> pwFind(@RequestBody TripUserPasswordFindRequest request) {
+        tripUserService.pwFind(request.name(), request.email());
+
+        return Response.success(true);
 
     }
 

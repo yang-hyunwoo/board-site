@@ -21,7 +21,7 @@ public interface TripUserRepository extends JpaRepository<TripUser, Long>, AdmAu
 
     Optional<TripUser> findByEmailAndDeletedAndLoginType(String email,boolean deleted,String loginType);
 
-
+    Optional<TripUser> findByNameAndEmailAndEmailAuthAndLoginTypeIsNull(String name, String email , boolean emailAuth);
 
     Optional<TripUser> findByIdAndAuthChk(Long adminId , boolean authChk);
 
