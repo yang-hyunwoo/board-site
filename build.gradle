@@ -92,9 +92,10 @@ clean {
 }
 jar {
     manifest {
-        attributes('Main-Class': 'com.board.boardsite.BoardSiteApplication')
+        attributes('Main-Class': 'com.board.projectboard.ProjectBoardApplication')
     }
 }
+
 
 bootJar {
     archiveFileName ='app.jar'
