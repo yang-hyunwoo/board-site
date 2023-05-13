@@ -43,7 +43,7 @@ public class AuthenticationConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws  Exception {
         return http.csrf().disable()
                 .authorizeRequests()    //보안 시작
-                .antMatchers("/api/adm/excel/**","p/api/chat/detail","/**","/api/common/**","/api/trip/agency-trip/**","/api/trip/agency/**","/api/trip/articles/**","/api/trip/articles","/api/trip/users/confirm-email","/api/adm/admin/list").permitAll()
+                .antMatchers("/api/adm/excel/**","/api/chat/detail","/**","/api/common/**","/api/trip/agency-trip/**","/api/trip/agency/**","/api/trip/articles/**","/api/trip/articles","/api/trip/users/confirm-email","/api/adm/admin/list").permitAll()
                 .antMatchers("/api/admin/**").hasRole("SUPER")
                 .antMatchers("/api/admin/**").hasRole("ADMIN")
                 .antMatchers("/api/**","/api/tirp/articles/new-article").authenticated()

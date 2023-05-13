@@ -8,15 +8,15 @@ logging:
 
 spring:
   datasource:
-    url: ${POSTGRE_SQL_URL}
+    url: jdbc:postgresql://containers-us-west-155.railway.app:6558/railway
     username: postgres
-    password: ${POSTGRE_SQL_PWD}
+    password: mMPrheU9cycQTO9WLba9
     driver-class-name: org.postgresql.Driver
   mail:
     host: smtp.gmail.com
     port: 587
-    username: ${GOOGLE_MAIL_ID}
-    password: ${GOOGLE_MAIL_PW}
+    username: cohouseol@gmail.com
+    password: vbikziwhmhkazoow
     properties:
       mail:
         smtp:
@@ -30,6 +30,7 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+
   jpa:
     defer-datasource-initialization: true         # 2.5 이상 data.sql 실행
     hibernate.ddl-auto: update                    # table 생성
@@ -58,16 +59,16 @@ custom:
     thumbnail-images: C:\Git_project\board-site\src\main\resources\templates\thumbnail
 
 import:
-  rest-api: ${IMPORT_KEY}
-  rest-api-secret: ${IMPORT_SECRET}
+  rest-api: 3071870338636273
+  rest-api-secret: 0nejijihcCxf0Fi7io0zia5NNtaw0tv7z15FUDhLJi8w0h85ieWdC2zgRyqK9KAS0T2yA0PHeABpwYOd
 naver:
-  client-id: ${NAVER_ID}
-  client-secret: ${NAVER_PW}
+  client-id: VI3PelSRuX5_E4NdPZHj
+  client-secret: CHD4HaNzd4
   callback-url: https://board-site-production.up.railway.app/NaverLoginCallback
 kakao:
-  rest-api-key: ${KAKAO_ID}
+  rest-api-key: fa8b9147c368820f00315b9e2b68eae5
   callback-url: https://board-site-production.up.railway.app/NaverLoginCallback
-  admin-key: ${KAKAO_PW}
+  admin-key:  cce05f289cb3058bb7a61d4d1fce24b2
 jwt:
   secret-key: board_site.trip_web_application.secret_key
   #30 days
@@ -76,8 +77,8 @@ batch:
   initialize-schema: never
 
 cloudinary:
-  cloud_name: ${CLOUDINARY_ID}
-  api_key: ${CLOUDINARY_KEY}
-  api_secret: ${CLOUDINARY_PW}
+  cloud_name: df1m1qh0o
+  api_key: 176668919675916
+  api_secret: 65specbjat7h5uCf_HZ1_WwEpRM
 
 ---
